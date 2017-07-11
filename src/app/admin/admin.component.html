@@ -1,4 +1,5 @@
 <md-toolbar>
+    <h3>FireCMS</h3>
     <span class="fill-space"></span>
     <div class="login">
         <img src="{{ (user | async)?.photoURL }}" class="user-photo">
@@ -7,46 +8,15 @@
 </md-toolbar>
 <md-sidenav-container>
     <md-sidenav mode="side" opened="true">
-
-        <div class="post-form">
-            <h1>Add a Post</h1>
-
-            <md-input-container class="block">
-                <input mdInput placeholder="Link" type="url" [(ngModel)]="newLink" required>
-            </md-input-container>
-
-            <div>
-                <md-input-container>
-                <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="newDate" required>
-                <button mdSuffix [mdDatepickerToggle]="picker"></button>
-                </md-input-container>
-                <md-datepicker #picker></md-datepicker>
-            </div>
-
-            <md-input-container class="block">
-                <input mdInput placeholder="Title" [(ngModel)]="newTitle" required>
-            </md-input-container>
-
-            <md-input-container class="block">
-                <input mdInput placeholder="Description" [(ngModel)]="newDescription" required>
-            </md-input-container>
-
-            <button md-raised-button (click)="addPost(newLink, newDate, newTitle, newDescription)" class="block">Add Post</button>
-        </div>
-
+        <md-list>
+            <md-list-item><a routerLink="/admin">Dashboard</a></md-list-item>
+            <md-list-item><a routerLink="/admin/posts">Posts</a></md-list-item>
+            <md-list-item><a routerLink="/admin/pages">Pages</a></md-list-item>
+            <!--<md-list-item>Navigation</md-list-item>
+            <md-list-item>Theme</md-list-item>-->
+            <md-list-item><a routerLink="/admin/users">Users</a></md-list-item>
+        </md-list>
     </md-sidenav>
-    <md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
-        <div class="content">
-        <h3>{{post.title}}</h3>
-        <div class="date">{{post.date | date }}</div>
-            <p>{{post.description}}... <a href="{{post.link}}" target="_blank">Read More</a></p>
-        </div>
-        <div class="publish">
-            <md-slide-toggle ngDefaultControl (change)="onChange($event, post.$key)" [(ngModel)]="post.published">
-                <span *ngIf="!post.published">Publish</span>
-                <span *ngIf="post.published">Un-Publish</span>
-            </md-slide-toggle>
-        </div>
-    </md-card>
+    <router-outlet></router-outlet>
 </md-sidenav-container>
 

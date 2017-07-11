@@ -31,12 +31,11 @@ export class LoginComponent implements OnInit {
 
         checkUser.subscribe(user => {
           if (user.length > 0) {
-            globalService.user.next(currentUser);
-
             this.db.object('/users/' + this.hashCode(currentUser.email)).set({
               uid: currentUser.uid,
               email: currentUser.email,
-              photoURL: currentUser.photoURL
+              photoURL: currentUser.photoURL,
+              active: true
             });
 
             this.router.navigateByUrl('admin');

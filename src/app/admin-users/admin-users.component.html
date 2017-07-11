@@ -1,0 +1,13 @@
+<div class="button-container">
+    <button md-raised-button routerLink="/admin/add-user">Add a User</button>
+</div>
+<md-card class="user" *ngFor="let user of users | async | sort:['email']">
+    <div class="content">
+        <img src="{{ user.photoURL }}" class="user-photo">
+        {{user.email}}
+    </div>
+    <div class="active">
+          <span *ngIf="user.active">Active</span>
+          <span *ngIf="!user.active">Inactive</span>
+    </div>
+</md-card>

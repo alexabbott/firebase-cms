@@ -1,0 +1,23 @@
+.button-container {
+    text-align: right;
+}
+
+.button-container button {
+    margin: 30px;
+}
+
+.mat-card {
+    margin-bottom: 5px;
+}
+
+.post .content {
+    display: inline-block;
+    width: calc(100% - 120px);
+}
+
+.post .publish {
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: top;
+    width: 100px;
+}

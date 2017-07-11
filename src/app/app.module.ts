@@ -8,12 +8,20 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { MdButtonModule, MdInputModule, MdNativeDateModule, MdDatepickerModule, MdCardModule, MdSnackBarModule, MdSlideToggleModule, MdSidenavModule, MdToolbarModule } from '@angular/material';
+import { MdButtonModule, MdInputModule, MdNativeDateModule, MdDatepickerModule, MdCardModule, MdSnackBarModule, MdSlideToggleModule, MdSidenavModule, MdToolbarModule, MdListModule } from '@angular/material';
 
 // components
 import { PostsComponent } from './posts/posts.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import { AdminPostsComponent } from './admin-posts/admin-posts.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { PagesComponent } from './pages/pages.component';
+import { AdminPagesComponent } from './admin-pages/admin-pages.component';
+import { PageComponent } from './page/page.component';
 
 // services
 import { GlobalService } from './global.service';
@@ -21,11 +29,28 @@ import { AuthGuard } from './auth-guard.service';
 
 // pipes
 import { SortPipe } from './sort.pipe';
+import { AddPageComponent } from './add-page/add-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        children: [
+          { path: 'add-page', component: AddPageComponent },
+          { path: 'add-post', component: AddPostComponent },
+          { path: 'add-user', component: AddUserComponent },
+          { path: 'pages', component: AdminPagesComponent },
+          { path: 'posts', component: AdminPostsComponent },
+          { path: 'users', component: AdminUsersComponent },
+          { path: '', component: AdminDashboardComponent }
+        ]
+      }
+    ]
+  },
   { path: 'login', component: LoginComponent },
+  { path: ':url', component: PageComponent },
 ];
 
 @NgModule({
@@ -39,8 +64,9 @@ const appRoutes: Routes = [
     MdButtonModule,
     MdCardModule,
     MdDatepickerModule,
-    MdNativeDateModule,
     MdInputModule,
+    MdListModule,
+    MdNativeDateModule,
     MdSidenavModule,
     MdSlideToggleModule,
     MdSnackBarModule,
@@ -50,7 +76,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  declarations: [ AppComponent, PostsComponent, AdminComponent, SortPipe, LoginComponent ],
+  declarations: [ AppComponent, PostsComponent, AdminComponent, SortPipe, LoginComponent, AddPostComponent, AdminPostsComponent, AdminDashboardComponent, AdminUsersComponent, AddUserComponent, PagesComponent, AdminPagesComponent, PageComponent, AddPageComponent ],
   providers: [GlobalService, AuthGuard],
   bootstrap: [ AppComponent ]
 })

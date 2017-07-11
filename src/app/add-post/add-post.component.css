@@ -1,0 +1,12 @@
+.block {
+    display: block;
+}
+
+.post-form {
+    box-sizing: border-box;
+    padding: 50px;
+}
+
+button {
+    margin-top: 30px;
+}

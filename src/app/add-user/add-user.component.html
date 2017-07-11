@@ -1,0 +1,9 @@
+<div class="user-form">
+    <h1>Add a User</h1>
+
+    <md-input-container class="block">
+        <input mdInput placeholder="Email" type="email" [(ngModel)]="newEmail" required>
+    </md-input-container>
+
+    <button md-raised-button (click)="addUser(newEmail)" class="block">Add User</button>
+</div>

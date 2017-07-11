@@ -1,0 +1,28 @@
+.button-container {
+    text-align: right;
+}
+
+.button-container button {
+    margin: 30px;
+}
+
+.mat-card {
+    margin-bottom: 5px;
+}
+
+.user .content {
+    display: inline-block;
+    width: calc(100% - 100px);
+}
+
+.user .active {
+    display: inline-block;
+    width: 80px;
+}
+
+.user-photo {
+    border-radius: 50%;
+    margin-right: 15px;
+    vertical-align: middle;
+    width: 45px;
+}

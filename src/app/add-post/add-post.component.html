@@ -1,0 +1,30 @@
+<div class="post-form">
+    <h1>Add a Post</h1>
+
+    <md-input-container class="block">
+        <input mdInput placeholder="Link" type="url" [(ngModel)]="newLink" required>
+    </md-input-container>
+
+    <div>
+        <md-input-container>
+        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="newDate" required>
+        <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+    </div>
+
+    <md-input-container class="block">
+        <input mdInput placeholder="Title" [(ngModel)]="newTitle" required>
+    </md-input-container>
+
+    <md-input-container class="block">
+        <input mdInput placeholder="Description" [(ngModel)]="newDescription" required>
+    </md-input-container>
+
+    <md-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
+        <span *ngIf="!newPublished">Publish</span>
+        <span *ngIf="newPublished">Un-Publish</span>
+    </md-slide-toggle>
+
+    <button md-raised-button (click)="addPost(newLink, newDate, newTitle, newDescription, newPublished)" class="block">Add Post</button>
+</div>
