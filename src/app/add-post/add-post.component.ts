@@ -12,7 +12,6 @@ import { GlobalService } from '../global.service';
 export class AddPostComponent implements OnInit {
 
   posts: FirebaseListObservable<any>;
-  post: FirebaseObjectObservable<any>;
   newLink: string;
   newDate: string;
   newTitle: string;
@@ -20,12 +19,23 @@ export class AddPostComponent implements OnInit {
   newPublished: boolean;
   currentUser: any;
 
-
   constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService) {
     this.newPublished = false;
     this.posts = db.list('/posts');
     this.globalService.user.subscribe(user => {
       this.currentUser = user;
+    });
+
+    this.globalService.currentPost.subscribe(post => {
+      if (post) {
+        db.object('/posts/' + post).subscribe(p => {
+          this.newLink = p.link;
+          this.newDate = p.date;
+          this.newTitle = p.title;
+          this.newDescription = p.description;
+          this.newPublished = p.published;
+        });
+      }
     });
   }
 

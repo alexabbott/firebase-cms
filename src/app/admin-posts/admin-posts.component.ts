@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-
+import { GlobalService } from '../global.service';
+import { Router }    from '@angular/router';
 
 @Component({
   selector: 'admin-posts',
@@ -12,7 +13,7 @@ export class AdminPostsComponent implements OnInit {
   posts: FirebaseListObservable<any>;
   post: FirebaseObjectObservable<any>;
 
-  constructor(public db: AngularFireDatabase) {
+  constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router) {
     this.posts = db.list('/posts');
   }
 
@@ -23,6 +24,12 @@ export class AdminPostsComponent implements OnInit {
     } else {
       this.post.update({published: false});
     }
+  }
+
+  editPost(key: string) {
+    console.log('edit');
+    this.globalService.currentPost.next(key);
+    this.router.navigateByUrl('admin/add-post');
   }
 
   ngOnInit() {
