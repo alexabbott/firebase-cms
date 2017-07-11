@@ -1,6 +1,16 @@
-p,
+.login-frame {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+}
+
 button {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 50%;
+}
+
+button img {
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 20px;
 }

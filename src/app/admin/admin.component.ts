@@ -16,6 +16,7 @@ import { GlobalService } from '../global.service';
 export class AdminComponent implements OnInit {
 
   user: Observable<firebase.User>;
+  currentUserID: string;
   posts: FirebaseListObservable<any>;
   post: FirebaseObjectObservable<any>;
   newLink: string;
@@ -30,12 +31,10 @@ export class AdminComponent implements OnInit {
     this.user.subscribe(currentUser => {
       if (!currentUser) {
         this.router.navigateByUrl('login');
+      } else {
+        this.currentUserID = currentUser.uid;
       }
     });
-  }
-
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   logout() {
@@ -51,6 +50,7 @@ export class AdminComponent implements OnInit {
         date: dateTime,
         title: newTitle,
         description: newDescription,
+        postedBy: this.currentUserID
       });
 
       this.newLink = null;
