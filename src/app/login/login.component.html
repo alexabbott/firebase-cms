@@ -1,0 +1,5 @@
+<p>
+  Login
+</p>
+<button md-raised-button (click)="login()" *ngIf="!(user | async)?.uid">Login</button>
+<button md-raised-button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>

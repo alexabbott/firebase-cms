@@ -1,0 +1,35 @@
+.block {
+    display: block;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+md-sidenav {
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
+    width: 500px;
+}
+
+.mat-sidenav-container {
+    height: 100vh;
+}
+
+.post-form {
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.mat-card {
+    margin-bottom: 5px;
+}
+
+.post .content {
+    display: inline-block;
+    width: calc(100% - 100px);
+}
+
+.post .publish {
+    display: inline-block;
+    width: 80px;
+}

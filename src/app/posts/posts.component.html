@@ -1,0 +1,5 @@
+<md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
+  <h3>{{post.title}}</h3>
+  <div class="date">{{post.date | date }}</div>
+  <p>{{post.description}}... <a href="{{post.link}}" target="_blank">Read More</a></p>
+</md-card>
