@@ -68,7 +68,8 @@ const appRoutes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
-  { path: ':url', component: PageComponent },
+  { path: 'page/:url', component: PageComponent },
+  { path: 'blog', component: PostsComponent },
   { path: 'blog/:url', component: PostComponent },
 ];
 

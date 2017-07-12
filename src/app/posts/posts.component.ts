@@ -14,7 +14,7 @@ export class PostsComponent implements OnInit {
       query: {
         orderByChild: 'published',
         equalTo: true,
-        limitToLast: 20
+        limitToLast: 20,
       }
     })
   }
