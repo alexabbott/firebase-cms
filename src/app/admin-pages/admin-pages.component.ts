@@ -3,7 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Router }    from '@angular/router';
 
 @Component({
-  selector: 'app-admin-pages',
+  selector: 'admin-pages',
   templateUrl: './admin-pages.component.html',
   styleUrls: ['./admin-pages.component.css']
 })

@@ -3,30 +3,30 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
-  selector: 'page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.css']
+  selector: 'post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.css']
 })
-export class PageComponent implements OnInit {
-  pageContent: any;
-  page: any;
+export class PostComponent implements OnInit {
+  postContent: any;
+  post: any;
 
   constructor(public db: AngularFireDatabase, public route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-        this.pageContent = this.db.list('/pages', {
+        this.postContent = this.db.list('/posts', {
           query: {
             orderByChild: 'url',
             equalTo: params.url
           }
         });
-        this.pageContent.subscribe(p => {
+        this.postContent.subscribe(p => {
           if (p[0].published) {
-            this.page = p[0];
+            this.post = p[0];
           } else {
-            this.page = {
-              title: 'Page Not Found',
+            this.post = {
+              title: 'Post Not Found',
               body: ''
             }
           }

@@ -8,13 +8,13 @@
 </md-toolbar>
 <md-sidenav-container>
     <md-sidenav mode="side" opened="true">
-        <md-list>
-            <md-list-item><a routerLink="/admin">Dashboard</a></md-list-item>
-            <md-list-item><a routerLink="/admin/posts">Posts</a></md-list-item>
-            <md-list-item><a routerLink="/admin/pages">Pages</a></md-list-item>
-            <!--<md-list-item>Navigation</md-list-item>
-            <md-list-item>Theme</md-list-item>-->
-            <md-list-item><a routerLink="/admin/users">Users</a></md-list-item>
+        <md-list class="admin-nav">
+            <md-list-item [ngClass]="{'selected': router.url === '/admin'}" routerLink="/admin">Dashboard</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/posts')}" routerLink="/admin/posts">Posts</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/pages')}" routerLink="/admin/pages">Pages</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/menus')}" routerLink="/admin/menus">Menus</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url === '/admin/theme'}" routerLink="/admin/theme">Theme</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/users')}" routerLink="/admin/users">Users</md-list-item>
         </md-list>
     </md-sidenav>
     <router-outlet></router-outlet>

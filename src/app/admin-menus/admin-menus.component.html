@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Menus</h2>
+
+  <h3>Primary Nav</h3>
+  <md-card *ngFor="let item of nav | async">
+    <md-input-container>
+      <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Item URL" [(ngModel)]="item.url" required>
+    </md-input-container>
+    <div class="actions">
+      <button md-raised-button (click)="saveMenuItem(item.$key, item.label, item.url)">Save Menu Item</button>
+      <button md-raised-button (click)="deleteMenuItem(item.$key)">Delete Menu Item</button>
+    </div>
+  </md-card>
+  <button md-raised-button (click)="addMenuItem()">Add Menu Item</button>
+</div>

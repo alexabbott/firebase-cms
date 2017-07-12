@@ -41,6 +41,9 @@ import { AuthGuard } from './auth-guard.service';
 // pipes
 import { SortPipe } from './sort.pipe';
 import { AddPageComponent } from './add-page/add-page.component';
+import { PostComponent } from './post/post.component';
+import { AdminMenusComponent } from './admin-menus/admin-menus.component';
+import { AdminThemeComponent } from './admin-theme/admin-theme.component';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -54,8 +57,10 @@ const appRoutes: Routes = [
           { path: 'add-user', component: AddUserComponent },
           { path: 'edit-page/:key', component: AddPageComponent },
           { path: 'edit-post/:key', component: AddPostComponent },
+          { path: 'menus', component: AdminMenusComponent },
           { path: 'pages', component: AdminPagesComponent },
           { path: 'posts', component: AdminPostsComponent },
+          { path: 'theme', component: AdminThemeComponent },
           { path: 'users', component: AdminUsersComponent },
           { path: '', component: AdminDashboardComponent }
         ]
@@ -64,6 +69,7 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: ':url', component: PageComponent },
+  { path: 'blog/:url', component: PostComponent },
 ];
 
 @NgModule({
@@ -104,7 +110,10 @@ const appRoutes: Routes = [
     PagesComponent,
     AdminPagesComponent,
     PageComponent,
-    AddPageComponent
+    AddPageComponent,
+    PostComponent,
+    AdminMenusComponent,
+    AdminThemeComponent
   ],
   providers: [ GlobalService, AuthGuard ],
   bootstrap: [ AppComponent ]

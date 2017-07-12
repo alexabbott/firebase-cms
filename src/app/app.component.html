@@ -1,1 +1,12 @@
+<md-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
+    <h3><a routerLink="/">{{ (theme | async)?.siteName }}</a></h3>
+    <span class="fill-space"></span>
+    <ul>
+        <span *ngFor="let item of nav | async">
+            <li *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
+                <a routerLink="{{item.url}}">{{item.label}}</a>
+            </li>
+        </span>
+    </ul>
+</md-toolbar>
 <router-outlet></router-outlet>

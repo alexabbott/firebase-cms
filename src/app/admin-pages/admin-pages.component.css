@@ -1,9 +1,14 @@
 .button-container {
-    text-align: right;
+    padding: 0 30px;
+}
+
+.button-container h2 {
+    display: inline-block;
 }
 
 .button-container button {
-    margin: 30px;
+    float: right;
+    margin: 18px 30px 30px 30px;
 }
 
 .mat-card {

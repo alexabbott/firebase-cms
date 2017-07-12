@@ -2,7 +2,7 @@
     <h1>Add a Post</h1>
 
     <md-input-container class="block">
-        <input mdInput placeholder="Link" type="url" [(ngModel)]="newLink" required>
+        <input mdInput placeholder="Post URL (no slashes or spaces)" type="text" [(ngModel)]="newURL" required>
     </md-input-container>
 
     <div>
@@ -18,7 +18,7 @@
     </md-input-container>
 
     <md-input-container class="block">
-        <input mdInput placeholder="Description" [(ngModel)]="newDescription" required>
+        <input mdInput placeholder="Body text" [(ngModel)]="newBody" required>
     </md-input-container>
 
     <md-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
@@ -26,5 +26,5 @@
         <span *ngIf="newPublished">Un-Publish</span>
     </md-slide-toggle>
 
-    <button md-raised-button (click)="addPost(newLink, newDate, newTitle, newDescription, newPublished)" class="block">Add Post</button>
+    <button md-raised-button (click)="addPost(newURL, newDate, newTitle, newBody, newPublished)" class="block">Add Post</button>
 </div>

@@ -21,3 +21,14 @@ md-sidenav {
 .mat-sidenav-container {
     height: 100vh;
 }
+
+.admin-nav md-list-item {
+    cursor: pointer;
+    transition: background .2s ease-out;
+}
+
+.admin-nav md-list-item:hover,
+.admin-nav md-list-item.selected {
+    background: #eee;
+    outline: 0;
+}

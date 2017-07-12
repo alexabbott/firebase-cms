@@ -13,10 +13,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class AddPostComponent implements OnInit {
 
   posts: FirebaseListObservable<any>;
-  newLink: string;
+  newURL: string;
   newDate: string;
   newTitle: string;
-  newDescription: string;
+  newBody: string;
   newPublished: boolean;
   currentUser: any;
 
@@ -28,24 +28,24 @@ export class AddPostComponent implements OnInit {
     });
   }
 
-  addPost(newLink: string, newDate: string, newTitle: string, newDescription: string, newPublished: boolean) {
+  addPost(newURL: string, newDate: string, newTitle: string, newBody: string, newPublished: boolean) {
     let date = new Date(newDate);
     let dateTime = date.getTime();
-    if (newLink && newDate && newTitle && newDescription && this.currentUser.uid) {
+    if (newURL && newDate && newTitle && newBody && this.currentUser.uid) {
       this.posts.push({
-        link: newLink,
+        url: newURL,
         dateAdded: Date.now(),
         date: dateTime,
         title: newTitle,
-        description: newDescription,
+        body: newBody,
         published: newPublished,
         postedBy: this.currentUser.uid
       });
 
-      this.newLink = null;
+      this.newURL = null;
       this.newDate = null;
       this.newTitle = null;
-      this.newDescription = null;
+      this.newBody = null;
       this.newPublished = false;
 
       let snackBarRef = this.snackBar.open('Post saved', 'OK!', {
@@ -58,10 +58,10 @@ export class AddPostComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
         if (params && params.key) {
           this.db.object('/posts/' + params.key).subscribe(p => {
-            this.newLink = p.link;
+            this.newURL = p.url;
             this.newDate = p.date;
             this.newTitle = p.title;
-            this.newDescription = p.description;
+            this.newBody = p.body;
             this.newPublished = p.published;
           });
         }

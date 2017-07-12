@@ -13,7 +13,8 @@ export class PostsComponent implements OnInit {
     this.posts = db.list('/posts', {
       query: {
         orderByChild: 'published',
-        equalTo: true
+        equalTo: true,
+        limitToLast: 20
       }
     })
   }

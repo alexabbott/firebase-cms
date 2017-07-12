@@ -1,9 +1,14 @@
 .button-container {
-    text-align: right;
+    padding: 0 30px;
+}
+
+.button-container h2 {
+    display: inline-block;
 }
 
 .button-container button {
-    margin: 30px;
+    float: right;
+    margin: 18px 30px 30px 30px;
 }
 
 .mat-card {
@@ -12,12 +17,19 @@
 
 .user .content {
     display: inline-block;
-    width: calc(100% - 100px);
+    margin-top: 13px;
+    vertical-align: top;
+    width: calc(100% - 160px);
 }
 
 .user .active {
     display: inline-block;
-    width: 80px;
+    text-align: center;
+    width: 150px;
+}
+
+.user .active button {
+    margin-top: 10px;
 }
 
 .user-photo {

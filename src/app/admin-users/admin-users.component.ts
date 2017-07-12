@@ -14,6 +14,10 @@ export class AdminUsersComponent implements OnInit {
     this.users = db.list('/users');
   }
 
+  deleteUser(key: string) {
+    this.db.object('/users' + key).remove();
+  }
+
   ngOnInit() {
   }
 
