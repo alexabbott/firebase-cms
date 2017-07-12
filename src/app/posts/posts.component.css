@@ -1,7 +1,11 @@
+h3 {
+    margin-left: 20px;
+}
+
 .mat-card {
     margin-bottom: 5px;
 }
 
-h2 {
-    margin-left: 20px;
+.mat-card h3 {
+    margin-left: 0;
 }

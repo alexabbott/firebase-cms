@@ -1,6 +1,6 @@
-<h2>New Posts</h2>
+<h3>New Posts</h3>
 <md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
   <h3>{{post.title}}</h3>
   <div class="date">{{post.date | date }}</div>
-  <p><span [innerHTML]="post.body"></span>... <a href="/blog/{{post.url}}">Read More</a></p>
+  <p><span [innerHTML]="post.body"></span>... <a routerLink="/blog/{{post.url}}">Read More</a></p>
 </md-card>

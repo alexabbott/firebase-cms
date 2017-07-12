@@ -12,6 +12,7 @@ export class AdminPostsComponent implements OnInit {
 
   posts: FirebaseListObservable<any>;
   post: FirebaseObjectObservable<any>;
+  
 
   constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router) {
     this.posts = db.list('/posts');

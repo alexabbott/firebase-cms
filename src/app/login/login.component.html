@@ -1,7 +1,7 @@
 <div class="login-frame">
-    <button md-raised-button (click)="login()" *ngIf="!(user | async)?.uid">
+    <button md-raised-button class="bw" (click)="login()" *ngIf="!(user | async)?.uid">
         <img src="../../assets/google-icon.png">
         Sign In with Google
     </button>
-    <button md-raised-button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
+    <button md-button *ngIf="(user | async)?.uid">Loading...</button>
 </div>

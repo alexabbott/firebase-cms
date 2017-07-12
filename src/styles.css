@@ -6,3 +6,41 @@ body {
     font-family: 'Roboto', Arial, sans serif;
     margin: 0;
 }
+
+a {
+    color: #00D4D4;
+    text-decoration: none;
+}
+
+.mat-toolbar {
+    background: #00D4D4;
+    color: #fff;
+}
+
+.mat-toolbar a {
+    color: #fff;
+}
+
+.mat-toolbar .mat-raised-button {
+    background: #fff;
+}
+
+.mat-toolbar .mat-button-wrapper {
+    color: #00D4D4;
+}
+
+.mat-raised-button {
+    background: #00D4D4;
+}
+
+.mat-button-wrapper {
+    color: #fff;
+}
+
+.mat-raised-button.bw {
+    background: #fff;
+}
+
+.mat-raised-button.bw .mat-button-wrapper {
+    color: #333;
+}
