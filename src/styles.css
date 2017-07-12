@@ -44,3 +44,20 @@ a {
 .mat-raised-button.bw .mat-button-wrapper {
     color: #333;
 }
+
+.container {
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.mat-card {
+    margin-bottom: 5px;
+}
+
+.block {
+    display: block;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}

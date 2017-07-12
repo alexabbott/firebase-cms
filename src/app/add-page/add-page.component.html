@@ -1,9 +1,9 @@
 <div class="page-form">
-    <h1>
+    <h2>
         <span *ngIf="!editMode">Add a</span>
         <span *ngIf="editMode">Edit</span>
         Page
-    </h1>
+    </h2>
 
     <md-input-container class="block">
         <input mdInput placeholder="Page URL (without any slashes)" type="text" [(ngModel)]="newURL" required>

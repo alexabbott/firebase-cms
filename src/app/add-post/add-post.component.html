@@ -1,9 +1,9 @@
 <div class="post-form">
-    <h1>
+    <h2>
         <span *ngIf="!editMode">Add a</span>
         <span *ngIf="editMode">Edit</span>
         Post
-    </h1>
+    </h2>
 
     <md-input-container class="block">
         <input mdInput placeholder="Post URL (no slashes or spaces)" type="text" [(ngModel)]="newURL" required>

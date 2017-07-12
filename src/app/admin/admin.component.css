@@ -1,11 +1,3 @@
-.block {
-    display: block;
-}
-
-.fill-space {
-    flex: 1 1 auto;
-}
-
 .user-photo {
     border-radius: 50%;
     margin-right: 15px;

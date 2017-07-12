@@ -1,7 +1,3 @@
-.block {
-    display: block;
-}
-
 .page-form {
     box-sizing: border-box;
     padding: 0 30px 30px 30px;
@@ -9,4 +5,9 @@
 
 button {
     margin-top: 30px;
+}
+
+.mat-input-container,
+.mat-raised-button {
+    display: block;
 }
