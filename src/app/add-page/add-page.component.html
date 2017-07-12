@@ -13,9 +13,11 @@
         <input mdInput placeholder="Title" [(ngModel)]="newTitle" required>
     </md-input-container>
 
-    <md-input-container class="block">
-        <input mdInput placeholder="Body" [(ngModel)]="newBody" required>
-    </md-input-container>
+    <ckeditor
+        [(ngModel)]="newBody"
+        [config]="{uiColor: '#FFFFFF'}"
+        [readonly]="false">
+    </ckeditor>
 
     <md-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
         <span *ngIf="!newPublished">Publish</span>

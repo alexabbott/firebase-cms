@@ -20,6 +20,7 @@ import { MdButtonModule,
     MdListModule,
     MdDialogModule
   } from '@angular/material';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 // components
 import { PostsComponent } from './posts/posts.component';
@@ -95,7 +96,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    CKEditorModule
   ],
   declarations: [
     AppComponent,
