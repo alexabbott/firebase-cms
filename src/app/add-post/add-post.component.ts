@@ -19,6 +19,8 @@ export class AddPostComponent implements OnInit {
   newBody: string;
   newPublished: boolean;
   currentUser: any;
+  editMode: boolean;
+  postKey: string;
 
   constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute) {
     this.newPublished = false;
@@ -31,23 +33,35 @@ export class AddPostComponent implements OnInit {
   addPost(newURL: string, newDate: string, newTitle: string, newBody: string, newPublished: boolean) {
     let date = new Date(newDate);
     let dateTime = date.getTime();
+
     if (newURL && newDate && newTitle && newBody && this.currentUser.uid) {
-      this.posts.push({
-        url: newURL,
-        dateAdded: Date.now(),
-        date: dateTime,
-        title: newTitle,
-        body: newBody,
-        published: newPublished,
-        postedBy: this.currentUser.uid
-      });
+      if (this.editMode && this.postKey) {
+        this.db.object('/posts/' + this.postKey).update({
+          url: newURL,
+          dateAdded: Date.now(),
+          date: dateTime,
+          title: newTitle,
+          body: newBody,
+          published: newPublished,
+          postedBy: this.currentUser.uid
+        });
+      } else {
+          this.posts.push({
+            url: newURL,
+            dateAdded: Date.now(),
+            date: dateTime,
+            title: newTitle,
+            body: newBody,
+            published: newPublished,
+            postedBy: this.currentUser.uid
+          });
 
-      this.newURL = null;
-      this.newDate = null;
-      this.newTitle = null;
-      this.newBody = null;
-      this.newPublished = false;
-
+          this.newURL = null;
+          this.newDate = null;
+          this.newTitle = null;
+          this.newBody = null;
+          this.newPublished = false;
+      }
       let snackBarRef = this.snackBar.open('Post saved', 'OK!', {
         duration: 3000
       });
@@ -57,6 +71,8 @@ export class AddPostComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
         if (params && params.key) {
+          this.editMode = true;
+          this.postKey = params.key;
           this.db.object('/posts/' + params.key).subscribe(p => {
             this.newURL = p.url;
             this.newDate = p.date;

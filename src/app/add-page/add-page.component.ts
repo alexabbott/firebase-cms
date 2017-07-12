@@ -19,6 +19,8 @@ export class AddPageComponent implements OnInit {
   newBody: string;
   newPublished: boolean;
   currentUser: any;
+  editMode: boolean;
+  pageKey: string;
 
   constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute) {
     this.newPublished = false;
@@ -29,20 +31,32 @@ export class AddPageComponent implements OnInit {
   }
 
   addPage(newURL: string, newTitle: string, newBody: string, newPublished: boolean) {
+    
     if (newURL && newTitle && newBody && this.currentUser.uid) {
-      this.pages.push({
-        url: newURL,
-        dateAdded: Date.now(),
-        title: newTitle,
-        body: newBody,
-        published: newPublished,
-        postedBy: this.currentUser.uid
-      });
+      if (this.editMode && this.pageKey) {
+        this.db.object('/pages/' + this.pageKey).update({
+          url: newURL,
+          dateAdded: Date.now(),
+          title: newTitle,
+          body: newBody,
+          published: newPublished,
+          postedBy: this.currentUser.uid
+        });
+      } else {
+        this.pages.push({
+          url: newURL,
+          dateAdded: Date.now(),
+          title: newTitle,
+          body: newBody,
+          published: newPublished,
+          postedBy: this.currentUser.uid
+        });
 
-      this.newURL = null;
-      this.newTitle = null;
-      this.newBody = null;
-      this.newPublished = false;
+        this.newURL = null;
+        this.newTitle = null;
+        this.newBody = null;
+        this.newPublished = false;
+      }
 
       let snackBarRef = this.snackBar.open('Page saved', 'OK!', {
         duration: 3000
@@ -53,6 +67,8 @@ export class AddPageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
         if (params && params.key) {
+          this.editMode = true;
+          this.pageKey = params.key;
           this.db.object('/pages/' + params.key).subscribe(p => {
             this.newURL = p.url;
             this.newTitle = p.title;
