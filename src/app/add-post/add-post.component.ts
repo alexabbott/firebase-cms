@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from '../global.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'add-post',
@@ -19,23 +20,11 @@ export class AddPostComponent implements OnInit {
   newPublished: boolean;
   currentUser: any;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService) {
+  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute) {
     this.newPublished = false;
     this.posts = db.list('/posts');
     this.globalService.user.subscribe(user => {
       this.currentUser = user;
-    });
-
-    this.globalService.currentPost.subscribe(post => {
-      if (post) {
-        db.object('/posts/' + post).subscribe(p => {
-          this.newLink = p.link;
-          this.newDate = p.date;
-          this.newTitle = p.title;
-          this.newDescription = p.description;
-          this.newPublished = p.published;
-        });
-      }
     });
   }
 
@@ -66,6 +55,17 @@ export class AddPostComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+        if (params && params.key) {
+          this.db.object('/posts/' + params.key).subscribe(p => {
+            this.newLink = p.link;
+            this.newDate = p.date;
+            this.newTitle = p.title;
+            this.newDescription = p.description;
+            this.newPublished = p.published;
+          });
+        }
+    });
   }
 
 }

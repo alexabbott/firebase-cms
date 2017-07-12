@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Router }    from '@angular/router';
 
 @Component({
   selector: 'app-admin-pages',
@@ -12,7 +13,7 @@ export class AdminPagesComponent implements OnInit {
   page: FirebaseObjectObservable<any>;
   domain: string;
 
-  constructor(public db: AngularFireDatabase) {
+  constructor(public db: AngularFireDatabase, public router: Router) {
     this.pages = db.list('/pages');
     this.domain = window.location.hostname;
   }
@@ -24,6 +25,14 @@ export class AdminPagesComponent implements OnInit {
     } else {
       this.page.update({published: false});
     }
+  }
+
+  editPage(key: string) {
+    this.router.navigateByUrl('admin/edit-page/' + key);
+  }
+
+  deletePage(key: string) {
+    this.db.object('/pages/' + key).remove();
   }
 
   ngOnInit() {

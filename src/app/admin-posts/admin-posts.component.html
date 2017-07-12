@@ -11,9 +11,14 @@
         <md-slide-toggle ngDefaultControl (change)="onChange($event, post.$key)" [(ngModel)]="post.published">
             <span *ngIf="!post.published">Publish</span>
             <span *ngIf="post.published">Un-Publish</span>
-            <div class="edit" (click)="editPost(post.$key)">
-                Edit
-            </div>
         </md-slide-toggle>
+        <div class="edit">
+            <button md-raised-button (click)="editPost(post.$key)">
+                Edit
+            </button>
+            <button md-raised-button (click)="deletePost(post.$key)">
+                Delete
+            </button>
+        </div>
     </div>
 </md-card>

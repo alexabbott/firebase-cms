@@ -27,9 +27,12 @@ export class AdminPostsComponent implements OnInit {
   }
 
   editPost(key: string) {
-    console.log('edit');
-    this.globalService.currentPost.next(key);
-    this.router.navigateByUrl('admin/add-post');
+    this.router.navigateByUrl('admin/edit-post/' + key);
+  }
+
+
+  deletePost(key: string) {
+    this.db.object('/posts/' + key).remove();
   }
 
   ngOnInit() {

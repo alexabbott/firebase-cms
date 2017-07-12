@@ -8,7 +8,18 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { MdButtonModule, MdInputModule, MdNativeDateModule, MdDatepickerModule, MdCardModule, MdSnackBarModule, MdSlideToggleModule, MdSidenavModule, MdToolbarModule, MdListModule } from '@angular/material';
+import { MdButtonModule,
+    MdInputModule,
+    MdNativeDateModule,
+    MdDatepickerModule,
+    MdCardModule,
+    MdSnackBarModule,
+    MdSlideToggleModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdListModule,
+    MdDialogModule
+  } from '@angular/material';
 
 // components
 import { PostsComponent } from './posts/posts.component';
@@ -41,6 +52,8 @@ const appRoutes: Routes = [
           { path: 'add-page', component: AddPageComponent },
           { path: 'add-post', component: AddPostComponent },
           { path: 'add-user', component: AddUserComponent },
+          { path: 'edit-page/:key', component: AddPageComponent },
+          { path: 'edit-post/:key', component: AddPostComponent },
           { path: 'pages', component: AdminPagesComponent },
           { path: 'posts', component: AdminPostsComponent },
           { path: 'users', component: AdminUsersComponent },
@@ -64,6 +77,7 @@ const appRoutes: Routes = [
     MdButtonModule,
     MdCardModule,
     MdDatepickerModule,
+    MdDialogModule,
     MdInputModule,
     MdListModule,
     MdNativeDateModule,
@@ -76,8 +90,23 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  declarations: [ AppComponent, PostsComponent, AdminComponent, SortPipe, LoginComponent, AddPostComponent, AdminPostsComponent, AdminDashboardComponent, AdminUsersComponent, AddUserComponent, PagesComponent, AdminPagesComponent, PageComponent, AddPageComponent ],
-  providers: [GlobalService, AuthGuard],
+  declarations: [
+    AppComponent,
+    PostsComponent,
+    AdminComponent,
+    SortPipe,
+    LoginComponent,
+    AddPostComponent,
+    AdminPostsComponent,
+    AdminDashboardComponent,
+    AdminUsersComponent,
+    AddUserComponent,
+    PagesComponent,
+    AdminPagesComponent,
+    PageComponent,
+    AddPageComponent
+  ],
+  providers: [ GlobalService, AuthGuard ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

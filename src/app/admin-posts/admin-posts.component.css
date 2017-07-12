@@ -12,12 +12,21 @@
 
 .post .content {
     display: inline-block;
-    width: calc(100% - 120px);
+    width: calc(100% - 220px);
 }
 
 .post .publish {
     display: inline-block;
     margin-top: 30px;
     vertical-align: top;
-    width: 100px;
+    width: 210px;
+}
+
+.mat-slide-toggle {
+    margin-left: 45px;
+}
+
+.edit {
+    margin-top: 30px;
+    text-align: center;
 }

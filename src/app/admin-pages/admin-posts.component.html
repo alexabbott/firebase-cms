@@ -11,5 +11,13 @@
             <span *ngIf="!page.published">Publish</span>
             <span *ngIf="page.published">Un-Publish</span>
         </md-slide-toggle>
+        <div class="edit">
+            <button md-raised-button (click)="editPage(post.$key)">
+                Edit
+            </button>
+            <button md-raised-button (click)="deletePage(post.$key)">
+                Delete
+            </button>
+        </div>
     </div>
 </md-card>

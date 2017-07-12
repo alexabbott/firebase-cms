@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from '../global.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'add-page',
@@ -19,7 +20,7 @@ export class AddPageComponent implements OnInit {
   newPublished: boolean;
   currentUser: any;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService) {
+  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute) {
     this.newPublished = false;
     this.pages = db.list('/pages');
     this.globalService.user.subscribe(user => {
@@ -50,6 +51,16 @@ export class AddPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+        if (params && params.key) {
+          this.db.object('/pages/' + params.key).subscribe(p => {
+            this.newURL = p.url;
+            this.newTitle = p.title;
+            this.newBody = p.body;
+            this.newPublished = p.published;
+          });
+        }
+    });
   }
 
 }
