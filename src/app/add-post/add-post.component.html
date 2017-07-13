@@ -22,7 +22,7 @@
     </md-input-container>
 
     <input type="file" id="uploadImage" name="thumbnail" (change)="handleFiles($event)">
-    <img [src]="imageUrl" *ngIf="file" class="thumbnail">
+    <img [src]="imageUrl" *ngIf="imageUrl" class="thumbnail">
 
     <ckeditor
         [(ngModel)]="newBody"

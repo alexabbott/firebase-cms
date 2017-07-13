@@ -20,6 +20,7 @@ export class AddPostComponent implements OnInit {
   newURL: string;
   newDate: string;
   newTitle: string;
+  newThumbnail: string;
   newBody: string;
   newPublished: boolean;
   currentUser: any;
@@ -63,6 +64,7 @@ export class AddPostComponent implements OnInit {
       let path = this.file.name;
       let iRef = storageRef.child(path);
       iRef.put(this.file).then((snapshot) => {
+          this.newThumbnail = path;
           let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
             duration: 3000
           });
@@ -80,6 +82,7 @@ export class AddPostComponent implements OnInit {
           dateAdded: Date.now(),
           date: dateTime,
           title: newTitle,
+          thumbnail: this.newThumbnail ? this.newThumbnail : null,
           body: newBody,
           published: newPublished,
           postedBy: this.currentUser.uid
@@ -90,6 +93,7 @@ export class AddPostComponent implements OnInit {
             dateAdded: Date.now(),
             date: dateTime,
             title: newTitle,
+            thumbnail: this.newThumbnail ? this.newThumbnail : null,
             body: newBody,
             published: newPublished,
             postedBy: this.currentUser.uid
@@ -98,6 +102,7 @@ export class AddPostComponent implements OnInit {
           this.newURL = null;
           this.newDate = null;
           this.newTitle = null;
+          this.newThumbnail = null;
           this.newBody = null;
           this.newPublished = false;
       }
@@ -118,6 +123,15 @@ export class AddPostComponent implements OnInit {
             this.newTitle = p.title;
             this.newBody = p.body;
             this.newPublished = p.published;
+
+            let me = this;
+            
+            if (p.thumbnail) {
+              this.storageRef.child(p.thumbnail).getDownloadURL().then(function(url) {
+                me.imageUrl = url;
+                console.log('imageurl', url);
+              });
+            }
           });
         }
     });
