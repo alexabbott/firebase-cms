@@ -1,5 +1,8 @@
 <div class="container" *ngIf="post">
-  <h2>{{post.title}}</h2>
-  <p>Published {{post.date | date}}</p>
+  <div class="center post-header">
+    <img [src]="post.thumbnail" *ngIf="post.thumbnail" class="thumbnail">
+    <h2>{{post.title}}</h2>
+    <p>Published {{post.date | date}}</p>
+  </div>
   <p [innerHTML]="post.body | safeHtml"></p>
 </div>

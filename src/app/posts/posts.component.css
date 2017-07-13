@@ -8,3 +8,8 @@
     display: inline-block;
     vertical-align: top;
 }
+
+.post .date {
+    color: #999;
+    font-size: 0.8em;
+}

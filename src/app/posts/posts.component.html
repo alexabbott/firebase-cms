@@ -3,7 +3,7 @@
   <md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
     <img [src]="getPostImage(post)">
     <div class="post-content">
-      <h3>{{post.title}}</h3>
+      <h3><a routerLink="/blog/{{post.url}}">{{post.title}}</a></h3>
       <div class="date">{{post.date | date }}</div>
       <p><span [innerHTML]="post.body | truncate: 20 "></span> <a routerLink="/blog/{{post.url}}">Read More</a></p>
     </div>
