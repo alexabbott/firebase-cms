@@ -6,46 +6,53 @@ A basic CMS + Front End theme built with Angular 4 (Angular CLI) and AngularFire
 
 Install [Angular CLI](https://cli.angular.io/)  
 
-Run `npm install`  
+Run `npm install`
 
-## Firebase setup  
+## Firebase setup
 
 Create a [Firebase account](https://firebase.google.com/), create a new project, and copy the config code for your project.  
 
-Within the project folder, run:  
-`cd src`  
-`mkdir environments`  
-`cd environments`  
-`touch environments.ts`  
-`touch environments.prod.ts`  
+Within the project folder, run:
 
-Open 'environments.ts' and add your Firebase config as follows:  
+```
+cd src
+mkdir environments
+cd environments
+touch environments.ts
+touch environments.prod.ts
+```
 
-export const environment = {  
-  production: false,  
-  firebase: {  
-    apiKey: "xxxx",  
-    authDomain: "xxxxx",  
-    databaseURL: "xxxxx",  
-    projectId: "xxxxx",  
-    storageBucket: "xxxx",  
-    messagingSenderId: "xxxx"  
-  }  
-};  
+Open 'environments.ts' and add your Firebase config as follows:
 
-Open 'environments.prod.ts' and add your Firebase config as follows:  
+```javascript
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "xxxx",
+    authDomain: "xxxxx",
+    databaseURL: "xxxxx",
+    projectId: "xxxxx",
+    storageBucket: "xxxx",
+    messagingSenderId: "xxxx"
+  }
+};
+```
 
-export const environment = {  
-  production: true,  
-  firebase: {  
-    apiKey: "xxxx",  
-    authDomain: "xxxxx",  
-    databaseURL: "xxxxx",  
-    projectId: "xxxxx",  
-    storageBucket: "xxxx",  
-    messagingSenderId: "xxxx"  
-  }  
-};  
+Open 'environments.prod.ts' and add your Firebase config as follows:
+
+```javascript
+export const environment = {
+  production: true,
+  firebase: {
+    apiKey: "xxxx",
+    authDomain: "xxxxx",
+    databaseURL: "xxxxx",
+    projectId: "xxxxx",
+    storageBucket: "xxxx",
+    messagingSenderId: "xxxx"
+  }
+};
+```
 
 ## Development server
 
