@@ -1,5 +1,5 @@
 <div class="container" *ngIf="post">
   <h2>{{post.title}}</h2>
   <p>Published {{post.date | date}}</p>
-  <p [innerHTML]="post.body"></p>
+  <p [innerHTML]="post.body | safeHtml"></p>
 </div>

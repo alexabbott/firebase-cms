@@ -34,6 +34,10 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { PagesComponent } from './pages/pages.component';
 import { AdminPagesComponent } from './admin-pages/admin-pages.component';
 import { PageComponent } from './page/page.component';
+import { AddPageComponent } from './add-page/add-page.component';
+import { PostComponent } from './post/post.component';
+import { AdminMenusComponent } from './admin-menus/admin-menus.component';
+import { AdminThemeComponent } from './admin-theme/admin-theme.component';
 
 // services
 import { GlobalService } from './global.service';
@@ -41,10 +45,8 @@ import { AuthGuard } from './auth-guard.service';
 
 // pipes
 import { SortPipe } from './sort.pipe';
-import { AddPageComponent } from './add-page/add-page.component';
-import { PostComponent } from './post/post.component';
-import { AdminMenusComponent } from './admin-menus/admin-menus.component';
-import { AdminThemeComponent } from './admin-theme/admin-theme.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
+import { TruncatePipe } from './truncate.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -116,7 +118,9 @@ const appRoutes: Routes = [
     AddPageComponent,
     PostComponent,
     AdminMenusComponent,
-    AdminThemeComponent
+    AdminThemeComponent,
+    SafeHtmlPipe,
+    TruncatePipe
   ],
   providers: [ GlobalService, AuthGuard ],
   bootstrap: [ AppComponent ]

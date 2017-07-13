@@ -12,6 +12,8 @@ button {
     display: block;
 }
 
-.mat-slide-toggle {
-    margin-top: 20px;
+.mat-slide-toggle,
+ckeditor {
+    display: block;
+    margin-top: 30px;
 }

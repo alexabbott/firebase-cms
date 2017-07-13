@@ -7,7 +7,7 @@
         <div class="content">
             <h3>{{post.title}}</h3>
             <div class="date">{{post.date | date }}</div>
-            <p><span [innerHTML]="post.body"></span>... <a routerLink="/blog/{{post.url}}">Read More</a></p>
+            <p><span [innerHTML]="post.body | truncate: 20"></span> <a routerLink="/blog/{{post.url}}">Read More</a></p>
         </div>
         <div class="publish">
             <md-slide-toggle ngDefaultControl (change)="onChange($event, post.$key)" [(ngModel)]="post.published">

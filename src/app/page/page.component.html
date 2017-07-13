@@ -1,4 +1,3 @@
 <div class="container" *ngIf="page">
-  <h2>{{page.title}}</h2>
-  <p [innerHTML]="page.body"></p>
+  <p [innerHTML]="page.body | safeHtml"></p>
 </div>
