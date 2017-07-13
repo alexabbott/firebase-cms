@@ -1,3 +1,7 @@
 .button-add-menu {
     margin-top: 20px;
 }
+
+md-toolbar {
+    margin-bottom: 5px;
+}

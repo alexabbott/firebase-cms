@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Menus</h2>
 
-  <h3>Primary Nav</h3>
+  <md-toolbar>Primary Nav</md-toolbar>
   <md-card *ngFor="let item of nav | async">
     <md-input-container>
       <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
