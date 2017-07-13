@@ -16,10 +16,17 @@ export class PostsComponent implements OnInit {
         equalTo: true,
         limitToLast: 20,
       }
-    })
+    });
+  }
+
+  getPostImage(post:any) {
+    if (post.thumbnail) {
+      return post.thumbnail;
+    } else {
+      return '../../assets/placeholder.jpg';
+    }
   }
 
   ngOnInit() {
   }
-
 }

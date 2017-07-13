@@ -43,30 +43,22 @@ export class AddPostComponent implements OnInit {
 
   handleFiles(e) {
     this.file = e.srcElement.files[0];
-    this.readThis(this.file);
     this.uploadImage();
-  }
-
-  readThis(inputValue: any) : void {
-    let file:File = this.file; 
-    let myReader:FileReader = new FileReader();
-
-    let me = this;
-
-    myReader.onloadend = function(e){
-      me.imageUrl = myReader.result;
-    }
-    myReader.readAsDataURL(file);
   }
 
   uploadImage() {
       let storageRef = firebase.storage().ref();
       let path = this.file.name;
       let iRef = storageRef.child(path);
+      let me = this;
       iRef.put(this.file).then((snapshot) => {
-          this.newThumbnail = path;
           let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
             duration: 3000
+          });
+          this.storageRef.child(path).getDownloadURL().then(function(url) {
+            me.imageUrl = url;
+            me.newThumbnail = url;
+            console.log('imageurl', url);
           });
       });
   }
@@ -124,13 +116,9 @@ export class AddPostComponent implements OnInit {
             this.newBody = p.body;
             this.newPublished = p.published;
 
-            let me = this;
-            
             if (p.thumbnail) {
-              this.storageRef.child(p.thumbnail).getDownloadURL().then(function(url) {
-                me.imageUrl = url;
-                console.log('imageurl', url);
-              });
+              this.imageUrl = p.thumbnail;
+              this.newThumbnail = p.thumbnail;
             }
           });
         }
