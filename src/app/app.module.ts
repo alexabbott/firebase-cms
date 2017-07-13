@@ -4,10 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
+import 'firebase/storage';
+import * as firebase from 'firebase';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { MdButtonModule,
     MdInputModule,
     MdNativeDateModule,
@@ -20,7 +23,6 @@ import { MdButtonModule,
     MdListModule,
     MdDialogModule
   } from '@angular/material';
-import { CKEditorModule } from 'ng2-ckeditor';
 
 // components
 import { PostsComponent } from './posts/posts.component';
@@ -75,6 +77,8 @@ const appRoutes: Routes = [
   { path: 'blog', component: PostsComponent },
   { path: 'blog/:url', component: PostComponent },
 ];
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
   imports: [

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Input} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from '../global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as firebase from 'firebase/app';
+import { FirebaseApp } from 'angularfire2';
 
 @Component({
   selector: 'add-post',
@@ -11,6 +13,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+
+  @Input() folder: string;
 
   posts: FirebaseListObservable<any>;
   newURL: string;
@@ -21,13 +25,48 @@ export class AddPostComponent implements OnInit {
   currentUser: any;
   editMode: boolean;
   postKey: string;
+  storageRef: any;
+  file: any;
+  imageUrl: any;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute) {
+  constructor(public af: FirebaseApp, public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute, private fb: FirebaseApp) {
     this.newPublished = false;
     this.posts = db.list('/posts');
+
     this.globalService.user.subscribe(user => {
       this.currentUser = user;
     });
+
+    this.storageRef = af.storage().ref();
+  }
+
+  handleFiles(e) {
+    this.file = e.srcElement.files[0];
+    this.readThis(this.file);
+    this.uploadImage();
+  }
+
+  readThis(inputValue: any) : void {
+    let file:File = this.file; 
+    let myReader:FileReader = new FileReader();
+
+    let me = this;
+
+    myReader.onloadend = function(e){
+      me.imageUrl = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  uploadImage() {
+      let storageRef = firebase.storage().ref();
+      let path = this.file.name;
+      let iRef = storageRef.child(path);
+      iRef.put(this.file).then((snapshot) => {
+          let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
+            duration: 3000
+          });
+      });
   }
 
   addPost(newURL: string, newDate: string, newTitle: string, newBody: string, newPublished: boolean) {
@@ -83,6 +122,5 @@ export class AddPostComponent implements OnInit {
         }
     });
   }
-
 }
 

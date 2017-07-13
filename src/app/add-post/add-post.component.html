@@ -21,6 +21,9 @@
         <input mdInput placeholder="Title" [(ngModel)]="newTitle" required>
     </md-input-container>
 
+    <input type="file" id="uploadImage" name="thumbnail" (change)="handleFiles($event)">
+    <img [src]="imageUrl" *ngIf="file" class="thumbnail">
+
     <ckeditor
         [(ngModel)]="newBody"
         [config]="{uiColor: '#FFFFFF'}"
@@ -34,7 +37,7 @@
 
     <button md-raised-button (click)="addPost(newURL, newDate, newTitle, newBody, newPublished)" class="block">
         <span *ngIf="!editMode">Add</span>
-        <span *ngIf="editMode">Edit</span>
+        <span *ngIf="editMode">Save</span>
         Post
     </button>
 </div>

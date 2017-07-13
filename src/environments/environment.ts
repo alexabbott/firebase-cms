@@ -10,7 +10,7 @@ export const environment = {
     authDomain: "fir-cms-76f54.firebaseapp.com",
     databaseURL: "https://fir-cms-76f54.firebaseio.com",
     projectId: "fir-cms-76f54",
-    storageBucket: "",
+    storageBucket: "fir-cms-76f54.appspot.com",
     messagingSenderId: "1065458841365"
   }
 };
