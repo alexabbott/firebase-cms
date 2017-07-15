@@ -49,6 +49,7 @@ import { AuthGuard } from './auth-guard.service';
 import { SortPipe } from './sort.pipe';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { TruncatePipe } from './truncate.pipe';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -124,8 +125,10 @@ firebase.initializeApp(environment.firebase);
     AdminMenusComponent,
     AdminThemeComponent,
     SafeHtmlPipe,
-    TruncatePipe
+    TruncatePipe,
+    DeleteDialogComponent
   ],
+  entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],
   bootstrap: [ AppComponent ]
 })
