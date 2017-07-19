@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 
@@ -11,7 +12,7 @@ export class AddUserComponent implements OnInit {
 
   newEmail: string;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar) {}
+  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public router: Router) {}
 
   ngOnInit() {
   }
@@ -29,6 +30,10 @@ export class AddUserComponent implements OnInit {
       let snackBarRef = this.snackBar.open('User saved', 'OK!', {
         duration: 3000
       });
+
+      setTimeout(() => {
+        this.router.navigateByUrl('admin/users');
+      }, 3300);
     }
   }
 

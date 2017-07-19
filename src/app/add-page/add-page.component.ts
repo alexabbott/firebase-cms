@@ -22,7 +22,7 @@ export class AddPageComponent implements OnInit {
   editMode: boolean;
   pageKey: string;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public route: ActivatedRoute) {
+  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute) {
     this.newPublished = false;
     this.pages = db.list('/pages');
     this.globalService.user.subscribe(user => {
@@ -61,6 +61,10 @@ export class AddPageComponent implements OnInit {
       let snackBarRef = this.snackBar.open('Page saved', 'OK!', {
         duration: 3000
       });
+
+      setTimeout(() => {
+        this.router.navigateByUrl('admin/pages');
+      }, 3300);
     }
   }
 
