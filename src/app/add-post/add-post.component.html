@@ -11,7 +11,7 @@
 
     <div>
         <md-input-container>
-        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="newDate" required>
+        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="newDate" (focus)="picker.open()" required>
         <button mdSuffix [mdDatepickerToggle]="picker"></button>
         </md-input-container>
         <md-datepicker #picker></md-datepicker>

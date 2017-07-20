@@ -23,6 +23,7 @@ import { MdButtonModule,
     MdListModule,
     MdDialogModule
   } from '@angular/material';
+import 'hammerjs';
 
 // components
 import { PostsComponent } from './posts/posts.component';
