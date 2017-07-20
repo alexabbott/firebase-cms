@@ -3,7 +3,7 @@
     padding: 0 30px 30px 30px;
 }
 
-button {
+.submit {
     margin-top: 30px;
 }
 
@@ -22,4 +22,24 @@ ckeditor {
     display: block;
     margin-top: 10px;
     width: 100px;
+}
+
+.mat-upload-button {
+    margin-top: 10px;
+}
+
+.native-upload {
+    display: none;
+}
+
+.no-image {
+    font-size: 0.8em;
+    margin: 5px 0 0 38px;
+}
+
+.delete-image {
+    color: #ff0000;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin: 5px 0 0 0;
 }
