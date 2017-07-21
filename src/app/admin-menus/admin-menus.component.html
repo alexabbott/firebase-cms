@@ -2,17 +2,20 @@
   <h2>Menus</h2>
 
   <md-toolbar>Primary Nav</md-toolbar>
-  <md-card *ngFor="let item of nav | async">
-    <md-input-container>
-      <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Item URL" [(ngModel)]="item.url" required>
-    </md-input-container>
-    <div class="actions">
-      <button md-raised-button (click)="saveMenuItem(item.$key, item.label, item.url)">Save Menu Item</button>
-      <button md-raised-button (click)="deleteMenuItem(item.$key)">Delete Menu Item</button>
-    </div>
-  </md-card>
+  <div dnd-sortable-container [sortableData]="menuList">
+    <md-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
+      <md-input-container>
+        <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Item URL" [(ngModel)]="item.url" required>
+      </md-input-container>
+      <div class="actions">
+        <!--<button md-raised-button (click)="saveMenuItem(item.$key, item.label, item.url)">Save Menu Item</button>-->
+        <button md-raised-button (click)="deleteMenuItem(i)">Delete Menu Item</button>
+      </div>
+    </md-card>
+  </div>
   <button md-raised-button (click)="addMenuItem()" class="button-add-menu">Add Menu Item</button>
+  <button md-raised-button (click)="saveMenu()" class="button-add-menu">Save Menu</button>
 </div>

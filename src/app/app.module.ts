@@ -24,6 +24,7 @@ import { MdButtonModule,
     MdDialogModule
   } from '@angular/material';
 import 'hammerjs';
+import { DndModule } from 'ng2-dnd';
 
 // components
 import { PostsComponent } from './posts/posts.component';
@@ -85,10 +86,11 @@ firebase.initializeApp(environment.firebase);
 @NgModule({
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase, 'firebase-cms'), // imports firebase/app needed for everything
-    AngularFireDatabaseModule, // imports firebase/database, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireModule.initializeApp(environment.firebase, 'firebase-cms'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     BrowserAnimationsModule,
+    DndModule.forRoot(),
     FormsModule,
     MdButtonModule,
     MdCardModule,
