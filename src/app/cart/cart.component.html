@@ -1,0 +1,20 @@
+<div class="container">
+  <h3>Your Cart</h3>
+  <md-toolbar class="cart-header">
+    <div class="item">Item</div>
+    <div class="price">Price</div>
+    <div class="quantity">Qty</div>
+    <div class="total">Total</div>
+  </md-toolbar>
+  <div class="no-items" *ngIf="cartArray.length === 0">No items in the cart. <a routerLink="/products">Keep shopping!</a></div>
+  <md-card *ngFor="let item of cartArray">
+    <div class="item">{{item.title}}</div>
+    <div class="price">{{item.price | currency:'USD':true}}</div>
+    <div class="quantity">
+      <md-input-container>
+        <input mdInput type="number" min="1" [(ngModel)]="item.quantity" (change)="updateCart(item)">
+      </md-input-container>
+    </div>
+    <div class="total">{{item.total | currency:'USD':true}}</div>
+  </md-card>
+</div>

@@ -1,0 +1,24 @@
+h3,
+.no-items {
+    text-align: center;
+}
+
+.cart-header {
+    margin-bottom: 10px;
+}
+
+.item {
+    display: inline-block;
+    width: 50%;
+}
+
+.price,
+.quantity,
+.total {
+    display: inline-block;
+    width: 15%;
+}
+
+.quantity .mat-input-container {
+    width: 35px;
+}

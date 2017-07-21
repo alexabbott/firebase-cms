@@ -1,0 +1,13 @@
+.quantity-label,
+.quantity {
+    display: inline-block;
+}
+
+.quantity-label {
+    color: #666;
+    transform: translateY(-2px);
+}
+
+.quantity {
+    width: 35px;
+}

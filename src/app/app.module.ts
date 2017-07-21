@@ -22,7 +22,8 @@ import { MdButtonModule,
     MdToolbarModule,
     MdListModule,
     MdDialogModule,
-    MdGridListModule
+    MdGridListModule,
+    MdIconModule,
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
@@ -47,6 +48,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { AdminProductsComponent } from './admin-products/admin-products.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { CartComponent } from './cart/cart.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 // services
 import { GlobalService } from './global.service';
@@ -56,7 +59,7 @@ import { AuthGuard } from './auth-guard.service';
 import { SortPipe } from './sort.pipe';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { TruncatePipe } from './truncate.pipe';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { CartIconComponent } from './cart-icon/cart-icon.component';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -89,6 +92,7 @@ const appRoutes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'blog', component: PostsComponent },
   { path: 'blog/:url', component: PostComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 firebase.initializeApp(environment.firebase);
@@ -107,6 +111,7 @@ firebase.initializeApp(environment.firebase);
     MdDatepickerModule,
     MdDialogModule,
     MdGridListModule,
+    MdIconModule,
     MdInputModule,
     MdListModule,
     MdNativeDateModule,
@@ -144,7 +149,9 @@ firebase.initializeApp(environment.firebase);
     ProductsComponent,
     ProductComponent,
     AdminProductsComponent,
-    AddProductComponent
+    AddProductComponent,
+    CartComponent,
+    CartIconComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],
