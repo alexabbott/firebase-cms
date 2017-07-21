@@ -1,0 +1,14 @@
+<div class="container">
+  <h3>New Products</h3>
+  <md-grid-list cols="{{columns}}" rowHeight="300px" (window:resize)="onResize($event)">
+    <md-grid-tile *ngFor="let product of products | async | sort:['-weight']" colspan="1" rowspan="1">
+      <md-card routerLink="/product/{{product.url}}" class="product">
+        <img [src]="getProductImage(product)">
+        <div class="product-content">
+          <h3><a routerLink="/product/{{product.url}}">{{product.title}}</a></h3>
+          <div class="price">{{product.price | currency:'USD':true }}</div>
+        </div>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
+</div>

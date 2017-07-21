@@ -9,6 +9,10 @@
         <button md-raised-button routerLink="/admin/add-page">Add a Page</button>
     </md-card>
     <md-card>
+        <h4 *ngIf="products | async">{{ (products | async).length }} Products</h4>
+        <button md-raised-button routerLink="/admin/add-product">Add a Product</button>
+    </md-card>
+    <md-card>
         <h4 *ngIf="users | async">{{ (users | async).length }} Users</h4>
         <button md-raised-button routerLink="/admin/add-user">Add a User</button>
     </md-card>

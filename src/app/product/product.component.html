@@ -1,0 +1,8 @@
+<div class="container" *ngIf="product">
+  <div class="center product-header">
+    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="thumbnail">
+    <h2>{{product.title}}</h2>
+    <p>Published {{product.price | currency:'USD':true}}</p>
+  </div>
+  <p [innerHTML]="product.body | safeHtml"></p>
+</div>

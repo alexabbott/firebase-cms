@@ -21,7 +21,8 @@ import { MdButtonModule,
     MdSidenavModule,
     MdToolbarModule,
     MdListModule,
-    MdDialogModule
+    MdDialogModule,
+    MdGridListModule
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
@@ -42,6 +43,10 @@ import { AddPageComponent } from './add-page/add-page.component';
 import { PostComponent } from './post/post.component';
 import { AdminMenusComponent } from './admin-menus/admin-menus.component';
 import { AdminThemeComponent } from './admin-theme/admin-theme.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductComponent } from './product/product.component';
+import { AdminProductsComponent } from './admin-products/admin-products.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 // services
 import { GlobalService } from './global.service';
@@ -62,12 +67,15 @@ const appRoutes: Routes = [
         children: [
           { path: 'add-page', component: AddPageComponent },
           { path: 'add-post', component: AddPostComponent },
+          { path: 'add-product', component: AddProductComponent },
           { path: 'add-user', component: AddUserComponent },
           { path: 'edit-page/:key', component: AddPageComponent },
           { path: 'edit-post/:key', component: AddPostComponent },
+          { path: 'edit-product/:key', component: AddProductComponent },
           { path: 'menus', component: AdminMenusComponent },
           { path: 'pages', component: AdminPagesComponent },
           { path: 'posts', component: AdminPostsComponent },
+          { path: 'products', component: AdminProductsComponent },
           { path: 'theme', component: AdminThemeComponent },
           { path: 'users', component: AdminUsersComponent },
           { path: '', component: AdminDashboardComponent }
@@ -77,6 +85,8 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'page/:url', component: PageComponent },
+  { path: 'product/:url', component: ProductComponent },
+  { path: 'products', component: ProductsComponent },
   { path: 'blog', component: PostsComponent },
   { path: 'blog/:url', component: PostComponent },
 ];
@@ -96,6 +106,7 @@ firebase.initializeApp(environment.firebase);
     MdCardModule,
     MdDatepickerModule,
     MdDialogModule,
+    MdGridListModule,
     MdInputModule,
     MdListModule,
     MdNativeDateModule,
@@ -129,7 +140,11 @@ firebase.initializeApp(environment.firebase);
     AdminThemeComponent,
     SafeHtmlPipe,
     TruncatePipe,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ProductsComponent,
+    ProductComponent,
+    AdminProductsComponent,
+    AddProductComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],

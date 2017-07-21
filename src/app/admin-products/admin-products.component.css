@@ -1,0 +1,29 @@
+.button-container h2 {
+    display: inline-block;
+}
+
+.button-container button {
+    float: right;
+    margin: 18px 30px 30px 30px;
+}
+
+.product .content {
+    display: inline-block;
+    width: calc(100% - 220px);
+}
+
+.product .publish {
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: top;
+    width: 210px;
+}
+
+.mat-slide-toggle {
+    margin-left: 45px;
+}
+
+.edit {
+    margin-top: 30px;
+    text-align: center;
+}

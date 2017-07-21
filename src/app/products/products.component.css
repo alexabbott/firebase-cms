@@ -1,0 +1,20 @@
+.product {
+    cursor: pointer;
+    height: 235px;
+    width: 83%;
+}
+
+.product img {
+    display: block;
+    margin: 0 auto;
+    max-height: 155px;
+}
+
+.product .product-content {
+    display: block;
+}
+
+.product .price {
+    color: #999;
+    font-size: 0.8em;
+}

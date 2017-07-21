@@ -11,11 +11,13 @@ export class AdminDashboardComponent implements OnInit {
   posts: FirebaseListObservable<any>;
   pages: FirebaseListObservable<any>;
   users: FirebaseListObservable<any>;
+  products: FirebaseListObservable<any>;
 
   constructor(public db: AngularFireDatabase) {
     this.posts = db.list('/posts');
     this.pages = db.list('/pages');
     this.users = db.list('/users');
+    this.products = db.list('/products');
   }
 
   ngOnInit() {

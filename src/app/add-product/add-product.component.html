@@ -1,0 +1,43 @@
+<div class="product-form">
+    <h2>
+        <span *ngIf="!editMode">Add a</span>
+        <span *ngIf="editMode">Edit</span>
+        Product
+    </h2>
+
+    <md-input-container class="block">
+        <input mdInput placeholder="Title" [(ngModel)]="newTitle" required>
+    </md-input-container>
+
+    <div class="currency-label">$</div>
+    <md-input-container class="price">
+        <input mdInput type="number" step="0.01" placeholder="Price" [(ngModel)]="newPrice" required>
+    </md-input-container>
+
+    <button md-raised-button class="mat-upload-button" onclick="document.getElementById('uploadImage').click()">
+        <span *ngIf="!imageUrl">Upload</span>
+        <span *ngIf="imageUrl">Change</span>
+        Featured Image
+    </button>
+    <input type="file" id="uploadImage" name="thumbnail" class="native-upload" (change)="handleFiles($event)">
+    <img [src]="imageUrl" *ngIf="imageUrl" class="thumbnail">
+    <div class="no-image" *ngIf="!imageUrl">No image chosen</div>
+    <div (click)="deleteImage()" *ngIf="imageUrl" class="delete-image">Delete Image</div>
+
+    <ckeditor
+        [(ngModel)]="newDescription"
+        [config]="{uiColor: '#FFFFFF'}"
+        [readonly]="false">
+    </ckeditor>
+
+    <md-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
+        <span *ngIf="!newPublished">Publish</span>
+        <span *ngIf="newPublished">Un-Publish</span>
+    </md-slide-toggle>
+
+    <button md-raised-button (click)="addProduct(newTitle, newPrice, newDescription, newPublished)" class="submit block">
+        <span *ngIf="!editMode">Add</span>
+        <span *ngIf="editMode">Save</span>
+        Product
+    </button>
+</div>

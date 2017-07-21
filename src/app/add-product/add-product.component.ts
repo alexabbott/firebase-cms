@@ -8,30 +8,29 @@ import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 
 @Component({
-  selector: 'add-post',
-  templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.css']
+  selector: 'add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
 })
-export class AddPostComponent implements OnInit {
+export class AddProductComponent implements OnInit {
 
-  posts: FirebaseListObservable<any>;
-  newURL: string;
-  newDate: string;
+  products: FirebaseListObservable<any>;
   newTitle: string;
   newThumbnail: string;
-  newBody: string;
+  newDescription: string;
+  newPrice: string;
   newPublished: boolean;
   currentUser: any;
   editMode: boolean;
-  postKey: string;
+  productKey: string;
   storageRef: any;
   file: any;
   imageUrl: any;
-  currentPost: FirebaseObjectObservable<any>;
+  currentProduct: FirebaseObjectObservable<any>;
 
   constructor(public af: FirebaseApp, public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute, private fb: FirebaseApp) {
     this.newPublished = false;
-    this.posts = db.list('/posts');
+    this.products = db.list('/products');
 
     this.globalService.user.subscribe(user => {
       this.currentUser = user;
@@ -48,18 +47,18 @@ export class AddPostComponent implements OnInit {
   uploadImage() {
       let storageRef = firebase.storage().ref();
       let path = this.file.name;
-      let iRef = storageRef.child('posts/' + path);
+      let iRef = storageRef.child('products/' + path);
       let me = this;
       iRef.put(this.file).then((snapshot) => {
           let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
             duration: 3000
           });
-          this.storageRef.child('posts/' + path).getDownloadURL().then(function(url) {
+          this.storageRef.child('products/' + path).getDownloadURL().then(function(url) {
             me.imageUrl = url;
             me.newThumbnail = url;
 
             if (me.editMode) {
-              me.currentPost.update({
+              me.currentProduct.update({
                 thumbnail: url
               });
             }
@@ -79,7 +78,7 @@ export class AddPostComponent implements OnInit {
         duration: 3000
       });
       if (me.editMode) {
-        me.currentPost.update({
+        me.currentProduct.update({
           thumbnail: null
         });
       }
@@ -88,46 +87,44 @@ export class AddPostComponent implements OnInit {
     });
   }
 
-  addPost(newURL: string, newDate: string, newTitle: string, newBody: string, newPublished: boolean) {
-    let date = new Date(newDate);
-    let dateTime = date.getTime();
+  addProduct(newTitle: string, newPrice: string, newDescription: string, newPublished: boolean) {
 
     if (!newPublished) {
       newPublished = false;
     }
 
-    if (newURL && newDate && newTitle && newBody && this.currentUser.uid) {
-      if (this.editMode && this.postKey) {
+    if (newTitle && newPrice && newDescription && this.currentUser.uid) {
+      if (this.editMode && this.productKey) {
 
-        this.currentPost = this.db.object('/posts/' + this.postKey);
+        this.currentProduct = this.db.object('/products/' + this.productKey);
 
-        this.currentPost.update({
-          url: newURL,
+        this.currentProduct.update({
+          url: this.slugify(newTitle),
           dateAdded: Date.now(),
-          date: dateTime,
           title: newTitle,
           thumbnail: this.newThumbnail ? this.newThumbnail : null,
-          body: newBody,
+          description: newDescription,
+          price: newPrice,
           published: newPublished,
-          postedBy: this.currentUser.uid
+          productedBy: this.currentUser.uid
         });
       } else {
-          this.posts.push({
-            url: newURL,
+          this.products.push({
+            url: this.slugify(newTitle),
             dateAdded: Date.now(),
-            date: dateTime,
             title: newTitle,
             thumbnail: this.newThumbnail ? this.newThumbnail : null,
-            body: newBody,
+            description: newDescription,
+            price: newPrice,
             published: newPublished,
-            postedBy: this.currentUser.uid
+            productedBy: this.currentUser.uid
           });
       }
-      let snackBarRef = this.snackBar.open('Post saved', 'OK!', {
+      let snackBarRef = this.snackBar.open('Product saved', 'OK!', {
         duration: 3000
       });
       setTimeout(() => {
-        this.router.navigateByUrl('admin/posts');
+        this.router.navigateByUrl('admin/products');
       }, 3300);
     }
   }
@@ -136,14 +133,13 @@ export class AddPostComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
         if (params && params.key) {
           this.editMode = true;
-          this.postKey = params.key;
-          this.currentPost = this.db.object('/posts/' + params.key);
+          this.productKey = params.key;
+          this.currentProduct = this.db.object('/products/' + params.key);
 
-          this.currentPost.subscribe(p => {
-            this.newURL = p.url;
-            this.newDate = p.date;
+          this.currentProduct.subscribe(p => {
             this.newTitle = p.title;
-            this.newBody = p.body;
+            this.newDescription = p.description;
+            this.newPrice = p.price;
             this.newPublished = p.published;
 
             if (p.thumbnail) {
@@ -152,14 +148,22 @@ export class AddPostComponent implements OnInit {
             }
           });
         } else {
-          this.newURL = null;
-          this.newDate = null;
           this.newTitle = null;
           this.newThumbnail = null;
-          this.newBody = null;
+          this.newDescription = null;
+          this.newPrice = null;
           this.newPublished = false;
         }
     });
+  }
+
+  slugify(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
   }
 }
 

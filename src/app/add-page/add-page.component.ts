@@ -35,7 +35,7 @@ export class AddPageComponent implements OnInit {
     if (!newPublished) {
       newPublished = false;
     }
-    
+
     if (newURL && newTitle && newBody && this.currentUser.uid) {
       if (this.editMode && this.pageKey) {
         this.db.object('/pages/' + this.pageKey).update({
@@ -55,11 +55,6 @@ export class AddPageComponent implements OnInit {
           published: newPublished,
           postedBy: this.currentUser.uid
         });
-
-        this.newURL = null;
-        this.newTitle = null;
-        this.newBody = null;
-        this.newPublished = false;
       }
 
       let snackBarRef = this.snackBar.open('Page saved', 'OK!', {
@@ -83,6 +78,11 @@ export class AddPageComponent implements OnInit {
             this.newBody = p.body;
             this.newPublished = p.published;
           });
+        } else {
+          this.newURL = null;
+          this.newTitle = null;
+          this.newBody = null;
+          this.newPublished = false;
         }
     });
   }
