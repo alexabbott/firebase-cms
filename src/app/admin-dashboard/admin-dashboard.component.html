@@ -1,7 +1,15 @@
 <div class="container">
     <h2>Admin Dashboard</h2>
-
-    <button md-raised-button routerLink="/admin/add-post">Add a Post</button>
-    <button md-raised-button routerLink="/admin/add-page">Add a Page</button>
-    <button md-raised-button routerLink="/admin/add-user">Add a User</button>
+    <md-card>
+        <h4 *ngIf="posts | async">{{ (posts | async).length }} Posts</h4>
+        <button md-raised-button routerLink="/admin/add-post">Add a Post</button>
+    </md-card>
+    <md-card>
+        <h4 *ngIf="pages | async">{{ (pages | async).length }} Pages</h4>
+        <button md-raised-button routerLink="/admin/add-page">Add a Page</button>
+    </md-card>
+    <md-card>
+        <h4 *ngIf="users | async">{{ (users | async).length }} Users</h4>
+        <button md-raised-button routerLink="/admin/add-user">Add a User</button>
+    </md-card>
 </div>

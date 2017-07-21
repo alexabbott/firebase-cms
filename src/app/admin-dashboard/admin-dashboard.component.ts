@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'admin-dashboard',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  posts: FirebaseListObservable<any>;
+  pages: FirebaseListObservable<any>;
+  users: FirebaseListObservable<any>;
+
+  constructor(public db: AngularFireDatabase) {
+    this.posts = db.list('/posts');
+    this.pages = db.list('/pages');
+    this.users = db.list('/users');
+  }
 
   ngOnInit() {
   }
