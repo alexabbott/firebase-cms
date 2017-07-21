@@ -92,6 +92,10 @@ export class AddPostComponent implements OnInit {
     let date = new Date(newDate);
     let dateTime = date.getTime();
 
+    if (!newPublished) {
+      newPublished = false;
+    }
+
     if (newURL && newDate && newTitle && newBody && this.currentUser.uid) {
       if (this.editMode && this.postKey) {
 

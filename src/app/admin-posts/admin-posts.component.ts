@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+import { FirebaseApp } from 'angularfire2';
 import { GlobalService } from '../global.service';
 import { Router }    from '@angular/router';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
@@ -16,9 +18,12 @@ export class AdminPostsComponent implements OnInit {
   post: FirebaseObjectObservable<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
+  storageRef: any;
 
-  constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(public af: FirebaseApp, public db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
     this.posts = db.list('/posts');
+
+    this.storageRef = af.storage().ref();
   }
 
   onChange(e: any, key: string) {
@@ -34,16 +39,29 @@ export class AdminPostsComponent implements OnInit {
     this.router.navigateByUrl('admin/edit-post/' + key);
   }
 
-  deletePost(key: string) {
+  deletePost(post: any) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
       if (this.selectedOption === 'delete') {
-        this.db.object('/posts/' + key).remove();
-  
-        let snackBarRef = this.snackBar.open('Post deleted', 'OK!', {
-          duration: 3000
-        });
+        this.db.object('/posts/' + post.$key).remove();
+
+        if (post.thumbnail) {
+          let storage = firebase.storage();
+          let imageRef = storage.refFromURL(post.thumbnail);
+          let me = this;
+          imageRef.delete().then(function() {
+            let snackBarRef = me.snackBar.open('Post deleted', 'OK!', {
+              duration: 3000
+            });
+          }).catch(function(error) {
+            console.log('error', error);
+          });
+        } else {
+          let snackBarRef = this.snackBar.open('Post deleted', 'OK!', {
+            duration: 3000
+          });
+        }
       }
     });
   }

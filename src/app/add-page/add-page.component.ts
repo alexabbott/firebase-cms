@@ -31,6 +31,10 @@ export class AddPageComponent implements OnInit {
   }
 
   addPage(newURL: string, newTitle: string, newBody: string, newPublished: boolean) {
+
+    if (!newPublished) {
+      newPublished = false;
+    }
     
     if (newURL && newTitle && newBody && this.currentUser.uid) {
       if (this.editMode && this.pageKey) {
