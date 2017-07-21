@@ -33,6 +33,15 @@ export class CartComponent implements OnInit {
     });
   }
 
+  removeItem(item) {
+    delete this.globalCart[item.key];
+    this.globalService.cart.next(this.globalCart);
+
+    let snackBarRef = this.snackBar.open('Item removed', 'OK!', {
+      duration: 3000
+    });
+  }
+
   ngOnInit() {
   }
 

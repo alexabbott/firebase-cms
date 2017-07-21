@@ -16,5 +16,8 @@
       </md-input-container>
     </div>
     <div class="total">{{item.total | currency:'USD':true}}</div>
+    <div class="remove">
+      <button md-raised-button (click)="removeItem(item)">Remove</button>
+    </div>
   </md-card>
 </div>

@@ -9,7 +9,7 @@ h3,
 
 .item {
     display: inline-block;
-    width: 50%;
+    width: 40%;
 }
 
 .price,
@@ -21,4 +21,9 @@ h3,
 
 .quantity .mat-input-container {
     width: 35px;
+}
+
+.remove {
+    display: inline-block;
+    width: 5%;
 }
