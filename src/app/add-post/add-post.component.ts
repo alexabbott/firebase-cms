@@ -21,7 +21,7 @@ export class AddPostComponent implements OnInit {
   newThumbnail: string;
   newBody: string;
   newPublished: boolean;
-  currentUser: any;
+  currentAdmin: any;
   editMode: boolean;
   postKey: string;
   storageRef: any;
@@ -33,8 +33,8 @@ export class AddPostComponent implements OnInit {
     this.newPublished = false;
     this.posts = db.list('/posts');
 
-    this.globalService.user.subscribe(user => {
-      this.currentUser = user;
+    this.globalService.admin.subscribe(admin => {
+      this.currentAdmin = admin;
     });
 
     this.storageRef = af.storage().ref();
@@ -96,7 +96,7 @@ export class AddPostComponent implements OnInit {
       newPublished = false;
     }
 
-    if (newURL && newDate && newTitle && newBody && this.currentUser.uid) {
+    if (newURL && newDate && newTitle && newBody && this.currentAdmin.uid) {
       if (this.editMode && this.postKey) {
 
         this.currentPost = this.db.object('/posts/' + this.postKey);
@@ -109,7 +109,7 @@ export class AddPostComponent implements OnInit {
           thumbnail: this.newThumbnail ? this.newThumbnail : null,
           body: newBody,
           published: newPublished,
-          postedBy: this.currentUser.uid
+          postedBy: this.currentAdmin.uid
         });
       } else {
           this.posts.push({
@@ -120,7 +120,7 @@ export class AddPostComponent implements OnInit {
             thumbnail: this.newThumbnail ? this.newThumbnail : null,
             body: newBody,
             published: newPublished,
-            postedBy: this.currentUser.uid
+            postedBy: this.currentAdmin.uid
           });
       }
       let snackBarRef = this.snackBar.open('Post saved', 'OK!', {

@@ -18,15 +18,15 @@ export class AddPageComponent implements OnInit {
   newTitle: string;
   newBody: string;
   newPublished: boolean;
-  currentUser: any;
+  currentAdmin: any;
   editMode: boolean;
   pageKey: string;
 
   constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute) {
     this.newPublished = false;
     this.pages = db.list('/pages');
-    this.globalService.user.subscribe(user => {
-      this.currentUser = user;
+    this.globalService.admin.subscribe(admin => {
+      this.currentAdmin = admin;
     });
   }
 
@@ -36,7 +36,7 @@ export class AddPageComponent implements OnInit {
       newPublished = false;
     }
 
-    if (newURL && newTitle && newBody && this.currentUser.uid) {
+    if (newURL && newTitle && newBody && this.currentAdmin.uid) {
       if (this.editMode && this.pageKey) {
         this.db.object('/pages/' + this.pageKey).update({
           url: newURL,
@@ -44,7 +44,7 @@ export class AddPageComponent implements OnInit {
           title: newTitle,
           body: newBody,
           published: newPublished,
-          postedBy: this.currentUser.uid
+          postedBy: this.currentAdmin.uid
         });
       } else {
         this.pages.push({
@@ -53,7 +53,7 @@ export class AddPageComponent implements OnInit {
           title: newTitle,
           body: newBody,
           published: newPublished,
-          postedBy: this.currentUser.uid
+          postedBy: this.currentAdmin.uid
         });
       }
 

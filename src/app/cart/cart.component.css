@@ -27,3 +27,24 @@ h3,
     display: inline-block;
     width: 5%;
 }
+
+.checkout-cta {
+    float: right;
+    margin-top: 20px;
+    width: 300px;
+}
+
+.checkout-cta button {
+    display: block;
+    float: right;
+}
+
+.subtotal-label,
+.subtotal {
+    display: inline-block;
+    width: 48%;
+}
+
+.subtotal {
+    text-align: right;
+}

@@ -2,8 +2,8 @@
     <h3>FireCMS</h3>
     <span class="fill-space"></span>
     <div class="login">
-        <img src="{{ (user | async)?.photoURL }}" class="user-photo">
-        <button md-raised-button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
+        <img src="{{ (admin | async)?.photoURL }}" class="admin-photo">
+        <button md-raised-button (click)="logout()" *ngIf="(admin | async)?.uid">Logout</button>
     </div>
 </md-toolbar>
 <md-sidenav-container>
@@ -13,9 +13,10 @@
             <md-list-item [ngClass]="{'selected': router.url.includes('/admin/posts')}" routerLink="/admin/posts">Posts</md-list-item>
             <md-list-item [ngClass]="{'selected': router.url.includes('/admin/pages')}" routerLink="/admin/pages">Pages</md-list-item>
             <md-list-item [ngClass]="{'selected': router.url.includes('/admin/products')}" routerLink="/admin/products">Products</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/customers')}" routerLink="/admin/customers">Customers</md-list-item>
             <md-list-item [ngClass]="{'selected': router.url.includes('/admin/menus')}" routerLink="/admin/menus">Menus</md-list-item>
             <md-list-item [ngClass]="{'selected': router.url === '/admin/theme'}" routerLink="/admin/theme">Theme</md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/users')}" routerLink="/admin/users">Users</md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/admins')}" routerLink="/admin/admins">Admins</md-list-item>
         </md-list>
     </md-sidenav>
     <router-outlet></router-outlet>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { GlobalService } from '../global.service';
 
 @Component({
@@ -14,13 +16,11 @@ export class ProductComponent implements OnInit {
   productContent: any;
   product: any;
   globalCart: any;
+  user: Observable<firebase.User>;
+  currentShopper: any;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public route: ActivatedRoute, public globalService: GlobalService) {
-    globalService.cart.subscribe((cart) => {
-      this.globalCart = cart;
-      window.localStorage.setItem('cart', JSON.stringify(this.globalCart));
-      console.log('cart', cart);
-    });
+  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public route: ActivatedRoute, public globalService: GlobalService) {
+    this.user = afAuth.authState;
   }
 
   ngOnInit() {
@@ -34,10 +34,17 @@ export class ProductComponent implements OnInit {
         this.productContent.subscribe(p => {
           if (p[0].published) {
             this.product = p[0];
-            if (!this.product.quantity) {
-              this.product.quantity = 1;
-              this.product.total = this.product.price;
-            }
+
+            this.globalService.cart.subscribe((cart) => {
+              this.globalCart = cart;
+              window.localStorage.setItem('cart', JSON.stringify(this.globalCart));
+              if (this.globalCart[this.product.$key]) {
+                this.product.quantity = this.globalCart[this.product.$key]['quantity'];
+              } else {
+                this.product.quantity = 1;
+                this.product.total = this.product.price;
+              }
+            });
           } else {
             this.product = {
               title: 'Product Not Found',

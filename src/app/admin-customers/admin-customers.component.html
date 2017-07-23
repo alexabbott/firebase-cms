@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="button-container">
+        <h2>Customers</h2>
+    </div>
+    <md-card class="customer" *ngFor="let customer of customers | async | sort:['email']">
+        <div class="content">
+            <img src="{{ customer.photoURL }}" class="customer-photo">
+            {{customer.email}}
+        </div>
+        <div class="active">
+            <span *ngIf="customer.cart">Customer has items in cart</span>
+            <button md-raised-button (click)="deleteCustomer(customer.$key)">Delete Customer</button>
+        </div>
+    </md-card>
+</div>

@@ -50,6 +50,8 @@ import { AdminProductsComponent } from './admin-products/admin-products.componen
 import { AddProductComponent } from './add-product/add-product.component';
 import { CartComponent } from './cart/cart.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { CartIconComponent } from './cart-icon/cart-icon.component';
+import { AdminCustomersComponent } from './admin-customers/admin-customers.component';
 
 // services
 import { GlobalService } from './global.service';
@@ -59,7 +61,6 @@ import { AuthGuard } from './auth-guard.service';
 import { SortPipe } from './sort.pipe';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { TruncatePipe } from './truncate.pipe';
-import { CartIconComponent } from './cart-icon/cart-icon.component';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -71,7 +72,8 @@ const appRoutes: Routes = [
           { path: 'add-page', component: AddPageComponent },
           { path: 'add-post', component: AddPostComponent },
           { path: 'add-product', component: AddProductComponent },
-          { path: 'add-user', component: AddUserComponent },
+          { path: 'add-admin', component: AddUserComponent },
+          { path: 'customers', component: AdminCustomersComponent },
           { path: 'edit-page/:key', component: AddPageComponent },
           { path: 'edit-post/:key', component: AddPostComponent },
           { path: 'edit-product/:key', component: AddProductComponent },
@@ -80,7 +82,7 @@ const appRoutes: Routes = [
           { path: 'posts', component: AdminPostsComponent },
           { path: 'products', component: AdminProductsComponent },
           { path: 'theme', component: AdminThemeComponent },
-          { path: 'users', component: AdminUsersComponent },
+          { path: 'admins', component: AdminUsersComponent },
           { path: '', component: AdminDashboardComponent }
         ]
       }
@@ -151,7 +153,8 @@ firebase.initializeApp(environment.firebase);
     AdminProductsComponent,
     AddProductComponent,
     CartComponent,
-    CartIconComponent
+    CartIconComponent,
+    AdminCustomersComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],

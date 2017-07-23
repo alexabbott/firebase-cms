@@ -14,34 +14,34 @@ import { MdSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  user: Observable<firebase.User>;
+  admin: Observable<firebase.User>;
 
   constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public globalService: GlobalService, public router: Router, public snackBar: MdSnackBar) {
 
-    this.user = afAuth.authState;
-    this.user.subscribe(currentUser => {
+    this.admin = afAuth.authState;
+    this.admin.subscribe(currentAdmin => {
 
-      if (currentUser) {
-        let checkUser = db.list('/users', {
+      if (currentAdmin) {
+        let checkAdmin = db.list('/admins', {
           query: {
             orderByChild: 'email',
-            equalTo: currentUser.email
+            equalTo: currentAdmin.email
           }
         });
 
-        checkUser.subscribe(user => {
-          if (user.length > 0) {
-            this.db.object('/users/' + this.hashCode(currentUser.email)).set({
-              uid: currentUser.uid,
-              email: currentUser.email,
-              photoURL: currentUser.photoURL,
+        checkAdmin.subscribe(admin => {
+          if (admin.length > 0) {
+            this.db.object('/admins/' + this.hashCode(currentAdmin.email)).set({
+              uid: currentAdmin.uid,
+              email: currentAdmin.email,
+              photoURL: currentAdmin.photoURL,
               active: true
             });
 
             this.router.navigateByUrl('admin');
           } else {
             this.logout();
-            let snackBarRef = this.snackBar.open('You are not an authorized user', 'OK!', {
+            let snackBarRef = this.snackBar.open('You are not an authorized administrator', 'OK!', {
               duration: 3000
             });
           }

@@ -17,22 +17,22 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  addUser(newEmail: string) {
+  addAdmin(newEmail: string) {
     if (newEmail) {
 
-      this.db.object('/users/' + this.hashCode(newEmail)).set({
+      this.db.object('/admins/' + this.hashCode(newEmail)).set({
         email: newEmail,
         active: false
       });
 
       this.newEmail = null;
 
-      let snackBarRef = this.snackBar.open('User saved', 'OK!', {
+      let snackBarRef = this.snackBar.open('Admin saved', 'OK!', {
         duration: 3000
       });
 
       setTimeout(() => {
-        this.router.navigateByUrl('admin/users');
+        this.router.navigateByUrl('admin/admins');
       }, 3300);
     }
   }

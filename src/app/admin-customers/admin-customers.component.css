@@ -7,24 +7,28 @@
     margin: 18px 30px 30px 30px;
 }
 
-.admin .content {
+.customer .content {
     display: inline-block;
     margin-top: 13px;
     vertical-align: top;
     width: calc(100% - 160px);
 }
 
-.admin .active {
+.customer .active {
     display: inline-block;
     text-align: center;
     width: 150px;
 }
 
-.admin .active button {
+.customer .active button {
     margin-top: 10px;
 }
 
-.admin-photo {
+.customer .active span {
+    font-size: .9em;
+}
+
+.customer-photo {
     border-radius: 50%;
     margin-right: 15px;
     vertical-align: middle;

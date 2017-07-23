@@ -8,7 +8,15 @@
             </li>
         </span>
         <li>
-        <cart-icon></cart-icon>
+            <cart-icon></cart-icon>
+        </li>
+        <li *ngIf="(user | async)?.uid">
+            <img src="{{ (user | async)?.photoURL }}" class="user-photo">
+        </li>
+        <li>
+            <button md-raised-button (click)="login()" *ngIf="!(user | async)?.uid">Login</button>
+            <button md-raised-button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
+        </li>
     </ul>
 </md-toolbar>
 <router-outlet></router-outlet>

@@ -14,18 +14,18 @@ import { GlobalService } from '../global.service';
 
 export class AdminComponent implements OnInit {
 
-  user: Observable<firebase.User>;
-  currentUserID: string;
+  admin: Observable<firebase.User>;
+  currentAdminID: string;
 
   constructor(public afAuth: AngularFireAuth, public router: Router, public globalService: GlobalService) {
-    this.user = afAuth.authState;
+    this.admin = afAuth.authState;
 
-    this.user.subscribe(currentUser => {
-      if (!currentUser) {
+    this.admin.subscribe(currentAdmin => {
+      if (!currentAdmin) {
         this.router.navigateByUrl('login');
       } else {
-        this.globalService.user.next(currentUser);
-        this.currentUserID = currentUser.uid;
+        this.globalService.admin.next(currentAdmin);
+        this.currentAdminID = currentAdmin.uid;
       }
     });
   }

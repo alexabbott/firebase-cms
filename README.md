@@ -62,7 +62,7 @@ Navigate to `http://localhost:4200/` to access the front end.
 
 Navigate to `http://localhost:4200/login` to access the login page (login is via Google).  
 
-Navigate to `http://localhost:4200/admin` to access the CMS (user must be logged in and must be part of '/users' in the Firebase database to access the CMS).
+Navigate to `http://localhost:4200/admin` to access the CMS (user must be logged in and must be part of '/admins' in the Firebase database to access the CMS).
 
 ## Code scaffolding
 

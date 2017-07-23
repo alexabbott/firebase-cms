@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { GlobalService } from '../global.service';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'cart-icon',
@@ -8,19 +11,26 @@ import { GlobalService } from '../global.service';
 })
 export class CartIconComponent implements OnInit {
   globalCart: any;
+  user: Observable<firebase.User>;
 
-  constructor(public globalService: GlobalService) {
+  constructor(public globalService: GlobalService, public afAuth: AngularFireAuth, public db: AngularFireDatabase) {
+    this.user = afAuth.authState;
+  
     globalService.cart.subscribe((cart) => {
       this.globalCart = cart;
-      console.log('globalCart', this.globalCart);
+      console.log('the global cart', this.globalCart);
+
+      this.user.subscribe(currentUser => {
+        if (currentUser && currentUser.uid && Object.keys(cart).length > 0) {
+          db.object('/users/' + currentUser.uid).update({
+            cart: cart
+          })
+        }
+      });
     });
+
   }
 
   ngOnInit() {
-    if (window.localStorage.getItem('cart')) {
-      this.globalCart = JSON.parse(window.localStorage.getItem('cart'));
-      this.globalService.cart.next(this.globalCart);
-      console.log('cartFromLocal', this.globalCart);
-    }
   }
 }

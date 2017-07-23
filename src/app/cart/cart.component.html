@@ -20,4 +20,9 @@
       <button md-raised-button (click)="removeItem(item)">Remove</button>
     </div>
   </md-card>
+  <md-card class="checkout-cta">
+    <h4 class="subtotal-label">Subtotal</h4>
+    <h4 class="subtotal">{{cartTotal | currency:'USD':true}}</h4>
+    <button md-raised-button>Checkout</button>
+  </md-card>
 </div>

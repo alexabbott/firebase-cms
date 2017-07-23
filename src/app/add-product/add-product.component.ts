@@ -20,7 +20,7 @@ export class AddProductComponent implements OnInit {
   newDescription: string;
   newPrice: string;
   newPublished: boolean;
-  currentUser: any;
+  currentAdmin: any;
   editMode: boolean;
   productKey: string;
   storageRef: any;
@@ -32,8 +32,8 @@ export class AddProductComponent implements OnInit {
     this.newPublished = false;
     this.products = db.list('/products');
 
-    this.globalService.user.subscribe(user => {
-      this.currentUser = user;
+    this.globalService.admin.subscribe(admin => {
+      this.currentAdmin = admin;
     });
 
     this.storageRef = af.storage().ref();
@@ -93,7 +93,7 @@ export class AddProductComponent implements OnInit {
       newPublished = false;
     }
 
-    if (newTitle && newPrice && newDescription && this.currentUser.uid) {
+    if (newTitle && newPrice && newDescription && this.currentAdmin.uid) {
       if (this.editMode && this.productKey) {
 
         this.currentProduct = this.db.object('/products/' + this.productKey);
@@ -106,7 +106,7 @@ export class AddProductComponent implements OnInit {
           description: newDescription,
           price: newPrice,
           published: newPublished,
-          productedBy: this.currentUser.uid
+          productedBy: this.currentAdmin.uid
         });
       } else {
           this.products.push({
@@ -117,7 +117,7 @@ export class AddProductComponent implements OnInit {
             description: newDescription,
             price: newPrice,
             published: newPublished,
-            productedBy: this.currentUser.uid
+            productedBy: this.currentAdmin.uid
           });
       }
       let snackBarRef = this.snackBar.open('Product saved', 'OK!', {
