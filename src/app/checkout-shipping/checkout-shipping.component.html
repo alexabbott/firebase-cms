@@ -1,0 +1,25 @@
+<md-card class="container">
+  <h3>Shipping Info</h3>
+  <md-input-container>
+    <input mdInput placeholder="Name (first & last)" [(ngModel)]="order.shipping.name">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Company (optional)" [(ngModel)]="order.shipping.company">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Email" [(ngModel)]="order.shipping.email">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Address" [(ngModel)]="order.shipping.address">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="City" [(ngModel)]="order.shipping.city">
+  </md-input-container>
+  <md-select placeholder="State" [(ngModel)]="order.shipping.state">
+    <md-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</md-option>
+  </md-select>
+  <md-input-container>
+    <input mdInput placeholder="Zip Code" [(ngModel)]="order.shipping.zip">
+  </md-input-container>
+  <button md-raised-button (click)="goTo('checkout/billing')">Continue</button>
+</md-card>

@@ -129,6 +129,22 @@ export class AddPostComponent implements OnInit {
       setTimeout(() => {
         this.router.navigateByUrl('admin/posts');
       }, 3300);
+    } else if (!newURL) {
+      let snackBarRef = this.snackBar.open('You must add a URL for this post', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newTitle) {
+      let snackBarRef = this.snackBar.open('You must add a title for this post', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newBody) {
+      let snackBarRef = this.snackBar.open('You must add content to the post', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newDate) {
+      let snackBarRef = this.snackBar.open('You must add a date to the post', 'OK!', {
+        duration: 3000
+      });
     }
   }
 

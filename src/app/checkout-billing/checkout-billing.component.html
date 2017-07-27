@@ -1,0 +1,26 @@
+<md-card class="container">
+  <h3>Billing info</h3>
+  <md-checkbox [(ngModel)]="sameAsShipping" (change)="copyShipping()">same as shipping</md-checkbox>
+  <md-input-container>
+    <input mdInput placeholder="Name (first & last)" [(ngModel)]="order.billing.name">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Company (optional)" [(ngModel)]="order.billing.company">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Email" [(ngModel)]="order.billing.email">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Address" [(ngModel)]="order.billing.address">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="City" [(ngModel)]="order.billing.city">
+  </md-input-container>
+  <md-select placeholder="State" [(ngModel)]="order.billing.state">
+    <md-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</md-option>
+  </md-select>
+  <md-input-container>
+    <input mdInput placeholder="Zip Code" [(ngModel)]="order.billing.zip">
+  </md-input-container>
+  <button md-raised-button (click)="goTo('checkout/payment')">Continue</button>
+</md-card>

@@ -24,6 +24,9 @@ import { MdButtonModule,
     MdDialogModule,
     MdGridListModule,
     MdIconModule,
+    MdSelectModule,
+    MdOptionModule,
+    MdCheckboxModule,
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
@@ -52,6 +55,11 @@ import { CartComponent } from './cart/cart.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { CartIconComponent } from './cart-icon/cart-icon.component';
 import { AdminCustomersComponent } from './admin-customers/admin-customers.component';
+import { CheckoutShippingComponent } from './checkout-shipping/checkout-shipping.component';
+import { CheckoutBillingComponent } from './checkout-billing/checkout-billing.component';
+import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
+import { CheckoutReviewComponent } from './checkout-review/checkout-review.component';
+import { CheckoutConfirmationComponent } from './checkout-confirmation/checkout-confirmation.component';
 
 // services
 import { GlobalService } from './global.service';
@@ -88,6 +96,20 @@ const appRoutes: Routes = [
       }
     ]
   },
+  { path: 'checkout',
+    children: [
+      {
+        path: '',
+        children: [
+          { path: 'shipping', component: CheckoutShippingComponent },
+          { path: 'billing', component: CheckoutBillingComponent },
+          { path: 'payment', component: CheckoutPaymentComponent },
+          { path: 'review', component: CheckoutReviewComponent },
+          { path: 'confirmation', component: CheckoutConfirmationComponent },
+        ]
+      }
+    ]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'page/:url', component: PageComponent },
   { path: 'product/:url', component: ProductComponent },
@@ -112,11 +134,14 @@ firebase.initializeApp(environment.firebase);
     MdCardModule,
     MdDatepickerModule,
     MdDialogModule,
+    MdCheckboxModule,
     MdGridListModule,
     MdIconModule,
     MdInputModule,
     MdListModule,
     MdNativeDateModule,
+    MdOptionModule,
+    MdSelectModule,
     MdSidenavModule,
     MdSlideToggleModule,
     MdSnackBarModule,
@@ -154,7 +179,12 @@ firebase.initializeApp(environment.firebase);
     AddProductComponent,
     CartComponent,
     CartIconComponent,
-    AdminCustomersComponent
+    AdminCustomersComponent,
+    CheckoutShippingComponent,
+    CheckoutBillingComponent,
+    CheckoutPaymentComponent,
+    CheckoutReviewComponent,
+    CheckoutConfirmationComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],

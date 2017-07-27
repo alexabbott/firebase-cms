@@ -126,6 +126,18 @@ export class AddProductComponent implements OnInit {
       setTimeout(() => {
         this.router.navigateByUrl('admin/products');
       }, 3300);
+    } else if (!newTitle) {
+      let snackBarRef = this.snackBar.open('You must add a title for this product', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newDescription) {
+      let snackBarRef = this.snackBar.open('You must add a description to the product', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newPrice) {
+      let snackBarRef = this.snackBar.open('You must add a price to the product', 'OK!', {
+        duration: 3000
+      });
     }
   }
 

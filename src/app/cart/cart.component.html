@@ -20,9 +20,9 @@
       <button md-raised-button (click)="removeItem(item)">Remove</button>
     </div>
   </md-card>
-  <md-card class="checkout-cta">
+  <md-card class="checkout-cta" *ngIf="cartArray.length > 0">
     <h4 class="subtotal-label">Subtotal</h4>
     <h4 class="subtotal">{{cartTotal | currency:'USD':true}}</h4>
-    <button md-raised-button>Checkout</button>
+    <button md-raised-button routerLink="/checkout/shipping">Checkout</button>
   </md-card>
 </div>

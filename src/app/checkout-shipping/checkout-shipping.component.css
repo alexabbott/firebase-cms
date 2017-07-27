@@ -1,0 +1,13 @@
+.container {
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.mat-input-container,
+.mat-select {
+    display: block;
+}
+
+.mat-select {
+    margin: 20px auto 21px auto;
+}

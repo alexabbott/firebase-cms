@@ -64,6 +64,18 @@ export class AddPageComponent implements OnInit {
       setTimeout(() => {
         this.router.navigateByUrl('admin/pages');
       }, 3300);
+    } else if (!newURL) {
+      let snackBarRef = this.snackBar.open('You must add a URL for this page', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newTitle) {
+      let snackBarRef = this.snackBar.open('You must add a title for this page', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newBody) {
+      let snackBarRef = this.snackBar.open('You must add content to the page', 'OK!', {
+        duration: 3000
+      });
     }
   }
 

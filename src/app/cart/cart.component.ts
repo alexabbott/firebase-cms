@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }    from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { GlobalService } from '../global.service';
 import { MdSnackBar } from '@angular/material';
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   user: Observable<firebase.User>;
   currentShopper: any;
 
-  constructor(public globalService: GlobalService, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar) {
+  constructor(public globalService: GlobalService, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public router: Router) {
     this.user = afAuth.authState;
     this.cartArray = [];
     this.cartTotal = 0;
@@ -30,6 +31,8 @@ export class CartComponent implements OnInit {
       for (let i = 0; i < this.cartArray.length; i++) {
         this.cartTotal += this.cartArray[i].total;
       }
+
+      globalService.order.next({items: this.cartArray});
     });
   }
 
@@ -56,7 +59,6 @@ export class CartComponent implements OnInit {
       duration: 3000
     });
   }
-
   ngOnInit() {
   }
 

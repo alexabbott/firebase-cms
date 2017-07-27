@@ -1,0 +1,22 @@
+.container {
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+h3 {
+    display: inline-block;
+    width: 50%;
+}
+
+.mat-checkbox {
+    float: right;
+}
+
+.mat-input-container,
+.mat-select {
+    display: block;
+}
+
+.mat-select {
+    margin: 20px auto 21px auto;
+}
