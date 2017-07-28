@@ -29,12 +29,14 @@ export class CartComponent implements OnInit {
       this.cartArray = [];
       this.cartTotal = 0;
       this.globalCart = cart;
-      this.cartArray = (<any>Object).values(this.globalCart);
-      for (let i = 0; i < this.cartArray.length; i++) {
-        this.cartTotal += this.cartArray[i].total;
+      if (this.globalCart) {
+        this.cartArray = (<any>Object).values(this.globalCart);
+        for (let i = 0; i < this.cartArray.length; i++) {
+          this.cartTotal += this.cartArray[i].total;
+        }
+        globalService.order.next({items: this.cartArray, shipping: {}, billing: {}});
       }
 
-      globalService.order.next({items: this.cartArray, shipping: {}, billing: {}});
     });
   }
 

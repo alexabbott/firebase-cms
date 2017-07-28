@@ -18,10 +18,9 @@ export class CartIconComponent implements OnInit {
   
     globalService.cart.subscribe((cart) => {
       this.globalCart = cart;
-      console.log('the global cart', this.globalCart);
 
       this.user.subscribe(currentUser => {
-        if (currentUser && currentUser.uid && Object.keys(cart).length > 0) {
+        if (currentUser && currentUser.uid && cart && Object.keys(cart).length > 0) {
           db.object('/users/' + currentUser.uid).update({
             cart: cart
           })

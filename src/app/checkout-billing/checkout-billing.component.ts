@@ -23,7 +23,6 @@ export class CheckoutBillingComponent implements OnInit {
 
   copyShipping() {
     if (this.sameAsShipping) {
-      console.log('order billing', this.order);
       this.order.billing = this.order.shipping;
     } else {
       this.order.billing = {};

@@ -27,7 +27,6 @@ export class CheckoutShippingComponent implements OnInit {
         this.order.shipping.city &&
         this.order.shipping.state &&
         this.order.shipping.zip) {
-          console.log('this.order', this.order);
           this.globalService.order.next(this.order);
           this.router.navigateByUrl(url);
       } else {

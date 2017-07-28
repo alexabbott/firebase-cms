@@ -40,7 +40,6 @@ export class AppComponent {
 
       if (!currentUser && window.localStorage.getItem('cart')) {
         this.globalService.cart.next(JSON.parse(window.localStorage.getItem('cart')));
-        console.log('localStorage', JSON.parse(window.localStorage.getItem('cart')));
       }
     });
   }

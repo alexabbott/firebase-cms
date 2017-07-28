@@ -10,7 +10,6 @@ export class AuthGuard implements CanActivate {
   constructor(public afAuth: AngularFireAuth, public router: Router) {}
 
   canActivate() {
-    console.log('AuthGuard#canActivate called');
     return this.afAuth.authState.map((auth) => {
         if (!auth) {
           this.router.navigateByUrl('login');

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-checkout-confirmation',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkout-confirmation.component.css']
 })
 export class CheckoutConfirmationComponent implements OnInit {
+  order: any;
 
-  constructor() { }
+  constructor(public router: Router, public globalService: GlobalService) {
+    this.order = globalService.order.getValue();
+  }
 
   ngOnInit() {
   }
