@@ -15,7 +15,7 @@
   {{ order.billing.address }}<br>
   {{ order.billing.city }}, {{ order.billing.state }}, {{ order.billing.zip }}<br>
 
-  <h4>Order</h4>
   <cart></cart>
-  <button md-raised-button routerLink="/checkout/confirmation">Confirm Order</button>
+  <a routerLink="/cart" class="edit">Edit Cart</a>
+  <button md-raised-button class="confirm" routerLink="/checkout/confirmation">Confirm Order</button>
 </md-card>

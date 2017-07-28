@@ -13,17 +13,11 @@ export class CheckoutShippingComponent implements OnInit {
   states: any;
 
   constructor(public globalService: GlobalService, public snackBar: MdSnackBar, public router: Router) {
-    this.globalService.order.subscribe(currentOrder => {
-      this.order = currentOrder;
-      console.log('order', currentOrder);
-      if (!this.order) {
-        this.router.navigateByUrl('cart');
-      }
-      if (!this.order.shipping) {
-        this.order.shipping = {};
-      }
-    });
     this.states = globalService.states;
+    this.order = globalService.order.getValue();
+    if (!this.order.items) {
+      router.navigateByUrl('cart');
+    }
   }
 
   goTo(url: string) {
@@ -33,6 +27,7 @@ export class CheckoutShippingComponent implements OnInit {
         this.order.shipping.city &&
         this.order.shipping.state &&
         this.order.shipping.zip) {
+          console.log('this.order', this.order);
           this.globalService.order.next(this.order);
           this.router.navigateByUrl(url);
       } else {

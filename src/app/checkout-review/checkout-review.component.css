@@ -2,3 +2,16 @@
     margin: 30px auto;
     max-width: 600px;
 }
+
+h4 {
+    margin-bottom: 5px;
+}
+
+.edit {
+    float: right;
+}
+
+.confirm {
+    display: block;
+    margin-top: 40px;
+}

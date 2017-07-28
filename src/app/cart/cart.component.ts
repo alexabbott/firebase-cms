@@ -17,11 +17,13 @@ export class CartComponent implements OnInit {
   cartTotal: Number;
   user: Observable<firebase.User>;
   currentShopper: any;
+  review: boolean;
 
   constructor(public globalService: GlobalService, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public router: Router) {
     this.user = afAuth.authState;
     this.cartArray = [];
     this.cartTotal = 0;
+    this.review = false;
 
     globalService.cart.subscribe((cart) => {
       this.cartArray = [];
@@ -32,7 +34,7 @@ export class CartComponent implements OnInit {
         this.cartTotal += this.cartArray[i].total;
       }
 
-      globalService.order.next({items: this.cartArray});
+      globalService.order.next({items: this.cartArray, shipping: {}, billing: {}});
     });
   }
 
@@ -60,6 +62,9 @@ export class CartComponent implements OnInit {
     });
   }
   ngOnInit() {
+    if (this.router.url.includes('review')) {
+      this.review = true;
+    }
   }
 
 }

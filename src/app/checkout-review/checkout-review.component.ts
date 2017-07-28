@@ -11,14 +11,10 @@ export class CheckoutReviewComponent implements OnInit {
   order: any;
 
   constructor(public globalService: GlobalService, public router: Router) {
-    globalService.order.subscribe(currentOrder => {
-      this.order = currentOrder;
-      console.log('theorder', this.order);
-
-      if (!currentOrder) {
-        router.navigateByUrl('cart');
-      }
-    });
+    this.order = globalService.order.getValue();
+    if (!this.order.billing) {
+      router.navigateByUrl('cart');
+    }
   }
 
   ngOnInit() {

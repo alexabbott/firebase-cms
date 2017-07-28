@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'checkout-payment',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutPaymentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public globalService: GlobalService) {
+    globalService.order.subscribe((o) => {
+      console.log('order payment', o);
+    });
+  }
 
   ngOnInit() {
   }

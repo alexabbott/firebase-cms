@@ -15,19 +15,15 @@ export class CheckoutBillingComponent implements OnInit {
 
   constructor(public globalService: GlobalService, public snackBar: MdSnackBar, public router: Router) {
     this.states = globalService.states;
-    this.globalService.order.subscribe(currentOrder => {
-      this.order = currentOrder;
-      if (!this.order) {
-        this.router.navigateByUrl('cart');
-      }
-      if (!this.order.billing) {
-        this.order.billing = {};
-      }
-    });
+    this.order = globalService.order.getValue();
+    if (!this.order.shipping) {
+      router.navigateByUrl('cart');
+    }
   }
 
   copyShipping() {
     if (this.sameAsShipping) {
+      console.log('order billing', this.order);
       this.order.billing = this.order.shipping;
     } else {
       this.order.billing = {};
@@ -51,7 +47,7 @@ export class CheckoutBillingComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.order) {
+    if (!this.order || this.order === {}) {
       this.router.navigateByUrl('checkout/shipping');
     }
   }
