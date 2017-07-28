@@ -72,6 +72,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { TruncatePipe } from './truncate.pipe';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './order/order.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { GetPipe } from './get.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -100,6 +102,8 @@ const appRoutes: Routes = [
           { path: 'edit-post/:key', component: AddPostComponent },
           { path: 'edit-product/:key', component: AddProductComponent },
           { path: 'menus', component: AdminMenusComponent },
+          { path: 'orders', component: AdminOrdersComponent },
+          { path: 'order/:key', component: OrderComponent },
           { path: 'pages', component: AdminPagesComponent },
           { path: 'posts', component: AdminPostsComponent },
           { path: 'products', component: AdminProductsComponent },
@@ -201,7 +205,9 @@ firebase.initializeApp(environment.firebase);
     CheckoutReviewComponent,
     CheckoutConfirmationComponent,
     OrdersComponent,
-    OrderComponent
+    OrderComponent,
+    AdminOrdersComponent,
+    GetPipe
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="button-container">
+        <h2>Orders</h2>
+    </div>
+    <md-card class="order" *ngFor="let order of orders | async | sort:['-date']">
+        <div class="content">
+            <h3>Order #{{order.$key}}</h3>
+            <div class="date">{{order.date | date }}</div>
+        </div>
+        <div class="action">
+            <div class="view">
+                <div>{{ (users | async | get: order.uid)?.email }}</div>
+                <button md-raised-button routerLink="/admin/order/{{order.$key}}">
+                    View Order
+                </button>
+            </div>
+        </div>
+    </md-card>
+</div>

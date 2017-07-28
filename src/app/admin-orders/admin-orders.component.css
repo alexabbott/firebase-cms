@@ -1,0 +1,16 @@
+.order .content {
+    display: inline-block;
+    width: calc(100% - 220px);
+}
+
+.order .action {
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: top;
+    width: 210px;
+}
+
+.view {
+    margin-top: 30px;
+    text-align: center;
+}
