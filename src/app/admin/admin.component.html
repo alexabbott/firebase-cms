@@ -2,8 +2,10 @@
     <h3>FireCMS</h3>
     <span class="fill-space"></span>
     <div class="login">
-        <img src="{{ (admin | async)?.photoURL }}" class="admin-photo">
-        <button md-raised-button (click)="logout()" *ngIf="(admin | async)?.uid">Logout</button>
+        <img src="{{ (admin | async)?.photoURL }}" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
+        <md-menu #adminMenu="mdMenu">
+            <button md-menu-item (click)="logout()">Logout</button>
+        </md-menu>
     </div>
 </md-toolbar>
 <md-sidenav-container>

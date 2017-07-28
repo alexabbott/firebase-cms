@@ -1,8 +1,13 @@
 .admin-photo {
     border-radius: 50%;
-    margin-right: 15px;
+    cursor: pointer;
     vertical-align: middle;
+    transition: transform .3s ease-out;
     width: 45px;
+}
+
+.admin-photo:hover {
+    transform: scale(1.1);
 }
 
 md-sidenav {
