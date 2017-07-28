@@ -24,3 +24,8 @@ md-sidenav {
     background: #eee;
     outline: 0;
 }
+
+.container {
+    float: right;
+    width: 77%;
+}

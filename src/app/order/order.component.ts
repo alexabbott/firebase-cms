@@ -10,12 +10,18 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 export class OrderComponent implements OnInit {
   orderContent: any;
   order: any;
+  admin: boolean;
 
-  constructor(public db: AngularFireDatabase, public route: ActivatedRoute) {}
+  constructor(public db: AngularFireDatabase, public route: ActivatedRoute, public router: Router) {
+    this.admin = false;
+  }
 
   ngOnInit() {
+    if (this.router.url.includes('admin')) {
+      this.admin = true;
+    }
+
     this.route.params.subscribe((params: Params) => {
-        console.log('params', params);
         this.orderContent = this.db.list('/orders', {
           query: {
             orderByKey: true,
