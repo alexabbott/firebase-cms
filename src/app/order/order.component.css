@@ -1,0 +1,31 @@
+.orders-header {
+    margin: 30px 0 10px 0;
+}
+
+.item {
+    display: inline-block;
+    width: 50%;
+}
+
+.price,
+.quantity,
+.total {
+    display: inline-block;
+    width: 15%;
+}
+
+.order-summary {
+    float: right;
+    margin-top: 20px;
+    width: 300px;
+}
+
+.subtotal-label,
+.subtotal {
+    display: inline-block;
+    width: 48%;
+}
+
+.subtotal {
+    text-align: right;
+}

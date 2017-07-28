@@ -1,0 +1,23 @@
+<div class="container">
+  <h3 *ngIf="order">Order #{{ order.$key }}</h3>
+  <div *ngIf="order">{{ order.date | date }}</div>
+  <md-toolbar class="orders-header">
+    <div class="item">Item</div>
+    <div class="price">Price</div>
+    <div class="quantity">Qty</div>
+    <div class="total">Total</div>
+  </md-toolbar>
+  <span *ngIf="order">
+    <md-card *ngFor="let item of order.items">
+        <div class="item">{{item.title}}</div>
+        <div class="price">{{item.price | currency:'USD':true }}</div>
+        <div class="quantity">
+          <span>{{item.quantity}}</span>
+        </div>
+        <div class="total">{{item.total | currency:'USD':true }}</div>
+    </md-card>
+  <span>
+  <md-card class="order-summary" *ngIf="order">
+    <h4 class="subtotal-label">Subtotal</h4>
+    <h4 class="subtotal">{{order.total | currency:'USD':true}}</h4>
+  </md-card>

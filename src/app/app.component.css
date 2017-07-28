@@ -15,6 +15,12 @@
 
 .user-photo {
     border-radius: 50%;
+    cursor: pointer;
     vertical-align: middle;
+    transition: transform .3s ease-out;
     width: 45px;
+}
+
+.user-photo:hover {
+    transform: scale(1.1);
 }

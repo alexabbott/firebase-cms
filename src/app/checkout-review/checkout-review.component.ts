@@ -11,12 +11,16 @@ import { Router }    from '@angular/router';
 export class CheckoutReviewComponent implements OnInit {
   order: any;
   user: any;
+  now: number;
 
   constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router) {
     this.order = globalService.order.getValue();
     this.user = globalService.user.getValue();
+    const now = new Date().getTime();
+
     if (this.order) {
       this.order.uid = this.user.uid;
+      this.order.date = now;
     }
 
     if (!this.order.billing) {
@@ -25,8 +29,7 @@ export class CheckoutReviewComponent implements OnInit {
   }
 
   confirm() {
-    this.order.date = new Date();
-    let newKey = this.hashCode(this.order.date) + this.hashCode(this.order.shipping.email);
+    let newKey = Math.abs(this.hashCode(this.order.date) + this.hashCode(this.order.shipping.email));
     this.db.object('/orders/' + newKey).set(this.order);
     this.globalService.cart.next(null);
     this.globalService.order.next(null);

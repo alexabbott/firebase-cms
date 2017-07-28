@@ -11,11 +11,14 @@
             <cart-icon></cart-icon>
         </li>
         <li *ngIf="(user | async)?.uid">
-            <img src="{{ (user | async)?.photoURL }}" class="user-photo">
+            <img src="{{ (user | async)?.photoURL }}" class="user-photo" [mdMenuTriggerFor]="userMenu">
+            <md-menu #userMenu="mdMenu">
+                <button md-menu-item routerLink="/account/orders">My Account</button>
+                <button md-menu-item (click)="logout()">Logout</button>
+            </md-menu>
         </li>
         <li>
             <button md-raised-button (click)="login()" *ngIf="!(user | async)?.uid">Login</button>
-            <button md-raised-button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
         </li>
     </ul>
 </md-toolbar>

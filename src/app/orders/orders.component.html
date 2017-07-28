@@ -1,0 +1,13 @@
+<div class="container">
+  <h3>My Orders</h3>
+  <md-card class="order" *ngFor="let order of orders | async | sort:['-date']" routerLink="/account/{{order.$key}}">
+    <div class="order-info">
+      <h3>#{{order.$key}}</h3>
+      <div class="date">{{order.date | date }}</div>
+    </div>
+    <div class="actions">
+      <div>{{order.total | currency:'USD':true }}</div>
+      <button md-raised-button routerLink="/account/order/{{ order.$key }}">View Order</button>
+    </div>
+  </md-card>
+</div>

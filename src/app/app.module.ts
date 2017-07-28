@@ -27,6 +27,7 @@ import { MdButtonModule,
     MdSelectModule,
     MdOptionModule,
     MdCheckboxModule,
+    MdMenuModule,
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
@@ -69,9 +70,22 @@ import { AuthGuard } from './auth-guard.service';
 import { SortPipe } from './sort.pipe';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { TruncatePipe } from './truncate.pipe';
+import { OrdersComponent } from './orders/orders.component';
+import { OrderComponent } from './order/order.component';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
+  { path: 'account',
+    children: [
+      {
+        path: '',
+        children: [
+          { path: 'orders', component: OrdersComponent },
+          { path: 'order/:key', component: OrderComponent },
+        ]
+      }
+    ]
+  },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
     children: [
       {
@@ -139,6 +153,7 @@ firebase.initializeApp(environment.firebase);
     MdIconModule,
     MdInputModule,
     MdListModule,
+    MdMenuModule,
     MdNativeDateModule,
     MdOptionModule,
     MdSelectModule,
@@ -184,7 +199,9 @@ firebase.initializeApp(environment.firebase);
     CheckoutBillingComponent,
     CheckoutPaymentComponent,
     CheckoutReviewComponent,
-    CheckoutConfirmationComponent
+    CheckoutConfirmationComponent,
+    OrdersComponent,
+    OrderComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],

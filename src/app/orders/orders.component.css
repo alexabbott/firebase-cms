@@ -1,0 +1,27 @@
+.order {
+    cursor: pointer;
+}
+
+.order .order-info {
+    display: inline-block;
+    width: 49%;
+}
+
+.order .actions {
+    display: inline-block;
+    text-align: right;
+    width: 49%;
+}
+
+.price {
+    color: #999;
+    font-size: 0.8em;
+}
+
+.order .totals {
+    float: right;
+}
+
+.order .mat-raised-button {
+    margin-top: 10px;
+}

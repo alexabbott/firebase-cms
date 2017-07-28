@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class GlobalService {
@@ -8,7 +7,6 @@ export class GlobalService {
   public admin = new BehaviorSubject(null);
   public cart = new BehaviorSubject({});
   public order = new BehaviorSubject({});
-  public router = Router;
 
   public states = [
     { name: 'Alabama', abbreviation: 'AL'},
