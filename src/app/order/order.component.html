@@ -1,6 +1,14 @@
 <div class="container">
-  <h3 *ngIf="order">Order #{{ order.$key }}</h3>
-  <div *ngIf="order">{{ order.date | date }}</div>
+  <div class="order-left">
+    <h3 *ngIf="order">Order #{{ order.$key }}</h3>
+    <div *ngIf="order">{{ order.date | date }}</div>
+  </div>
+  <div class="order-right">
+    {{ order.shipping.name }}<br>
+    {{ order.shipping.email }}<br>
+    {{ order.shipping.address }}<br>
+    {{ order.shipping.city }}, {{ order.shipping.ca }} {{ order.shipping.zip }}
+  </div>
   <md-toolbar class="orders-header">
     <div class="item">Item</div>
     <div class="price">Price</div>

@@ -5,12 +5,15 @@
 
 .order .action {
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 15px;
     vertical-align: top;
     width: 210px;
 }
 
 .view {
-    margin-top: 30px;
     text-align: center;
+}
+
+.view button {
+    margin-top: 20px;
 }
