@@ -19,7 +19,7 @@ export class ProductComponent implements OnInit {
   user: Observable<firebase.User>;
   currentShopper: any;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public route: ActivatedRoute, public globalService: GlobalService) {
+  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public route: ActivatedRoute, public router: Router, public globalService: GlobalService) {
     this.user = afAuth.authState;
   }
 
@@ -61,8 +61,11 @@ export class ProductComponent implements OnInit {
     this.globalCart[item.$key]['total'] = (item.quantity * item.price);
     this.globalService.cart.next(this.globalCart);
 
-    let snackBarRef = this.snackBar.open('Product added to cart', 'OK!', {
+    let snackBarRef = this.snackBar.open('Product added to cart', 'View Cart', {
       duration: 3000
+    });
+    snackBarRef.onAction().subscribe(() => {
+      this.router.navigateByUrl('cart');
     });
   }
 

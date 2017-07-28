@@ -3,7 +3,7 @@
     <h3 *ngIf="order">Order #{{ order.$key }}</h3>
     <div *ngIf="order">{{ order.date | date }}</div>
   </div>
-  <div class="order-right">
+  <div class="order-right" *ngIf="order">
     {{ order.shipping.name }}<br>
     {{ order.shipping.email }}<br>
     {{ order.shipping.address }}<br>
