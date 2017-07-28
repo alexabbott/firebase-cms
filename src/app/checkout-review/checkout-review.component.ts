@@ -12,11 +12,12 @@ export class CheckoutReviewComponent implements OnInit {
   order: any;
   user: any;
 
-
   constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router) {
     this.order = globalService.order.getValue();
     this.user = globalService.user.getValue();
-    this.order.id = this.user.uid;
+    if (this.order) {
+      this.order.uid = this.user.uid;
+    }
 
     if (!this.order.billing) {
       router.navigateByUrl('cart');

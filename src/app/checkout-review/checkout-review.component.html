@@ -17,5 +17,6 @@
 
   <cart></cart>
   <a routerLink="/cart" class="edit">Edit Cart</a>
+  <h4>Total: {{ order.total | currency:'USD':true }}</h4>
   <button md-raised-button class="confirm" (click)="confirm()">Confirm Order</button>
 </md-card>
