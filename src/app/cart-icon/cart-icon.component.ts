@@ -12,12 +12,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class CartIconComponent implements OnInit {
   globalCart: any;
   user: Observable<firebase.User>;
+  cartItems: Number;
 
   constructor(public globalService: GlobalService, public afAuth: AngularFireAuth, public db: AngularFireDatabase) {
     this.user = afAuth.authState;
   
     globalService.cart.subscribe((cart) => {
       this.globalCart = cart;
+
+      this.cartItems = 0;
+      let cartArray = [];
+      if (this.globalCart) {
+        cartArray = (<any>Object).values(this.globalCart);
+      }
+      for (let i = 0; i < cartArray.length; i++) {
+        this.cartItems += cartArray[i].quantity;
+      }
 
       this.user.subscribe(currentUser => {
         if (currentUser && currentUser.uid && cart && Object.keys(cart).length > 0) {

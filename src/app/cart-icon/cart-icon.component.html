@@ -1,1 +1,4 @@
-<md-icon class="cart-icon" routerLink="/cart">shopping_cart</md-icon>
+<div class="icon-container">
+    <md-icon class="cart-icon" routerLink="/cart">shopping_cart</md-icon>
+    <span class="cart-counter" *ngIf="cartItems > 0">{{ cartItems }}</span>
+</div>

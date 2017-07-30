@@ -2,3 +2,17 @@
     cursor: pointer;
     transform: translateY(5px);
 }
+
+.icon-container {
+    display: inline-block;
+    position: relative;
+}
+
+.cart-counter {
+    bottom: 3px;
+    color: #00D4D4;
+    font-size: 8px;
+    pointer-events: none;
+    position: absolute;
+    right: 9px;
+}
