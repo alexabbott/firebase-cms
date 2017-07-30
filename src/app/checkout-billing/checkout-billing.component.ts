@@ -19,6 +19,9 @@ export class CheckoutBillingComponent implements OnInit {
     if (!this.order.shipping) {
       router.navigateByUrl('cart');
     }
+    if (JSON.parse(window.localStorage.getItem('order')) && JSON.parse(window.localStorage.getItem('order')).billing) {
+      this.order = JSON.parse(window.localStorage.getItem('order'));
+    }
   }
 
   copyShipping() {
@@ -38,6 +41,7 @@ export class CheckoutBillingComponent implements OnInit {
         this.order.billing.zip) {
           this.globalService.order.next(this.order);
           this.router.navigateByUrl(url);
+          window.localStorage.setItem('order', JSON.stringify(this.order));
       } else {
           let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
             duration: 3000

@@ -18,6 +18,9 @@ export class CheckoutShippingComponent implements OnInit {
     if (!this.order.items) {
       router.navigateByUrl('cart');
     }
+    if (JSON.parse(window.localStorage.getItem('order')) && JSON.parse(window.localStorage.getItem('order')).shipping) {
+      this.order = JSON.parse(window.localStorage.getItem('order'));
+    }
   }
 
   goTo(url: string) {
@@ -29,6 +32,7 @@ export class CheckoutShippingComponent implements OnInit {
         this.order.shipping.zip) {
           this.globalService.order.next(this.order);
           this.router.navigateByUrl(url);
+          window.localStorage.setItem('order', JSON.stringify(this.order));
       } else {
           let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
             duration: 3000
