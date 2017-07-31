@@ -9,9 +9,11 @@ import { GlobalService } from '../global.service';
 })
 export class CheckoutConfirmationComponent implements OnInit {
   order: any;
+  user: any;
 
   constructor(public router: Router, public globalService: GlobalService) {
     this.order = globalService.order.getValue();
+    this.user = globalService.user.getValue();
   }
 
   ngOnInit() {

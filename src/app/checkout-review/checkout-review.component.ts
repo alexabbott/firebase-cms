@@ -19,7 +19,9 @@ export class CheckoutReviewComponent implements OnInit {
     const now = new Date().getTime();
 
     if (this.order) {
-      this.order.uid = this.user.uid;
+      if (this.user) {
+        this.order.uid = this.user.uid;
+      }
       this.order.date = now;
     }
 
@@ -35,8 +37,10 @@ export class CheckoutReviewComponent implements OnInit {
     this.globalService.order.next(null);
     window.localStorage.setItem('cart', null);
     window.localStorage.setItem('order', null);
-    this.db.object('/users/' + this.user.uid + '/cart').remove();
-    this.db.list('/users/' + this.user.uid + '/orders').push(newKey);
+    if (this.user) {
+      this.db.object('/users/' + this.user.uid + '/cart').remove();
+      this.db.list('/users/' + this.user.uid + '/orders').push(newKey);
+    }
     this.router.navigateByUrl('checkout/confirmation');
   }
 

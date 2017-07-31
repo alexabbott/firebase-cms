@@ -37,8 +37,12 @@ export class ProductComponent implements OnInit {
 
             this.globalService.cart.subscribe((cart) => {
               this.globalCart = cart;
+              if (!cart) {
+                this.globalCart = {};
+              }
               window.localStorage.setItem('cart', JSON.stringify(this.globalCart));
               if (this.globalCart && this.globalCart[this.product.$key]) {
+                console.log('cart', this.globalCart);
                 this.product.quantity = this.globalCart[this.product.$key]['quantity'];
               } else {
                 this.product.quantity = 1;
