@@ -8,6 +8,7 @@
     display: block;
     margin: 0 auto;
     max-height: 155px;
+    max-width: 100%;
 }
 
 .product .product-content {

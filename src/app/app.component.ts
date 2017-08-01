@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router }    from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 import { GlobalService } from './global.service';
 
 @Component({
@@ -49,6 +50,10 @@ export class AppComponent {
   }
 
   logout() {
+    this.globalService.cart.next(null);
+    this.globalService.order.next(null);
+    window.localStorage.setItem('cart', null);
+    window.localStorage.setItem('order', null);
     this.afAuth.auth.signOut();
   }
 }

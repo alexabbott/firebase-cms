@@ -23,6 +23,8 @@ export class CartIconComponent implements OnInit {
       if (this.globalCart) {
         const cartArray = (<any>Object).values(this.globalCart);
         this.cartItems = cartArray.reduce((sum, cartItem) => sum + cartItem.quantity, 0);
+      } else {
+        this.cartItems = 0;
       }
 
       this.user.subscribe(currentUser => {

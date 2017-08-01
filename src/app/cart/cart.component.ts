@@ -53,9 +53,11 @@ export class CartComponent implements OnInit {
     this.user.subscribe((currentShopper) => {
       if (Object.keys(this.globalCart).length === 0) {
         window.localStorage.removeItem('cart');
-        this.db.object('/users/' + currentShopper.uid).update({
-          cart: null
-        });
+        if (currentShopper) {
+          this.db.object('/users/' + currentShopper.uid).update({
+            cart: null
+          });
+        }
       }
     });
 
