@@ -24,6 +24,11 @@ md-sidenav {
     transition: background .2s ease-out;
 }
 
+.admin-nav md-list-item .mat-icon {
+    color: #00D4D4;
+    margin-right: 10px;
+}
+
 .admin-nav md-list-item:hover,
 .admin-nav md-list-item.selected {
     background: #eee;
