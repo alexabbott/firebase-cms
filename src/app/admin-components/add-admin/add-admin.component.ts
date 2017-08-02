@@ -4,11 +4,11 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { MdSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  selector: 'add-admin',
+  templateUrl: './add-admin.component.html',
+  styleUrls: ['./add-admin.component.css']
 })
-export class AddUserComponent implements OnInit {
+export class AddAdminComponent implements OnInit {
 
   newEmail: string;
 

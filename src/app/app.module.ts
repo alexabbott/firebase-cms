@@ -38,9 +38,9 @@ import { AdminComponent } from './admin-components/admin/admin.component';
 import { LoginComponent } from './admin-components/login/login.component';
 import { AddPostComponent } from './admin-components/add-post/add-post.component';
 import { AdminPostsComponent } from './admin-components/admin-posts/admin-posts.component';
-import { AdminUsersComponent } from './admin-components/admin-users/admin-users.component';
+import { AdminAdminsComponent } from './admin-components/admin-admins/admin-admins.component';
 import { AdminDashboardComponent } from './admin-components/admin-dashboard/admin-dashboard.component';
-import { AddUserComponent } from './admin-components/add-user/add-user.component';
+import { AddAdminComponent } from './admin-components/add-admin/add-admin.component';
 import { PagesComponent } from './storefront-components/pages/pages.component';
 import { AdminPagesComponent } from './admin-components/admin-pages/admin-pages.component';
 import { PageComponent } from './storefront-components/page/page.component';
@@ -101,7 +101,7 @@ const appRoutes: Routes = [
           { path: 'add-page', component: AddPageComponent },
           { path: 'add-post', component: AddPostComponent },
           { path: 'add-product', component: AddProductComponent },
-          { path: 'add-admin', component: AddUserComponent },
+          { path: 'add-admin', component: AddAdminComponent },
           { path: 'customers', component: AdminCustomersComponent },
           { path: 'edit-customer/:uid', component: AddCustomerComponent },
           { path: 'edit-order/:key', component: AddOrderComponent },
@@ -115,7 +115,7 @@ const appRoutes: Routes = [
           { path: 'posts', component: AdminPostsComponent },
           { path: 'products', component: AdminProductsComponent },
           { path: 'theme', component: AdminThemeComponent },
-          { path: 'admins', component: AdminUsersComponent },
+          { path: 'admins', component: AdminAdminsComponent },
           { path: '', component: AdminDashboardComponent }
         ]
       }
@@ -187,8 +187,8 @@ firebase.initializeApp(environment.firebase);
     AddPostComponent,
     AdminPostsComponent,
     AdminDashboardComponent,
-    AdminUsersComponent,
-    AddUserComponent,
+    AdminAdminsComponent,
+    AddAdminComponent,
     PagesComponent,
     AdminPagesComponent,
     PageComponent,

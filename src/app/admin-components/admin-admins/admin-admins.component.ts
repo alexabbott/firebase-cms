@@ -4,11 +4,11 @@ import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
-  selector: 'admin-users',
-  templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.css']
+  selector: 'admin-admins',
+  templateUrl: './admin-admins.component.html',
+  styleUrls: ['./admin-admins.component.css']
 })
-export class AdminUsersComponent {
+export class AdminAdminsComponent {
 
   admins: FirebaseListObservable<any>;
   selectedOption: any;
