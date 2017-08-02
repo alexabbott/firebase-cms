@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="button-container">
+        <h2>Customers</h2>
+        <button md-raised-button routerLink="/admin/add-customer">Add a Customer</button>
+    </div>
+    <md-card class="customer" *ngFor="let customer of customers | async | sort:['email']">
+        <div class="content">
+            <img src="{{ customer.photoURL }}" class="customer-photo" *ngIf="customer.photoURL">
+            <img src="../../assets/placeholder.jpg" class="customer-photo" *ngIf="!customer.photoURL">
+            {{customer.email}}
+        </div>
+        <div class="active">
+            <span>{{customer.orders | objectCount}} orders</span>
+            <button md-raised-button routerLink="/admin/edit-customer/{{customer.uid}}">
+                Edit
+            </button>
+            <button md-raised-button (click)="deleteCustomer(customer.$key)">Delete</button>
+        </div>
+    </md-card>
+</div>

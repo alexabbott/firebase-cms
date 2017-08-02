@@ -1,0 +1,41 @@
+.order-form {
+    box-sizing: border-box;
+    padding: 0 30px 30px 30px;
+}
+
+h2,
+.order-user {
+    display: inline-block;
+    width: 49%;
+}
+
+.order-user {
+    text-align: right;
+}
+
+.order-user span {
+    font-weight: bold;
+}
+
+.mat-card {
+    display: inline-block;
+    width: 43%;
+}
+
+.mat-card:last-of-type {
+    float: right;
+}
+
+.submit {
+    margin-top: 30px;
+}
+
+.mat-input-container,
+.mat-raised-button {
+    display: block;
+}
+
+.mat-select {
+    display: block;
+    margin: 20px auto 21px auto;
+}

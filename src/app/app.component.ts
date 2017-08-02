@@ -4,7 +4,7 @@ import { Router }    from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { GlobalService } from './global.service';
+import { GlobalService } from './services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,8 @@ export class AppComponent {
         this.db.object('/users/' + currentUser.uid).update({
           uid: currentUser.uid,
           email: currentUser.email,
-          photoURL: currentUser.photoURL
+          photoURL: currentUser.photoURL,
+          status: 'active'
         });
 
         this.db.object('/users/' + currentUser.uid).subscribe((user) => {

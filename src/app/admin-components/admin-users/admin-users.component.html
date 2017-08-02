@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="button-container">
+        <h2>Admins</h2>
+        <button md-raised-button routerLink="/admin/add-admin">Add an Admin</button>
+    </div>
+    <md-card class="admin" *ngFor="let admin of admins | async | sort:['email']">
+        <div class="content">
+            <img src="{{ admin.photoURL }}" class="admin-photo">
+            {{admin.email}}
+        </div>
+        <div class="active">
+            <span *ngIf="admin.active">Active</span>
+            <span *ngIf="!admin.active">Inactive</span>
+            <button md-raised-button (click)="deleteAdmin(admin.$key)">Delete</button>
+        </div>
+    </md-card>
+</div>

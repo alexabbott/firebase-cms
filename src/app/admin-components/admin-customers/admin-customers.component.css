@@ -1,0 +1,40 @@
+.button-container h2 {
+    display: inline-block;
+}
+
+.button-container button {
+    float: right;
+    margin: 18px 30px 30px 30px;
+}
+
+.customer .content {
+    display: inline-block;
+    margin-top: 13px;
+    vertical-align: top;
+    width: calc(100% - 220px);
+}
+
+.customer .active {
+    display: inline-block;
+    text-align: center;
+    width: 210px;
+}
+
+.customer .active span {
+    display: block;
+}
+
+.customer .active button {
+    margin-top: 10px;
+}
+
+.customer .active span {
+    font-size: .9em;
+}
+
+.customer-photo {
+    border-radius: 50%;
+    margin-right: 15px;
+    vertical-align: middle;
+    width: 45px;
+}

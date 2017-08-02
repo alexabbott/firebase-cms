@@ -1,0 +1,81 @@
+<div class="order-form">
+    <h2>
+        <span *ngIf="!editMode">Add an</span>
+        <span *ngIf="editMode">Edit</span>
+        Order <span *ngIf="editMode">#{{order.$key}}</span>
+    </h2>
+
+    <div class="order-user" *ngIf="editMode">
+      Order placed by:
+      <span *ngIf="editMode && order.uid">{{ (users | async | get: order.uid)?.email }}</span>
+      <span *ngIf="editMode && !order.uid">Guest User</span>
+    </div>
+
+    <div>
+        <md-input-container>
+        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="order.date" (focus)="picker.open()">
+        <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+    </div>
+
+    <md-select placeholder="Order Status" [(ngModel)]="order.status">
+      <md-option *ngFor="let status of statuses" [value]="status.id">{{ status.id }}</md-option>
+    </md-select>
+
+    <md-card>
+      <h3>Shipping info</h3>
+      <md-input-container class="block">
+          <input mdInput placeholder="Name (first & last)" [(ngModel)]="order.shipping.name">
+      </md-input-container>
+        <md-input-container class="block">
+          <input mdInput placeholder="Company" [(ngModel)]="order.shipping.company">
+      </md-input-container>
+      <md-input-container class="block">
+          <input mdInput placeholder="Email" type="email" [(ngModel)]="order.shipping.email">
+      </md-input-container>
+      <md-input-container class="block">
+          <input mdInput placeholder="Address" [(ngModel)]="order.shipping.address">
+      </md-input-container>
+      <md-input-container class="block">
+          <input mdInput placeholder="City" [(ngModel)]="order.shipping.city">
+      </md-input-container>
+      <md-select placeholder="State" [(ngModel)]="order.shipping.state">
+        <md-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</md-option>
+      </md-select>
+      <md-input-container>
+        <input mdInput placeholder="Zip Code" [(ngModel)]="order.shipping.zip">
+      </md-input-container>
+    </md-card>
+
+    <md-card>
+      <h3>Billing info</h3>
+      <md-input-container class="block">
+          <input mdInput placeholder="Name (first & last)" [(ngModel)]="order.billing.name">
+      </md-input-container>
+        <md-input-container class="block">
+          <input mdInput placeholder="Company" [(ngModel)]="order.billing.company">
+      </md-input-container>
+      <md-input-container class="block">
+          <input mdInput placeholder="Email" type="email" [(ngModel)]="order.billing.email">
+      </md-input-container>
+      <md-input-container class="block">
+          <input mdInput placeholder="Address" [(ngModel)]="order.billing.address">
+      </md-input-container>
+      <md-input-container class="block">
+          <input mdInput placeholder="City" [(ngModel)]="order.billing.city">
+      </md-input-container>
+      <md-select placeholder="State" [(ngModel)]="order.billing.state">
+        <md-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</md-option>
+      </md-select>
+      <md-input-container>
+        <input mdInput placeholder="Zip Code" [(ngModel)]="order.billing.zip">
+      </md-input-container>
+    </md-card>
+
+    <button md-raised-button (click)="addOrder(order)" class="block submit">
+        <span *ngIf="!editMode">Add</span>
+        <span *ngIf="editMode">Save</span>
+        Order
+    </button>
+</div>

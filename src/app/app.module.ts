@@ -33,47 +33,50 @@ import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
 
 // components
-import { PostsComponent } from './posts/posts.component';
-import { AdminComponent } from './admin/admin.component';
-import { LoginComponent } from './login/login.component';
-import { AddPostComponent } from './add-post/add-post.component';
-import { AdminPostsComponent } from './admin-posts/admin-posts.component';
-import { AdminUsersComponent } from './admin-users/admin-users.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AddUserComponent } from './add-user/add-user.component';
-import { PagesComponent } from './pages/pages.component';
-import { AdminPagesComponent } from './admin-pages/admin-pages.component';
-import { PageComponent } from './page/page.component';
-import { AddPageComponent } from './add-page/add-page.component';
-import { PostComponent } from './post/post.component';
-import { AdminMenusComponent } from './admin-menus/admin-menus.component';
-import { AdminThemeComponent } from './admin-theme/admin-theme.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductComponent } from './product/product.component';
-import { AdminProductsComponent } from './admin-products/admin-products.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { CartComponent } from './cart/cart.component';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { CartIconComponent } from './cart-icon/cart-icon.component';
-import { AdminCustomersComponent } from './admin-customers/admin-customers.component';
-import { CheckoutShippingComponent } from './checkout-shipping/checkout-shipping.component';
-import { CheckoutBillingComponent } from './checkout-billing/checkout-billing.component';
-import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
-import { CheckoutReviewComponent } from './checkout-review/checkout-review.component';
-import { CheckoutConfirmationComponent } from './checkout-confirmation/checkout-confirmation.component';
+import { PostsComponent } from './storefront-components/posts/posts.component';
+import { AdminComponent } from './admin-components/admin/admin.component';
+import { LoginComponent } from './admin-components/login/login.component';
+import { AddPostComponent } from './admin-components/add-post/add-post.component';
+import { AdminPostsComponent } from './admin-components/admin-posts/admin-posts.component';
+import { AdminUsersComponent } from './admin-components/admin-users/admin-users.component';
+import { AdminDashboardComponent } from './admin-components/admin-dashboard/admin-dashboard.component';
+import { AddUserComponent } from './admin-components/add-user/add-user.component';
+import { PagesComponent } from './storefront-components/pages/pages.component';
+import { AdminPagesComponent } from './admin-components/admin-pages/admin-pages.component';
+import { PageComponent } from './storefront-components/page/page.component';
+import { AddPageComponent } from './admin-components/add-page/add-page.component';
+import { PostComponent } from './storefront-components/post/post.component';
+import { AdminMenusComponent } from './admin-components/admin-menus/admin-menus.component';
+import { AdminThemeComponent } from './admin-components/admin-theme/admin-theme.component';
+import { ProductsComponent } from './storefront-components/products/products.component';
+import { ProductComponent } from './storefront-components/product/product.component';
+import { AdminProductsComponent } from './admin-components/admin-products/admin-products.component';
+import { AddProductComponent } from './admin-components/add-product/add-product.component';
+import { CartComponent } from './storefront-components/cart/cart.component';
+import { DeleteDialogComponent } from './admin-components/delete-dialog/delete-dialog.component';
+import { CartIconComponent } from './storefront-components/cart-icon/cart-icon.component';
+import { AdminCustomersComponent } from './admin-components/admin-customers/admin-customers.component';
+import { CheckoutShippingComponent } from './storefront-components/checkout-shipping/checkout-shipping.component';
+import { CheckoutBillingComponent } from './storefront-components/checkout-billing/checkout-billing.component';
+import { CheckoutPaymentComponent } from './storefront-components/checkout-payment/checkout-payment.component';
+import { CheckoutReviewComponent } from './storefront-components/checkout-review/checkout-review.component';
+import { CheckoutConfirmationComponent } from './storefront-components/checkout-confirmation/checkout-confirmation.component';
+import { AddOrderComponent } from './admin-components/add-order/add-order.component';
+import { AddCustomerComponent } from './admin-components/add-customer/add-customer.component';
+import { OrdersComponent } from './storefront-components/orders/orders.component';
+import { OrderComponent } from './storefront-components/order/order.component';
+import { AdminOrdersComponent } from './admin-components/admin-orders/admin-orders.component';
 
 // services
-import { GlobalService } from './global.service';
-import { AuthGuard } from './auth-guard.service';
+import { GlobalService } from './services/global.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 // pipes
-import { SortPipe } from './sort.pipe';
-import { SafeHtmlPipe } from './safe-html.pipe';
-import { TruncatePipe } from './truncate.pipe';
-import { OrdersComponent } from './orders/orders.component';
-import { OrderComponent } from './order/order.component';
-import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
-import { GetPipe } from './get.pipe';
+import { SortPipe } from './pipes/sort.pipe';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { GetPipe } from './pipes/get.pipe';
+import { ObjectCountPipe } from './pipes/object-count.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: PostsComponent },
@@ -93,11 +96,15 @@ const appRoutes: Routes = [
       {
         path: '',
         children: [
+          { path: 'add-customer', component: AddCustomerComponent },
+          { path: 'add-order', component: AddOrderComponent },
           { path: 'add-page', component: AddPageComponent },
           { path: 'add-post', component: AddPostComponent },
           { path: 'add-product', component: AddProductComponent },
           { path: 'add-admin', component: AddUserComponent },
           { path: 'customers', component: AdminCustomersComponent },
+          { path: 'edit-customer/:uid', component: AddCustomerComponent },
+          { path: 'edit-order/:key', component: AddOrderComponent },
           { path: 'edit-page/:key', component: AddPageComponent },
           { path: 'edit-post/:key', component: AddPostComponent },
           { path: 'edit-product/:key', component: AddProductComponent },
@@ -207,7 +214,10 @@ firebase.initializeApp(environment.firebase);
     OrdersComponent,
     OrderComponent,
     AdminOrdersComponent,
-    GetPipe
+    GetPipe,
+    AddOrderComponent,
+    AddCustomerComponent,
+    ObjectCountPipe
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],
