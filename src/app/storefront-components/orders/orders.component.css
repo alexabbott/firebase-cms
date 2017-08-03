@@ -1,12 +1,12 @@
 .order .order-info {
     display: inline-block;
-    width: 49%;
+    width: calc(100% - 220px);
 }
 
 .order .actions {
     display: inline-block;
-    text-align: right;
-    width: 49%;
+    text-align: center;
+    width: 210px;
 }
 
 .user-photo {

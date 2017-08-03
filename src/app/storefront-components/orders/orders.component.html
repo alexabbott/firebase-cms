@@ -1,6 +1,6 @@
 <div class="container">
   <h3 *ngIf="!router.url.includes('/admin/customer')">My Orders</h3>
-  <h3 *ngIf="router.url.includes('/admin/customer')">
+  <h3 *ngIf="router.url.includes('/admin/customer') && userObject">
     <img src="{{ userObject.photoURL }}" class="user-photo"> {{ userObject.email }}
   </h3>
   <md-card class="order" *ngFor="let order of orders | async | sort:['-date']">
