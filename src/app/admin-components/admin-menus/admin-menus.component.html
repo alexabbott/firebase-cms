@@ -4,6 +4,7 @@
   <md-toolbar>Primary Nav</md-toolbar>
   <div dnd-sortable-container [sortableData]="menuList">
     <md-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
+      <md-icon>drag_handle</md-icon>
       <md-input-container>
         <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
       </md-input-container>
@@ -11,7 +12,6 @@
         <input mdInput placeholder="Item URL" [(ngModel)]="item.url" required>
       </md-input-container>
       <div class="actions">
-        <!--<button md-raised-button (click)="saveMenuItem(item.$key, item.label, item.url)">Save Menu Item</button>-->
         <button md-raised-button (click)="deleteMenuItem(i)">Delete Menu Item</button>
       </div>
     </md-card>

@@ -1,7 +1,20 @@
+.mat-card {
+    cursor: move !important;
+}
+
+.mat-icon {
+    color: #999;
+    margin-right: 20px;
+}
+
 .button-add-menu {
     margin-top: 20px;
 }
 
 md-toolbar {
     margin-bottom: 5px;
+}
+
+.actions {
+    float: right;
 }
