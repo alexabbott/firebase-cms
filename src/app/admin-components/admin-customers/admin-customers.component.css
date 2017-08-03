@@ -7,6 +7,10 @@
     margin: 18px 30px 30px 30px;
 }
 
+.customer {
+    cursor: pointer;
+}
+
 .customer .content {
     display: inline-block;
     margin-top: 13px;

@@ -3,9 +3,9 @@
         <h2>Orders</h2>
         <button md-raised-button routerLink="/admin/add-order">Add an Order</button>
     </div>
-    <md-card class="order" *ngFor="let order of orders | async | sort:['-date']">
+    <md-card class="order" routerLink="/admin/order/{{order.$key}}" *ngFor="let order of orders | async | sort:['-date']">
         <div class="content">
-            <h3>Order #{{order.$key}}</h3>
+            <h3><a routerLink="/admin/order/{{order.$key}}">Order #{{order.$key}}</a></h3>
             <div class="date">{{order.date | date }}</div>
         </div>
         <div class="action">
@@ -14,11 +14,11 @@
                     <span *ngIf="order.uid">{{ (users | async | get: order.uid)?.email }}</span>
                     <span *ngIf="!order.uid">Guest Customer</span>
                 </div>
-                <button md-raised-button routerLink="/admin/order/{{order.$key}}">
-                    View
-                </button>
                 <button md-raised-button routerLink="/admin/edit-order/{{order.$key}}">
                     Edit
+                </button>
+                <button md-raised-button (click)="deleteOrder($event, order.$key)">
+                    Delete
                 </button>
             </div>
         </div>

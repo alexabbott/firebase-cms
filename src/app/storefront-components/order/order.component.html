@@ -3,11 +3,29 @@
     <h3 *ngIf="order">Order #{{ order.$key }}</h3>
     <div *ngIf="order">{{ order.date | date }}</div>
   </div>
-  <div class="order-right" *ngIf="order">
-    {{ order.shipping.name }}<br>
-    {{ order.shipping.email }}<br>
-    {{ order.shipping.address }}<br>
-    {{ order.shipping.city }}, {{ order.shipping.ca }} {{ order.shipping.zip }}
+  <div class="order-right" *ngIf="order && router.url.includes('/admin')">
+    <a routerLink="/admin/customer/{{order.uid}}">
+      <img src="{{ (customers | async | get: order.uid)?.photoURL }}" class="user-photo">
+      {{ (customers | async | get: order.uid)?.email }}
+    </a>
+  </div>
+  <div class="order-info">
+    <md-card *ngIf="order">
+      <h3>Shipping info</h3>
+      {{ order.shipping.name }}<br>
+      <span *ngIf="order.shipping.company">{{ order.shipping.company }}<br></span>
+      {{ order.shipping.email }}<br>
+      {{ order.shipping.address }}<br>
+      {{ order.shipping.city }}, {{ order.shipping.ca }} {{ order.shipping.zip }}
+    </md-card>
+    <md-card *ngIf="order">
+      <h3>Billing info</h3>
+      {{ order.billing.name }}<br>
+      <span *ngIf="order.billing.company">{{ order.billing.company }}<br></span>
+      {{ order.billing.email }}<br>
+      {{ order.billing.address }}<br>
+      {{ order.billing.city }}, {{ order.billing.ca }} {{ order.billing.zip }}
+    </md-card>
   </div>
   <md-toolbar class="orders-header">
     <div class="item">Item</div>
@@ -25,6 +43,7 @@
         <div class="total">{{item.total | currency:'USD':true }}</div>
     </md-card>
   <span>
+  <button md-raised-button routerLink="/admin/edit-order/{{order.$key}}" *ngIf="router.url.includes('/admin')">Edit Order</button>
   <md-card class="order-summary" *ngIf="order">
     <h4 class="subtotal-label">Subtotal</h4>
     <h4 class="subtotal">{{order.total | currency:'USD':true}}</h4>

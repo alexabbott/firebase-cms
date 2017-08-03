@@ -16,6 +16,13 @@
     width: 49%;
 }
 
+.user-photo {
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 40px;
+}
+
 .item {
     display: inline-block;
     width: 50%;
@@ -42,4 +49,21 @@
 
 .subtotal {
     text-align: right;
+}
+
+.mat-raised-button {
+    margin-top: 20px;
+}
+
+.order-info {
+    margin-top: 30px;
+}
+
+.order-info .mat-card {
+    display: inline-block;
+    width: 43%;
+}
+
+.order-info .mat-card:last-of-type {
+    float: right;
 }

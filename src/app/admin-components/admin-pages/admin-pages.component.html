@@ -5,8 +5,7 @@
     </div>
     <md-card class="page" *ngFor="let page of pages | async | sort:['title']">
         <div class="content">
-            <h3>{{page.title}}</h3>
-            <a routerLink="/page/{{page.url}}" target="_blank">{{domain}}/page/{{page.url}}</a>
+            <h3><a routerLink="/page/{{page.url}}" target="_blank">{{page.title}}</a></h3>
         </div>
         <div class="publish">
             <md-slide-toggle ngDefaultControl (change)="onChange($event, page.$key)" [(ngModel)]="page.published">

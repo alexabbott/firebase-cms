@@ -66,6 +66,7 @@ import { AddCustomerComponent } from './admin-components/add-customer/add-custom
 import { OrdersComponent } from './storefront-components/orders/orders.component';
 import { OrderComponent } from './storefront-components/order/order.component';
 import { AdminOrdersComponent } from './admin-components/admin-orders/admin-orders.component';
+import { AdminCustomerComponent } from './admin-components/admin-customer/admin-customer.component';
 
 // services
 import { GlobalService } from './services/global.service';
@@ -102,6 +103,7 @@ const appRoutes: Routes = [
           { path: 'add-post', component: AddPostComponent },
           { path: 'add-product', component: AddProductComponent },
           { path: 'add-admin', component: AddAdminComponent },
+          { path: 'customer/:key', component: AdminCustomerComponent },
           { path: 'customers', component: AdminCustomersComponent },
           { path: 'edit-customer/:uid', component: AddCustomerComponent },
           { path: 'edit-order/:key', component: AddOrderComponent },
@@ -217,7 +219,8 @@ firebase.initializeApp(environment.firebase);
     GetPipe,
     AddOrderComponent,
     AddCustomerComponent,
-    ObjectCountPipe
+    ObjectCountPipe,
+    AdminCustomerComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard ],

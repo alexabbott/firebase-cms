@@ -13,13 +13,11 @@ export class AdminPagesComponent implements OnInit {
 
   pages: FirebaseListObservable<any>;
   page: FirebaseObjectObservable<any>;
-  domain: string;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
 
   constructor(public db: AngularFireDatabase, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
     this.pages = db.list('/pages');
-    this.domain = window.location.hostname;
   }
 
   onChange(e: any, key: string) {

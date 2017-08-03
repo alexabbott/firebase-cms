@@ -11,9 +11,11 @@ export class OrderComponent implements OnInit {
   orderContent: any;
   order: any;
   admin: boolean;
+  customers: FirebaseListObservable<any>;
 
   constructor(public db: AngularFireDatabase, public route: ActivatedRoute, public router: Router) {
     this.admin = false;
+    this.customers = db.list('/users');
   }
 
   ngOnInit() {

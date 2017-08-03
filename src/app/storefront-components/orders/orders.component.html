@@ -1,13 +1,21 @@
 <div class="container">
-  <h3>My Orders</h3>
-  <md-card class="order" *ngFor="let order of orders | async | sort:['-date']" routerLink="/account/{{order.$key}}">
+  <h3 *ngIf="!router.url.includes('/admin/customer')">My Orders</h3>
+  <h3 *ngIf="router.url.includes('/admin/customer')">
+    <img src="{{ userObject.photoURL }}" class="user-photo"> {{ userObject.email }}
+  </h3>
+  <md-card class="order" *ngFor="let order of orders | async | sort:['-date']">
     <div class="order-info">
-      <h3>#{{order.$key}}</h3>
+      <h3>
+        <a *ngIf="!router.url.includes('/admin/customer')" routerLink="/account/order/{{order.$key}}">#{{order.$key}}</a>
+        <a *ngIf="router.url.includes('/admin/customer')" routerLink="/admin/order/{{order.$key}}">#{{order.$key}}</a>
+      </h3>
       <div class="date">{{order.date | date }}</div>
     </div>
     <div class="actions">
       <div>{{order.total | currency:'USD':true }}</div>
-      <button md-raised-button routerLink="/account/order/{{ order.$key }}">View Order</button>
+      <button *ngIf="!router.url.includes('/admin/customer')" md-raised-button routerLink="/account/order/{{ order.$key }}">View Order</button>
+      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/order/{{ order.$key }}">View Order</button>
+      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/edit-order/{{ order.$key }}">Edit Order</button>
     </div>
   </md-card>
 </div>

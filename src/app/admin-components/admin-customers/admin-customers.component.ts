@@ -18,7 +18,8 @@ export class AdminCustomersComponent {
     this.customers = db.list('/users');
   }
 
-  deleteCustomer(key: string) {
+  deleteCustomer(event, key: string) {
+    event.stopPropagation();
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;

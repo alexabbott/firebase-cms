@@ -14,11 +14,13 @@ import { GlobalService } from '../../services/global.service';
 export class OrdersComponent implements OnInit {
   orders: FirebaseListObservable<any[]>;
   user: Observable<firebase.User>;
+  userObject: any;
 
   constructor(db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
     this.user.subscribe(currentUser => {
       if (currentUser && currentUser.uid) {
+        this.userObject = currentUser;
         this.orders = db.list('/orders', {
           query: {
             orderByChild: 'uid',
@@ -27,7 +29,9 @@ export class OrdersComponent implements OnInit {
           }
         });
       } else {
-        router.navigateByUrl('products');
+        if (!router.url.includes('/admin')) {
+          router.navigateByUrl('products');
+        }
       }
     });
   }

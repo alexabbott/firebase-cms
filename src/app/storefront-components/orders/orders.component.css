@@ -1,7 +1,3 @@
-.order {
-    cursor: pointer;
-}
-
 .order .order-info {
     display: inline-block;
     width: 49%;
@@ -11,6 +7,13 @@
     display: inline-block;
     text-align: right;
     width: 49%;
+}
+
+.user-photo {
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 50px;
 }
 
 .price {

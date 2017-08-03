@@ -7,6 +7,10 @@
     margin: 18px 30px 30px 30px;
 }
 
+.order {
+    cursor: pointer;
+}
+
 .order .content {
     display: inline-block;
     width: calc(100% - 220px);
