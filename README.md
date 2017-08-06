@@ -6,7 +6,7 @@ A basic CMS + Front End theme built with Angular 4 (Angular CLI) and AngularFire
 
 Install [Angular CLI](https://cli.angular.io/)
 
-Run `npm install`
+Run `npm install` or `yarn install`
 
 ## Firebase setup
 
@@ -18,8 +18,8 @@ Within the project folder, run:
 cd src
 mkdir environments
 cd environments
-touch environments.ts
-touch environments.prod.ts
+touch environment.ts
+touch environment.prod.ts
 ```
 
 Open 'environments.ts' and add your Firebase config as follows:
