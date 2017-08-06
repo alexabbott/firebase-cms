@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { LocalcartService } from './localcart.service';
+import { LocalCartService } from './localcart.service';
 
-describe('LocalcartService', () => {
+describe('LocalCartService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LocalcartService]
+      providers: [LocalCartService]
     });
   });
 
-  it('should be created', inject([LocalcartService], (service: LocalcartService) => {
+  it('should be created', inject([LocalCartService], (service: LocalCartService) => {
     expect(service).toBeTruthy();
   }));
 });

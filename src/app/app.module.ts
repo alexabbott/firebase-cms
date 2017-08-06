@@ -72,6 +72,7 @@ import { AdminCustomerComponent } from './admin-components/admin-customer/admin-
 import { GlobalService } from './services/global.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { WindowRefService } from "./services/window-ref.service";
+import { LocalCartService } from "./services/localcart.service";
 
 // pipes
 import { SortPipe } from './pipes/sort.pipe';
@@ -224,7 +225,7 @@ firebase.initializeApp(environment.firebase);
     AdminCustomerComponent
   ],
   entryComponents: [DeleteDialogComponent],
-  providers: [ GlobalService, AuthGuard, WindowRefService ],
+  providers: [ GlobalService, AuthGuard, WindowRefService, LocalCartService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
