@@ -23,7 +23,7 @@ export class LocalCartService {
   }
 
   /**
-   * hasItems()
+   * cartHasItems()
    * Returns boolean, if localstorage has items stored in cart.
    */
   public cartHasItems(): boolean {
@@ -31,7 +31,7 @@ export class LocalCartService {
   }
 
   /**
-   * getItems()
+   * cartGetItems()
    * returns json object of all items in localstorage cart
    */
   public cartGetItems(): any {
@@ -41,6 +41,45 @@ export class LocalCartService {
       return cart;
     }
     return null
+  }
+
+  /**
+   * cartUpdateItems()
+   * @param items - Items to store in localstorage cart
+   */
+  public cartUpdateItems(items: any): void {
+    const itemStr = JSON.stringify(items);
+    this._window.localStorage.setItem('cart', itemStr);
+  }
+
+  /**
+   * orderHasItems()
+   * * Returns boolean, if localstorage has items stored in order.
+   */
+  public orderHasItems(): boolean {
+    return (this._window.localStorage.getItem('order') !== null);
+  }
+
+  /**
+   * orderGetItems()
+   * returns json object of all items in localstorage order
+   */
+  public orderGetItems(): any {
+    if (this.orderHasItems()) {
+      let order = this._window.localStorage.getItem('order');
+      order = JSON.parse(order);
+      return order;
+    }
+    return null;
+  }
+
+  /**
+   * orderUpdateItems()
+   * @param items - Items to store in localstorage order
+   */
+  public orderUpdateItems(items: any): void {
+    const itemStr = JSON.stringify(items);
+    this._window.localStorage.setItem('order', itemStr);
   }
 
 }
