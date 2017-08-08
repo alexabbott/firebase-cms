@@ -79,6 +79,21 @@ export class LocalCartService {
   }
 
   /**
+   * orderHas()
+   * @param key - string
+   *
+   * Returns boolean, if localstorage has {key} in order
+   */
+  public orderHas(key: string): boolean {
+    if (this.orderHasItems() && key) {
+      let order = this._window.localStorage.getItem('order');
+      order = JSON.parse(order);
+      return (order[key] !== null)
+    }
+    return false
+  }
+
+  /**
    * orderGetItems()
    * returns json object of all items in localstorage order
    */
