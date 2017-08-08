@@ -60,7 +60,7 @@ export class AppComponent {
   logout() {
     this.globalService.cart.next(null);
     this.globalService.order.next(null);
-    this.localCart.clearCart();
+    this.localCart.clearAll();
     this.afAuth.auth.signOut();
   }
 }

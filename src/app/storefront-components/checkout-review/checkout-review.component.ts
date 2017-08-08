@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalService } from '../../services/global.service';
+import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { Router }    from '@angular/router';
+import { GlobalService } from 'app/services/global.service';
+import { LocalCartService } from "app/services/localcart.service";
 
 @Component({
   selector: 'checkout-review',
@@ -13,7 +14,12 @@ export class CheckoutReviewComponent implements OnInit {
   user: any;
   now: number;
 
-  constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router) {
+  constructor(
+    public db: AngularFireDatabase,
+    public router: Router,
+    public globalService: GlobalService,
+    public localCart: LocalCartService
+  ) {
     this.order = globalService.order.getValue();
     this.user = globalService.user.getValue();
     const now = new Date().getTime();
@@ -36,8 +42,7 @@ export class CheckoutReviewComponent implements OnInit {
     this.db.object('/orders/' + newKey).set(this.order);
     this.globalService.cart.next(null);
     this.globalService.order.next(null);
-    window.localStorage.setItem('cart', null);
-    window.localStorage.setItem('order', null);
+    this.localCart.clearAll();
     if (this.user) {
       this.db.object('/users/' + this.user.uid + '/cart').remove();
       this.db.list('/users/' + this.user.uid + '/orders').push(newKey);
