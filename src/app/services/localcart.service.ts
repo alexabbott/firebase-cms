@@ -12,14 +12,23 @@ export class LocalCartService {
   }
 
   /**
-   * clearCart()
+   * clearAll()
    * Clears:
    * - localstorage.cart
    * - localstorage.order
    */
+  public clearAll(): void {
+    this.clearCart();
+    this.clearOrder();
+  }
+
+  /**
+   * clearCart()
+   *
+   * clears localstorage cart
+   */
   public clearCart(): void {
     this._window.localStorage.setItem('cart', null);
-    this._window.localStorage.setItem('order', null);
   }
 
   /**
@@ -41,6 +50,15 @@ export class LocalCartService {
       return cart;
     }
     return null
+  }
+
+  /**
+   * clearOrder()
+   *
+   * Clears localstorage order
+   */
+  public clearOrder(): void {
+    this._window.localStorage.setItem('order', null);
   }
 
   /**
