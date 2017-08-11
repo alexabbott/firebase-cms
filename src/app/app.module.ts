@@ -3,7 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -31,6 +30,7 @@ import { MdButtonModule,
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
+import { AppRoutingModule } from 'app/app-routing.module';
 
 // components
 import { PostsComponent } from './storefront-components/posts/posts.component';
@@ -70,9 +70,11 @@ import { AdminCustomerComponent } from './admin-components/admin-customer/admin-
 
 // services
 import { GlobalService } from './services/global.service';
-import { AuthGuard } from './services/auth-guard.service';
 import { WindowRefService } from "./services/window-ref.service";
 import { LocalCartService } from "./services/localcart.service";
+
+// guards
+import { AuthGuard } from './services/auth.guard';
 
 // pipes
 import { SortPipe } from './pipes/sort.pipe';
@@ -80,73 +82,6 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { GetPipe } from './pipes/get.pipe';
 import { ObjectCountPipe } from './pipes/object-count.pipe';
-
-const appRoutes: Routes = [
-  { path: '', component: PostsComponent },
-  { path: 'account',
-    children: [
-      {
-        path: '',
-        children: [
-          { path: 'orders', component: OrdersComponent },
-          { path: 'order/:key', component: OrderComponent },
-        ]
-      }
-    ]
-  },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        children: [
-          { path: 'add-customer', component: AddCustomerComponent },
-          { path: 'add-order', component: AddOrderComponent },
-          { path: 'add-page', component: AddPageComponent },
-          { path: 'add-post', component: AddPostComponent },
-          { path: 'add-product', component: AddProductComponent },
-          { path: 'add-admin', component: AddAdminComponent },
-          { path: 'customer/:key', component: AdminCustomerComponent },
-          { path: 'customers', component: AdminCustomersComponent },
-          { path: 'edit-customer/:uid', component: AddCustomerComponent },
-          { path: 'edit-order/:key', component: AddOrderComponent },
-          { path: 'edit-page/:key', component: AddPageComponent },
-          { path: 'edit-post/:key', component: AddPostComponent },
-          { path: 'edit-product/:key', component: AddProductComponent },
-          { path: 'menus', component: AdminMenusComponent },
-          { path: 'orders', component: AdminOrdersComponent },
-          { path: 'order/:key', component: OrderComponent },
-          { path: 'pages', component: AdminPagesComponent },
-          { path: 'posts', component: AdminPostsComponent },
-          { path: 'products', component: AdminProductsComponent },
-          { path: 'theme', component: AdminThemeComponent },
-          { path: 'admins', component: AdminAdminsComponent },
-          { path: '', component: AdminDashboardComponent }
-        ]
-      }
-    ]
-  },
-  { path: 'checkout',
-    children: [
-      {
-        path: '',
-        children: [
-          { path: 'shipping', component: CheckoutShippingComponent },
-          { path: 'billing', component: CheckoutBillingComponent },
-          { path: 'payment', component: CheckoutPaymentComponent },
-          { path: 'review', component: CheckoutReviewComponent },
-          { path: 'confirmation', component: CheckoutConfirmationComponent },
-        ]
-      }
-    ]
-  },
-  { path: 'login', component: LoginComponent },
-  { path: 'page/:url', component: PageComponent },
-  { path: 'product/:url', component: ProductComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'blog', component: PostsComponent },
-  { path: 'blog/:url', component: PostComponent },
-  { path: 'cart', component: CartComponent },
-];
 
 firebase.initializeApp(environment.firebase);
 
@@ -176,10 +111,7 @@ firebase.initializeApp(environment.firebase);
     MdSlideToggleModule,
     MdSnackBarModule,
     MdToolbarModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
+    AppRoutingModule,
     CKEditorModule
   ],
   declarations: [
