@@ -36,7 +36,7 @@ import { OrderComponent } from 'app/storefront-components/order/order.component'
 import { AdminOrdersComponent } from 'app/admin-components/admin-orders/admin-orders.component';
 import { AdminCustomerComponent } from 'app/admin-components/admin-customer/admin-customer.component';
 
-import { AuthGuard } from 'app/services/auth-guard.service';
+import { AuthGuard } from 'app/services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: PostsComponent },

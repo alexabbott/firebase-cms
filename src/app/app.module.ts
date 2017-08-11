@@ -30,7 +30,7 @@ import { MdButtonModule,
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
-import { AppRoutingModule } from "app/app-routing.module";
+import { AppRoutingModule } from 'app/app-routing.module';
 
 // components
 import { PostsComponent } from './storefront-components/posts/posts.component';
@@ -70,7 +70,7 @@ import { AdminCustomerComponent } from './admin-components/admin-customer/admin-
 
 // services
 import { GlobalService } from './services/global.service';
-import { AuthGuard } from './services/auth-guard.service';
+import { AuthGuard } from './services/auth.guard';
 
 // pipes
 import { SortPipe } from './pipes/sort.pipe';
