@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }    from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { GlobalService } from '../../services/global.service';
 import { MdSnackBar } from '@angular/material';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import { GlobalService } from 'app/services/global.service';
+import { LocalCartService } from "app/services/localcart.service";
 
 @Component({
   selector: 'cart',
@@ -19,7 +20,14 @@ export class CartComponent implements OnInit {
   currentShopper: any;
   review: boolean;
 
-  constructor(public globalService: GlobalService, public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public router: Router) {
+  constructor(
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public router: Router,
+    public snackBar: MdSnackBar,
+    public globalService: GlobalService,
+    public localCart: LocalCartService
+  ) {
     this.user = afAuth.authState;
     this.cartArray = [];
     this.cartTotal = 0;
@@ -52,7 +60,7 @@ export class CartComponent implements OnInit {
 
     this.user.subscribe((currentShopper) => {
       if (Object.keys(this.globalCart).length === 0) {
-        window.localStorage.removeItem('cart');
+        this.localCart.clearCart();
         if (currentShopper) {
           this.db.object('/users/' + currentShopper.uid).update({
             cart: null

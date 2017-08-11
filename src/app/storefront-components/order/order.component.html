@@ -16,7 +16,7 @@
       <span *ngIf="order.shipping.company">{{ order.shipping.company }}<br></span>
       {{ order.shipping.email }}<br>
       {{ order.shipping.address }}<br>
-      {{ order.shipping.city }}, {{ order.shipping.ca }} {{ order.shipping.zip }}
+      {{ order.shipping.city }}, {{ order.shipping.state }} {{ order.shipping.zip }}
     </md-card>
     <md-card *ngIf="order">
       <h3>Billing info</h3>
@@ -24,7 +24,7 @@
       <span *ngIf="order.billing.company">{{ order.billing.company }}<br></span>
       {{ order.billing.email }}<br>
       {{ order.billing.address }}<br>
-      {{ order.billing.city }}, {{ order.billing.ca }} {{ order.billing.zip }}
+      {{ order.billing.city }}, {{ order.billing.state }} {{ order.billing.zip }}
     </md-card>
   </div>
   <md-toolbar class="orders-header">
