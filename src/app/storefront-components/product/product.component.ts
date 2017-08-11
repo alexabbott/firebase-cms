@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { GlobalService } from '../../services/global.service';
+import { MdSnackBar } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { GlobalService } from 'app/services/global.service';
+import { LocalCartService } from "app/services/localcart.service";
 
 @Component({
   selector: 'product',
@@ -19,7 +20,15 @@ export class ProductComponent implements OnInit {
   user: Observable<firebase.User>;
   currentShopper: any;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MdSnackBar, public route: ActivatedRoute, public router: Router, public globalService: GlobalService) {
+  constructor(
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public snackBar: MdSnackBar,
+    public route: ActivatedRoute,
+    public router: Router,
+    public globalService: GlobalService,
+    public localCart: LocalCartService
+  ) {
     this.user = afAuth.authState;
   }
 
@@ -40,7 +49,7 @@ export class ProductComponent implements OnInit {
               if (!cart) {
                 this.globalCart = {};
               }
-              window.localStorage.setItem('cart', JSON.stringify(this.globalCart));
+              this.localCart.cartUpdateItems(this.globalCart);
               if (this.globalCart && this.globalCart[this.product.$key]) {
                 console.log('cart', this.globalCart);
                 this.product.quantity = this.globalCart[this.product.$key]['quantity'];
