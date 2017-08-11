@@ -75,7 +75,7 @@ export class LocalCartService {
    * * Returns boolean, if localstorage has items stored in order.
    */
   public orderHasItems(): boolean {
-    return (this._window.localStorage.getItem('order') !== null);
+    return (this._window.localStorage.getItem('order') !== null && this._window.localStorage.getItem('order') !== 'null');
   }
 
   /**
