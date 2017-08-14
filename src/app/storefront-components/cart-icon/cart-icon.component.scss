@@ -1,6 +1,14 @@
+@import '../../../variables.scss';
+
 .cart-icon {
+    @extend %transition;
     cursor: pointer;
     transform: translateY(5px);
+    transition-property: color;
+
+    &:hover {
+        color: $color-main;
+    }
 }
 
 .icon-container {
@@ -10,7 +18,7 @@
 
 .cart-counter {
     bottom: 3px;
-    color: #00D4D4;
+    color: $color-white;
     font-size: 8px;
     pointer-events: none;
     position: absolute;

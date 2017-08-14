@@ -1,0 +1,46 @@
+@import '../../../variables.scss';
+
+.button-container {
+    h2 {
+        display: inline-block;
+    }
+
+    button {
+        float: right;
+        margin: 18px 30px 30px 30px;
+    }
+}
+
+.post {
+    .content {
+        display: inline-block;
+        width: calc(100% - 410px);
+
+        h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .date {
+            color: $color-grey;
+            font-size: .8em;
+        }
+    }
+
+    .publish {
+        float: right;
+        margin-top: 10px;
+        text-align: right;
+        vertical-align: top;
+        width: 400px;
+    }
+}
+
+.mat-slide-toggle {
+    margin: 0 20px 0 45px;
+    width: 115px;
+}
+
+.edit {
+    display: inline-block;
+    text-align: center;
+}

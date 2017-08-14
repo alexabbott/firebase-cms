@@ -1,0 +1,23 @@
+@import '../../../variables.scss';
+
+.post {
+    img {
+        display: inline-block;
+        margin-right: 20px;
+        max-width: 150px;
+    }
+
+    h3 a {
+        color: $color-black;
+    }
+
+    .post-content {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .date {
+        color: $color-grey;
+        font-size: 0.8em;
+    }
+}

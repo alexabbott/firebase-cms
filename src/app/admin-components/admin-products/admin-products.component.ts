@@ -10,7 +10,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 @Component({
   selector: 'admin-products',
   templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.css']
+  styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
 

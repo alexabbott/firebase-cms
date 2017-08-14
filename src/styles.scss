@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./variables";
+
+html,
+body {
+    font-family: 'Roboto', Arial, sans serif;
+    margin: 0;
+}
+
+body {
+    margin-top: 64px;
+}
+
+a {
+    color: $color-main;
+    text-decoration: none;
+}
+
+.mat-toolbar {
+    background: $color-white;
+    box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, .1);
+    color: $color-grey;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+
+    a {
+        @extend %transition;
+        color: $color-grey;
+        transition-property: color;
+
+        &:hover {
+            color: $color-main;
+        }
+    }
+
+    h2 {
+        font-weight: 800;
+        margin-left: 11px;
+    }
+
+    .mat-raised-button {
+        background: $color-white;
+    }
+
+    .mat-button-wrapper {
+        color: $color-main;
+    }
+
+    &.highlight {
+        background: $color-main;
+        box-shadow: none;
+        color: $color-white;
+        position: static;
+    }
+}
+
+.mat-raised-button {
+    background: $color-main;
+
+    &.bw {
+        background: $color-white;
+
+        .mat-button-wrapper {
+            color: $color-grey-dark;
+        }
+    }
+}
+
+.mat-button-wrapper {
+    color: $color-white;
+}
+
+.container {
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.mat-card {
+    margin-bottom: 5px;
+}
+
+.block {
+    display: block;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+.center {
+    text-align: center;
+}
+
+/*dnd*/
+.dnd-drag-start {
+    -moz-transform:scale(0.8);
+    -webkit-transform:scale(0.8);
+    transform:scale(0.8);
+    opacity:0.7;
+    border: 2px dashed #000;
+}
+
+.dnd-drag-enter {
+    opacity:0.7;
+    border: 2px dashed #000;
+}
+
+.dnd-drag-over {
+    border: 2px dashed #000;
+}
+
+.dnd-sortable-drag {
+  -moz-transform:scale(0.9);
+  -webkit-transform:scale(0.9);
+  transform:scale(0.9);
+  opacity:0.7;
+  border: 1px dashed #000;
+}

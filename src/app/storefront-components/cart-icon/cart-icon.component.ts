@@ -7,7 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Component({
   selector: 'cart-icon',
   templateUrl: './cart-icon.component.html',
-  styleUrls: ['./cart-icon.component.css']
+  styleUrls: ['./cart-icon.component.scss']
 })
 export class CartIconComponent implements OnInit {
   globalCart: any;

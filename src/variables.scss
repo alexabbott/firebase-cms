@@ -1,0 +1,9 @@
+$color-main: #00D4D4;
+$color-white: #FFF;
+$color-grey: #777;
+$color-grey-dark: #333;
+$color-black: rgba(0,0,0,.87);
+
+%transition {
+    transition: .3s ease-out;
+}

@@ -1,0 +1,13 @@
+@import '../../../variables.scss';
+
+.mat-card {
+    height: 70%;
+    text-align: center;
+    width: 80%;
+
+    .mat-icon {
+        color: $color-main;
+        font-size: 3em;
+        width: 100%;
+    }
+}

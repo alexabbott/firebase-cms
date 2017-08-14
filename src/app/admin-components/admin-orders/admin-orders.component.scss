@@ -1,0 +1,41 @@
+@import '../../../variables.scss';
+
+.button-container {
+    h2 {
+        display: inline-block;
+    }
+
+    button {
+        float: right;
+        margin: 18px 30px 30px 30px;
+    }
+}
+
+.order {
+    cursor: pointer;
+
+    .content {
+        display: inline-block;
+        width: calc(100% - 220px);
+
+        .date {
+            color: $color-grey;
+            font-size: .8em;
+        }
+    }
+
+    .action {
+        display: inline-block;
+        margin-top: 15px;
+        vertical-align: top;
+        width: 210px;
+    }
+}
+
+.view {
+    text-align: center;
+
+    button {
+        margin-top: 20px;
+    }
+}
