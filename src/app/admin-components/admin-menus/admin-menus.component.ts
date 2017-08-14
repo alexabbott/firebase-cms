@@ -6,7 +6,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 @Component({
   selector: 'app-admin-menus',
   templateUrl: './admin-menus.component.html',
-  styleUrls: ['./admin-menus.component.css']
+  styleUrls: ['./admin-menus.component.scss']
 })
 export class AdminMenusComponent implements OnInit {
 

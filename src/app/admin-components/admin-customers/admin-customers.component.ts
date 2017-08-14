@@ -6,7 +6,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 @Component({
   selector: 'admin-customers',
   templateUrl: './admin-customers.component.html',
-  styleUrls: ['./admin-customers.component.css']
+  styleUrls: ['./admin-customers.component.scss']
 })
 export class AdminCustomersComponent {
 

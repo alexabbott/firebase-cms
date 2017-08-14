@@ -1,10 +1,13 @@
+@import '../../../variables.scss';
+
 .mat-card {
     cursor: move !important;
 }
 
 .mat-icon {
-    color: #999;
+    color: $color-grey;
     margin-right: 20px;
+    pointer-events: none;
 }
 
 .button-add-menu {

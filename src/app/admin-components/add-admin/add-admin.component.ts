@@ -6,7 +6,7 @@ import { MdSnackBar } from '@angular/material';
 @Component({
   selector: 'add-admin',
   templateUrl: './add-admin.component.html',
-  styleUrls: ['./add-admin.component.css']
+  styleUrls: ['./add-admin.component.scss']
 })
 export class AddAdminComponent implements OnInit {
 

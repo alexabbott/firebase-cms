@@ -8,7 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 @Component({
   selector: 'add-order',
   templateUrl: './add-order.component.html',
-  styleUrls: ['./add-order.component.css']
+  styleUrls: ['./add-order.component.scss']
 })
 export class AddOrderComponent implements OnInit {
 

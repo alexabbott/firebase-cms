@@ -10,7 +10,7 @@ import { FirebaseApp } from 'angularfire2';
 @Component({
   selector: 'add-post',
   templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.css']
+  styleUrls: ['./add-post.component.scss']
 })
 export class AddPostComponent implements OnInit {
 
@@ -29,7 +29,16 @@ export class AddPostComponent implements OnInit {
   imageUrl: any;
   currentPost: FirebaseObjectObservable<any>;
 
-  constructor(public af: FirebaseApp, public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute, private fb: FirebaseApp) {
+  constructor(
+    public af: FirebaseApp,
+    public db:
+    AngularFireDatabase,
+    public snackBar: MdSnackBar,
+    public globalService: GlobalService,
+    public router: Router,
+    public route: ActivatedRoute,
+    private fb: FirebaseApp) {
+
     this.newPublished = false;
     this.posts = db.list('/posts');
 

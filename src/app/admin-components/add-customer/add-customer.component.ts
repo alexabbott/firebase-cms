@@ -7,7 +7,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 @Component({
   selector: 'add-customer',
   templateUrl: './add-customer.component.html',
-  styleUrls: ['./add-customer.component.css']
+  styleUrls: ['./add-customer.component.scss']
 })
 export class AddCustomerComponent implements OnInit {
 

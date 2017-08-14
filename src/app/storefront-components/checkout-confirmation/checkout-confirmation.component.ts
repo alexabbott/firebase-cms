@@ -5,7 +5,7 @@ import { GlobalService } from '../../services/global.service';
 @Component({
   selector: 'app-checkout-confirmation',
   templateUrl: './checkout-confirmation.component.html',
-  styleUrls: ['./checkout-confirmation.component.css']
+  styleUrls: ['./checkout-confirmation.component.scss']
 })
 export class CheckoutConfirmationComponent implements OnInit {
   order: any;

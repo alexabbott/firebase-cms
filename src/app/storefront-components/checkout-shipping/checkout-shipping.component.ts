@@ -7,7 +7,7 @@ import { LocalCartService } from "app/services/localcart.service";
 @Component({
   selector: 'checkout-shipping',
   templateUrl: './checkout-shipping.component.html',
-  styleUrls: ['./checkout-shipping.component.css']
+  styleUrls: ['./checkout-shipping.component.scss']
 })
 export class CheckoutShippingComponent implements OnInit {
   order: any;

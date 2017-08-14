@@ -9,7 +9,7 @@ import { GlobalService } from '../../services/global.service';
 @Component({
   selector: 'orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
   orders: FirebaseListObservable<any[]>;

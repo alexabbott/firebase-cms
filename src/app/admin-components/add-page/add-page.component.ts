@@ -8,7 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 @Component({
   selector: 'add-page',
   templateUrl: './add-page.component.html',
-  styleUrls: ['./add-page.component.css']
+  styleUrls: ['./add-page.component.scss']
 })
 export class AddPageComponent implements OnInit {
 
