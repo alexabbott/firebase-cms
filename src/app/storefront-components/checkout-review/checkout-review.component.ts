@@ -64,7 +64,7 @@ export class CheckoutReviewComponent implements OnInit {
   submitNewCharge() {
     this.db.list('/stripe_customers/' + this.user.uid + '/charges').push({
       source: this.newCharge.source.id,
-      amount: parseInt(this.order.total)
+      amount: (parseInt(this.order.total) * 100)
     });
   }
 
