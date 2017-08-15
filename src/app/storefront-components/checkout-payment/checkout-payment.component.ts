@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { GlobalService } from '../../services/global.service';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'checkout-payment',
@@ -14,14 +17,32 @@ export class CheckoutPaymentComponent implements OnInit {
   stripeCustomerInitialized: Boolean;
   newCreditCard: any;
   user: any;
+  anonymous: Observable<firebase.User>;
   order: any;
 
-  constructor(public db: AngularFireDatabase, public globalService: GlobalService, public router: Router) {
+  constructor(
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public globalService: GlobalService,
+    public router: Router
+  ) {
     this.user = globalService.user.getValue();
     this.order = globalService.order.getValue();
 
     if (this.user) {
       this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
+    } else {
+      this.afAuth.auth.signInAnonymously().catch(function(error) {
+        console.log('auth error', error.message);
+      });
+
+      this.anonymous = afAuth.authState;
+      this.anonymous.subscribe(anonymousUser => {
+        if (anonymousUser.isAnonymous) {
+          this.user = anonymousUser;
+          this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
+        }
+      });
     }
 
     this.stripeCustomerInitialized = false;

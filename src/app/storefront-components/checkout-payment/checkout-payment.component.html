@@ -21,4 +21,5 @@
     </div>
 
   <button md-raised-button (click)="submitNewCreditCard()">Continue</button>
+  <div class="error" *ngIf="newCreditCard.error">{{ newCreditCard.error }}</div>
 </md-card>

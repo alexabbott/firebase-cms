@@ -72,6 +72,11 @@ a {
     color: $color-white;
 }
 
+.mat-progress-spinner path,
+.mat-spinner path {
+    stroke: $color-main;
+}
+
 .container {
     box-sizing: border-box;
     padding: 30px;
@@ -91,6 +96,10 @@ a {
 
 .center {
     text-align: center;
+}
+
+.error {
+    color: $color-red;
 }
 
 /*dnd*/

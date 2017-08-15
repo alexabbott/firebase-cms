@@ -27,6 +27,7 @@ import { MdButtonModule,
     MdOptionModule,
     MdCheckboxModule,
     MdMenuModule,
+    MdProgressSpinnerModule
   } from '@angular/material';
 import 'hammerjs';
 import { DndModule } from 'ng2-dnd';
@@ -106,6 +107,7 @@ firebase.initializeApp(environment.firebase);
     MdMenuModule,
     MdNativeDateModule,
     MdOptionModule,
+    MdProgressSpinnerModule,
     MdSelectModule,
     MdSidenavModule,
     MdSlideToggleModule,

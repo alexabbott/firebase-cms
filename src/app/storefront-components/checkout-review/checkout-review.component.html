@@ -17,13 +17,20 @@
 
   <h4>Payment Info</h4>
   <div *ngIf="newCharge.source">
-    {{ newCharge.source.monbrand }} &hellip;{{ newCharge.source.last4 }}
-    (exp. {{ newCharge.source.exp_th }}/{{ newCharge.source.exp_year }})
+    <span *ngIf="newCharge.source && newCharge.source.last4">
+      {{ newCharge.source.monbrand }} &hellip;{{ newCharge.source.last4 }}
+      (exp. {{ newCharge.source.exp_th }}/{{ newCharge.source.exp_year }})
+    </span>
+    <md-progress-spinner mode="indeterminate" *ngIf="!newCharge.source || !newCharge.source.last4"></md-progress-spinner>
   </div>
 
   <cart></cart>
+
   <a routerLink="/cart" class="edit">Edit Cart</a>
+
   <h4>Subtotal: {{ order.total | currency:'USD':true }}</h4>
-  <button md-raised-button class="confirm" (click)="confirm()">Confirm Order</button>
-  {{ newCharge.error }}
+
+  <button md-raised-button [disabled]="!newCharge.source || !newCharge.source.last4" class="confirm" (click)="confirm()">Confirm Order</button>
+
+  <div class="error" *ngIf="newCharge.error">{{ newCharge.error }}</div>
 </md-card>

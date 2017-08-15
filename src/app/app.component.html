@@ -10,7 +10,7 @@
         <li>
             <cart-icon></cart-icon>
         </li>
-        <li *ngIf="(user | async)?.uid">
+        <li *ngIf="(user | async)?.displayName">
             <img src="{{ (user | async)?.photoURL }}" class="user-photo" [mdMenuTriggerFor]="userMenu">
             <md-menu #userMenu="mdMenu">
                 <button md-menu-item routerLink="/account/orders">My Account</button>
@@ -18,7 +18,7 @@
             </md-menu>
         </li>
         <li>
-            <button md-raised-button (click)="login()" *ngIf="!(user | async)?.uid">Login</button>
+            <button md-raised-button (click)="login()" *ngIf="!(user | async)?.displayName">Login</button>
         </li>
     </ul>
 </md-toolbar>

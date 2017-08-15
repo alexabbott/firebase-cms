@@ -29,7 +29,12 @@ export class CheckoutReviewComponent implements OnInit {
     this.user = globalService.user.getValue();
     const now = new Date().getTime();
 
-    this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
+    if (this.user) {
+      this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
+    } else {
+      router.navigateByUrl('cart');
+    }
+
     this.sources.subscribe((s) => {
       this.newCharge.source = s[(s.length - 1)];
     });
@@ -39,7 +44,7 @@ export class CheckoutReviewComponent implements OnInit {
         this.order.uid = this.user.uid;
       }
       this.order.date = now;
-      this.order.status = 'SUBMITTED';
+      this.order.status = 'PAID';
     }
 
     if (!this.order.billing) {
