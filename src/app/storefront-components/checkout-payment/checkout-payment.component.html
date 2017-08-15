@@ -1,5 +1,24 @@
 <md-card class="container">
   <h3>Payment Info</h3>
-  <p>Everything is freeeeeeee!</p>
-  <button md-raised-button routerLink="/checkout/review">Continue</button>
+    <div>
+      <md-input-container>
+        <input mdInput placeholder="Credit Card Number" [(ngModel)]="newCreditCard.number">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input mdInput placeholder="CCV" [(ngModel)]="newCreditCard.cvc">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input mdInput placeholder="Month" [(ngModel)]="newCreditCard.exp_month" size="4">
+      </md-input-container>
+      /
+      <md-input-container>
+        <input mdInput placeholder="Year" [(ngModel)]="newCreditCard.exp_year" size="6">
+      </md-input-container>
+    </div>
+
+  <button md-raised-button (click)="goToReview()">Continue</button>
 </md-card>

@@ -13,6 +13,9 @@ export class CheckoutReviewComponent implements OnInit {
   order: any;
   user: any;
   now: number;
+  sources: FirebaseListObservable<any[]>;
+  charges: any;
+  newCharge: any;
 
   constructor(
     public db: AngularFireDatabase,
@@ -20,9 +23,16 @@ export class CheckoutReviewComponent implements OnInit {
     public globalService: GlobalService,
     public localCart: LocalCartService
   ) {
+    this.charges = {};
+    this.newCharge = {};
     this.order = globalService.order.getValue();
     this.user = globalService.user.getValue();
     const now = new Date().getTime();
+
+    this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
+    this.sources.subscribe((s) => {
+      this.newCharge.source = s[(s.length - 1)];
+    });
 
     if (this.order) {
       if (this.user) {
@@ -38,6 +48,7 @@ export class CheckoutReviewComponent implements OnInit {
   }
 
   confirm() {
+    this.submitNewCharge();
     let newKey = Math.abs(this.hashCode(this.order.date) + this.hashCode(this.order.shipping.email));
     this.db.object('/orders/' + newKey).set(this.order);
     this.globalService.cart.next(null);
@@ -48,6 +59,13 @@ export class CheckoutReviewComponent implements OnInit {
       this.db.list('/users/' + this.user.uid + '/orders').push(newKey);
     }
     this.router.navigateByUrl('checkout/confirmation');
+  }
+
+  submitNewCharge() {
+    this.db.list('/stripe_customers/' + this.user.uid + '/charges').push({
+      source: this.newCharge.source.id,
+      amount: parseInt(this.order.total)
+    });
   }
 
   hashCode(input:string) {

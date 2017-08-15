@@ -37,9 +37,10 @@ export class AdminMenusComponent implements OnInit {
   }
 
   saveMenu() {
-    for (let i = 0; i < this.menuList.length; i++) {
-      this.menuObject[i] = this.menuList[i];
-    }
+    this.menuObject = this.menuList.reduce(function(acc, cur, i) {
+      acc[i] = cur;
+      return acc;
+    }, {});
     this.db.object('/menus/nav').set(this.menuObject);
     let snackBarRef = this.snackBar.open('Menu saved', 'OK!', {
       duration: 3000

@@ -15,8 +15,15 @@
   {{ order.billing.address }}<br>
   {{ order.billing.city }}, {{ order.billing.state }}, {{ order.billing.zip }}<br>
 
+  <h4>Payment Info</h4>
+  <div *ngIf="newCharge.source">
+    {{ newCharge.source.monbrand }} &hellip;{{ newCharge.source.last4 }}
+    (exp. {{ newCharge.source.exp_th }}/{{ newCharge.source.exp_year }})
+  </div>
+
   <cart></cart>
   <a routerLink="/cart" class="edit">Edit Cart</a>
-  <h4>Total: {{ order.total | currency:'USD':true }}</h4>
+  <h4>Subtotal: {{ order.total | currency:'USD':true }}</h4>
   <button md-raised-button class="confirm" (click)="confirm()">Confirm Order</button>
+  {{ newCharge.error }}
 </md-card>

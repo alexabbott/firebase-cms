@@ -39,7 +39,7 @@ import { AdminCustomerComponent } from 'app/admin-components/admin-customer/admi
 import { AuthGuard } from 'app/services/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent },
+  { path: '', component: ProductsComponent },
   { path: 'account',
     children: [
       {
