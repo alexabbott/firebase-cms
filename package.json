@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "hashcode": "node scripts/hashcode.js"
+    "hashcode": "node scripts/hashcode.js",
+    "deploy": "ng build --prod; firebase deploy"
   },
   "private": true,
   "dependencies": {
