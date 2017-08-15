@@ -1,6 +1,6 @@
 # FirebaseCMS
 
-A CMS and E-commerce platform with a Front End theme built with Angular 4 (Angular CLI) and AngularFire2. Manage pages, blog posts, products, orders, customers, carts, navigation, themes and admins with this tool.
+A CMS and E-commerce platform with a Front End theme built with Angular 4 (Angular CLI), Firebase (AngularFire2), Angular Material and Stripe. Manage pages, blog posts, products, orders, customers, carts, navigation, themes and admins with this tool.
 
 ## Installation
 

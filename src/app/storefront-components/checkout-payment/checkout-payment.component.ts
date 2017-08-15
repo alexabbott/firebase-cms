@@ -54,14 +54,10 @@ export class CheckoutPaymentComponent implements OnInit {
             exp_year: 2017,
             address_zip: ''
           };
+          this.router.navigateByUrl('checkout/review');
         });
       }
     });
-  }
-
-  goToReview() {
-    this.submitNewCreditCard();
-    this.router.navigateByUrl('checkout/review');
   }
 
   ngOnInit() {
