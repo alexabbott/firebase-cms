@@ -38,6 +38,7 @@ import { AdminCustomerComponent } from 'app/admin-components/admin-customer/admi
 import { AdminProductCategoriesComponent } from 'app/admin-components/admin-product-categories/admin-product-categories.component';
 import { AddProductCategoryComponent } from 'app/admin-components/add-product-category/add-product-category.component';
 import { ProductCategoryComponent } from 'app/storefront-components/product-category/product-category.component';
+import { ProductCategoriesComponent } from 'app/storefront-components/product-categories/product-categories.component';
 
 import { AuthGuard } from 'app/services/auth.guard';
 
@@ -102,6 +103,7 @@ const routes: Routes = [
     ]
   },
   { path: 'category/:slug', component: ProductCategoryComponent },
+  { path: 'categories', component: ProductCategoriesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'page/:url', component: PageComponent },
   { path: 'product/:url', component: ProductComponent },

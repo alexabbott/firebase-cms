@@ -71,6 +71,7 @@ import { AdminCustomerComponent } from './admin-components/admin-customer/admin-
 import { AdminProductCategoriesComponent } from './admin-components/admin-product-categories/admin-product-categories.component';
 import { AddProductCategoryComponent } from './admin-components/add-product-category/add-product-category.component';
 import { ProductCategoryComponent } from './storefront-components/product-category/product-category.component';
+import { ProductCategoriesComponent } from './storefront-components/product-categories/product-categories.component';
 
 // services
 import { GlobalService } from './services/global.service';
@@ -84,8 +85,9 @@ import { AuthGuard } from './services/auth.guard';
 import { SortPipe } from './pipes/sort.pipe';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { GetPipe } from './pipes/get.pipe';
+import { GetUserPipe } from './pipes/getUser.pipe';
 import { ObjectCountPipe } from './pipes/object-count.pipe';
+import { GetKeyPipe } from './pipes/get-key.pipe';
 
 firebase.initializeApp(environment.firebase);
 
@@ -155,14 +157,16 @@ firebase.initializeApp(environment.firebase);
     OrdersComponent,
     OrderComponent,
     AdminOrdersComponent,
-    GetPipe,
+    GetUserPipe,
     AddOrderComponent,
     AddCustomerComponent,
     ObjectCountPipe,
     AdminCustomerComponent,
     AdminProductCategoriesComponent,
     AddProductCategoryComponent,
-    ProductCategoryComponent
+    ProductCategoryComponent,
+    ProductCategoriesComponent,
+    GetKeyPipe
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard, WindowRefService, LocalCartService ],

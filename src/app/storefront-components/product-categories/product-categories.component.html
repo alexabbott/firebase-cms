@@ -1,0 +1,3 @@
+<section *ngFor="let category of categories | async">
+  <product-category [categoryInput]="category" *ngIf="category.products"></product-category>
+</section>

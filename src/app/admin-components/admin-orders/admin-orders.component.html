@@ -11,7 +11,7 @@
         <div class="action">
             <div class="view">
                 <div>
-                    <span *ngIf="order.uid">{{ (users | async | get: order.uid)?.email }}</span>
+                    <span *ngIf="order.uid">{{ (users | async | getUser: order.uid)?.email }}</span>
                     <span *ngIf="!order.uid">Guest Customer</span>
                 </div>
                 <button md-raised-button routerLink="/admin/edit-order/{{order.$key}}">
