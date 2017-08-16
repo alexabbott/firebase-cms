@@ -136,7 +136,7 @@ export class AddProductComponent implements OnInit {
           // update categories object if a category was added to the product
           this.products.$ref.on('child_added', (product) => {
             if (product.val().category) {
-              this.db.object('/categories/' + this.newCategory + '/products/' + this.productKey).set(Date.now());
+              this.db.object('/categories/' + this.newCategory + '/products/' + product.val().$key).set(Date.now());
             }
           });
       }
