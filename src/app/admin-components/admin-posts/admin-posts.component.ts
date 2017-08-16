@@ -20,7 +20,14 @@ export class AdminPostsComponent implements OnInit {
   dialogRef: MdDialogRef<any>;
   storageRef: any;
 
-  constructor(public af: FirebaseApp, public db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(
+    public af: FirebaseApp,
+    public db: AngularFireDatabase,
+    public globalService: GlobalService,
+    public router: Router,
+    public dialog: MdDialog,
+    public snackBar: MdSnackBar
+  ) {
     this.posts = db.list('/posts');
 
     this.storageRef = af.storage().ref();

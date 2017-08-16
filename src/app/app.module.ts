@@ -68,6 +68,9 @@ import { OrdersComponent } from './storefront-components/orders/orders.component
 import { OrderComponent } from './storefront-components/order/order.component';
 import { AdminOrdersComponent } from './admin-components/admin-orders/admin-orders.component';
 import { AdminCustomerComponent } from './admin-components/admin-customer/admin-customer.component';
+import { AdminProductCategoriesComponent } from './admin-components/admin-product-categories/admin-product-categories.component';
+import { AddProductCategoryComponent } from './admin-components/add-product-category/add-product-category.component';
+import { ProductCategoryComponent } from './storefront-components/product-category/product-category.component';
 
 // services
 import { GlobalService } from './services/global.service';
@@ -156,7 +159,10 @@ firebase.initializeApp(environment.firebase);
     AddOrderComponent,
     AddCustomerComponent,
     ObjectCountPipe,
-    AdminCustomerComponent
+    AdminCustomerComponent,
+    AdminProductCategoriesComponent,
+    AddProductCategoryComponent,
+    ProductCategoryComponent
   ],
   entryComponents: [DeleteDialogComponent],
   providers: [ GlobalService, AuthGuard, WindowRefService, LocalCartService ],

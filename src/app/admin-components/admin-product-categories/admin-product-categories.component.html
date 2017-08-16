@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="button-container">
+        <h2>Product Categories</h2>
+        <button md-raised-button routerLink="/admin/add-product-category">Add a Category</button>
+    </div>
+    <md-card class="category" *ngFor="let category of categories | async">
+        <div class="content">
+            <h3>{{category.name}}</h3>
+        </div>
+        <div class="publish">
+            <div class="edit">
+                <button md-raised-button (click)="editCategory(category.$key)">
+                    Edit
+                </button>
+                <button md-raised-button (click)="deleteCategory(category)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </md-card>
+</div>

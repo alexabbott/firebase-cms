@@ -35,6 +35,9 @@ import { OrdersComponent } from 'app/storefront-components/orders/orders.compone
 import { OrderComponent } from 'app/storefront-components/order/order.component';
 import { AdminOrdersComponent } from 'app/admin-components/admin-orders/admin-orders.component';
 import { AdminCustomerComponent } from 'app/admin-components/admin-customer/admin-customer.component';
+import { AdminProductCategoriesComponent } from 'app/admin-components/admin-product-categories/admin-product-categories.component';
+import { AddProductCategoryComponent } from 'app/admin-components/add-product-category/add-product-category.component';
+import { ProductCategoryComponent } from 'app/storefront-components/product-category/product-category.component';
 
 import { AuthGuard } from 'app/services/auth.guard';
 
@@ -61,7 +64,9 @@ const routes: Routes = [
           { path: 'add-page', component: AddPageComponent },
           { path: 'add-post', component: AddPostComponent },
           { path: 'add-product', component: AddProductComponent },
+          { path: 'add-product-category', component: AddProductCategoryComponent },
           { path: 'add-admin', component: AddAdminComponent },
+          { path: 'product-categories', component: AdminProductCategoriesComponent },
           { path: 'customer/:key', component: AdminCustomerComponent },
           { path: 'customers', component: AdminCustomersComponent },
           { path: 'edit-customer/:uid', component: AddCustomerComponent },
@@ -96,6 +101,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'category/:slug', component: ProductCategoryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'page/:url', component: PageComponent },
   { path: 'product/:url', component: ProductComponent },

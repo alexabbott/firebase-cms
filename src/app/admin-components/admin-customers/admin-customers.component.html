@@ -8,7 +8,8 @@
             <a routerLink="/admin/customer/{{ customer.$key }}">
                 <img src="{{ customer.photoURL }}" class="customer-photo" *ngIf="customer.photoURL">
                 <img src="../../assets/placeholder.jpg" class="customer-photo" *ngIf="!customer.photoURL">
-                {{customer.email}}
+                <span *ngIf="customer.email">{{customer.email}}</span>
+                <span *ngIf="!customer.email">Guest Customer</span>
             </a>
         </div>
         <div class="active">

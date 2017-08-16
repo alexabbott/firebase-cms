@@ -29,6 +29,10 @@ export class CheckoutPaymentComponent implements OnInit {
     this.user = globalService.user.getValue();
     this.order = globalService.order.getValue();
 
+    if (!this.order) {
+      this.router.navigateByUrl('cart');
+    }
+
     if (this.user) {
       this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
     } else {

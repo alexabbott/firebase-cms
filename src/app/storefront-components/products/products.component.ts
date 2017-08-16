@@ -10,7 +10,7 @@ export class ProductsComponent implements OnInit {
   products: FirebaseListObservable<any[]>;
   columns: Number;
 
-  constructor(db: AngularFireDatabase) {
+  constructor(public db: AngularFireDatabase) {
     this.products = db.list('/products', {
       query: {
         orderByChild: 'published',

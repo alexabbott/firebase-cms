@@ -1,6 +1,18 @@
 {
   "rules": {
     ".read": true,
-    ".write": true
+    ".write": true,
+    "categories": {
+      ".indexOn": "slug"
+    },
+    "orders": {
+      ".indexOn": "uid"
+    },
+    "products": {
+      ".indexOn": ["published", "category"]
+    },
+    "posts": {
+      ".indexOn": "published"
+    }
   }
 }

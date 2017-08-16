@@ -1,4 +1,5 @@
 <div class="container">
+  <h3>{{ categoryName }}</h3>
   <md-grid-list cols="{{columns}}" rowHeight="300px" (window:resize)="onResize($event)">
     <md-grid-tile *ngFor="let product of products | async | sort:['-weight']" colspan="1" rowspan="1">
       <md-card routerLink="/product/{{product.url}}" class="product">

@@ -5,8 +5,9 @@
   </div>
   <div class="order-right" *ngIf="order && router.url.includes('/admin')">
     <a routerLink="/admin/customer/{{order.uid}}">
-      <img src="{{ (customers | async | get: order.uid)?.photoURL }}" class="user-photo">
-      {{ (customers | async | get: order.uid)?.email }}
+      <img src="{{ (customers | async | get: order.uid)?.photoURL }}" class="user-photo" *ngIf="(customers | async | get: order.uid)?.photoURL">
+      <span *ngIf="(customers | async | get: order.uid)?.email">{{ (customers | async | get: order.uid)?.email }}</span>
+      <span *ngIf="!(customers | async | get: order.uid)?.email">Guest Customer</span>
     </a>
   </div>
   <div class="order-info">

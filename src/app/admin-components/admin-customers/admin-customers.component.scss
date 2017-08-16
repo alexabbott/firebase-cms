@@ -1,43 +1,43 @@
-.button-container h2 {
-    display: inline-block;
-}
+.button-container{
+    h2 {
+        display: inline-block;
+    }
 
-.button-container button {
-    float: right;
-    margin: 18px 30px 30px 30px;
+    button {
+        float: right;
+        margin: 18px 30px 30px 30px;
+    }
 }
 
 .customer {
     cursor: pointer;
-}
 
-.customer .content {
-    display: inline-block;
-    margin-top: 13px;
-    vertical-align: top;
-    width: calc(100% - 220px);
-}
+    .content {
+        display: inline-block;
+        margin-top: 13px;
+        vertical-align: top;
+        width: calc(100% - 220px);
+    }
 
-.customer .active {
-    display: inline-block;
-    text-align: center;
-    width: 210px;
-}
+    .active {
+        display: inline-block;
+        text-align: center;
+        width: 210px;
 
-.customer .active span {
-    display: block;
-}
+        span {
+            display: block;
+            font-size: .9em;
+        }
 
-.customer .active button {
-    margin-top: 10px;
-}
-
-.customer .active span {
-    font-size: .9em;
+        button {
+            margin-top: 10px;
+        }
+    }
 }
 
 .customer-photo {
     border-radius: 50%;
+    height: 45px;
     margin-right: 15px;
     vertical-align: middle;
     width: 45px;

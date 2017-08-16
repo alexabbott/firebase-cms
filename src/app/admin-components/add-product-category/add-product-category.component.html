@@ -1,0 +1,17 @@
+<div class="category-form">
+    <h2>
+        <span *ngIf="!editMode">Add a</span>
+        <span *ngIf="editMode">Edit</span>
+        Category
+    </h2>
+
+    <md-input-container class="block">
+        <input mdInput placeholder="Category name" type="text" [(ngModel)]="newName">
+    </md-input-container>
+
+    <button md-raised-button (click)="addCategory(newName)" class="block">
+        <span *ngIf="!editMode">Add</span>
+        <span *ngIf="editMode">Save</span>
+        Category
+    </button>
+</div>

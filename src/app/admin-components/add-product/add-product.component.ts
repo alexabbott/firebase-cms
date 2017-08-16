@@ -15,11 +15,14 @@ import { FirebaseApp } from 'angularfire2';
 export class AddProductComponent implements OnInit {
 
   products: FirebaseListObservable<any>;
+  categories: FirebaseListObservable<any>;
+  ogCategory: string;
   newTitle: string;
   newThumbnail: string;
   newDescription: string;
   newPrice: string;
   newPublished: boolean;
+  newCategory: any;
   currentAdmin: any;
   editMode: boolean;
   productKey: string;
@@ -31,6 +34,7 @@ export class AddProductComponent implements OnInit {
   constructor(public af: FirebaseApp, public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute, private fb: FirebaseApp) {
     this.newPublished = false;
     this.products = db.list('/products');
+    this.categories = db.list('/categories');
 
     this.globalService.admin.subscribe(admin => {
       this.currentAdmin = admin;
@@ -87,8 +91,7 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  addProduct(newTitle: string, newPrice: string, newDescription: string, newPublished: boolean) {
-
+  addProduct(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
     if (!newPublished) {
       newPublished = false;
     }
@@ -106,8 +109,17 @@ export class AddProductComponent implements OnInit {
           description: newDescription,
           price: newPrice,
           published: newPublished,
-          productedBy: this.currentAdmin.uid
+          addedBy: this.currentAdmin.uid,
+          category: this.newCategory ? this.newCategory : null
         });
+
+        // update or remove product from categories object
+        if (this.ogCategory && this.newCategory) {
+          this.db.object('/categories/' + this.ogCategory + '/products/' + this.productKey).remove();
+          this.db.object('/categories/' + this.newCategory + '/products/' + this.productKey).set(Date.now());
+        } else if (this.ogCategory && !this.newCategory) {
+          this.db.object('/categories/' + this.ogCategory + '/products/' + this.productKey).remove();
+        }
       } else {
           this.products.push({
             url: this.slugify(newTitle),
@@ -117,7 +129,15 @@ export class AddProductComponent implements OnInit {
             description: newDescription,
             price: newPrice,
             published: newPublished,
-            productedBy: this.currentAdmin.uid
+            addedBy: this.currentAdmin.uid,
+            category: this.newCategory ? this.newCategory : null
+          });
+
+          // update categories object if a category was added to the product
+          this.products.$ref.on('child_added', (product) => {
+            if (product.val().category) {
+              this.db.object('/categories/' + this.newCategory + '/products/' + this.productKey).set(Date.now());
+            }
           });
       }
       let snackBarRef = this.snackBar.open('Product saved', 'OK!', {
@@ -148,11 +168,18 @@ export class AddProductComponent implements OnInit {
           this.productKey = params.key;
           this.currentProduct = this.db.object('/products/' + params.key);
 
+          this.db.object('/products/' + params.key, { preserveSnapshot: true }).take(1).subscribe((p) => {
+            if (p.val().category) {
+              this.ogCategory = p.val().category;
+            }
+          });
+
           this.currentProduct.subscribe(p => {
             this.newTitle = p.title;
             this.newDescription = p.description;
             this.newPrice = p.price;
             this.newPublished = p.published;
+            this.newCategory = p.category;
 
             if (p.thumbnail) {
               this.imageUrl = p.thumbnail;
@@ -164,6 +191,7 @@ export class AddProductComponent implements OnInit {
           this.newThumbnail = null;
           this.newDescription = null;
           this.newPrice = null;
+          this.newCategory = null;
           this.newPublished = false;
         }
     });

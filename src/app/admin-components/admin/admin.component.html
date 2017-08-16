@@ -23,6 +23,9 @@
             <md-list-item [ngClass]="{'selected': router.url.includes('/admin/products')}" routerLink="/admin/products">
                 <md-icon>shopping_basket</md-icon> Products
             </md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/product-categories')}" routerLink="/admin/product-categories">
+                <md-icon>group_work</md-icon> Product Categories
+            </md-list-item>
             <md-list-item [ngClass]="{'selected': router.url.includes('/admin/customers')}" routerLink="/admin/customers">
                 <md-icon>account_circle</md-icon> Customers
             </md-list-item>

@@ -22,7 +22,6 @@ export class AdminProductsComponent implements OnInit {
 
   constructor(public af: FirebaseApp, public db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
     this.products = db.list('/products');
-
     this.storageRef = af.storage().ref();
   }
 
@@ -45,6 +44,9 @@ export class AdminProductsComponent implements OnInit {
       this.selectedOption = result;
       if (this.selectedOption === 'delete') {
         this.db.object('/products/' + product.$key).remove();
+        if (product.category) {
+          this.db.object('/categories/' + product.category + '/products/' + product.$key).remove();
+        }
 
         if (product.thumbnail) {
           let storage = firebase.storage();

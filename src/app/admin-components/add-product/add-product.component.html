@@ -14,6 +14,10 @@
         <input mdInput type="number" step="0.01" placeholder="Price" [(ngModel)]="newPrice">
     </md-input-container>
 
+    <md-select placeholder="Product Category" [(ngModel)]="newCategory">
+        <md-option *ngFor="let category of categories | async" [value]="category.$key">{{ category.name }}</md-option>
+    </md-select>
+
     <button md-raised-button class="mat-upload-button" onclick="document.getElementById('uploadImage').click()">
         <span *ngIf="!imageUrl">Upload</span>
         <span *ngIf="imageUrl">Change</span>
@@ -35,7 +39,7 @@
         <span *ngIf="newPublished">Un-Publish</span>
     </md-slide-toggle>
 
-    <button md-raised-button (click)="addProduct(newTitle, newPrice, newDescription, newPublished)" class="submit block">
+    <button md-raised-button (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished)" class="submit block">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Product
