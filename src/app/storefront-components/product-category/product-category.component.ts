@@ -14,7 +14,6 @@ export class ProductCategoryComponent implements OnInit {
   categoryObject: any;
   categoryName: string;
   categoryProducts: any;
-  columns: Number;
   @Input() categoryInput: any;
 
   constructor(
@@ -31,8 +30,6 @@ export class ProductCategoryComponent implements OnInit {
     });
 
     this.categoryObject = {};
-
-    this.columns = 4;
   }
 
   getProductImage(product:any) {
@@ -40,22 +37,6 @@ export class ProductCategoryComponent implements OnInit {
       return product.thumbnail;
     } else {
       return '../../assets/placeholder.jpg';
-    }
-  }
-
-  onResize(event) {
-    const element = event.target.innerWidth;
-
-    if (element < 950) {
-      this.columns = 2;
-    }
-
-    if (element > 950) {
-      this.columns = 4;
-    }
-
-    if (element < 750) {
-      this.columns = 1;
     }
   }
 

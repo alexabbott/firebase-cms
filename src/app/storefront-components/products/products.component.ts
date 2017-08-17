@@ -8,7 +8,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class ProductsComponent implements OnInit {
   products: FirebaseListObservable<any[]>;
-  columns: Number;
 
   constructor(public db: AngularFireDatabase) {
     this.products = db.list('/products', {
@@ -18,8 +17,6 @@ export class ProductsComponent implements OnInit {
         limitToLast: 20,
       }
     });
-
-    this.columns = 4;
   }
 
   getProductImage(product:any) {
@@ -27,22 +24,6 @@ export class ProductsComponent implements OnInit {
       return product.thumbnail;
     } else {
       return '../../assets/placeholder.jpg';
-    }
-  }
-
-  onResize(event) {
-    const element = event.target.innerWidth;
-
-    if (element < 950) {
-      this.columns = 2;
-    }
-
-    if (element > 950) {
-      this.columns = 4;
-    }
-
-    if (element < 750) {
-      this.columns = 1;
     }
   }
 

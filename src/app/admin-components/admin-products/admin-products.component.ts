@@ -21,7 +21,12 @@ export class AdminProductsComponent implements OnInit {
   storageRef: any;
 
   constructor(public af: FirebaseApp, public db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
-    this.products = db.list('/products');
+    this.products = db.list('/products', {
+      query: {
+        orderByChild: 'rdateAdded',
+        limitToLast: 9999
+      }
+    });
     this.storageRef = af.storage().ref();
   }
 

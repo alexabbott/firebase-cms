@@ -104,6 +104,7 @@ export class AddProductComponent implements OnInit {
         this.currentProduct.update({
           url: this.slugify(newTitle),
           dateAdded: Date.now(),
+          rdateAdded: (Date.now() * -1),
           title: newTitle,
           thumbnail: this.newThumbnail ? this.newThumbnail : null,
           description: newDescription,
@@ -126,6 +127,7 @@ export class AddProductComponent implements OnInit {
           this.products.push({
             url: this.slugify(newTitle),
             dateAdded: Date.now(),
+            rdateAdded: (Date.now() * -1),
             title: newTitle,
             thumbnail: this.newThumbnail ? this.newThumbnail : null,
             description: newDescription,

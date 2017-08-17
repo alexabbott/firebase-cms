@@ -1,3 +1,4 @@
+// colors
 $color-main: #00D4D4;
 $color-white: #FFF;
 $color-grey: #777;
@@ -5,6 +6,30 @@ $color-grey-dark: #333;
 $color-black: rgba(0,0,0,.87);
 $color-red: #FF0000;
 
+// screen size
+$screen-sm: 750px;
+$screen-md: 960px;
+
+// transitions
 %transition {
     transition: .3s ease-out;
+}
+
+// mixins
+@mixin mobile {
+    @media screen and (max-width: #{$screen-sm}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: #{$screen-sm}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: #{$screen-md}) {
+        @content;
+    }
 }

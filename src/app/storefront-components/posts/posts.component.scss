@@ -4,7 +4,11 @@
     img {
         display: inline-block;
         margin-right: 20px;
-        max-width: 150px;
+        max-width: 100%;
+
+        @include tablet {
+            max-width: 150px;
+        }
     }
 
     h3 a {
