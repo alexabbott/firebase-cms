@@ -1,31 +1,35 @@
-.button-container h2 {
-    display: inline-block;
+.button-container {
+    h2 {
+        display: inline-block;
+    }
+
+    button {
+        float: right;
+        margin: 18px 30px 30px 30px;
+    }
 }
 
-.button-container button {
-    float: right;
-    margin: 18px 30px 30px 30px;
-}
+.admin {
+    .content {
+        display: inline-block;
+        margin-top: 13px;
+        vertical-align: top;
+        width: calc(100% - 210px);
+    }
 
-.admin .content {
-    display: inline-block;
-    margin-top: 13px;
-    vertical-align: top;
-    width: calc(100% - 160px);
-}
+    .active {
+        display: inline-block;
+        text-align: center;
+        width: 200px;
 
-.admin .active {
-    display: inline-block;
-    text-align: center;
-    width: 150px;
-}
+        span {
+            font-size: .8em;
+        }
 
-.admin .active span {
-    display: block;
-}
-
-.admin .active button {
-    margin-top: 10px;
+        button {
+            margin-top: 10px;
+        }
+    }
 }
 
 .admin-photo {

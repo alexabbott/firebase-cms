@@ -1,9 +1,15 @@
 <div class="admin-form">
     <h2>Add an Admin</h2>
 
-    <md-input-container class="block">
+    <md-input-container>
         <input mdInput placeholder="Email" type="email" [(ngModel)]="newEmail">
     </md-input-container>
 
-    <button md-raised-button (click)="addAdmin(newEmail)" class="block">Add Admin</button>
+    <md-select placeholder="Admin role" [(ngModel)]="newRole">
+        <md-option value="non-approver">Non-approver</md-option>
+        <md-option value="approver">Approver</md-option>
+        <md-option value="super-admin">Super Admin</md-option>
+    </md-select>
+
+    <button md-raised-button (click)="addAdmin(newEmail, newRole)" class="block">Add Admin</button>
 </div>

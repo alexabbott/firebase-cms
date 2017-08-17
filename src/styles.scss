@@ -8,10 +8,6 @@ body {
     margin: 0;
 }
 
-body {
-    margin-top: 64px;
-}
-
 a {
     color: $color-main;
     text-decoration: none;
@@ -79,6 +75,15 @@ a {
 
 .mat-sidenav-container {
     height: 100vh;
+}
+
+.mat-sidenav-content {
+    box-sizing: border-box;
+    padding-top: 64px;
+}
+
+admin .mat-sidenav-content {
+    padding-top: 0;
 }
 
 .container {

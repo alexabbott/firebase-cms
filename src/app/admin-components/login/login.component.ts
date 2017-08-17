@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       hash |= 0; // Convert to 32bit integer
     }
     return hash;
-  };
+  }
 
   ngOnInit() {
   }

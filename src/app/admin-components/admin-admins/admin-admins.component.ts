@@ -15,7 +15,12 @@ export class AdminAdminsComponent {
   dialogRef: MdDialogRef<any>;
 
   constructor(public db: AngularFireDatabase, public dialog: MdDialog, public snackBar: MdSnackBar) {
-    this.admins = db.list('/admins');
+    this.admins = db.list('/admins', {
+      query: {
+        orderByChild: 'email',
+        limitToFirst: 9999
+      }
+    });
   }
 
   deleteAdmin(key: string) {

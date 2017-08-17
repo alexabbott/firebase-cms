@@ -11,21 +11,30 @@ import { MdSnackBar } from '@angular/material';
 export class AddAdminComponent implements OnInit {
 
   newEmail: string;
+  newRole: string;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public router: Router) {}
+  constructor(
+    public db: AngularFireDatabase,
+    public snackBar: MdSnackBar,
+    public router: Router
+  ) {
+    this.newRole = 'non-approver';
+  }
 
   ngOnInit() {
   }
 
-  addAdmin(newEmail: string) {
-    if (newEmail) {
+  addAdmin(newEmail: string, newRole: string) {
+    if (newEmail && newRole) {
 
       this.db.object('/admins/' + this.hashCode(newEmail)).set({
         email: newEmail,
+        role: newRole,
         active: false
       });
 
       this.newEmail = null;
+      this.newRole = null;
 
       let snackBarRef = this.snackBar.open('Admin saved', 'OK!', {
         duration: 3000
@@ -36,6 +45,10 @@ export class AddAdminComponent implements OnInit {
       }, 3300);
     } else if (!newEmail) {
       let snackBarRef = this.snackBar.open('You must add an email for the user', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newRole) {
+      let snackBarRef = this.snackBar.open('You must add a role for the user', 'OK!', {
         duration: 3000
       });
     }
