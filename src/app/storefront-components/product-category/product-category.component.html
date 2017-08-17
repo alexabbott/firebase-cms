@@ -1,16 +1,21 @@
-<div class="container">
-  <h3>{{ categoryName }}</h3>
+<div class="container" [ngClass]="{ 'category': router.url.includes('category'), 'categories': router.url.includes('categories')}">
+  <h3><a routerLink="/category/{{ categoryObject.slug }}">{{ categoryObject.name }}</a></h3>
   <md-grid-list cols="{{columns}}" rowHeight="300px" (window:resize)="onResize($event)">
-    <span *ngFor="let product of categoryProducts">
-      <md-grid-tile *ngIf="(products | async | getKey: product)?.published" colspan="1" rowspan="1">
-        <md-card routerLink="/product/{{ (products | async | getKey: product)?.url }}" class="product">
-          <img [src]="getProductImage((products | async | getKey: product))">
+    <span *ngFor="let productKey of categoryObject.products">
+      <md-grid-tile *ngIf="(products | async | getKey: productKey)?.published" colspan="1" rowspan="1">
+        <md-card routerLink="/product/{{ (products | async | getKey: productKey)?.url }}" class="product">
+          <img [src]="getProductImage((products | async | getKey: productKey))">
           <div class="product-content">
-            <h3><a routerLink="/product/{{ (products | async | getKey: product)?.url }}">{{ (products | async | getKey: product)?.title }}</a></h3>
-            <div class="price">{{ (products | async | getKey: product)?.price | currency:'USD':true }}</div>
+            <h3><a routerLink="/product/{{ (products | async | getKey: productKey)?.url }}">{{ (products | async | getKey: productKey)?.title }}</a></h3>
+            <div class="price">{{ (products | async | getKey: productKey)?.price | currency:'USD':true }}</div>
           </div>
         </md-card>
       </md-grid-tile>
     </span>
+    <md-grid-tile colspan="1" rowspan="1" class="button-container">
+      <md-card class="see-more">
+        <button md-raised-button routerLink="/category/{{ categoryObject.slug }}">See more {{ categoryObject.name }}</button>
+      </md-card>
+    </md-grid-tile>
   </md-grid-list>
 </div>

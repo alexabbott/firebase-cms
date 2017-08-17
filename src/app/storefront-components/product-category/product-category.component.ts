@@ -11,6 +11,7 @@ export class ProductCategoryComponent implements OnInit {
   products: FirebaseListObservable<any[]>;
   categories: FirebaseListObservable<any[]>;
   category: FirebaseListObservable<any[]>;
+  categoryObject: any;
   categoryName: string;
   categoryProducts: any;
   columns: Number;
@@ -28,6 +29,8 @@ export class ProductCategoryComponent implements OnInit {
         equalTo: true
       }
     });
+
+    this.categoryObject = {};
 
     this.columns = 4;
   }
@@ -60,8 +63,9 @@ export class ProductCategoryComponent implements OnInit {
 
     if (this.categoryInput) {
       this.category = this.categoryInput;
-      this.categoryName = this.categoryInput.name;
-      this.categoryProducts = Object.keys(this.categoryInput.products);
+      this.categoryObject.slug = this.categoryInput.slug;
+      this.categoryObject.name = this.categoryInput.name;
+      this.categoryObject.products = Object.keys(this.categoryInput.products);
     } else {
       this.route.params.subscribe((params: Params) => {
         this.category = this.db.list('/categories', {
@@ -72,8 +76,9 @@ export class ProductCategoryComponent implements OnInit {
         });
 
         this.category.subscribe((cat) => {
-          this.categoryName = cat[0].name;
-          this.categoryProducts = Object.keys(cat[0].products);
+          this.categoryObject.slug = cat[0].slug;
+          this.categoryObject.name = cat[0].name;
+          this.categoryObject.products = Object.keys(cat[0].products);
         });
       });
     }

@@ -1,6 +1,7 @@
 @import '../../../variables.scss';
 
-.product {
+.product,
+.see-more {
     cursor: pointer;
     height: 235px;
     width: 80%;
@@ -19,5 +20,36 @@
 
     .product-content {
         display: block;
+    }
+}
+
+.categories md-grid-list span {
+    display: none;
+}
+
+.categories md-grid-list span:nth-of-type(1),
+.categories md-grid-list span:nth-of-type(2),
+.categories md-grid-list span:nth-of-type(3) {
+    display: block;
+}
+
+.button-container {
+    display: none;
+}
+
+.categories md-grid-list span:nth-of-type(3) + .button-container {
+    display: block;
+}
+
+.see-more:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+    cursor: default;
+    position: relative;
+
+    button {
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-50%);
     }
 }

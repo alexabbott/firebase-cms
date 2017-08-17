@@ -119,6 +119,8 @@ export class AddProductComponent implements OnInit {
           this.db.object('/categories/' + this.newCategory + '/products/' + this.productKey).set(Date.now());
         } else if (this.ogCategory && !this.newCategory) {
           this.db.object('/categories/' + this.ogCategory + '/products/' + this.productKey).remove();
+        } else if (!this.ogCategory && this.newCategory) {
+          this.db.object('/categories/' + this.newCategory + '/products/' + this.productKey).set(Date.now());
         }
       } else {
           this.products.push({
@@ -131,12 +133,9 @@ export class AddProductComponent implements OnInit {
             published: newPublished,
             addedBy: this.currentAdmin.uid,
             category: this.newCategory ? this.newCategory : null
-          });
-
-          // update categories object if a category was added to the product
-          this.products.$ref.on('child_added', (product) => {
-            if (product.val().category) {
-              this.db.object('/categories/' + this.newCategory + '/products/' + product.val().$key).set(Date.now());
+          }).then((item) => {
+            if (this.newCategory) {
+              this.db.object('/categories/' + this.newCategory + '/products/' + item.key).set(Date.now());
             }
           });
       }
