@@ -43,7 +43,7 @@ import { ProductCategoriesComponent } from 'app/storefront-components/product-ca
 import { AuthGuard } from 'app/services/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent },
+  { path: '', component: ProductCategoriesComponent },
   { path: 'account',
     children: [
       {
@@ -103,7 +103,6 @@ const routes: Routes = [
     ]
   },
   { path: 'category/:slug', component: ProductCategoryComponent },
-  { path: 'categories', component: ProductCategoriesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'page/:url', component: PageComponent },
   { path: 'product/:url', component: ProductComponent },

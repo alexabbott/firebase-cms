@@ -1,8 +1,9 @@
 <md-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
+    <md-icon class="material-icons menu-trigger" (click)="mobilenav.open()">menu</md-icon>
     <h2><a routerLink="/">{{ (theme | async)?.siteName }}</a></h2>
     <span class="fill-space"></span>
     <ul>
-        <span *ngFor="let item of nav | async">
+        <span *ngFor="let item of nav | async" class="nav-item">
             <li *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
                 <a routerLink="{{item.url}}">{{item.label}}</a>
             </li>
@@ -22,4 +23,14 @@
         </li>
     </ul>
 </md-toolbar>
-<router-outlet></router-outlet>
+<md-sidenav-container>
+    <md-sidenav #mobilenav  mode="over" class="mobile-nav">
+        <div *ngFor="let item of nav | async" class="mobile-nav-item">
+            <a routerLink="{{item.url}}" (click)="mobilenav.close()" *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
+                {{item.label}}
+            </a>
+        </div>
+    </md-sidenav>
+
+    <router-outlet></router-outlet>
+</md-sidenav-container>

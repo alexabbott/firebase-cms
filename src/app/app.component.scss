@@ -1,0 +1,57 @@
+@import '../variables.scss';
+
+.main-header {
+    a {
+        text-decoration: none;
+    }
+
+    md-icon {
+        cursor: pointer;
+        display: inline-block;
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    ul li {
+        display: inline-block;
+        font-size: 0.8em;
+        list-style-type: none;
+        margin-left: 25px;
+    }
+
+    .nav-item {
+        display: none;
+
+        @include tablet {
+            display: inline-block;
+        }
+    }
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+.user-photo {
+    border-radius: 50%;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: transform .3s ease-out;
+    width: 45px;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.mobile-nav {
+    box-sizing: border-box;
+    min-width: 50%;
+    padding: 0 20px;
+
+    .mobile-nav-item {
+        margin: 20px 0;
+    }
+}

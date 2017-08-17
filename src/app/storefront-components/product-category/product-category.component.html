@@ -1,4 +1,4 @@
-<div class="container" [ngClass]="{ 'category': router.url.includes('category'), 'categories': router.url.includes('categories')}">
+<div class="container" [ngClass]="{ 'category': router.url.includes('category'), 'categories': !router.url.includes('category') }">
   <h3><a routerLink="/category/{{ categoryObject.slug }}">{{ categoryObject.name }}</a></h3>
   <section class="grid">
     <span class="grid-tile" *ngFor="let productKey of categoryObject.products">

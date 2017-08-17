@@ -1,7 +1,11 @@
 @import '../../../variables.scss';
 
-.categories {
-    padding: 30px 30px 0 30px;
+h3 {
+    text-align: center;
+
+    @include tablet {
+        text-align: left;
+    }
 }
 
 .grid {
@@ -27,6 +31,7 @@
 .see-more {
     cursor: pointer;
     height: 235px;
+    margin: 0 auto;
     width: 80%;
 
     .price {
@@ -46,10 +51,6 @@
     }
 }
 
-.categories .grid span {
-    display: none;
-}
-
 .grid .button-container {
     box-sizing: border-box;
     display: inline-block;
@@ -64,6 +65,14 @@
     }
 }
 
+.categories {
+    padding: 30px 30px 0 30px;
+}
+
+.categories .grid span {
+    display: none;
+}
+
 .categories .grid span:nth-of-type(1),
 .categories .grid span:nth-of-type(2),
 .categories .grid span:nth-of-type(3) {
@@ -75,10 +84,10 @@
     display: none;
 }
 
-.see-more:not([class*=mat-elevation-z]) {
-    cursor: default;
-}
-
 .category .button-container {
     display: none;
+}
+
+.see-more:not([class*=mat-elevation-z]) {
+    cursor: default;
 }
