@@ -10,8 +10,8 @@
         </div>
         <div class="active">
             {{ admin.role }}
-            <span *ngIf="admin.active">(active)</span>
-            <span *ngIf="!admin.active">(inactive)</span>
+            <span *ngIf="admin.uid">(active)</span>
+            <span *ngIf="!admin.uid">(inactive)</span>
             <button md-raised-button (click)="deleteAdmin(admin.$key)">Delete</button>
         </div>
     </md-card>

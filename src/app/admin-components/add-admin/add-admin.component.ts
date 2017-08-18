@@ -18,7 +18,7 @@ export class AddAdminComponent implements OnInit {
     public snackBar: MdSnackBar,
     public router: Router
   ) {
-    this.newRole = 'non-approver';
+    this.newRole = 'editor';
   }
 
   ngOnInit() {
@@ -27,10 +27,9 @@ export class AddAdminComponent implements OnInit {
   addAdmin(newEmail: string, newRole: string) {
     if (newEmail && newRole) {
 
-      this.db.object('/admins/' + this.hashCode(newEmail)).set({
+      this.db.object('/admins/' + this.hashCode(newEmail)).update({
         email: newEmail,
-        role: newRole,
-        active: false
+        role: newRole
       });
 
       this.newEmail = null;
