@@ -3,7 +3,6 @@ import { Router, CanActivate } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { GlobalService } from '../services/global.service';
 import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase/app';
 
 @Injectable()
 export class SuperAdminGuard implements CanActivate {
