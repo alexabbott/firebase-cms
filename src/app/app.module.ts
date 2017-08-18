@@ -80,6 +80,7 @@ import { LocalCartService } from "./services/localcart.service";
 
 // guards
 import { AuthGuard } from './services/auth.guard';
+import { SuperAdminGuard } from './services/super-admin.guard';
 
 // pipes
 import { SortPipe } from './pipes/sort.pipe';
@@ -169,7 +170,7 @@ firebase.initializeApp(environment.firebase);
     GetKeyPipe
   ],
   entryComponents: [DeleteDialogComponent],
-  providers: [ GlobalService, AuthGuard, WindowRefService, LocalCartService ],
+  providers: [ GlobalService, AuthGuard, SuperAdminGuard, WindowRefService, LocalCartService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

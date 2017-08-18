@@ -9,9 +9,14 @@
             {{admin.email}}
         </div>
         <div class="active">
-            {{ admin.role }}
-            <span *ngIf="admin.uid">(active)</span>
-            <span *ngIf="!admin.uid">(inactive)</span>
+            <div>
+                {{ admin.role }}
+                <span *ngIf="admin.uid">(active)</span>
+                <span *ngIf="!admin.uid">(inactive)</span>
+            </div>
+            <button md-raised-button routerLink="/admin/edit-admin/{{admin.$key}}">
+                Edit
+            </button>
             <button md-raised-button (click)="deleteAdmin(admin.$key)">Delete</button>
         </div>
     </md-card>

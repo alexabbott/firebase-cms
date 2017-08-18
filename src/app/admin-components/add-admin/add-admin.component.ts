@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 
@@ -12,16 +12,35 @@ export class AddAdminComponent implements OnInit {
 
   newEmail: string;
   newRole: string;
+  currentAdmin: FirebaseObjectObservable<any>;
+  editMode: boolean;
+  adminKey: string;
 
   constructor(
     public db: AngularFireDatabase,
     public snackBar: MdSnackBar,
-    public router: Router
+    public router: Router,
+    public route: ActivatedRoute
   ) {
-    this.newRole = 'editor';
+    this.editMode = false;
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+        if (params && params.key) {
+          this.editMode = true;
+          this.adminKey = params.key;
+          this.currentAdmin = this.db.object('/admins/' + params.key);
+
+          this.currentAdmin.subscribe(a => {
+            this.newEmail = a.email;
+            this.newRole = a.role;
+          });
+        } else {
+          this.newEmail = null;
+          this.newRole = 'editor';
+        }
+    });
   }
 
   addAdmin(newEmail: string, newRole: string) {

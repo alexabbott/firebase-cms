@@ -31,13 +31,13 @@ export class AddPostComponent implements OnInit {
 
   constructor(
     public af: FirebaseApp,
-    public db:
-    AngularFireDatabase,
+    public db: AngularFireDatabase,
     public snackBar: MdSnackBar,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
-    private fb: FirebaseApp) {
+    private fb: FirebaseApp
+  ) {
 
     this.newPublished = false;
     this.posts = db.list('/posts');
