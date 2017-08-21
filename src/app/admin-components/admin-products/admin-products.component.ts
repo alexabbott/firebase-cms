@@ -19,8 +19,16 @@ export class AdminProductsComponent implements OnInit {
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
   storageRef: any;
+  currentAdmin: any;
 
-  constructor(public af: FirebaseApp, public db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(
+    public af: FirebaseApp,
+    public db: AngularFireDatabase,
+    public globalService: GlobalService,
+    public router: Router,
+    public dialog: MdDialog,
+    public snackBar: MdSnackBar
+  ) {
     this.products = db.list('/products', {
       query: {
         orderByChild: 'rdateAdded',
@@ -28,6 +36,10 @@ export class AdminProductsComponent implements OnInit {
       }
     });
     this.storageRef = af.storage().ref();
+
+    this.globalService.admin.subscribe((a) => {
+      this.currentAdmin = a;
+    });
   }
 
   onChange(e: any, key: string) {

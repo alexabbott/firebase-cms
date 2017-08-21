@@ -5,6 +5,9 @@
     "categories": {
       ".indexOn": "slug"
     },
+    "admins": {
+      ".indexOn": "email"
+    },
     "orders": {
       ".indexOn": "uid"
     },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Router }    from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
@@ -15,9 +16,20 @@ export class AdminPagesComponent implements OnInit {
   page: FirebaseObjectObservable<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
+  currentAdmin: any;
 
-  constructor(public db: AngularFireDatabase, public router: Router, public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(
+    public db: AngularFireDatabase,
+    public router: Router,
+    public dialog: MdDialog,
+    public snackBar: MdSnackBar,
+    public globalService: GlobalService
+  ) {
     this.pages = db.list('/pages');
+
+    this.globalService.admin.subscribe((a) => {
+      this.currentAdmin = a;
+    });
   }
 
   onChange(e: any, key: string) {

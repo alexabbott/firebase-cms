@@ -5,13 +5,13 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { GlobalService } from '../../services/global.service';
 
 @Component({
-  selector: 'admin-customers',
-  templateUrl: './admin-customers.component.html',
-  styleUrls: ['./admin-customers.component.scss']
+  selector: 'admin-approvals',
+  templateUrl: './admin-approvals.component.html',
+  styleUrls: ['./admin-approvals.component.scss']
 })
-export class AdminCustomersComponent {
+export class AdminApprovalsComponent {
 
-  customers: FirebaseListObservable<any>;
+  productApprovals: FirebaseListObservable<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
   currentAdmin: any;
@@ -22,25 +22,10 @@ export class AdminCustomersComponent {
     public snackBar: MdSnackBar,
     public globalService: GlobalService
   ) {
-    this.customers = db.list('/users');
+    this.productApprovals = db.list('/approvals/products');
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;
-    });
-  }
-
-  deleteCustomer(event, key: string) {
-    event.stopPropagation();
-    let dialogRef = this.dialog.open(DeleteDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
-      if (this.selectedOption === 'delete') {
-        this.db.object('/users/' + key).remove();
-
-        let snackBarRef = this.snackBar.open('Customer deleted', 'OK!', {
-          duration: 3000
-        });
-      }
     });
   }
 }

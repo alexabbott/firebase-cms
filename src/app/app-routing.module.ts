@@ -39,9 +39,11 @@ import { AdminProductCategoriesComponent } from 'app/admin-components/admin-prod
 import { AddProductCategoryComponent } from 'app/admin-components/add-product-category/add-product-category.component';
 import { ProductCategoryComponent } from 'app/storefront-components/product-category/product-category.component';
 import { ProductCategoriesComponent } from 'app/storefront-components/product-categories/product-categories.component';
+import { AdminApprovalsComponent } from './admin-components/admin-approvals/admin-approvals.component';
 
 import { AuthGuard } from 'app/services/auth.guard';
 import { SuperAdminGuard } from 'app/services/super-admin.guard';
+import { AdminGuard } from 'app/services/admin.guard';
 
 const routes: Routes = [
   { path: '', component: ProductCategoriesComponent },
@@ -68,6 +70,7 @@ const routes: Routes = [
           { path: 'add-product', component: AddProductComponent },
           { path: 'add-product-category', component: AddProductCategoryComponent },
           { path: 'add-admin', component: AddAdminComponent },
+          { path: 'approvals', component: AdminApprovalsComponent },
           { path: 'product-categories', component: AdminProductCategoriesComponent },
           { path: 'customer/:key', component: AdminCustomerComponent },
           { path: 'customers', component: AdminCustomersComponent },

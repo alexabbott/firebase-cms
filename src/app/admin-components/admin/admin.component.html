@@ -38,6 +38,9 @@
             <md-list-item [ngClass]="{'selected': router.url === '/admin/theme'}" routerLink="/admin/theme">
                 <md-icon>restaurant_menu</md-icon> Theme
             </md-list-item>
+            <md-list-item [ngClass]="{'selected': router.url === '/admin/approvals'}" routerLink="/admin/approvals">
+                <md-icon>check_circle</md-icon> Approvals
+            </md-list-item>
             <md-list-item
                 [ngClass]="{'selected': router.url.includes('/admin/admins')}"
                 routerLink="/admin/admins"

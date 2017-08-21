@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'admin-orders',
@@ -13,10 +14,20 @@ export class AdminOrdersComponent implements OnInit {
   orders: FirebaseListObservable<any>;
   users: FirebaseListObservable<any>;
   selectedOption: String;
+  currentAdmin: any;
 
-  constructor(public db: AngularFireDatabase, public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(
+    public db: AngularFireDatabase,
+    public dialog: MdDialog,
+    public snackBar: MdSnackBar,
+    public globalService: GlobalService
+  ) {
     this.orders = db.list('/orders');
     this.users = db.list('/users');
+
+    this.globalService.admin.subscribe((a) => {
+      this.currentAdmin = a;
+    });
   }
 
   deleteOrder(event, key: string) {

@@ -30,6 +30,7 @@ export class AddProductComponent implements OnInit {
   file: any;
   imageUrl: any;
   currentProduct: FirebaseObjectObservable<any>;
+  currentModeratedProducts: FirebaseListObservable<any>;
 
   constructor(public af: FirebaseApp, public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute, private fb: FirebaseApp) {
     this.newPublished = false;
@@ -103,14 +104,14 @@ export class AddProductComponent implements OnInit {
 
         this.currentProduct.update({
           url: this.slugify(newTitle),
-          dateAdded: Date.now(),
-          rdateAdded: (Date.now() * -1),
+          dateUpdated: Date.now(),
+          rdateUpdated: (Date.now() * -1),
           title: newTitle,
           thumbnail: this.newThumbnail ? this.newThumbnail : null,
           description: newDescription,
           price: newPrice,
           published: newPublished,
-          addedBy: this.currentAdmin.uid,
+          updatedBy: this.currentAdmin.uid,
           category: this.newCategory ? this.newCategory : null
         });
 
@@ -142,6 +143,69 @@ export class AddProductComponent implements OnInit {
           });
       }
       let snackBarRef = this.snackBar.open('Product saved', 'OK!', {
+        duration: 3000
+      });
+      setTimeout(() => {
+        this.router.navigateByUrl('admin/products');
+      }, 3300);
+    } else if (!newTitle) {
+      let snackBarRef = this.snackBar.open('You must add a title for this product', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newDescription) {
+      let snackBarRef = this.snackBar.open('You must add a description to the product', 'OK!', {
+        duration: 3000
+      });
+    } else if (!newPrice) {
+      let snackBarRef = this.snackBar.open('You must add a price to the product', 'OK!', {
+        duration: 3000
+      });
+    }
+  }
+
+  submitForModeration(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
+    if (!newPublished) {
+      newPublished = false;
+    }
+
+    if (newTitle && newPrice && newDescription && this.currentAdmin.uid) {
+      if (this.editMode && this.productKey) {
+
+        this.currentProduct = this.db.object('/products/' + this.productKey);
+        this.currentProduct.update({
+          awaitingApproval: true
+        });
+
+        this.currentModeratedProducts = this.db.list('/approvals/products/');
+
+        this.currentModeratedProducts.push({
+          pid: this.productKey,
+          url: this.slugify(newTitle),
+          dateUpdated: Date.now(),
+          rdateUpdated: (Date.now() * -1),
+          title: newTitle,
+          thumbnail: this.newThumbnail ? this.newThumbnail : null,
+          description: newDescription,
+          price: newPrice,
+          published: newPublished,
+          updatedBy: this.currentAdmin.uid,
+          category: this.newCategory ? this.newCategory : null
+        });
+      } else {
+          this.db.list('/approvals/products/').push({
+            url: this.slugify(newTitle),
+            dateAdded: Date.now(),
+            rdateAdded: (Date.now() * -1),
+            title: newTitle,
+            thumbnail: this.newThumbnail ? this.newThumbnail : null,
+            description: newDescription,
+            price: newPrice,
+            published: newPublished,
+            addedBy: this.currentAdmin.uid,
+            category: this.newCategory ? this.newCategory : null
+          });
+      }
+      let snackBarRef = this.snackBar.open('Product submitted for moderation', 'OK!', {
         duration: 3000
       });
       setTimeout(() => {

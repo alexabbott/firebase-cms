@@ -40,9 +40,13 @@
         <span *ngIf="newPublished">Un-Publish</span>
     </md-slide-toggle>
 
-    <button md-raised-button (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished)" class="submit block">
+    <button md-raised-button (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished, false)" class="submit">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Product
+    </button>
+
+    <button md-raised-button (click)="submitForModeration(newTitle, newPrice, newCategory, newDescription, newPublished)" class="submit">
+        Submit for Moderation
     </button>
 </div>

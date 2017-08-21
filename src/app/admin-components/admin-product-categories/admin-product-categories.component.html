@@ -12,7 +12,7 @@
                 <button md-raised-button (click)="editCategory(category.$key)">
                     Edit
                 </button>
-                <button md-raised-button (click)="deleteCategory(category)">
+                <button md-raised-button (click)="deleteCategory(category)" *ngIf="currentAdmin.role !== 'editor'">
                     Delete
                 </button>
             </div>
