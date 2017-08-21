@@ -73,6 +73,7 @@ import { AddProductCategoryComponent } from './admin-components/add-product-cate
 import { ProductCategoryComponent } from './storefront-components/product-category/product-category.component';
 import { ProductCategoriesComponent } from './storefront-components/product-categories/product-categories.component';
 import { AdminApprovalsComponent } from './admin-components/admin-approvals/admin-approvals.component';
+import { ApproveDialogComponent } from './admin-components/approve-dialog/approve-dialog.component';
 
 // services
 import { GlobalService } from './services/global.service';
@@ -170,9 +171,10 @@ firebase.initializeApp(environment.firebase);
     ProductCategoryComponent,
     ProductCategoriesComponent,
     GetKeyPipe,
-    AdminApprovalsComponent
+    AdminApprovalsComponent,
+    ApproveDialogComponent
   ],
-  entryComponents: [DeleteDialogComponent],
+  entryComponents: [DeleteDialogComponent, ApproveDialogComponent],
   providers: [ GlobalService, AuthGuard, SuperAdminGuard, AdminGuard, WindowRefService, LocalCartService ],
   bootstrap: [ AppComponent ]
 })

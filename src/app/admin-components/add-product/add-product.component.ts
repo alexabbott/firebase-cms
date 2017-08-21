@@ -179,7 +179,7 @@ export class AddProductComponent implements OnInit {
         this.currentModeratedProducts = this.db.list('/approvals/products/');
 
         this.currentModeratedProducts.push({
-          pid: this.productKey,
+          entityKey: this.productKey,
           url: this.slugify(newTitle),
           dateUpdated: Date.now(),
           rdateUpdated: (Date.now() * -1),
