@@ -30,18 +30,34 @@ export class AdminApprovalsComponent {
     });
   }
 
-  approveItem(event, entity: string, key: string, entityObject: any) {
+  approveItem(event, entity: string, entityObject: any) {
     event.stopPropagation();
     let dialogRef = this.dialog.open(ApproveDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
       if (this.selectedOption === 'approve') {
         if (entityObject.entityKey) {
-          this.db.object('/' + entity + '/' + entityObject.entityKey).update(entityObject);
+          let ogEntity = this.db.object('/' + entity + '/' + entityObject.entityKey);
+          ogEntity.take(1).subscribe((item) => {
+            if (entity === 'products' && item.category && entityObject.category) {
+              this.db.object('/categories/' + item.category + '/products/' + entityObject.entityKey).remove();
+              this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now());
+            } else if (entity === 'products' && item.category && !entityObject.category) {
+              this.db.object('/categories/' + item.category + '/products/' + entityObject.entityKey).remove();
+            } else if (entity === 'products' && !item.category && entityObject.category) {
+              this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now());
+            }
+            ogEntity.set(entityObject);
+          });
         } else {
-          this.db.list('/' + entity).push(entityObject);
+          this.db.list('/' + entity).push(entityObject).then((item) => {
+            if (entity === 'products' && entityObject.category) {
+              this.db.object('/categories/' + entityObject.category + '/products/' + item.key).set(Date.now());
+            }
+          });
         }
-        this.db.object('/approvals/' + entity + '/' + key).remove();
+
+        this.db.object('/approvals/' + entity + '/' + entityObject.$key).remove();
         let snackBarRef = this.snackBar.open('Item approved', 'OK!', {
           duration: 3000
         });
@@ -56,7 +72,7 @@ export class AdminApprovalsComponent {
       this.selectedOption = result;
       if (this.selectedOption === 'delete') {
         this.db.object('/approvals/' + entity + '/' + key).remove();
-
+        this
         let snackBarRef = this.snackBar.open('Item deleted', 'OK!', {
           duration: 3000
         });

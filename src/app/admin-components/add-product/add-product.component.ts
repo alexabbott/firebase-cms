@@ -61,35 +61,12 @@ export class AddProductComponent implements OnInit {
           this.storageRef.child('products/' + path).getDownloadURL().then(function(url) {
             me.imageUrl = url;
             me.newThumbnail = url;
-
-            if (me.editMode) {
-              me.currentProduct.update({
-                thumbnail: url
-              });
-            }
           });
       });
   }
 
   deleteImage() {
-    let storage = firebase.storage();
-    let imageRef = storage.refFromURL(this.imageUrl);
-
-    let me = this;
-    imageRef.delete().then(function() {
-      me.imageUrl = null;
-      me.newThumbnail = null;
-      let snackBarRef = me.snackBar.open('Image deleted', 'OK!', {
-        duration: 3000
-      });
-      if (me.editMode) {
-        me.currentProduct.update({
-          thumbnail: null
-        });
-      }
-    }).catch(function(error) {
-      console.log('error', error);
-    });
+    this.newThumbnail = null;
   }
 
   addProduct(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
@@ -98,6 +75,19 @@ export class AddProductComponent implements OnInit {
     }
 
     if (newTitle && newPrice && newDescription && this.currentAdmin.uid) {
+
+      if (this.imageUrl && !this.newThumbnail) {
+        let storage = firebase.storage();
+        let imageRef = storage.refFromURL(this.imageUrl);
+
+        let me = this;
+        imageRef.delete().then(function() {
+          me.imageUrl = null;
+        }).catch(function(error) {
+          console.log('error', error);
+        });
+      }
+
       if (this.editMode && this.productKey) {
 
         this.currentProduct = this.db.object('/products/' + this.productKey);
@@ -112,7 +102,7 @@ export class AddProductComponent implements OnInit {
           price: newPrice,
           published: newPublished,
           updatedBy: this.currentAdmin.uid,
-          category: this.newCategory ? this.newCategory : null
+          category: newCategory ? newCategory : null
         });
 
         // update or remove product from categories object
@@ -129,13 +119,15 @@ export class AddProductComponent implements OnInit {
             url: this.slugify(newTitle),
             dateAdded: Date.now(),
             rdateAdded: (Date.now() * -1),
+            dateUpdated: Date.now(),
+            rdateUpdated: (Date.now() * -1),
             title: newTitle,
             thumbnail: this.newThumbnail ? this.newThumbnail : null,
             description: newDescription,
             price: newPrice,
             published: newPublished,
             addedBy: this.currentAdmin.uid,
-            category: this.newCategory ? this.newCategory : null
+            category: newCategory ? newCategory : null
           }).then((item) => {
             if (this.newCategory) {
               this.db.object('/categories/' + this.newCategory + '/products/' + item.key).set(Date.now());
@@ -168,49 +160,69 @@ export class AddProductComponent implements OnInit {
       newPublished = false;
     }
 
+    console.log('new thumb', this.newThumbnail);
+
     if (newTitle && newPrice && newDescription && this.currentAdmin.uid) {
       if (this.editMode && this.productKey) {
-
-        this.currentProduct = this.db.object('/products/' + this.productKey);
-        this.currentProduct.update({
-          awaitingApproval: true
-        });
-
         this.currentModeratedProducts = this.db.list('/approvals/products/');
 
-        this.currentModeratedProducts.push({
-          entityKey: this.productKey,
-          url: this.slugify(newTitle),
-          dateUpdated: Date.now(),
-          rdateUpdated: (Date.now() * -1),
-          title: newTitle,
-          thumbnail: this.newThumbnail ? this.newThumbnail : null,
-          description: newDescription,
-          price: newPrice,
-          published: newPublished,
-          updatedBy: this.currentAdmin.uid,
-          category: this.newCategory ? this.newCategory : null
+        let adminApprovalProducts = this.db.list('/approvals/products/', {
+          query: {
+            orderByChild: 'updatedBy',
+            equalTo: this.currentAdmin.uid
+          }
+        });
+        adminApprovalProducts.take(1).subscribe((approvals) => {
+          let matchingApprovals = approvals.filter((a) => {
+            return a.entityKey === this.productKey;
+          });
+
+          if (matchingApprovals.length === 0) {
+            this.currentModeratedProducts.push({
+              entityKey: this.productKey,
+              url: this.slugify(newTitle),
+              dateUpdated: Date.now(),
+              rdateUpdated: (Date.now() * -1),
+              title: newTitle,
+              thumbnail: this.newThumbnail ? this.newThumbnail : null,
+              description: newDescription,
+              price: newPrice,
+              published: newPublished,
+              updatedBy: this.currentAdmin.uid,
+              category: newCategory ? newCategory : null
+            });
+          } else {
+            let approvalSnackRef = this.snackBar.open('You already submitted this product for approval', 'View Approvals', {
+              duration: 3000
+            });
+            approvalSnackRef.onAction().subscribe(() => {
+              this.router.navigateByUrl('admin/approvals');
+            });
+            return;
+          }
         });
       } else {
           this.db.list('/approvals/products/').push({
             url: this.slugify(newTitle),
             dateAdded: Date.now(),
             rdateAdded: (Date.now() * -1),
+            dateUpdated: Date.now(),
+            rdateUpdated: (Date.now() * -1),
             title: newTitle,
             thumbnail: this.newThumbnail ? this.newThumbnail : null,
             description: newDescription,
             price: newPrice,
             published: newPublished,
             addedBy: this.currentAdmin.uid,
-            category: this.newCategory ? this.newCategory : null
+            category: newCategory ? newCategory : null
           });
       }
       let snackBarRef = this.snackBar.open('Product submitted for moderation', 'OK!', {
         duration: 3000
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/products');
-      }, 3300);
+      snackBarRef.onAction().subscribe(() => {
+        this.router.navigateByUrl('admin/approvals');
+      });
     } else if (!newTitle) {
       let snackBarRef = this.snackBar.open('You must add a title for this product', 'OK!', {
         duration: 3000

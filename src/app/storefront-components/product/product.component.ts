@@ -51,7 +51,6 @@ export class ProductComponent implements OnInit {
               }
               this.localCart.cartUpdateItems(this.globalCart);
               if (this.globalCart && this.globalCart[this.product.$key]) {
-                console.log('cart', this.globalCart);
                 this.product.quantity = this.globalCart[this.product.$key]['quantity'];
               } else {
                 this.product.quantity = 1;
