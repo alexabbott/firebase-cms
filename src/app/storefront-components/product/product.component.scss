@@ -1,10 +1,12 @@
+@import '../../../variables.scss';
+
 .quantity-label,
 .quantity {
     display: inline-block;
 }
 
 .quantity-label {
-    color: #666;
+    color: $color-grey;
     transform: translateY(-2px);
 }
 

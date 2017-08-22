@@ -5,14 +5,16 @@
     </div>
     <md-card class="admin" *ngFor="let admin of admins | async">
         <div class="content">
-            <img src="{{ admin.photoURL }}" class="admin-photo">
+            <img src="{{ admin.photoURL }}" class="admin-photo" *ngIf="admin.photoURL">
+            <img src="..//../../assets/placeholder.jpg" class="admin-photo" *ngIf="!admin.photoURL">
             {{admin.email}}
         </div>
         <div class="active">
             <div>
                 {{ admin.role }}
-                <span *ngIf="admin.uid">(active)</span>
-                <span *ngIf="!admin.uid">(inactive)</span>
+                <span>
+                    (<span *ngIf="admin.uid" class="active-user">active</span><span *ngIf="!admin.uid" class="inactive-user">inactive</span>)
+                </span>
             </div>
             <button md-raised-button routerLink="/admin/edit-admin/{{admin.$key}}">
                 Edit
