@@ -38,10 +38,10 @@ a {
 
     .mat-raised-button {
         background: $color-white;
-    }
 
-    .mat-button-wrapper {
-        color: $color-main;
+        .mat-button-wrapper {
+            color: $color-main;
+        }
     }
 
     &.highlight {
@@ -52,8 +52,16 @@ a {
     }
 }
 
+.mat-button-wrapper {
+    color: $color-main;
+}
+
 .mat-raised-button {
     background: $color-main;
+
+    .mat-button-wrapper {
+        color: $color-white;
+    }
 
     &.bw {
         background: $color-white;
@@ -62,10 +70,6 @@ a {
             color: $color-grey-dark;
         }
     }
-}
-
-.mat-button-wrapper {
-    color: $color-white;
 }
 
 .mat-progress-spinner path,

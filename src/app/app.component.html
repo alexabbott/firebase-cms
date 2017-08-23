@@ -1,6 +1,6 @@
 <md-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
     <md-icon class="material-icons menu-trigger" (click)="mobilenav.open()">menu</md-icon>
-    <h2><a routerLink="/">{{ (theme | async)?.siteName }}</a></h2>
+    <h2><a routerLink="/" (click)="mobilenav.close()">{{ (theme | async)?.siteName }}</a></h2>
     <span class="fill-space"></span>
     <ul>
         <span *ngFor="let item of nav | async" class="nav-item">
@@ -8,7 +8,7 @@
                 <a routerLink="{{item.url}}">{{item.label}}</a>
             </li>
         </span>
-        <li>
+        <li class="cart-nav" (click)="mobilenav.close()">
             <cart-icon></cart-icon>
         </li>
         <li *ngIf="(user | async)?.displayName">
