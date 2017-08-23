@@ -24,6 +24,16 @@ h4 {
 }
 
 .mat-progress-spinner {
+    display: inline-block;
     height: 30px;
+    vertical-align: middle;
     width: 30px;
+}
+
+.verify-card {
+    color: $color-main;
+    display: inline-block;
+    font-size: .9em;
+    margin-left: 10px;
+    vertical-align: middle;
 }
