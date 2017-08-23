@@ -1,6 +1,6 @@
 <div class="container" *ngIf="product">
   <div class="center product-header">
-    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="thumbnail">
+    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="featured-image">
     <h2>{{product.title}}</h2>
     <p>{{product.price | currency:'USD':true}}</p>
   </div>
