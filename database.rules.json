@@ -8,8 +8,10 @@
     "admins": {
       ".indexOn": "email"
     },
-    "approvals/products": {
-      ".indexOn": "updatedBy"
+    "approvals": {
+      "products": {
+        ".indexOn": "updatedBy"
+      }
     },
     "orders": {
       ".indexOn": "uid"
