@@ -29,7 +29,7 @@ export class CheckoutPaymentComponent implements OnInit {
     this.user = globalService.user.getValue();
     this.order = globalService.order.getValue();
 
-    if (!this.order) {
+    if (!this.order || !this.order.billing || !this.order.billing.zip) {
       this.router.navigateByUrl('cart');
     }
 
@@ -38,18 +38,16 @@ export class CheckoutPaymentComponent implements OnInit {
     } else {
       this.afAuth.auth.signInAnonymously().catch(function(error) {
         console.log('auth error', error.message);
-      });
-
-      this.anonymous = afAuth.authState;
-      this.anonymous.subscribe(anonymousUser => {
-        if (anonymousUser.isAnonymous) {
-          this.user = anonymousUser;
-          this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
-        }
+      }).then(() => {
+        this.anonymous = afAuth.authState;
+        this.anonymous.subscribe(anonymousUser => {
+          if (anonymousUser && anonymousUser.isAnonymous) {
+            this.user = anonymousUser;
+            this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
+          }
+        });
       });
     }
-
-    this.stripeCustomerInitialized = false;
 
     this.newCreditCard = {
       number: '4242424242424242',

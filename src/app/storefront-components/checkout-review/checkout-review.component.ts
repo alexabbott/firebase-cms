@@ -35,9 +35,13 @@ export class CheckoutReviewComponent implements OnInit {
       router.navigateByUrl('cart');
     }
 
-    this.sources.subscribe((s) => {
-      this.newCharge.source = s[(s.length - 1)];
-    });
+    if (this.sources) {
+      this.sources.subscribe((s) => {
+        this.newCharge.source = s[(s.length - 1)];
+      });
+    } else {
+      router.navigateByUrl('cart');
+    }
 
     if (this.order) {
       if (this.user) {
@@ -47,7 +51,7 @@ export class CheckoutReviewComponent implements OnInit {
       this.order.status = 'PAID';
     }
 
-    if (!this.order.billing) {
+    if (!this.order || !this.order.billing) {
       router.navigateByUrl('cart');
     }
   }
