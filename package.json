@@ -25,7 +25,7 @@
     "@angular/platform-browser": "^4.3.6",
     "@angular/platform-browser-dynamic": "^4.3.6",
     "@angular/router": "^4.3.6",
-    "angularfire2": "^4.0.0-rc0",
+    "angularfire2": "4.0.0-rc.1",
     "core-js": "^2.4.1",
     "enhanced-resolve": "^3.3.0",
     "firebase": "^4.1.3",
