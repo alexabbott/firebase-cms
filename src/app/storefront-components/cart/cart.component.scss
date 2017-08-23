@@ -1,42 +1,100 @@
+@import '../../../variables.scss';
+
 h3,
 .no-items {
     text-align: center;
 }
 
 .cart-header {
+    display: none;
     margin-bottom: 10px;
+
+    @include tablet {
+        display: block;
+    }
 }
 
 .item {
-    display: inline-block;
-    width: 40%;
+    display: block;
+    width: 100%;
+
+    @include tablet {
+        display: inline-block;
+        width: 40%;
+    }
 }
 
 .price,
 .quantity,
 .total {
     display: inline-block;
-    width: 15%;
+    width: 45%;
+
+    @include tablet {
+        width: 15%;
+    }
 }
 
-.quantity .mat-input-container {
-    width: 35px;
+.total {
+    display: none;
+
+    @include tablet {
+        display: inline-block;
+    }
+}
+
+.quantity {
+    position: relative;
+    text-align: right;
+
+    @include tablet {
+        text-align: left;
+    }
+
+    .quantity-label {
+        color: $color-grey;
+        display: inline-block;
+        font-size: .8em;
+        position: absolute;
+        right: 40px;
+        top: 0px;
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    .mat-input-container {
+        width: 35px;
+    }
 }
 
 .remove {
-    display: inline-block;
-    width: 5%;
+    display: block;
+    text-align: center;
+    width: 100%;
+
+    @include tablet {
+        display: inline-block;
+        text-align: left;
+        width: 5%;
+    }
 }
 
 .checkout-cta {
+    box-sizing: border-box;
     float: right;
-    margin-top: 20px;
-    width: 300px;
-}
+    margin: 20px 0 30px 0;
+    width: 100%;
 
-.checkout-cta button {
-    display: block;
-    float: right;
+    @include tablet {
+        width: 330px;
+    }
+
+    button {
+        display: block;
+        float: right;
+    }
 }
 
 .subtotal-label,

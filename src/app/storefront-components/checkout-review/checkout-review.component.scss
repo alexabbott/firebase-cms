@@ -1,6 +1,13 @@
+@import '../../../variables.scss';
+
 .container {
-    margin: 90px auto 30px auto;
-    max-width: 600px;
+    margin: 0 30px 30px 30px;
+    max-width: 100%;
+
+    @include tablet {
+        margin: 30px auto 30px auto;
+        max-width: 600px;
+    }
 }
 
 h4 {
@@ -17,6 +24,16 @@ h4 {
 }
 
 .mat-progress-spinner {
+    display: inline-block;
     height: 30px;
+    vertical-align: middle;
     width: 30px;
+}
+
+.verify-card {
+    color: $color-main;
+    display: inline-block;
+    font-size: .9em;
+    margin-left: 10px;
+    vertical-align: middle;
 }

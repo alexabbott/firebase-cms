@@ -19,6 +19,14 @@
         font-size: 0.8em;
         list-style-type: none;
         margin-left: 25px;
+
+        &.cart-nav {
+            margin-left: -20px;
+
+            @include tablet {
+                margin-left: 25px;
+            }
+        }
     }
 
     .nav-item {
@@ -49,7 +57,7 @@
 .mobile-nav {
     box-sizing: border-box;
     min-width: 50%;
-    padding: 0 20px;
+    padding: 60px 20px 30px 20px;
 
     .mobile-nav-item {
         margin: 20px 0;

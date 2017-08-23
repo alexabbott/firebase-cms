@@ -19,6 +19,7 @@ export class AdminPostsComponent implements OnInit {
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
   storageRef: any;
+  currentAdmin: any;
 
   constructor(
     public af: FirebaseApp,
@@ -31,6 +32,10 @@ export class AdminPostsComponent implements OnInit {
     this.posts = db.list('/posts');
 
     this.storageRef = af.storage().ref();
+
+    this.globalService.admin.subscribe((a) => {
+      this.currentAdmin = a;
+    });
   }
 
   onChange(e: any, key: string) {

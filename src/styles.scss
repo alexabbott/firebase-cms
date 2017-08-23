@@ -8,10 +8,6 @@ body {
     margin: 0;
 }
 
-body {
-    margin-top: 64px;
-}
-
 a {
     color: $color-main;
     text-decoration: none;
@@ -42,10 +38,10 @@ a {
 
     .mat-raised-button {
         background: $color-white;
-    }
 
-    .mat-button-wrapper {
-        color: $color-main;
+        .mat-button-wrapper {
+            color: $color-main;
+        }
     }
 
     &.highlight {
@@ -56,8 +52,16 @@ a {
     }
 }
 
+.mat-button-wrapper {
+    color: $color-main;
+}
+
 .mat-raised-button {
     background: $color-main;
+
+    .mat-button-wrapper {
+        color: $color-white;
+    }
 
     &.bw {
         background: $color-white;
@@ -68,10 +72,6 @@ a {
     }
 }
 
-.mat-button-wrapper {
-    color: $color-white;
-}
-
 .mat-progress-spinner path,
 .mat-spinner path {
     stroke: $color-main;
@@ -79,6 +79,15 @@ a {
 
 .mat-sidenav-container {
     height: 100vh;
+}
+
+.mat-sidenav-content {
+    box-sizing: border-box;
+    padding-top: 64px;
+}
+
+admin .mat-sidenav-content {
+    padding-top: 0;
 }
 
 .container {

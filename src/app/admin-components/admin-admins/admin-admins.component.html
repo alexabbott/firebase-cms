@@ -3,14 +3,22 @@
         <h2>Admins</h2>
         <button md-raised-button routerLink="/admin/add-admin">Add an Admin</button>
     </div>
-    <md-card class="admin" *ngFor="let admin of admins | async | sort:['email']">
+    <md-card class="admin" *ngFor="let admin of admins | async">
         <div class="content">
-            <img src="{{ admin.photoURL }}" class="admin-photo">
+            <img src="{{ admin.photoURL }}" class="admin-photo" *ngIf="admin.photoURL">
+            <img src="..//../../assets/placeholder.jpg" class="admin-photo" *ngIf="!admin.photoURL">
             {{admin.email}}
         </div>
         <div class="active">
-            <span *ngIf="admin.active">Active</span>
-            <span *ngIf="!admin.active">Inactive</span>
+            <div>
+                {{ admin.role }}
+                <span>
+                    (<span *ngIf="admin.uid" class="active-user">active</span><span *ngIf="!admin.uid" class="inactive-user">inactive</span>)
+                </span>
+            </div>
+            <button md-raised-button routerLink="/admin/edit-admin/{{admin.$key}}">
+                Edit
+            </button>
             <button md-raised-button (click)="deleteAdmin(admin.$key)">Delete</button>
         </div>
     </md-card>

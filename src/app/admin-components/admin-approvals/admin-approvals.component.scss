@@ -1,0 +1,32 @@
+@import '../../../variables.scss';
+
+.button-container {
+    h2 {
+        display: inline-block;
+    }
+}
+
+.approval {
+    cursor: pointer;
+
+    .content {
+        display: inline-block;
+        width: calc(100% - 220px);
+
+        a {
+            display: block;
+        }
+
+        .date {
+            color: $color-grey;
+            font-size: .8em;
+        }
+    }
+
+    .actions {
+        display: inline-block;
+        margin-top: 15px;
+        vertical-align: top;
+        width: 210px;
+    }
+}

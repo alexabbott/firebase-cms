@@ -3,8 +3,12 @@
 .cart-icon {
     @extend %transition;
     cursor: pointer;
-    transform: translateY(5px);
+    transform: translateY(8px);
     transition-property: color;
+
+    @include tablet {
+        transform: translateY(5px);
+    }
 
     &:hover {
         color: $color-main;
@@ -17,10 +21,14 @@
 }
 
 .cart-counter {
-    bottom: 5px;
+    bottom: 2px;
     color: $color-white;
     font-size: 8px;
     pointer-events: none;
     position: absolute;
     right: 9px;
+
+    @include tablet {
+        bottom: 5px;
+    }
 }

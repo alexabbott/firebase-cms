@@ -1,6 +1,12 @@
 @import '../../../variables.scss';
 
 .post {
+    margin-bottom: 10px;
+
+    @include tablet {
+        margin-bottom: 5px;
+    }
+
     img {
         display: inline-block;
         margin-right: 20px;
@@ -11,8 +17,10 @@
         }
     }
 
-    h3 a {
-        color: $color-black;
+    h3 {
+        a {
+            color: $color-black;
+        }
     }
 
     .post-content {

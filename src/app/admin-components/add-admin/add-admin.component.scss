@@ -11,3 +11,9 @@ button {
 .mat-raised-button {
     display: block;
 }
+
+.mat-input-container,
+.mat-select {
+    display: inline-block;
+    width: 48%;
+}

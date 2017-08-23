@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
         checkAdmin.subscribe(admin => {
           if (admin.length > 0) {
-            this.db.object('/admins/' + this.hashCode(currentAdmin.email)).set({
+            this.db.object('/admins/' + this.hashCode(currentAdmin.email)).update({
               uid: currentAdmin.uid,
               email: currentAdmin.email,
               photoURL: currentAdmin.photoURL,
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       hash |= 0; // Convert to 32bit integer
     }
     return hash;
-  };
+  }
 
   ngOnInit() {
   }

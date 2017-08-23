@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="button-container">
+        <h2>Approvals</h2>
+    </div>
+    <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">Products</md-toolbar>
+    <section *ngFor="let product of productApprovals | async" class="approval-category">
+      <md-card class="approval">
+        <div class="content">
+          <a routerLink="/admin/product-approval/{{ product.$key }}">{{ product.title }}</a>
+          <span class="date" *ngIf="product.dateUpdated">{{ product.dateUpdated | date }}</span>
+          <span class="date" *ngIf="!product.dateUpdated">{{ product.dateAdded | date }}</span>
+        </div>
+        <div class="actions">
+          <button
+            md-raised-button
+            (click)="approveItem($event, 'products', product)"
+            *ngIf="currentAdmin.role !== 'editor'">
+            Approve
+          </button>
+          <button
+            md-raised-button
+            (click)="deleteItem($event, 'products', product.$key)"
+            *ngIf="currentAdmin.role !== 'editor' || product.updatedBy === currentAdmin.uid">
+            Delete
+          </button>
+        </div>
+      </md-card>
+    </section>
+</div>

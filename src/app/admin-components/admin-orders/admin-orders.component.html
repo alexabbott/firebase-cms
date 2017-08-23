@@ -11,13 +11,15 @@
         <div class="action">
             <div class="view">
                 <div>
-                    <span *ngIf="order.uid">{{ (users | async | getUser: order.uid)?.email }}</span>
+                    <a routerLink="/admin/customer/{{ order.uid }}" *ngIf="order.uid">
+                        {{ (users | async | getUser: order.uid)?.email }}
+                    </a>
                     <span *ngIf="!order.uid">Guest Customer</span>
                 </div>
                 <button md-raised-button routerLink="/admin/edit-order/{{order.$key}}">
                     Edit
                 </button>
-                <button md-raised-button (click)="deleteOrder($event, order.$key)">
+                <button md-raised-button (click)="deleteOrder($event, order.$key)" *ngIf="currentAdmin.role !== 'editor'">
                     Delete
                 </button>
             </div>

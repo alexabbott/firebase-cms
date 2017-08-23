@@ -1,9 +1,23 @@
 <div class="admin-form">
-    <h2>Add an Admin</h2>
+    <h2>
+        <span *ngIf="!editMode">Add an</span>
+        <span *ngIf="editMode">Edit</span>
+        Admin
+    </h2>
 
-    <md-input-container class="block">
+    <md-input-container>
         <input mdInput placeholder="Email" type="email" [(ngModel)]="newEmail">
     </md-input-container>
 
-    <button md-raised-button (click)="addAdmin(newEmail)" class="block">Add Admin</button>
+    <md-select placeholder="Admin role" [(ngModel)]="newRole">
+        <md-option value="editor">Editor</md-option>
+        <md-option value="admin">Admin</md-option>
+        <md-option value="super-admin">Super Admin</md-option>
+    </md-select>
+
+    <button md-raised-button (click)="addAdmin(newEmail, newRole)" class="block">
+        <span *ngIf="!editMode">Add</span>
+        <span *ngIf="editMode">Save</span>
+        Admin
+    </button>
 </div>

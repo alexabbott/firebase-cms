@@ -1,8 +1,13 @@
+.mat-sidenav-content {
+    margin-top: -64px;
+}
+
 .admin-photo {
     border-radius: 50%;
     cursor: pointer;
-    vertical-align: middle;
+    height: 45px;
     transition: transform .3s ease-out;
+    vertical-align: middle;
     width: 45px;
 }
 

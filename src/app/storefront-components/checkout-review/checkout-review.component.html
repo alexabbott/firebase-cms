@@ -22,6 +22,7 @@
       (exp. {{ newCharge.source.exp_th }}/{{ newCharge.source.exp_year }})
     </span>
     <md-progress-spinner mode="indeterminate" *ngIf="!newCharge.source || !newCharge.source.last4"></md-progress-spinner>
+    <span class="verify-card" *ngIf="!newCharge.source || !newCharge.source.last4">Verifying payment method</span>
   </div>
 
   <cart></cart>

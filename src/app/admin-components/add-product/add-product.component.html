@@ -20,14 +20,14 @@
     </md-select>
 
     <button md-raised-button class="mat-upload-button" onclick="document.getElementById('uploadImage').click()">
-        <span *ngIf="!imageUrl">Upload</span>
-        <span *ngIf="imageUrl">Change</span>
+        <span *ngIf="!newThumbnail">Upload</span>
+        <span *ngIf="newThumbnail">Change</span>
         Featured Image
     </button>
     <input type="file" id="uploadImage" name="thumbnail" class="native-upload" (change)="handleFiles($event)">
-    <img [src]="imageUrl" *ngIf="imageUrl" class="thumbnail">
-    <div class="no-image" *ngIf="!imageUrl">No image chosen</div>
-    <div (click)="deleteImage()" *ngIf="imageUrl" class="delete-image">Delete Image</div>
+    <img [src]="newThumbnail" *ngIf="newThumbnail" class="thumbnail">
+    <div class="no-image" *ngIf="!newThumbnail">No image chosen</div>
+    <div (click)="deleteImage()" *ngIf="newThumbnail" class="delete-image">Delete Image</div>
 
     <ckeditor
         [(ngModel)]="newDescription"
@@ -40,9 +40,45 @@
         <span *ngIf="newPublished">Un-Publish</span>
     </md-slide-toggle>
 
-    <button md-raised-button (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished)" class="submit block">
+    <button
+        md-raised-button
+        (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished, false)"
+        class="submit"
+        *ngIf="!router.url.includes('approval') && currentAdmin.role !== 'editor'">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Product
+    </button>
+
+    <button
+        md-raised-button
+        (click)="approveItem(newTitle, newPrice, newCategory, newDescription, newPublished)"
+        class="submit"
+        *ngIf="router.url.includes('approval') && currentAdmin.role !== 'editor'">
+        <span>Approve</span>
+    </button>
+
+    <button
+        md-raised-button
+        (click)="submitForModeration(newTitle, newPrice, newCategory, newDescription, newPublished)"
+        class="submit"
+        *ngIf="router.url.includes('approval') && entityObject && (currentAdmin.role !== 'editor' || currentAdmin.uid === entityObject.updatedBy)">
+        Save Draft
+    </button>
+
+    <button
+        md-raised-button
+        (click)="deleteItem($event)"
+        class="submit"
+        *ngIf="router.url.includes('approval') && entityObject && (currentAdmin.role !== 'editor' || currentAdmin.uid === entityObject.updatedBy)">
+        Delete Draft
+    </button>
+
+    <button
+        md-raised-button
+        (click)="submitForModeration(newTitle, newPrice, newCategory, newDescription, newPublished)"
+        class="submit"
+        *ngIf="!router.url.includes('approval')">
+        <span>Submit for Moderation</span>
     </button>
 </div>

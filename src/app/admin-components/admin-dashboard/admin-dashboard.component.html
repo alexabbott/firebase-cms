@@ -3,7 +3,7 @@
 
     <md-grid-list cols="{{columns}}" rowHeight="230px" (window:resize)="onResize($event)">
         <md-grid-tile colspan="1" rowspan="1">
-          <md-card>
+          <md-card routerLink="/admin/posts">
             <md-icon>class</md-icon>
             <h4 *ngIf="posts | async">{{ (posts | async).length }} Posts</h4>
             <button md-raised-button routerLink="/admin/add-post">Add a Post</button>
@@ -11,7 +11,7 @@
         </md-grid-tile>
 
         <md-grid-tile colspan="1" rowspan="1">
-            <md-card>
+            <md-card routerLink="/admin/ordpagesers">
                 <md-icon>description</md-icon>
                 <h4 *ngIf="pages | async">{{ (pages | async).length }} Pages</h4>
                 <button md-raised-button routerLink="/admin/add-page">Add a Page</button>
@@ -19,7 +19,7 @@
         </md-grid-tile>
 
         <md-grid-tile colspan="1" rowspan="1">
-            <md-card>
+            <md-card routerLink="/admin/products">
                 <md-icon>shopping_basket</md-icon>
                 <h4 *ngIf="products | async">{{ (products | async).length }} Products</h4>
                 <button md-raised-button routerLink="/admin/add-product">Add a Product</button>
@@ -27,7 +27,15 @@
         </md-grid-tile>
 
         <md-grid-tile colspan="1" rowspan="1">
-            <md-card>
+            <md-card routerLink="/admin/product-categories">
+                <md-icon>group_work</md-icon>
+                <h4 *ngIf="categories | async">{{ (categories | async).length }} Product Categories</h4>
+                <button md-raised-button routerLink="/admin/add-product-category">Add a Category</button>
+            </md-card>
+        </md-grid-tile>
+
+        <md-grid-tile colspan="1" rowspan="1">
+            <md-card routerLink="/admin/customers">
                 <md-icon>account_circle</md-icon>
                 <h4 *ngIf="customers | async">{{ (customers | async).length }} Customers</h4>
                 <button md-raised-button routerLink="/admin/add-customer">Add a Customer</button>
@@ -35,15 +43,15 @@
         </md-grid-tile>
 
         <md-grid-tile colspan="1" rowspan="1">
-            <md-card>
+            <md-card routerLink="/admin/orders">
                 <md-icon>attach_money</md-icon>
                 <h4 *ngIf="orders | async">{{ (orders | async).length }} Orders</h4>
                 <button md-raised-button routerLink="/admin/add-order">Add an Order</button>
             </md-card>
         </md-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1">
-            <md-card>
+        <md-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin.role === 'super-admin'">
+            <md-card routerLink="/admin/admins">
                 <md-icon>assignment_ind</md-icon>
                 <h4 *ngIf="admins | async">{{ (admins | async).length }} Admins</h4>
                 <button md-raised-button routerLink="/admin/add-admin">Add an Admin</button>
