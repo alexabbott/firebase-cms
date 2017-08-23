@@ -1,5 +1,9 @@
 @import '../../../variables.scss';
 
+.featured-image {
+    max-width: 100%;
+}
+
 .quantity-label,
 .quantity {
     display: inline-block;
