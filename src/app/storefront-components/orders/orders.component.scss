@@ -1,12 +1,43 @@
-.order .order-info {
-    display: inline-block;
-    width: calc(100% - 220px);
-}
+@import '../../../variables.scss';
 
-.order .actions {
-    display: inline-block;
-    text-align: center;
-    width: 210px;
+.order {
+    .order-info {
+        display: inline-block;
+        width: 45%;
+
+        @include tablet {
+            width: calc(100% - 220px);
+        }
+
+        h3 {
+            margin-top: 0;
+
+            @include tablet {
+                margin-top: 1em;
+            }
+        }
+    }
+
+    .actions {
+        display: inline-block;
+        float: right;
+        text-align: right;
+        width: 45%;
+
+        @include tablet {
+            float: none;
+            text-align: center;
+            width: 210px;
+        }
+    }
+
+    .totals {
+        float: right;
+    }
+
+    .mat-raised-button {
+        margin-top: 10px;
+    }
 }
 
 .user-photo {
@@ -18,14 +49,6 @@
 }
 
 .price {
-    color: #999;
+    color: $color-grey;
     font-size: 0.8em;
-}
-
-.order .totals {
-    float: right;
-}
-
-.order .mat-raised-button {
-    margin-top: 10px;
 }

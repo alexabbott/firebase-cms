@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .orders-header {
     margin: 30px 0 10px 0;
 }
@@ -6,14 +8,22 @@
     display: inline-block;
     text-align: left;
     vertical-align: top;
-    width: 49%;
+    width: 100%;
+
+    @include tablet {
+        width: 49%;
+    }
 }
 
 .order-right {
     display: inline-block;
     text-align: right;
     vertical-align: top;
-    width: 49%;
+    width: 100%;
+
+    @include tablet {
+        width: 49%;
+    }
 }
 
 .user-photo {
@@ -25,20 +35,33 @@
 
 .item {
     display: inline-block;
-    width: 50%;
+    width: 30%;
+
+    @include tablet {
+        width: 50%;
+    }
 }
 
 .price,
 .quantity,
 .total {
     display: inline-block;
-    width: 15%;
+    width: 20%;
+
+    @include tablet {
+        width: 15%;
+    }
 }
 
 .order-summary {
-    float: right;
+    box-sizing: border-box;
     margin-top: 20px;
-    width: 300px;
+    width: 100%;
+
+    @include tablet {
+        float: right;
+        width: 300px;
+    }
 }
 
 .subtotal-label,
@@ -57,13 +80,21 @@
 
 .order-info {
     margin-top: 30px;
-}
 
-.order-info .mat-card {
-    display: inline-block;
-    width: 43%;
-}
+    .mat-card {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
 
-.order-info .mat-card:last-of-type {
-    float: right;
+        @include tablet {
+            width: 43%;
+        }
+    }
+
+    .mat-card:last-of-type {
+
+        @include tablet {
+            float: right;
+        }
+    }
 }

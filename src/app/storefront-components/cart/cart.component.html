@@ -11,6 +11,7 @@
     <div class="item">{{item.title}}</div>
     <div class="price">{{item.price | currency:'USD':true}}</div>
     <div class="quantity">
+      <label class="quantity-label">QTY</label>
       <md-input-container *ngIf="!review">
         <input mdInput type="number" min="1" [(ngModel)]="item.quantity" (change)="updateCart(item)">
       </md-input-container>
@@ -18,7 +19,7 @@
     </div>
     <div class="total">{{item.total | currency:'USD':true}}</div>
     <div class="remove" *ngIf="!review">
-      <button md-raised-button (click)="removeItem(item)">Remove</button>
+      <button md-button (click)="removeItem(item)">Remove</button>
     </div>
   </md-card>
   <md-card class="checkout-cta" *ngIf="cartArray.length > 0 && !review">
