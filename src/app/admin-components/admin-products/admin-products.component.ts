@@ -31,7 +31,7 @@ export class AdminProductsComponent implements OnInit {
   ) {
     this.products = db.list('/products', {
       query: {
-        orderByChild: 'rdateAdded',
+        orderByChild: 'rdateUpdated',
         limitToLast: 9999
       }
     });

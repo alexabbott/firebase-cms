@@ -31,9 +31,10 @@
 
     <ckeditor
         [(ngModel)]="newDescription"
-        [config]="{uiColor: '#FFFFFF'}"
+        [config]="{uiColor: '#FFFFFF', extraPlugins: 'divarea'}"
         [readonly]="false">
     </ckeditor>
+
 
     <md-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
         <span *ngIf="!newPublished">Publish</span>

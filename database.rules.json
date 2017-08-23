@@ -17,7 +17,7 @@
       ".indexOn": "uid"
     },
     "products": {
-      ".indexOn": ["published", "category", "rdateAdded"]
+      ".indexOn": ["published", "category", "rdateUpdated"]
     },
     "posts": {
       ".indexOn": "published"

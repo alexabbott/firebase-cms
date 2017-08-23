@@ -90,6 +90,10 @@ admin .mat-sidenav-content {
     padding-top: 0;
 }
 
+.warn-snackbar {
+    background: darken($color-red, 15%) !important;
+}
+
 .container {
     box-sizing: border-box;
     padding: 30px;

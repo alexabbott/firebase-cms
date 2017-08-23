@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { GlobalService } from '../../services/global.service';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { MdSnackBar } from '@angular/material';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -24,7 +25,8 @@ export class CheckoutPaymentComponent implements OnInit {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
-    public router: Router
+    public router: Router,
+    public snackBar: MdSnackBar
   ) {
     this.user = globalService.user.getValue();
     this.order = globalService.order.getValue();
@@ -59,28 +61,35 @@ export class CheckoutPaymentComponent implements OnInit {
   }
 
   submitNewCreditCard() {
-    (<any>window).Stripe.card.createToken({
-      number: this.newCreditCard.number,
-      cvc: this.newCreditCard.cvc,
-      exp_month: this.newCreditCard.exp_month,
-      exp_year: this.newCreditCard.exp_year,
-      address_zip: this.order.billing.zip
-    }, (status, response) => {
-      if (response.error) {
-        this.newCreditCard.error = response.error.message;
-      } else {
-        this.sources.push({token: response.id}).then(() => {
-          this.newCreditCard = {
-            number: '',
-            cvc: '',
-            exp_month: 1,
-            exp_year: 2017,
-            address_zip: ''
-          };
-          this.router.navigateByUrl('checkout/review');
-        });
-      }
-    });
+    if (this.newCreditCard.number && this.newCreditCard.cvc && this.newCreditCard.exp_month && this.newCreditCard.exp_year) {
+      (<any>window).Stripe.card.createToken({
+        number: this.newCreditCard.number,
+        cvc: this.newCreditCard.cvc,
+        exp_month: this.newCreditCard.exp_month,
+        exp_year: this.newCreditCard.exp_year,
+        address_zip: this.order.billing.zip
+      }, (status, response) => {
+        if (response.error) {
+          this.newCreditCard.error = response.error.message;
+        } else {
+          this.sources.push({token: response.id}).then(() => {
+            this.newCreditCard = {
+              number: '',
+              cvc: '',
+              exp_month: 1,
+              exp_year: 2017,
+              address_zip: ''
+            };
+            this.router.navigateByUrl('checkout/review');
+          });
+        }
+      });
+    } else {
+      let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
+        duration: 3000,
+        extraClasses: ['warn-snackbar']
+      });
+    }
   }
 
   ngOnInit() {

@@ -1,11 +1,11 @@
 @import '../../../variables.scss';
 
 .container {
-    margin: 0 30px 30px 30px;
+    margin: 10px 30px 30px 30px;
     max-width: 100%;
 
     @include tablet {
-        margin: 30px auto 30px auto;
+        margin: 30px auto;
         max-width: 600px;
     }
 }
