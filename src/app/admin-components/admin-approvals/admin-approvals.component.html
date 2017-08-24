@@ -2,6 +2,9 @@
     <div class="button-container">
         <h2>Approvals</h2>
     </div>
+    <p *ngIf="(productApprovals | async)?.length === 0" class="center">
+      Nothing to approve at this time
+    </p>
     <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">Products</md-toolbar>
     <section *ngFor="let product of productApprovals | async" class="approval-category">
       <md-card class="approval">

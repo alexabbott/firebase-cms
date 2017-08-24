@@ -3,6 +3,9 @@
         <h2>Posts</h2>
         <button md-raised-button routerLink="/admin/add-post">Add a Post</button>
     </div>
+    <p *ngIf="(posts | async)?.length === 0" class="center">
+        No posts yet
+    </p>
     <md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
         <div class="content">
             <h3><a routerLink="/blog/{{post.url}}" target="_blank">{{post.title}}</a></h3>

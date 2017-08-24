@@ -3,6 +3,9 @@
         <h2>Products</h2>
         <button md-raised-button routerLink="/admin/add-product">Add a Product</button>
     </div>
+    <p *ngIf="(products | async)?.length === 0" class="center">
+        No products yet
+    </p>
     <md-card class="product" *ngFor="let product of products | async">
         <div class="content">
             <h3><a routerLink="/product/{{product.url}}" target="_blank">{{product.title}}</a></h3>

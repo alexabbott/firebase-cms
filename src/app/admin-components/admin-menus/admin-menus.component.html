@@ -2,6 +2,9 @@
   <h2>Menus</h2>
 
   <md-toolbar class="highlight">Primary Nav</md-toolbar>
+  <p *ngIf="(menuList | async)?.length === 0" class="center">
+      No menu items yet
+  </p>
   <div dnd-sortable-container [sortableData]="menuList">
     <md-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
       <md-icon>drag_handle</md-icon>

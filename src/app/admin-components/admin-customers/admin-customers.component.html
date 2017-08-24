@@ -3,6 +3,9 @@
         <h2>Customers</h2>
         <button md-raised-button routerLink="/admin/add-customer">Add a Customer</button>
     </div>
+    <p *ngIf="(customers | async)?.length === 0" class="center">
+        No customers yet
+    </p>
     <md-card routerLink="/admin/customer/{{ customer.$key }}" class="customer" *ngFor="let customer of customers | async">
         <div class="content">
             <a routerLink="/admin/customer/{{ customer.$key }}">
