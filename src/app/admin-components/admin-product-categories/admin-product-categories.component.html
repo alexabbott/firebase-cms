@@ -9,7 +9,7 @@
         </div>
         <div class="publish">
             <div class="edit">
-                <button md-raised-button (click)="editCategory(category.$key)">
+                <button md-raised-button routerLink="/admin/edit-product-category/{{ category.$key }}">
                     Edit
                 </button>
                 <button md-raised-button (click)="deleteCategory(category)" *ngIf="currentAdmin.role !== 'editor'">

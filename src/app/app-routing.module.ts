@@ -81,6 +81,7 @@ const routes: Routes = [
           { path: 'edit-page/:key', component: AddPageComponent },
           { path: 'edit-post/:key', component: AddPostComponent },
           { path: 'edit-product/:key', component: AddProductComponent },
+          { path: 'edit-product-category/:key', component: AddProductCategoryComponent },
           { path: 'menus', component: AdminMenusComponent },
           { path: 'orders', component: AdminOrdersComponent },
           { path: 'order/:key', component: OrderComponent },

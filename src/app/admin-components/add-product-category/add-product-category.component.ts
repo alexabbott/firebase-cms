@@ -64,7 +64,7 @@ export class AddProductCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-        if (params && params.uid) {
+        if (params && params.key) {
           this.editMode = true;
           this.categoryKey = params.key;
           this.db.object('/categories/' + params.key).subscribe(c => {

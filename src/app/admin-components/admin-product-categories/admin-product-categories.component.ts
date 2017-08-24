@@ -31,10 +31,6 @@ export class AdminProductCategoriesComponent implements OnInit {
     });
   }
 
-  editCategory(key: string) {
-    this.router.navigateByUrl('admin/edit-category/' + key);
-  }
-
   deleteCategory(category: any) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
