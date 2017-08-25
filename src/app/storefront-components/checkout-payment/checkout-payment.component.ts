@@ -5,6 +5,7 @@ import { GlobalService } from '../../services/global.service';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MdSnackBar } from '@angular/material';
+import { environment } from '../../../environments/environment';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -93,7 +94,7 @@ export class CheckoutPaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-    (<any>window).Stripe.setPublishableKey('pk_test_AJnicuaHK4JxTiQRFkdufx5Y');
+    (<any>window).Stripe.setPublishableKey(environment.stripe);
   }
 
 }
