@@ -199,7 +199,8 @@ export class AddProductComponent implements OnInit {
         price: newPrice,
         published: newPublished,
         updatedBy: this.currentAdmin.uid,
-        category: newCategory ? newCategory : null
+        category: newCategory ? newCategory : null,
+        entityKey: this.editMode && this.productKey ? this.productKey : null
       };
 
       if (this.imageUrl && !this.newThumbnail) {
@@ -213,6 +214,7 @@ export class AddProductComponent implements OnInit {
       } else {
         this.products.push(productObject).then((item) => {
           if (this.newCategory) {
+            this.db.object('/products/' + item.key + '/entityKey').set(item.key);
             this.db.object('/categories/' + this.newCategory + '/products/' + item.key).set(Date.now());
           }
         });
