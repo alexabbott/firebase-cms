@@ -187,9 +187,7 @@ export class AddPageComponent implements OnInit {
   approveItem(newURL: string, newTitle: string, newBody: true, newPublished: boolean) {
     if (this.entityObject.entityKey) {
       let ogEntity = this.db.object('/pages/' + this.entityObject.entityKey);
-      ogEntity.take(1).subscribe((item) => {
-        ogEntity.set(this.entityObject);
-      });
+      ogEntity.set(this.entityObject);
     } else {
       this.db.list('/pages').push(this.entityObject);
     }

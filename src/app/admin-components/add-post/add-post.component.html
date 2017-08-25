@@ -5,6 +5,13 @@
         Post
     </h2>
 
+    <md-toolbar class="highlight small" *ngIf="awaitingApproval" routerLink="/admin/approvals">
+        This post has a change awaiting moderation
+        <div class="action">
+            View Approvals
+        </div>
+    </md-toolbar>
+
     <md-input-container class="block">
         <input mdInput placeholder="Post URL (no slashes, spaces or special characters)" type="text" [(ngModel)]="newURL">
     </md-input-container>
@@ -42,9 +49,45 @@
         <span *ngIf="newPublished">Un-Publish</span>
     </md-slide-toggle>
 
-    <button md-raised-button (click)="addPost(newURL, newDate, newTitle, newBody, newPublished)" class="submit block">
+    <button
+        md-raised-button
+        (click)="addPost(newURL, newDate, newTitle, newBody, newPublished)"
+        class="submit"
+        *ngIf="!router.url.includes('approval') && currentAdmin.role !== 'editor'">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Post
+    </button>
+
+    <button
+        md-raised-button
+        (click)="approveItem(newURL, newDate, newTitle, newBody, newPublished)"
+        class="submit"
+        *ngIf="router.url.includes('approval') && currentAdmin.role !== 'editor'">
+        <span>Approve</span>
+    </button>
+
+    <button
+        md-raised-button
+        (click)="submitForModeration(newURL, newDate, newTitle, newBody, newPublished)"
+        class="submit"
+        *ngIf="router.url.includes('approval') && entityObject && (currentAdmin.role !== 'editor' || currentAdmin.uid === entityObject.updatedBy)">
+        Save Draft
+    </button>
+
+    <button
+        md-raised-button
+        (click)="deleteItem($event)"
+        class="submit"
+        *ngIf="router.url.includes('approval') && entityObject && (currentAdmin.role !== 'editor' || currentAdmin.uid === entityObject.updatedBy)">
+        Delete Draft
+    </button>
+
+    <button
+        md-raised-button
+        (click)="submitForModeration(newURL, newDate, newTitle, newBody, newPublished)"
+        class="submit"
+        *ngIf="!router.url.includes('approval')">
+        <span>Submit for Moderation</span>
     </button>
 </div>

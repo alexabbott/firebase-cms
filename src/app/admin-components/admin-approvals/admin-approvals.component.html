@@ -2,7 +2,7 @@
   <div class="button-container">
       <h2>Approvals</h2>
   </div>
-  <p *ngIf="(productApprovals | async)?.length === 0 && (pageApprovals | async)?.length === 0"
+  <p *ngIf="(productApprovals | async)?.length === 0 && (pageApprovals | async)?.length === 0 && (postApprovals | async)?.length === 0"
     class="center">
     Nothing to approve at this time
   </p>
@@ -78,6 +78,45 @@
           md-raised-button
           (click)="deleteItem($event, 'pages', page.$key)"
           *ngIf="currentAdmin.role !== 'editor' || page.updatedBy === currentAdmin.uid">
+          Delete
+        </button>
+      </div>
+    </md-card>
+  </section>
+
+  <md-toolbar class="highlight" *ngIf="(postApprovals | async)?.length > 0">
+    <div>
+      Post
+    </div>
+    <div>
+      Update date
+    </div>
+    <div>
+      Updated by
+    </div>
+  </md-toolbar>
+  <section *ngFor="let post of postApprovals | async" class="approval-category">
+    <md-card class="approval" routerLink="/admin/post-approval/{{ post.$key }}">
+      <div class="content">
+        <a routerLink="/admin/post-approval/{{ post.$key }}">{{ post.title }}</a>
+        <div class="date">
+          {{ post.dateUpdated | date }}
+        </div>
+        <div class="updated-by">
+          {{ (admins | async | getUser: post.updatedBy)?.email }}
+        </div>
+      </div>
+      <div class="actions">
+        <button
+          md-raised-button
+          (click)="approveItem($event, 'posts', post)"
+          *ngIf="currentAdmin.role !== 'editor'">
+          Approve
+        </button>
+        <button
+          md-raised-button
+          (click)="deleteItem($event, 'posts', post.$key)"
+          *ngIf="currentAdmin.role !== 'editor' || post.updatedBy === currentAdmin.uid">
           Delete
         </button>
       </div>
