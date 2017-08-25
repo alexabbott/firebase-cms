@@ -20,7 +20,7 @@
       ".indexOn": ["published", "category", "rdateUpdated"]
     },
     "posts": {
-      ".indexOn": "[published, url]"
+      ".indexOn": ["published", "url"]
     },
     "stripe_customers": {
       "$uid": {
