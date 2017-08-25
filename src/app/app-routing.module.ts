@@ -71,6 +71,7 @@ const routes: Routes = [
           { path: 'add-product-category', component: AddProductCategoryComponent },
           { path: 'add-admin', component: AddAdminComponent },
           { path: 'approvals', component: AdminApprovalsComponent },
+          { path: 'page-approval/:key', component: AddPageComponent },
           { path: 'product-approval/:key', component: AddProductComponent },
           { path: 'product-categories', component: AdminProductCategoriesComponent },
           { path: 'customer/:key', component: AdminCustomerComponent },

@@ -11,6 +11,9 @@
     "approvals": {
       "products": {
         ".indexOn": ["updatedBy", "entityKey"]
+      },
+      "pages": {
+        ".indexOn": ["updatedBy", "entityKey"]
       }
     },
     "orders": {

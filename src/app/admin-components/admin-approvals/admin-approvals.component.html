@@ -1,46 +1,86 @@
 <div class="container">
-    <div class="button-container">
-        <h2>Approvals</h2>
+  <div class="button-container">
+      <h2>Approvals</h2>
+  </div>
+  <p *ngIf="(productApprovals | async)?.length === 0 && (pageApprovals | async)?.length === 0"
+    class="center">
+    Nothing to approve at this time
+  </p>
+  <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">
+    <div>
+      Product
     </div>
-    <p *ngIf="(productApprovals | async)?.length === 0" class="center">
-      Nothing to approve at this time
-    </p>
-    <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">
-      <div>
-        Product
-      </div>
-      <div>
-        Update date
-      </div>
-      <div>
-        Updated by
-      </div>
-    </md-toolbar>
-    <section *ngFor="let product of productApprovals | async" class="approval-category">
-      <md-card class="approval" routerLink="/admin/product-approval/{{ product.$key }}">
-        <div class="content">
-          <a routerLink="/admin/product-approval/{{ product.$key }}">{{ product.title }}</a>
-          <div class="date">
-            {{ product.dateUpdated | date }}
-          </div>
-          <div class="updated-by">
-            {{ (admins | async | getUser: product.updatedBy)?.email }}
-          </div>
+    <div>
+      Update date
+    </div>
+    <div>
+      Updated by
+    </div>
+  </md-toolbar>
+  <section *ngFor="let product of productApprovals | async" class="approval-category">
+    <md-card class="approval" routerLink="/admin/product-approval/{{ product.$key }}">
+      <div class="content">
+        <a routerLink="/admin/product-approval/{{ product.$key }}">{{ product.title }}</a>
+        <div class="date">
+          {{ product.dateUpdated | date }}
         </div>
-        <div class="actions">
-          <button
-            md-raised-button
-            (click)="approveItem($event, 'products', product)"
-            *ngIf="currentAdmin.role !== 'editor'">
-            Approve
-          </button>
-          <button
-            md-raised-button
-            (click)="deleteItem($event, 'products', product.$key)"
-            *ngIf="currentAdmin.role !== 'editor' || product.updatedBy === currentAdmin.uid">
-            Delete
-          </button>
+        <div class="updated-by">
+          {{ (admins | async | getUser: product.updatedBy)?.email }}
         </div>
-      </md-card>
-    </section>
+      </div>
+      <div class="actions">
+        <button
+          md-raised-button
+          (click)="approveItem($event, 'products', product)"
+          *ngIf="currentAdmin.role !== 'editor'">
+          Approve
+        </button>
+        <button
+          md-raised-button
+          (click)="deleteItem($event, 'products', product.$key)"
+          *ngIf="currentAdmin.role !== 'editor' || product.updatedBy === currentAdmin.uid">
+          Delete
+        </button>
+      </div>
+    </md-card>
+  </section>
+
+  <md-toolbar class="highlight" *ngIf="(pageApprovals | async)?.length > 0">
+    <div>
+      Page
+    </div>
+    <div>
+      Update date
+    </div>
+    <div>
+      Updated by
+    </div>
+  </md-toolbar>
+  <section *ngFor="let page of pageApprovals | async" class="approval-category">
+    <md-card class="approval" routerLink="/admin/page-approval/{{ page.$key }}">
+      <div class="content">
+        <a routerLink="/admin/page-approval/{{ page.$key }}">{{ page.title }}</a>
+        <div class="date">
+          {{ page.dateUpdated | date }}
+        </div>
+        <div class="updated-by">
+          {{ (admins | async | getUser: page.updatedBy)?.email }}
+        </div>
+      </div>
+      <div class="actions">
+        <button
+          md-raised-button
+          (click)="approveItem($event, 'pages', page)"
+          *ngIf="currentAdmin.role !== 'editor'">
+          Approve
+        </button>
+        <button
+          md-raised-button
+          (click)="deleteItem($event, 'pages', page.$key)"
+          *ngIf="currentAdmin.role !== 'editor' || page.updatedBy === currentAdmin.uid">
+          Delete
+        </button>
+      </div>
+    </md-card>
+  </section>
 </div>
