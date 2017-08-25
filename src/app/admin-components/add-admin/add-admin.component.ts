@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'add-admin',
@@ -20,7 +21,8 @@ export class AddAdminComponent implements OnInit {
     public db: AngularFireDatabase,
     public snackBar: MdSnackBar,
     public router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public globalService: GlobalService
   ) {
     this.editMode = false;
   }
@@ -46,7 +48,7 @@ export class AddAdminComponent implements OnInit {
   addAdmin(newEmail: string, newRole: string) {
     if (newEmail && newRole) {
 
-      this.db.object('/admins/' + this.hashCode(newEmail)).update({
+      this.db.object('/admins/' + this.globalService.hashCode(newEmail)).update({
         email: newEmail,
         role: newRole
       });
@@ -71,16 +73,4 @@ export class AddAdminComponent implements OnInit {
       });
     }
   }
-
-  hashCode(input:string) {
-    let hash = 0, i, chr;
-    if (input.length === 0) return hash;
-    for (i = 0; i < input.length; i++) {
-      chr   = input.charCodeAt(i);
-      hash  = ((hash << 5) - hash) + chr;
-      hash |= 0; // Convert to 32bit integer
-    }
-    return hash;
-  };
-
 }

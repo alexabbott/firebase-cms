@@ -5,13 +5,27 @@
     <p *ngIf="(productApprovals | async)?.length === 0" class="center">
       Nothing to approve at this time
     </p>
-    <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">Products</md-toolbar>
+    <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">
+      <div>
+        Product
+      </div>
+      <div>
+        Update date
+      </div>
+      <div>
+        Updated by
+      </div>
+    </md-toolbar>
     <section *ngFor="let product of productApprovals | async" class="approval-category">
-      <md-card class="approval">
+      <md-card class="approval" routerLink="/admin/product-approval/{{ product.$key }}">
         <div class="content">
           <a routerLink="/admin/product-approval/{{ product.$key }}">{{ product.title }}</a>
-          <span class="date" *ngIf="product.dateUpdated">{{ product.dateUpdated | date }}</span>
-          <span class="date" *ngIf="!product.dateUpdated">{{ product.dateAdded | date }}</span>
+          <div class="date">
+            {{ product.dateUpdated | date }}
+          </div>
+          <div class="updated-by">
+            {{ (admins | async | getUser: product.updatedBy)?.email }}
+          </div>
         </div>
         <div class="actions">
           <button

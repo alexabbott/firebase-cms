@@ -35,6 +35,7 @@ export class AddProductComponent implements OnInit {
   entityObject: any;
   dialogRef: MdDialogRef<any>;
   selectedOption: string;
+  awaitingApproval: string;
 
   constructor(
     public af: FirebaseApp,
@@ -78,6 +79,18 @@ export class AddProductComponent implements OnInit {
             this.db.object('/products/' + params.key, { preserveSnapshot: true }).take(1).subscribe((p) => {
               if (p.val().category) {
                 this.ogCategory = p.val().category;
+              }
+            });
+
+            // check to see if any approvals are awaiting on this product
+            this.db.list('/approvals/products', {
+              query: {
+                orderByChild: 'entityKey',
+                equalTo: params.key
+              }
+            }).subscribe((approval) => {
+              if (approval.length > 0 && approval[0]) {
+                this.awaitingApproval = approval[0].$key;
               }
             });
           }
@@ -177,7 +190,7 @@ export class AddProductComponent implements OnInit {
     if (newTitle && newPrice && newDescription && this.currentAdmin.uid) {
 
       let productObject = {
-        url: this.slugify(newTitle),
+        url: this.globalService.slugify(newTitle),
         dateUpdated: Date.now(),
         rdateUpdated: (Date.now() * -1),
         title: newTitle,
@@ -224,8 +237,8 @@ export class AddProductComponent implements OnInit {
     if (newTitle && newPrice && newDescription && this.currentAdmin.uid) {
 
       let approvalObject = {
-        entityKey: this.productKey,
-        url: this.slugify(newTitle),
+        entityKey: this.router.url.includes('approval') ? this.entityObject.entityKey : this.productKey,
+        url: this.globalService.slugify(newTitle),
         dateUpdated: Date.now(),
         rdateUpdated: (Date.now() * -1),
         title: newTitle,
@@ -303,6 +316,7 @@ export class AddProductComponent implements OnInit {
     let snackBarRef = this.snackBar.open('Product approved', 'OK!', {
       duration: 3000
     });
+    this.router.navigateByUrl('admin/products');
   }
 
   deleteItem(event) {
@@ -318,15 +332,6 @@ export class AddProductComponent implements OnInit {
         this.router.navigateByUrl('admin/products')
       }
     });
-  }
-
-  slugify(text) {
-    return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
   }
 }
 

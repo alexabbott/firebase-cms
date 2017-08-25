@@ -5,6 +5,13 @@
         Product
     </h2>
 
+    <md-toolbar class="highlight small" *ngIf="awaitingApproval" routerLink="/admin/product-approval/{{ awaitingApproval }}">
+        This product has a change awaiting moderation
+        <div class="action">
+            View Product Approval
+        </div>
+    </md-toolbar>
+
     <md-input-container class="block">
         <input mdInput placeholder="Title" [(ngModel)]="newTitle">
     </md-input-container>

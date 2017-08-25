@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
+import { GlobalService } from '../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
@@ -21,7 +22,9 @@ export class AddProductCategoryComponent implements OnInit {
     public db: AngularFireDatabase,
     public snackBar: MdSnackBar,
     public router: Router,
-    public route: ActivatedRoute) {
+    public route: ActivatedRoute,
+    public globalService: GlobalService
+  ) {
     this.categories = db.list('/categories');
   }
 
@@ -30,12 +33,12 @@ export class AddProductCategoryComponent implements OnInit {
       if (this.editMode && this.categoryKey) {
         this.db.object('/categories/' + this.categoryKey).update({
           email: newName,
-          slug: this.slugify(newName)
+          slug: this.globalService.slugify(newName)
         });
       } else {
         this.categories.push({
           name: newName,
-          slug: this.slugify(newName)
+          slug: this.globalService.slugify(newName)
         });
       }
 
@@ -51,15 +54,6 @@ export class AddProductCategoryComponent implements OnInit {
         duration: 3000
       });
     }
-  }
-
-  slugify(text) {
-    return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
   }
 
   ngOnInit() {

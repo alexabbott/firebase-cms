@@ -1,6 +1,7 @@
 @import '../../../variables.scss';
 
 .post {
+    cursor: pointer;
     margin-bottom: 10px;
 
     @include tablet {

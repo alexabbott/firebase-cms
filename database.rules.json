@@ -10,7 +10,7 @@
     },
     "approvals": {
       "products": {
-        ".indexOn": "updatedBy"
+        ".indexOn": ["updatedBy", "entityKey"]
       }
     },
     "orders": {
@@ -20,7 +20,7 @@
       ".indexOn": ["published", "category", "rdateUpdated"]
     },
     "posts": {
-      ".indexOn": "published"
+      ".indexOn": "[published, url]"
     },
     "stripe_customers": {
       "$uid": {

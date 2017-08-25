@@ -58,7 +58,7 @@ export class CheckoutReviewComponent implements OnInit {
 
   confirm() {
     this.submitNewCharge();
-    let newKey = Math.abs(this.hashCode(this.order.date) + this.hashCode(this.order.shipping.email));
+    let newKey = Math.abs(this.globalService.hashCode(this.order.date) + this.globalService.hashCode(this.order.shipping.email));
     this.db.object('/orders/' + newKey).set(this.order);
     this.globalService.cart.next(null);
     this.globalService.order.next(null);
@@ -76,17 +76,6 @@ export class CheckoutReviewComponent implements OnInit {
       amount: Math.floor(this.order.total * 100)
     });
   }
-
-  hashCode(input:string) {
-    let hash = 0, i, chr;
-    if (input.length === 0) return hash;
-    for (i = 0; i < input.length; i++) {
-      chr   = input.charCodeAt(i);
-      hash  = ((hash << 5) - hash) + chr;
-      hash |= 0; // Convert to 32bit integer
-    }
-    return hash;
-  };
 
   ngOnInit() {
   }

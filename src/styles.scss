@@ -49,6 +49,16 @@ a {
         box-shadow: none;
         color: $color-white;
         position: static;
+
+        &.small {
+            height: 30px;
+            min-height: 30px;
+
+            .mat-toolbar-row {
+                height: 30px;
+                font-size: .7em;
+            }
+        }
     }
 }
 
