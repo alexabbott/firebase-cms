@@ -22,7 +22,12 @@ export class AdminOrdersComponent implements OnInit {
     public snackBar: MdSnackBar,
     public globalService: GlobalService
   ) {
-    this.orders = db.list('/orders');
+    this.orders = db.list('/orders', {
+      query: {
+        orderByChild: 'rdate',
+        limitToFirst: 99999
+      }
+    });
     this.users = db.list('/users');
 
     this.globalService.admin.subscribe((a) => {

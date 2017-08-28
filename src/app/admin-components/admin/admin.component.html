@@ -11,34 +11,58 @@
 <md-sidenav-container>
     <md-sidenav mode="side" opened="true">
         <md-list class="admin-nav">
-            <md-list-item [ngClass]="{'selected': router.url === '/admin'}" routerLink="/admin">
+            <md-list-item
+                [ngClass]="{'selected': router.url === '/admin'}"
+                routerLink="/admin">
                 <md-icon>dashboard</md-icon> Dashboard
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/posts')}" routerLink="/admin/posts">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/posts')}"
+                routerLink="/admin/posts">
                 <md-icon>class</md-icon> Posts
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/pages')}" routerLink="/admin/pages">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/pages')}"
+                routerLink="/admin/pages">
                 <md-icon>description</md-icon> Pages
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/products')}" routerLink="/admin/products">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/products')}"
+                routerLink="/admin/products">
                 <md-icon>shopping_basket</md-icon> Products
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/product-categories')}" routerLink="/admin/product-categories">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/product-categories')}"
+                routerLink="/admin/product-categories">
                 <md-icon>group_work</md-icon> Product Categories
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/customers')}" routerLink="/admin/customers">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/customers')}"
+                routerLink="/admin/customers"
+                *ngIf="currentAdmin.role !== 'editor'">
                 <md-icon>account_circle</md-icon> Customers
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/orders')}" routerLink="/admin/orders">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/orders')}"
+                routerLink="/admin/orders"
+                *ngIf="currentAdmin.role !== 'editor'">
                 <md-icon>attach_money</md-icon> Orders
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url.includes('/admin/menus')}" routerLink="/admin/menus">
+            <md-list-item
+                [ngClass]="{'selected': router.url.includes('/admin/menus')}"
+                routerLink="/admin/menus"
+                *ngIf="currentAdmin.role !== 'editor'">
                 <md-icon>menu</md-icon> Menus
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url === '/admin/theme'}" routerLink="/admin/theme">
+            <md-list-item
+                [ngClass]="{'selected': router.url === '/admin/theme'}"
+                routerLink="/admin/theme"
+                *ngIf="currentAdmin.role !== 'editor'">
                 <md-icon>restaurant_menu</md-icon> Theme
             </md-list-item>
-            <md-list-item [ngClass]="{'selected': router.url === '/admin/approvals'}" routerLink="/admin/approvals">
+            <md-list-item
+                [ngClass]="{'selected': router.url === '/admin/approvals'}"
+                routerLink="/admin/approvals">
                 <md-icon>check_circle</md-icon> Approvals
             </md-list-item>
             <md-list-item

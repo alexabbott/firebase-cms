@@ -16,9 +16,9 @@
     </div>
     <div class="actions">
       <div>{{order.total | currency:'USD':true }}</div>
-      <button *ngIf="!router.url.includes('/admin/customer')" md-raised-button routerLink="/account/order/{{ order.$key }}">View Order</button>
-      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/order/{{ order.$key }}">View Order</button>
-      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/edit-order/{{ order.$key }}">Edit Order</button>
+      <button *ngIf="!router.url.includes('/admin/customer')" md-raised-button routerLink="/account/order/{{ order.$key }}">View</button>
+      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/order/{{ order.$key }}">View</button>
+      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/edit-order/{{ order.$key }}">Edit</button>
     </div>
   </md-card>
 </div>

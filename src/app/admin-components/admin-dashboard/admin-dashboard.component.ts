@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { GlobalService } from '../../services/global.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class AdminDashboardComponent implements OnInit {
   customers: FirebaseListObservable<any>;
   categories: FirebaseListObservable<any>;
   orders: FirebaseListObservable<any>;
+  approvals: FirebaseObjectObservable<any>;
+  approvalsTotal: number;
   currentAdmin: any;
   columns: Number;
 
@@ -27,11 +29,27 @@ export class AdminDashboardComponent implements OnInit {
     this.products = db.list('/products');
     this.categories = db.list('/categories');
     this.orders = db.list('/orders');
+    this.approvals = db.object('/approvals');
 
     this.columns = 3;
+    this.approvalsTotal = 0;
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;
+    });
+  }
+
+  ngOnInit() {
+    this.approvals.subscribe((a) => {
+      if (a.products) {
+        this.approvalsTotal += Object.keys(a.products).length;
+      }
+      if (a.pages) {
+        this.approvalsTotal += Object.keys(a.pages).length;
+      }
+      if (a.posts) {
+        this.approvalsTotal += Object.keys(a.posts).length;
+      }
     });
   }
 
@@ -49,9 +67,6 @@ export class AdminDashboardComponent implements OnInit {
     if (element < 750) {
       this.columns = 1;
     }
-  }
-
-  ngOnInit() {
   }
 
 }

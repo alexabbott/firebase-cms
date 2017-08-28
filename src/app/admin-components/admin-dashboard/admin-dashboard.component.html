@@ -11,7 +11,7 @@
         </md-grid-tile>
 
         <md-grid-tile colspan="1" rowspan="1">
-            <md-card routerLink="/admin/ordpagesers">
+            <md-card routerLink="/admin/pages">
                 <md-icon>description</md-icon>
                 <h4 *ngIf="pages | async">{{ (pages | async).length }} Pages</h4>
                 <button md-raised-button routerLink="/admin/add-page">Add a Page</button>
@@ -35,6 +35,14 @@
         </md-grid-tile>
 
         <md-grid-tile colspan="1" rowspan="1">
+            <md-card routerLink="/admin/approvals">
+                <md-icon>check_circle</md-icon>
+                <h4 *ngIf="approvals | async">{{ approvalsTotal }} item<span *ngIf="approvalsTotal !== 1">s</span> need<span *ngIf="approvalsTotal === 1">s</span> moderation</h4>
+                <button md-raised-button routerLink="/admin/add-customer">View Approvals</button>
+            </md-card>
+        </md-grid-tile>
+
+        <md-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin.role !== 'editor'">
             <md-card routerLink="/admin/customers">
                 <md-icon>account_circle</md-icon>
                 <h4 *ngIf="customers | async">{{ (customers | async).length }} Customers</h4>
@@ -42,7 +50,7 @@
             </md-card>
         </md-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1">
+        <md-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin.role !== 'editor'">
             <md-card routerLink="/admin/orders">
                 <md-icon>attach_money</md-icon>
                 <h4 *ngIf="orders | async">{{ (orders | async).length }} Orders</h4>

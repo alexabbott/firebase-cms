@@ -48,6 +48,7 @@ export class CheckoutReviewComponent implements OnInit {
         this.order.uid = this.user.uid;
       }
       this.order.date = now;
+      this.order.rdate = (now * -1);
       this.order.status = 'PAID';
     }
 
