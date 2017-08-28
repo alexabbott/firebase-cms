@@ -1,17 +1,19 @@
 <div class="container" *ngIf="product">
-  <div class="center product-header">
+  <div class="product-left">
     <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="featured-image">
+  </div>
+  <div class="product-right">
     <h2>{{product.title}}</h2>
     <p>{{product.price | currency:'USD':true}}</p>
+    <p [innerHTML]="product.description | safeHtml"></p>
+    <div class="quantity-label">Qty</div>
+    <md-input-container class="quantity">
+      <input mdInput type="number" min="1" [(ngModel)]="product.quantity">
+    </md-input-container>
+    <button md-raised-button (click)="addToCart(product)">
+      <span *ngIf="!globalCart || !globalCart[product.$key]">Add to</span>
+      <span *ngIf="globalCart && globalCart[product.$key]">Update</span>
+       Cart
+    </button>
   </div>
-  <p [innerHTML]="product.description | safeHtml"></p>
-  <div class="quantity-label">Qty</div>
-  <md-input-container class="quantity">
-    <input mdInput type="number" min="1" [(ngModel)]="product.quantity">
-  </md-input-container>
-  <button md-raised-button (click)="addToCart(product)">
-    <span *ngIf="!globalCart || !globalCart[product.$key]">Add to</span>
-    <span *ngIf="globalCart && globalCart[product.$key]">Update</span>
-     Cart
-  </button>
 </div>
