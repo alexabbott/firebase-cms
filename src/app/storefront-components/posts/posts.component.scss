@@ -19,18 +19,27 @@
     }
 
     h3 {
-        a {
-            color: $color-black;
+        @include tablet {
+            margin-top: 0;
         }
     }
 
     .post-content {
         display: inline-block;
         vertical-align: top;
+        width: 100%;
+
+        @include tablet {
+            width: calc(100% - 180px);
+        }
     }
 
     .date {
         color: $color-grey;
         font-size: 0.8em;
+    }
+
+    button {
+        float: right;
     }
 }

@@ -5,6 +5,10 @@
         text-decoration: none;
     }
 
+    h2 a {
+        color: $color-main;
+    }
+
     md-icon {
         cursor: pointer;
         display: inline-block;

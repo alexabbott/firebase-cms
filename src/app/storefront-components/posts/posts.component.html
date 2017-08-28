@@ -5,7 +5,9 @@
     <div class="post-content">
       <h3><a routerLink="/blog/{{post.url}}">{{post.title}}</a></h3>
       <div class="date">{{post.date | date }}</div>
-      <p><span [innerHTML]="post.body | truncate: 200 "></span> <a routerLink="/blog/{{post.url}}">Read More</a></p>
+      <p><span [innerHTML]="post.body | truncate: 200 "></span>
+      <button md-button routerLink="/blog/{{post.url}}">Read More</button>
+      </p>
     </div>
   </md-card>
 </div>

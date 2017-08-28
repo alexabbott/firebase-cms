@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .mat-sidenav-content {
     margin-top: -64px;
 }
@@ -30,13 +32,13 @@ md-sidenav {
 }
 
 .admin-nav md-list-item .mat-icon {
-    color: #00D4D4;
+    color: $color-main;
     margin-right: 10px;
 }
 
 .admin-nav md-list-item:hover,
 .admin-nav md-list-item.selected {
-    background: #eee;
+    background: $color-grey-light;
     outline: 0;
 }
 
