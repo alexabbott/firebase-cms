@@ -11,10 +11,10 @@
     transition: transform .3s ease-out;
     vertical-align: middle;
     width: 45px;
-}
 
-.admin-photo:hover {
-    transform: scale(1.1);
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 md-sidenav {
@@ -26,20 +26,22 @@ md-sidenav {
     height: 100vh;
 }
 
-.admin-nav md-list-item {
-    cursor: pointer;
-    transition: background .2s ease-out;
-}
+.admin-nav {
+    md-list-item {
+        cursor: pointer;
+        transition: background .2s ease-out;
 
-.admin-nav md-list-item .mat-icon {
-    color: $color-main;
-    margin-right: 10px;
-}
+        &:hover,
+        &.selected {
+            background: $color-grey-light;
+            outline: 0;
+        }
 
-.admin-nav md-list-item:hover,
-.admin-nav md-list-item.selected {
-    background: $color-grey-light;
-    outline: 0;
+        .mat-icon {
+            color: $color-main;
+            margin-right: 10px;
+        }
+    }
 }
 
 .container {

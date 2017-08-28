@@ -1,11 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
 @import "./variables";
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+    $font-family: 'Roboto Mono'
+);
+
+@include angular-material-typography($custom-typography);
 
 html,
 body {
-    font-family: 'Roboto', Arial, sans serif;
     margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+div {
+    font-family: 'Roboto Mono', monospace;
 }
 
 a {
