@@ -12,6 +12,8 @@
 }
 
 .page {
+    cursor: pointer;
+
     .content {
         display: inline-block;
         width: calc(100% - 410px);

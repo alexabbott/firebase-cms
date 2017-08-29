@@ -41,10 +41,6 @@ export class AdminPagesComponent implements OnInit {
     }
   }
 
-  editPage(key: string) {
-    this.router.navigateByUrl('admin/edit-page/' + key);
-  }
-
   deletePage(key: string) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {

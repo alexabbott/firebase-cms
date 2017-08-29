@@ -92,6 +92,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { GetUserPipe } from './pipes/getUser.pipe';
 import { ObjectCountPipe } from './pipes/object-count.pipe';
 import { GetKeyPipe } from './pipes/get-key.pipe';
+import { StopPropagationDirective } from './directives/stop-propagation.directive';
 
 firebase.initializeApp(environment.firebase);
 
@@ -172,7 +173,8 @@ firebase.initializeApp(environment.firebase);
     ProductCategoriesComponent,
     GetKeyPipe,
     AdminApprovalsComponent,
-    ApproveDialogComponent
+    ApproveDialogComponent,
+    StopPropagationDirective
   ],
   entryComponents: [DeleteDialogComponent, ApproveDialogComponent],
   providers: [ GlobalService, AuthGuard, SuperAdminGuard, AdminGuard, WindowRefService, LocalCartService ],

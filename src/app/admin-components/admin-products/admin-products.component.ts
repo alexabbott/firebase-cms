@@ -51,10 +51,6 @@ export class AdminProductsComponent implements OnInit {
     }
   }
 
-  editProduct(key: string) {
-    this.router.navigateByUrl('admin/edit-product/' + key);
-  }
-
   deleteProduct(product: any) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {

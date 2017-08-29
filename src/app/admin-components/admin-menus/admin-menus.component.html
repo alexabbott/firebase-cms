@@ -2,7 +2,7 @@
   <h2>Menus</h2>
 
   <md-toolbar class="highlight">Primary Nav</md-toolbar>
-  <p *ngIf="(menuList | async)?.length === 0" class="center">
+  <p *ngIf="menuList.length === 0" class="center">
       No menu items yet
   </p>
   <div dnd-sortable-container [sortableData]="menuList">

@@ -6,19 +6,17 @@
   <h3 *ngIf="router.url.includes('/admin/customer') && userObject && !userObject.email">
     Guest Customer
   </h3>
-  <md-card class="order" *ngFor="let order of orders | async | sort:['-date']">
+  <md-card class="order" routerLink="{{ orderLink }}/{{order.$key}}" *ngFor="let order of orders | async">
     <div class="order-info">
       <h3>
-        <a *ngIf="!router.url.includes('/admin/customer')" routerLink="/account/order/{{order.$key}}">#{{order.$key}}</a>
-        <a *ngIf="router.url.includes('/admin/customer')" routerLink="/admin/order/{{order.$key}}">#{{order.$key}}</a>
+        <a routerLink="{{ orderLink }}/{{order.$key}}">#{{order.$key}}</a>
       </h3>
       <div class="date">{{order.date | date }}</div>
     </div>
     <div class="actions">
       <div>{{order.total | currency:'USD':true }}</div>
-      <button *ngIf="!router.url.includes('/admin/customer')" md-raised-button routerLink="/account/order/{{ order.$key }}">View</button>
-      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/order/{{ order.$key }}">View</button>
-      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="/admin/edit-order/{{ order.$key }}">Edit</button>
+      <button md-raised-button routerLink="{{ orderLink }}/{{ order.$key }}">View</button>
+      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="{{ orderLink }}/{{ order.$key }}">Edit</button>
     </div>
   </md-card>
 </div>

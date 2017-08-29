@@ -6,9 +6,9 @@
     <p *ngIf="(products | async)?.length === 0" class="center">
         No products yet
     </p>
-    <md-card class="product" *ngFor="let product of products | async">
+    <md-card class="product" *ngFor="let product of products | async" routerLink="/admin/edit-product/{{ product.$key }}">
         <div class="content">
-            <h3><a routerLink="/product/{{product.url}}" target="_blank">{{product.title}}</a></h3>
+            <h3><a routerLink="/product/{{product.url}}" target="_blank" stop-propagation>{{product.title}}</a></h3>
             <div class="date">{{product.price | currency:'USD':true }}</div>
         </div>
         <div class="publish">
@@ -17,7 +17,7 @@
                 <span *ngIf="product.published">Un-Publish</span>
             </md-slide-toggle>
             <div class="edit">
-                <button md-raised-button (click)="editProduct(product.$key)">
+                <button md-raised-button routerLink="/admin/edit-product/{{ product.$key }}">
                     Edit
                 </button>
                 <button md-raised-button (click)="deleteProduct(product)" *ngIf="currentAdmin.role !== 'editor'">

@@ -6,9 +6,13 @@
     <p *ngIf="(categories | async)?.length === 0" class="center">
         No categories yet
     </p>
-    <md-card class="category" *ngFor="let category of categories | async">
+    <md-card class="category" *ngFor="let category of categories | async" routerLink="/admin/edit-product-category/{{ category.$key }}">
         <div class="content">
-            <h3>{{category.name}}</h3>
+            <h3>
+                <a routerLink="/category/{{ category.slug }}" target="_blank" stop-propagation>
+                    {{category.name}}
+                </a>
+            </h3>
         </div>
         <div class="publish">
             <div class="edit">

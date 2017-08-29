@@ -6,9 +6,9 @@
     <p *ngIf="(posts | async)?.length === 0" class="center">
         No posts yet
     </p>
-    <md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
+    <md-card class="post" *ngFor="let post of posts | async | sort:['-date']" routerLink="/admin/edit-post/{{ post.$key}}">
         <div class="content">
-            <h3><a routerLink="/blog/{{post.url}}" target="_blank">{{post.title}}</a></h3>
+            <h3><a routerLink="/blog/{{post.url}}" target="_blank" stop-propagation>{{post.title}}</a></h3>
             <div class="date">{{post.date | date }}</div>
         </div>
         <div class="publish">
@@ -17,7 +17,7 @@
                 <span *ngIf="post.published">Un-Publish</span>
             </md-slide-toggle>
             <div class="edit">
-                <button md-raised-button (click)="editPost(post.$key)">
+                <button md-raised-button routerLink="/admin/edit-post/{{ post.$key}}">
                     Edit
                 </button>
                 <button md-raised-button (click)="deletePost(post)" *ngIf="currentAdmin.role !== 'editor'">

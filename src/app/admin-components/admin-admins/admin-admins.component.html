@@ -3,7 +3,7 @@
         <h2>Admins</h2>
         <button md-raised-button routerLink="/admin/add-admin">Add an Admin</button>
     </div>
-    <md-card class="admin" *ngFor="let admin of admins | async">
+    <md-card class="admin" *ngFor="let admin of admins | async" routerLink="/admin/edit-admin/{{admin.$key}}">
         <div class="content">
             <img src="{{ admin.photoURL }}" class="admin-photo" *ngIf="admin.photoURL">
             <img src="..//../../assets/placeholder.jpg" class="admin-photo" *ngIf="!admin.photoURL">

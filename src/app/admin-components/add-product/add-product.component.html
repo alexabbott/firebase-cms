@@ -50,16 +50,6 @@
 
     <button
         md-raised-button
-        (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished, false)"
-        class="submit"
-        *ngIf="!router.url.includes('approval') && currentAdmin.role !== 'editor'">
-        <span *ngIf="!editMode">Add</span>
-        <span *ngIf="editMode">Save</span>
-        Product
-    </button>
-
-    <button
-        md-raised-button
         (click)="approveItem(newTitle, newPrice, newCategory, newDescription, newPublished)"
         class="submit"
         *ngIf="router.url.includes('approval') && currentAdmin.role !== 'editor'">
@@ -88,5 +78,15 @@
         class="submit"
         *ngIf="!router.url.includes('approval')">
         <span>Submit for Moderation</span>
+    </button>
+
+    <button
+        md-raised-button
+        (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished, false)"
+        class="submit"
+        *ngIf="!router.url.includes('approval') && currentAdmin.role !== 'editor'">
+        <span *ngIf="!editMode">Add</span>
+        <span *ngIf="editMode">Save</span>
+        Product
     </button>
 </div>

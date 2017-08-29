@@ -47,10 +47,6 @@ export class AdminPostsComponent implements OnInit {
     }
   }
 
-  editPost(key: string) {
-    this.router.navigateByUrl('admin/edit-post/' + key);
-  }
-
   deletePost(post: any) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {

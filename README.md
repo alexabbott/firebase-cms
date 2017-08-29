@@ -5,8 +5,17 @@ A CMS and E-commerce platform with a Front End theme built with Angular 4 (Angul
 ## Installation
 
 Install [Angular CLI](https://cli.angular.io/)
+```
+npm install -g @angular/cli
+```
 
+Install NPM packages
+
+```
 Run `npm install` or `yarn install`
+cd functions/
+Run `npm install`
+```
 
 ## Firebase setup
 
@@ -54,12 +63,63 @@ export const environment = {
 };
 ```
 
-## Create Admin Account
+## Stripe setup
+
+Create a [Stripe account](https://stripe.com/).
+
+Add your Stripe API Secret Key to firebase config:
+```
+firebase functions:config:set stripe.token=<YOUR STRIPE SECRET KEY>
+```
+
+Open 'environment.ts' and add your Stripe Publishable API Key as follows:
+
+```javascript
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "xxxx",
+    authDomain: "xxxxx",
+    databaseURL: "xxxxx",
+    projectId: "xxxxx",
+    storageBucket: "xxxx",
+    messagingSenderId: "xxxx"
+  },
+  stripe: "<YOUR STRIPE PUBLISHABLE KEY>"
+};
+```
+
+Open 'environment.prod.ts' and add your Stripe Publishable API Key as follows:
+
+```javascript
+export const environment = {
+  production: true,
+  firebase: {
+    apiKey: "xxxx",
+    authDomain: "xxxxx",
+    databaseURL: "xxxxx",
+    projectId: "xxxxx",
+    storageBucket: "xxxx",
+    messagingSenderId: "<YOUR STRIPE PUBLISHABLE KEY>"
+  },
+  stripe: "xxxx"
+};
+```
+
+## Create SuperAdmin Account
 
 You'll need to manually add your first admin account. To generate a hashcode for it...
 
 1) Run `npm run hashcode` and enter your email. Copy hashcode
-2) Create new entry in your firebaseDB under, `/admins/{HASCODE}/{EMAIL}`
+2) Create new entry in your firebaseDB under, `/admins/<YOUR HASHCODE>/` as follows:
+
+```javascript
+{
+  email: '<YOUR EMAIL>',
+  role: 'super-admin'
+}
+```
+
 3) Create user in firebase user management with same email.
 
 ## Development server

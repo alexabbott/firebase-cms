@@ -15,6 +15,7 @@ export class OrdersComponent implements OnInit {
   orders: FirebaseListObservable<any[]>;
   user: Observable<firebase.User>;
   userObject: any;
+  orderLink: String;
 
   constructor(db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public route: ActivatedRoute, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
@@ -52,5 +53,10 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url.includes('/admin/customer')) {
+      this.orderLink = '/admin/order';
+    } else {
+      this.orderLink = '/account/order'
+    }
   }
 }

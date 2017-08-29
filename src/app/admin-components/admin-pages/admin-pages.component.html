@@ -6,9 +6,9 @@
     <p *ngIf="(pages | async)?.length === 0" class="center">
         No pages yet
     </p>
-    <md-card class="page" *ngFor="let page of pages | async | sort:['title']">
+    <md-card class="page" *ngFor="let page of pages | async | sort:['title']" routerLink="/admin/edit-page/{{ page.$key }}">
         <div class="content">
-            <h3><a routerLink="/page/{{page.url}}" target="_blank">{{page.title}}</a></h3>
+            <h3><a routerLink="/page/{{page.url}}" target="_blank" stop-propagation>{{page.title}}</a></h3>
         </div>
         <div class="publish">
             <md-slide-toggle ngDefaultControl (change)="onChange($event, page.$key)" [(ngModel)]="page.published" *ngIf="currentAdmin.role !== 'editor'">
@@ -16,7 +16,7 @@
                 <span *ngIf="page.published">Un-Publish</span>
             </md-slide-toggle>
             <div class="edit">
-                <button md-raised-button (click)="editPage(page.$key)">
+                <button md-raised-button routerLink="/admin/edit-page/{{ page.$key }}">
                     Edit
                 </button>
                 <button md-raised-button (click)="deletePage(page.$key)" *ngIf="currentAdmin.role !== 'editor'">
