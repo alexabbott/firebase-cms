@@ -25,7 +25,12 @@ export class AdminPagesComponent implements OnInit {
     public snackBar: MdSnackBar,
     public globalService: GlobalService
   ) {
-    this.pages = db.list('/pages');
+    this.pages = db.list('/pages', {
+      query: {
+        orderByChild: 'rdateUpdated',
+        limitToFirst: 9999
+      }
+    });
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;

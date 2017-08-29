@@ -7,7 +7,6 @@
   </p>
   <div dnd-sortable-container [sortableData]="menuList">
     <md-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
-      <md-icon>drag_handle</md-icon>
       <md-input-container>
         <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
       </md-input-container>
@@ -17,6 +16,7 @@
       <div class="actions">
         <button md-raised-button (click)="deleteMenuItem(i)">Delete Menu Item</button>
       </div>
+      <md-icon>drag_handle</md-icon>
     </md-card>
   </div>
   <button md-raised-button (click)="addMenuItem()" class="button-add-menu">Add Menu Item</button>

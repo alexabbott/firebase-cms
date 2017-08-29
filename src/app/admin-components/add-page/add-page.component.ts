@@ -96,6 +96,7 @@ export class AddPageComponent implements OnInit {
       let pageObject = {
         url: newURL,
         dateUpdated: Date.now(),
+        rdateUpdated: (Date.now() * -1),
         title: newTitle,
         body: newBody,
         published: newPublished,
@@ -131,6 +132,7 @@ export class AddPageComponent implements OnInit {
         entityKey: this.router.url.includes('approval') ? this.entityObject.entityKey : this.pageKey,
         url: newURL,
         dateUpdated: Date.now(),
+        rdateUpdated: (Date.now() * -1),
         title: newTitle,
         body: newBody,
         published: newPublished,
