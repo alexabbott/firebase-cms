@@ -38,9 +38,6 @@ export class AddCustomerComponent implements OnInit {
         duration: 3000
       });
 
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/customers');
-      }, 3300);
     } else if (!newEmail) {
       let snackBarRef = this.snackBar.open('You must add an email for this customer', 'OK!', {
         duration: 3000

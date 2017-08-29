@@ -223,9 +223,6 @@ export class AddProductComponent implements OnInit {
       let snackBarRef = this.snackBar.open('Product saved', 'OK!', {
         duration: 3000
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/products');
-      }, 3300);
     }
 
     this.validateFields(newTitle, newDescription, newPrice);
@@ -291,9 +288,6 @@ export class AddProductComponent implements OnInit {
       snackBarRef.onAction().subscribe(() => {
         this.router.navigateByUrl('admin/approvals');
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/approvals');
-      }, 3300);
     }
 
     this.validateFields(newTitle, newDescription, newPrice);

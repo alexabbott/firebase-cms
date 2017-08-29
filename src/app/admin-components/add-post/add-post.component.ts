@@ -178,9 +178,6 @@ export class AddPostComponent implements OnInit {
       let snackBarRef = this.snackBar.open('Post saved', 'OK!', {
         duration: 3000
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/posts');
-      }, 3300);
     }
 
     this.validateFields(newURL, newTitle, newBody, newDate);
@@ -247,9 +244,6 @@ export class AddPostComponent implements OnInit {
       snackBarRef.onAction().subscribe(() => {
         this.router.navigateByUrl('admin/approvals');
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/approvals');
-      }, 3300);
     }
 
     this.validateFields(newURL, newTitle, newBody, newDate);

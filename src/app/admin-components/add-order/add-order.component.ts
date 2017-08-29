@@ -39,10 +39,6 @@ export class AddOrderComponent implements OnInit {
       let snackBarRef = this.snackBar.open('Order saved', 'OK!', {
         duration: 3000
       });
-
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/orders');
-      }, 3300);
     }
   }
 

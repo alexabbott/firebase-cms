@@ -46,9 +46,6 @@ export class AddProductCategoryComponent implements OnInit {
         duration: 3000
       });
 
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/product-categories');
-      }, 3300);
     } else if (!newName) {
       let snackBarRef = this.snackBar.open('You must add a name for this category', 'OK!', {
         duration: 3000

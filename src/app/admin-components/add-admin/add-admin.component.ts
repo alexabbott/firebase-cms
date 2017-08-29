@@ -60,9 +60,6 @@ export class AddAdminComponent implements OnInit {
         duration: 3000
       });
 
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/admins');
-      }, 3300);
     } else if (!newEmail) {
       let snackBarRef = this.snackBar.open('You must add an email for the user', 'OK!', {
         duration: 3000

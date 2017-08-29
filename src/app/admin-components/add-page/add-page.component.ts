@@ -112,10 +112,6 @@ export class AddPageComponent implements OnInit {
       let snackBarRef = this.snackBar.open('Page saved', 'OK!', {
         duration: 3000
       });
-
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/pages');
-      }, 3300);
     }
 
     this.validateFields(newURL, newTitle, newBody);
@@ -178,9 +174,6 @@ export class AddPageComponent implements OnInit {
       snackBarRef.onAction().subscribe(() => {
         this.router.navigateByUrl('admin/approvals');
       });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/approvals');
-      }, 3300);
     }
 
     this.validateFields(newURL, newTitle, newBody);
