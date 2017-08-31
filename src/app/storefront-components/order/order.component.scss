@@ -96,20 +96,21 @@
 .order-info {
     margin-top: 30px;
 
+    @include tablet {
+        display: flex;
+        flex-direction: row;
+    }
+
     .mat-card {
         box-sizing: border-box;
         display: inline-block;
         width: 100%;
-
-        @include tablet {
-            width: 43%;
-        }
     }
 
     .mat-card:last-of-type {
 
         @include tablet {
-            float: right;
+            margin-left: 30px;
         }
     }
 }

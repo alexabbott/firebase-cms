@@ -100,9 +100,9 @@ export const environment = {
     databaseURL: "xxxxx",
     projectId: "xxxxx",
     storageBucket: "xxxx",
-    messagingSenderId: "<YOUR STRIPE PUBLISHABLE KEY>"
+    messagingSenderId: "xxxx"
   },
-  stripe: "xxxx"
+  stripe: "<YOUR STRIPE PUBLISHABLE KEY>"
 };
 ```
 
@@ -143,9 +143,9 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Admin Roles
 
 There are 3 Admin Roles:
-⋅⋅* super-admin
-⋅⋅* admin
-⋅⋅* editor
+* super-admin
+* admin
+* editor
 
 | Permission                          | super-admin | admin       | editor      |
 | ------------------------------------|:-----------:|:-----------:|:-----------:|
