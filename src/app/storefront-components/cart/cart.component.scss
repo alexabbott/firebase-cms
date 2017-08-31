@@ -14,12 +14,16 @@ h3,
     }
 }
 
+.product {
+    padding: 24px 16px;
+}
+
 .item {
     display: block;
     width: 100%;
 
     @include tablet {
-        display: inline-block;
+        float: left;
         width: 40%;
     }
 }
@@ -31,6 +35,7 @@ h3,
     width: 45%;
 
     @include tablet {
+        float: left;
         width: 15%;
     }
 }
@@ -48,6 +53,7 @@ h3,
     text-align: right;
 
     @include tablet {
+        margin-top: -22px;
         text-align: left;
     }
 

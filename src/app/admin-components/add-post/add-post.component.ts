@@ -164,9 +164,9 @@ export class AddPostComponent implements OnInit {
         updatedBy: this.currentAdmin.uid
       };
 
-      if (this.imageUrl && !this.newThumbnail) {
-        this.deleteImageRef();
-      }
+      // if (this.imageUrl && !this.newThumbnail) {
+      //   this.deleteImageRef();
+      // }
 
       if (this.editMode && this.postKey) {
         this.currentPost = this.db.object('/posts/' + this.postKey);

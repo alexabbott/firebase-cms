@@ -61,22 +61,22 @@ export class AdminProductsComponent implements OnInit {
           this.db.object('/categories/' + product.category + '/products/' + product.$key).remove();
         }
 
-        if (product.thumbnail) {
-          let storage = firebase.storage();
-          let imageRef = storage.refFromURL(product.thumbnail);
-          let me = this;
-          imageRef.delete().then(function() {
-            let snackBarRef = me.snackBar.open('Product deleted', 'OK!', {
-              duration: 3000
-            });
-          }).catch(function(error) {
-            console.log('error', error);
-          });
-        } else {
+        // if (product.thumbnail) {
+        //   let storage = firebase.storage();
+        //   let imageRef = storage.refFromURL(product.thumbnail);
+        //   let me = this;
+        //   imageRef.delete().then(function() {
+        //     let snackBarRef = me.snackBar.open('Product deleted', 'OK!', {
+        //       duration: 3000
+        //     });
+        //   }).catch(function(error) {
+        //     console.log('error', error);
+        //   });
+        // } else {
           let snackBarRef = this.snackBar.open('Product deleted', 'OK!', {
             duration: 3000
           });
-        }
+        // }
       }
     });
   }

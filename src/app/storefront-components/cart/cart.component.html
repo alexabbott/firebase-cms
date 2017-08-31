@@ -7,7 +7,7 @@
     <div class="total">Total</div>
   </md-toolbar>
   <div class="no-items" *ngIf="cartArray.length === 0">No items in the cart. <a routerLink="/products">Keep shopping!</a></div>
-  <md-card *ngFor="let item of cartArray">
+  <md-card *ngFor="let item of cartArray" class="product">
     <div class="item">{{item.title}}</div>
     <div class="price">{{item.price | currency:'USD':true}}</div>
     <div class="quantity">

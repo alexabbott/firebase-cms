@@ -35,7 +35,7 @@
     <div class="total">Total</div>
   </md-toolbar>
   <span *ngIf="order">
-    <md-card *ngFor="let item of order.items">
+    <md-card *ngFor="let item of order.items" class="product">
         <div class="item">{{item.title}}</div>
         <div class="price">{{item.price | currency:'USD':true }}</div>
         <div class="quantity">

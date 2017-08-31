@@ -33,11 +33,17 @@
     width: 40px;
 }
 
+.product {
+    height: 27px;
+    padding: 24px 16px;
+}
+
 .item {
     display: inline-block;
     width: 30%;
 
     @include tablet {
+        float: left;
         width: 50%;
     }
 }
@@ -49,7 +55,16 @@
     width: 20%;
 
     @include tablet {
+        float: left;
         width: 15%;
+    }
+}
+
+.quantity {
+    span {
+        @include tablet {
+            margin-left: 13px;
+        }
     }
 }
 

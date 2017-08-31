@@ -140,3 +140,25 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
+## Admin Roles
+
+There are 3 Admin Roles:
+⋅⋅* super-admin
+⋅⋅* admin
+⋅⋅* editor
+
+| Permission                          | super-admin | admin       | editor      |
+| ------------------------------------|:-----------:|:-----------:|:-----------:|
+| create new entities                 | ✓           | ✓           | ✓           |
+| edit entities                       | ✓           | ✓           | ✓           |
+| submit entities for approval        | ✓           | ✓           | ✓           |
+| save entities                       | ✓           | ✓           | ×           |
+| delete entities                     | ✓           | ✓           | ×           |
+| publish/unpublish entities          | ✓           | ✓           | ×           |
+| edit items awaiting approval        | ✓           | ✓           | ×           |
+| approve/disapprove changes          | ✓           | ✓           | ×           |
+| view/add/edit/delete orders         | ✓           | ✓           | ×           |
+| view/add/edit/delete customers      | ✓           | ✓           | ×           |
+| view/add/edit/delete menus          | ✓           | ✓           | ×           |
+| view/add/edit/delete theme settings | ✓           | ✓           | ×           |
+| view/add/edit/delete admins         | ✓           | ×           | ×           |

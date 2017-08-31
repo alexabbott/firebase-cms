@@ -203,9 +203,9 @@ export class AddProductComponent implements OnInit {
         entityKey: this.editMode && this.productKey ? this.productKey : null
       };
 
-      if (this.imageUrl && !this.newThumbnail) {
-        this.deleteImageRef();
-      }
+      // if (this.imageUrl && !this.newThumbnail) {
+      //   this.deleteImageRef();
+      // }
 
       if (this.editMode && this.productKey) {
         this.currentProduct = this.db.object('/products/' + this.productKey);

@@ -27,20 +27,20 @@
         <div class="updated-by">
           {{ (admins | async | getUser: product.updatedBy)?.email }}
         </div>
-      </div>
-      <div class="actions">
-        <button
-          md-raised-button
-          (click)="approveItem($event, 'products', product)"
-          *ngIf="currentAdmin.role !== 'editor'">
-          Approve
-        </button>
-        <button
-          md-raised-button
-          (click)="deleteItem($event, 'products', product.$key)"
-          *ngIf="currentAdmin.role !== 'editor' || product.updatedBy === currentAdmin.uid">
-          Delete
-        </button>
+        <div class="actions">
+          <button
+            md-raised-button
+            (click)="approveItem($event, 'products', product)"
+            *ngIf="currentAdmin.role !== 'editor'">
+            Approve
+          </button>
+          <button
+            md-raised-button
+            (click)="deleteItem($event, 'products', product.$key)"
+            *ngIf="currentAdmin.role !== 'editor' || product.updatedBy === currentAdmin.uid">
+            Delete
+          </button>
+        </div>
       </div>
     </md-card>
   </section>

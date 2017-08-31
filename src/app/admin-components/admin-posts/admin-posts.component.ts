@@ -54,22 +54,22 @@ export class AdminPostsComponent implements OnInit {
       if (this.selectedOption === 'delete') {
         this.db.object('/posts/' + post.$key).remove();
 
-        if (post.thumbnail) {
-          let storage = firebase.storage();
-          let imageRef = storage.refFromURL(post.thumbnail);
-          let me = this;
-          imageRef.delete().then(function() {
-            let snackBarRef = me.snackBar.open('Post deleted', 'OK!', {
-              duration: 3000
-            });
-          }).catch(function(error) {
-            console.log('error', error);
-          });
-        } else {
+        // if (post.thumbnail) {
+        //   let storage = firebase.storage();
+        //   let imageRef = storage.refFromURL(post.thumbnail);
+        //   let me = this;
+        //   imageRef.delete().then(function() {
+        //     let snackBarRef = me.snackBar.open('Post deleted', 'OK!', {
+        //       duration: 3000
+        //     });
+        //   }).catch(function(error) {
+        //     console.log('error', error);
+        //   });
+        // } else {
           let snackBarRef = this.snackBar.open('Post deleted', 'OK!', {
             duration: 3000
           });
-        }
+        // }
       }
     });
   }
