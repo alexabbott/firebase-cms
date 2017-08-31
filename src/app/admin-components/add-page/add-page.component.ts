@@ -100,13 +100,16 @@ export class AddPageComponent implements OnInit {
         title: newTitle,
         body: newBody,
         published: newPublished,
-        updatedBy: this.currentAdmin.uid
+        updatedBy: this.currentAdmin.uid,
+        entityKey: this.editMode && this.pageKey ? this.pageKey : null
       };
 
       if (this.editMode && this.pageKey) {
         this.db.object('/pages/' + this.pageKey).update(pageObject);
       } else {
-        this.pages.push(pageObject);
+        this.pages.push(pageObject).then((item) => {
+          this.db.object('/pages/' + item.key + '/entityKey').set(item.key);
+        });
       }
 
       let snackBarRef = this.snackBar.open('Page saved', 'OK!', {

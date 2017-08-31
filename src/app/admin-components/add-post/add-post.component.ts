@@ -161,7 +161,8 @@ export class AddPostComponent implements OnInit {
         thumbnail: this.newThumbnail ? this.newThumbnail : null,
         body: newBody,
         published: newPublished,
-        updatedBy: this.currentAdmin.uid
+        updatedBy: this.currentAdmin.uid,
+        entityKey: this.editMode && this.postKey ? this.postKey : null
       };
 
       // if (this.imageUrl && !this.newThumbnail) {
@@ -172,7 +173,9 @@ export class AddPostComponent implements OnInit {
         this.currentPost = this.db.object('/posts/' + this.postKey);
         this.currentPost.update(postObject);
       } else {
-          this.posts.push(postObject);
+          this.posts.push(postObject).then((item) => {
+            this.db.object('/posts/' + item.key + '/entityKey').set(item.key);
+          });
       }
 
       let snackBarRef = this.snackBar.open('Post saved', 'OK!', {

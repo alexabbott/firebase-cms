@@ -2,7 +2,7 @@
   <div class="button-container">
       <h2>Approvals</h2>
   </div>
-  <p *ngIf="(productApprovals | async)?.length === 0 && (pageApprovals | async)?.length === 0 && (postApprovals | async)?.length === 0"
+  <p *ngIf="(productApprovals | async)?.length === 0 && (pageApprovals | async)?.length === 0 && (postApprovals | async)?.length === 0 && (categoryApprovals | async)?.length === 0"
     class="center">
     Nothing to approve at this time
   </p>
@@ -45,6 +45,45 @@
     </md-card>
   </section>
 
+  <md-toolbar class="highlight" *ngIf="(categoryApprovals | async)?.length > 0">
+    <div>
+      Category
+    </div>
+    <div>
+      Update date
+    </div>
+    <div>
+      Updated by
+    </div>
+  </md-toolbar>
+  <section *ngFor="let category of categoryApprovals | async" class="approval-category">
+    <md-card class="approval" routerLink="/admin/category-approval/{{ category.$key }}">
+      <div class="content">
+        <a routerLink="/admin/category-approval/{{ category.$key }}">{{ category.name }}</a>
+        <div class="date">
+          {{ category.dateUpdated | date }}
+        </div>
+        <div class="updated-by">
+          {{ (admins | async | getUser: category.updatedBy)?.email }}
+        </div>
+        <div class="actions">
+          <button
+            md-raised-button
+            (click)="approveItem($event, 'categories', category)"
+            *ngIf="currentAdmin.role !== 'editor'">
+            Approve
+          </button>
+          <button
+            md-raised-button
+            (click)="deleteItem($event, 'categories', category.$key)"
+            *ngIf="currentAdmin.role !== 'editor' || category.updatedBy === currentAdmin.uid">
+            Delete
+          </button>
+        </div>
+      </div>
+    </md-card>
+  </section>
+
   <md-toolbar class="highlight" *ngIf="(pageApprovals | async)?.length > 0">
     <div>
       Page
@@ -66,20 +105,20 @@
         <div class="updated-by">
           {{ (admins | async | getUser: page.updatedBy)?.email }}
         </div>
-      </div>
-      <div class="actions">
-        <button
-          md-raised-button
-          (click)="approveItem($event, 'pages', page)"
-          *ngIf="currentAdmin.role !== 'editor'">
-          Approve
-        </button>
-        <button
-          md-raised-button
-          (click)="deleteItem($event, 'pages', page.$key)"
-          *ngIf="currentAdmin.role !== 'editor' || page.updatedBy === currentAdmin.uid">
-          Delete
-        </button>
+        <div class="actions">
+          <button
+            md-raised-button
+            (click)="approveItem($event, 'pages', page)"
+            *ngIf="currentAdmin.role !== 'editor'">
+            Approve
+          </button>
+          <button
+            md-raised-button
+            (click)="deleteItem($event, 'pages', page.$key)"
+            *ngIf="currentAdmin.role !== 'editor' || page.updatedBy === currentAdmin.uid">
+            Delete
+          </button>
+        </div>
       </div>
     </md-card>
   </section>
@@ -105,20 +144,20 @@
         <div class="updated-by">
           {{ (admins | async | getUser: post.updatedBy)?.email }}
         </div>
-      </div>
-      <div class="actions">
-        <button
-          md-raised-button
-          (click)="approveItem($event, 'posts', post)"
-          *ngIf="currentAdmin.role !== 'editor'">
-          Approve
-        </button>
-        <button
-          md-raised-button
-          (click)="deleteItem($event, 'posts', post.$key)"
-          *ngIf="currentAdmin.role !== 'editor' || post.updatedBy === currentAdmin.uid">
-          Delete
-        </button>
+        <div class="actions">
+          <button
+            md-raised-button
+            (click)="approveItem($event, 'posts', post)"
+            *ngIf="currentAdmin.role !== 'editor'">
+            Approve
+          </button>
+          <button
+            md-raised-button
+            (click)="deleteItem($event, 'posts', post.$key)"
+            *ngIf="currentAdmin.role !== 'editor' || post.updatedBy === currentAdmin.uid">
+            Delete
+          </button>
+        </div>
       </div>
     </md-card>
   </section>

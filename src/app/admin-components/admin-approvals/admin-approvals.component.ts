@@ -13,6 +13,7 @@ import { GlobalService } from '../../services/global.service';
 export class AdminApprovalsComponent {
 
   productApprovals: FirebaseListObservable<any>;
+  categoryApprovals: FirebaseListObservable<any>;
   pageApprovals: FirebaseListObservable<any>;
   postApprovals: FirebaseListObservable<any>;
   selectedOption: any;
@@ -27,6 +28,7 @@ export class AdminApprovalsComponent {
     public globalService: GlobalService
   ) {
     this.productApprovals = db.list('/approvals/products');
+    this.categoryApprovals = db.list('/approvals/categories');
     this.pageApprovals = db.list('/approvals/pages');
     this.postApprovals = db.list('/approvals/posts');
     this.admins = db.list('/admins');

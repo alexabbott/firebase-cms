@@ -71,6 +71,7 @@ const routes: Routes = [
           { path: 'add-product-category', component: AddProductCategoryComponent },
           { path: 'add-admin', component: AddAdminComponent, canActivate: [SuperAdminGuard] },
           { path: 'approvals', component: AdminApprovalsComponent },
+          { path: 'category-approval/:key', component: AddProductCategoryComponent },
           { path: 'page-approval/:key', component: AddPageComponent },
           { path: 'product-approval/:key', component: AddProductComponent },
           { path: 'post-approval/:key', component: AddPostComponent },

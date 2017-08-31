@@ -9,6 +9,9 @@
       ".indexOn": "email"
     },
     "approvals": {
+      "categories": {
+        ".indexOn": ["updatedBy", "entityKey"]
+      },
       "products": {
         ".indexOn": ["updatedBy", "entityKey"]
       },
@@ -20,7 +23,7 @@
       }
     },
     "orders": {
-      ".indexOn": "uid"
+      ".indexOn": ["uid", "rdate"]
     },
     "products": {
       ".indexOn": ["published", "category", "rdateUpdated"]
