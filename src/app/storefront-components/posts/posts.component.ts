@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'posts',
@@ -8,14 +9,22 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class PostsComponent implements OnInit {
   posts: FirebaseListObservable<any[]>;
+  searchTerm: string;
 
-  constructor(db: AngularFireDatabase) {
+  constructor(
+    public db: AngularFireDatabase,
+    public globalService: GlobalService
+  ) {
     this.posts = db.list('/posts', {
       query: {
         orderByChild: 'published',
         equalTo: true,
         limitToLast: 20,
       }
+    });
+
+    this.globalService.searchTerm.subscribe((term) => {
+      this.searchTerm = term;
     });
   }
 

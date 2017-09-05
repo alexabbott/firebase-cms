@@ -7,6 +7,7 @@ export class GlobalService {
   public admin = new BehaviorSubject(null);
   public cart = new BehaviorSubject({});
   public order = new BehaviorSubject({});
+  public searchTerm = new BehaviorSubject('');
 
   public slugify(text: string) {
     return text.toString().toLowerCase()

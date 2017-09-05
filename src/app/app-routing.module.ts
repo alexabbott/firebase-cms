@@ -39,7 +39,8 @@ import { AdminProductCategoriesComponent } from 'app/admin-components/admin-prod
 import { AddProductCategoryComponent } from 'app/admin-components/add-product-category/add-product-category.component';
 import { ProductCategoryComponent } from 'app/storefront-components/product-category/product-category.component';
 import { ProductCategoriesComponent } from 'app/storefront-components/product-categories/product-categories.component';
-import { AdminApprovalsComponent } from './admin-components/admin-approvals/admin-approvals.component';
+import { AdminApprovalsComponent } from 'app/admin-components/admin-approvals/admin-approvals.component';
+import { SearchResultsComponent } from 'app/storefront-components/search-results/search-results.component';
 
 import { AuthGuard } from 'app/services/auth.guard';
 import { SuperAdminGuard } from 'app/services/super-admin.guard';
@@ -120,6 +121,7 @@ const routes: Routes = [
   { path: 'blog', component: PostsComponent },
   { path: 'blog/:url', component: PostComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'search', component: SearchResultsComponent },
 ];
 
 @NgModule({

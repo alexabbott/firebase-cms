@@ -24,11 +24,33 @@
         list-style-type: none;
         margin-left: 25px;
 
+        &.user-nav {
+            margin-right: -30px;
+
+            @include tablet {
+                margin-right: 0;
+            }
+        }
+
         &.cart-nav {
             margin-left: -20px;
 
             @include tablet {
-                margin-left: 25px;
+                margin-left: 15px;
+            }
+        }
+
+        &.search-nav {
+            margin-left: 15px;
+            margin-right: 35px;
+
+            @include tablet {
+                margin-right: 0;
+            }
+
+            md-icon {
+                display:  inline-block;
+                transform: translateY(7px);
             }
         }
     }
@@ -65,5 +87,25 @@
 
     .mobile-nav-item {
         margin: 20px 0;
+    }
+}
+
+.search {
+    @extend %transition;
+    background: $color-white;
+    box-sizing: border-box;
+    box-shadow: 0 0 12px 2px rgba(0,0,0,.1);
+    padding: 0px 20px;
+    position: fixed;
+    right: 0;
+    top: -20px;
+    transition-property: transform;
+
+    &.show {
+        transform: translateY(74px);
+
+        @include tablet {
+            transform: translateY(84px);
+        }
     }
 }

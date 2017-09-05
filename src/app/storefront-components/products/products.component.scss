@@ -23,7 +23,11 @@
     cursor: pointer;
     height: 235px;
     margin: 0 auto;
-    width: 80%;
+    width: auto;
+
+    @include tablet {
+        width: 80%;
+    }
 
     .price {
         color: $color-grey;

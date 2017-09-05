@@ -1,6 +1,6 @@
 <div class="container">
   <div class="grid">
-    <div class="grid-tile" *ngFor="let product of products | async">
+    <div class="grid-tile" *ngFor="let product of products | async | search: searchTerm">
       <md-card routerLink="/product/{{product.url}}" class="product">
         <img [src]="getProductImage(product)">
         <div class="product-content">
@@ -9,5 +9,6 @@
         </div>
       </md-card>
     </div>
+    <p class="block-center" *ngIf="searchTerm && !(products | async | search: searchTerm)?.length">No products</p>
   </div>
 </div>

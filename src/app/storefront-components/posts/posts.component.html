@@ -1,6 +1,5 @@
 <div class="container">
-  <h3>New Posts</h3>
-  <md-card routerLink="/blog/{{post.url}}" class="post" *ngFor="let post of posts | async | sort:['-date']">
+  <md-card routerLink="/blog/{{post.url}}" class="post" *ngFor="let post of posts | async  | search: searchTerm | sort:['-date']">
     <img [src]="getPostImage(post)">
     <div class="post-content">
       <h3><a routerLink="/blog/{{post.url}}">{{post.title}}</a></h3>
@@ -10,4 +9,5 @@
       </p>
     </div>
   </md-card>
+  <p class="block-center" *ngIf="searchTerm && !(posts | async | search: searchTerm)?.length">No posts</p>
 </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Router }    from '@angular/router';
+import { Router, ActivatedRoute }    from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -17,9 +17,12 @@ export class AppComponent {
   nav: FirebaseListObservable<any>;
   theme: FirebaseObjectObservable<any>;
   user: Observable<firebase.User>;
+  searchTerm: string;
+  showSearch: boolean;
 
   constructor(
     public router: Router,
+    public route: ActivatedRoute,
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
@@ -62,5 +65,16 @@ export class AppComponent {
     this.globalService.order.next(null);
     this.localCart.clearAll();
     this.afAuth.auth.signOut();
+  }
+
+  toggleSearch() {
+    this.showSearch = !this.showSearch;
+  }
+
+  checkRoute() {
+    this.globalService.searchTerm.next(this.searchTerm);
+    if (location.pathname === '/') {
+      this.router.navigateByUrl('search');
+    }
   }
 }

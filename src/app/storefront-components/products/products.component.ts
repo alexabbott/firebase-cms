@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'products',
@@ -8,8 +9,12 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class ProductsComponent implements OnInit {
   products: FirebaseListObservable<any[]>;
+  searchTerm: string;
 
-  constructor(public db: AngularFireDatabase) {
+  constructor(
+    public db: AngularFireDatabase,
+    public globalService: GlobalService
+  ) {
     this.products = db.list('/products', {
       query: {
         orderByChild: 'published',
@@ -17,6 +22,13 @@ export class ProductsComponent implements OnInit {
         limitToLast: 20,
       }
     });
+
+    this.globalService.searchTerm.subscribe((term) => {
+      this.searchTerm = term;
+    });
+  }
+
+  ngOnInit() {
   }
 
   getProductImage(product:any) {
@@ -26,8 +38,4 @@ export class ProductsComponent implements OnInit {
       return '../../assets/placeholder.jpg';
     }
   }
-
-  ngOnInit() {
-  }
-
 }

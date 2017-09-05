@@ -1,5 +1,5 @@
 <md-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
-    <md-icon class="material-icons menu-trigger" (click)="mobilenav.open()">menu</md-icon>
+    <md-icon class="material-icons menu-trigger" (click)="mobilenav.toggle()">menu</md-icon>
     <h2><a routerLink="/" (click)="mobilenav.close()">{{ (theme | async)?.siteName }}</a></h2>
     <span class="fill-space"></span>
     <ul>
@@ -8,10 +8,13 @@
                 <a routerLink="{{item.url}}">{{item.label}}</a>
             </li>
         </span>
+        <li class="search-nav" (click)="toggleSearch()">
+            <md-icon>search</md-icon>
+        </li>
         <li class="cart-nav" (click)="mobilenav.close()">
             <cart-icon></cart-icon>
         </li>
-        <li *ngIf="(user | async)?.displayName">
+        <li *ngIf="(user | async)?.displayName" class="user-nav">
             <img src="{{ (user | async)?.photoURL }}" class="user-photo" [mdMenuTriggerFor]="userMenu">
             <md-menu #userMenu="mdMenu">
                 <button md-menu-item routerLink="/account/orders">My Account</button>
@@ -31,6 +34,8 @@
             </a>
         </div>
     </md-sidenav>
-
     <router-outlet></router-outlet>
 </md-sidenav-container>
+<md-input-container class="search" [ngClass]="{ 'show': showSearch }" floatPlaceholder="never">
+    <input mdInput placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="checkRoute()">
+</md-input-container>

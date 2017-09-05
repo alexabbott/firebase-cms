@@ -74,6 +74,7 @@ import { ProductCategoryComponent } from './storefront-components/product-catego
 import { ProductCategoriesComponent } from './storefront-components/product-categories/product-categories.component';
 import { AdminApprovalsComponent } from './admin-components/admin-approvals/admin-approvals.component';
 import { ApproveDialogComponent } from './admin-components/approve-dialog/approve-dialog.component';
+import { SearchResultsComponent } from './storefront-components/search-results/search-results.component';
 
 // services
 import { GlobalService } from './services/global.service';
@@ -92,6 +93,9 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { GetUserPipe } from './pipes/getUser.pipe';
 import { ObjectCountPipe } from './pipes/object-count.pipe';
 import { GetKeyPipe } from './pipes/get-key.pipe';
+import { SearchPipe } from './pipes/search.pipe';
+
+// directives
 import { StopPropagationDirective } from './directives/stop-propagation.directive';
 
 firebase.initializeApp(environment.firebase);
@@ -174,7 +178,9 @@ firebase.initializeApp(environment.firebase);
     GetKeyPipe,
     AdminApprovalsComponent,
     ApproveDialogComponent,
-    StopPropagationDirective
+    StopPropagationDirective,
+    SearchPipe,
+    SearchResultsComponent
   ],
   entryComponents: [DeleteDialogComponent, ApproveDialogComponent],
   providers: [ GlobalService, AuthGuard, SuperAdminGuard, AdminGuard, WindowRefService, LocalCartService ],

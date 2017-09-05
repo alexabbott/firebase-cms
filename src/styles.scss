@@ -136,6 +136,12 @@ admin .mat-sidenav-content {
     display: block;
 }
 
+.block-center {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .fill-space {
     flex: 1 1 auto;
 }
