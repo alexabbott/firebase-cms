@@ -5,8 +5,8 @@
     <ul>
         <span *ngFor="let item of nav | async" class="nav-item">
             <li *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
-                <a *ngIf="!item.url.includes('http') && !item.url.includes('www')" routerLink="{{item.url}}" [ngClass]="{ 'color-main': router.url.includes(item.url) }">{{item.label}}</a>
-                <a *ngIf="item.url.includes('http') || item.url.includes('www')"  href="{{item.url}}" target="_blank">{{item.label}}</a>
+                <a *ngIf="!item.url.includes('.')" routerLink="{{item.url}}" [ngClass]="{ 'color-main': router.url.includes(item.url) }">{{item.label}}</a>
+                <a *ngIf="item.url.includes('.')"  href="{{item.url}}" target="_blank">{{item.label}}</a>
             </li>
         </span>
         <li class="search-nav">

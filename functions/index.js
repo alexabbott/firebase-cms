@@ -136,3 +136,37 @@ function reportError(err, context = {}) {
 function userFacingMessage(error) {
   return error.type ? error.message : 'An error occurred, developers have been alerted';
 }
+
+const nodemailer = require('nodemailer');
+// Configure the email transport using the default SMTP transport and a GMail account.
+// For other types of transports such as Sendgrid see https://nodemailer.com/transports/
+// TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
+const gmailEmail = encodeURIComponent(functions.config().gmail.email);
+const gmailPassword = encodeURIComponent(functions.config().gmail.password);
+const mailTransport = nodemailer.createTransport(
+    `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
+
+// Sends an email confirmation when a user changes his mailing list subscription.
+exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(event => {
+  const snapshot = event.data;
+  const val = snapshot.val();
+
+  if (!snapshot.changed('active')) {
+    return;
+  }
+
+  const mailOptions = {
+    from: '"FireShop" <noreply@firebase.com>',
+    to: val.email
+  };
+
+  if (!val.active) {
+    mailOptions.subject = 'FireShop Admin Confirmation';
+    mailOptions.text = 'You have been added as an admin to FireShop. Sign in now: https://fir-cms-76f54.firebaseapp.com/login';
+    return mailTransport.sendMail(mailOptions).then(() => {
+      console.log('New admin confirmation email sent to:', val.email);
+    }).catch(error => {
+      console.error('There was an error while sending the email:', error);  
+    });
+  }
+});
