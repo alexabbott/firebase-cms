@@ -19,4 +19,5 @@
       <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="{{ orderLink }}/{{ order.$key }}">Edit</button>
     </div>
   </md-card>
+  <p *ngIf="!(orders | async)?.length" class="block-center">No orders</p>
 </div>

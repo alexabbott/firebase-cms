@@ -24,6 +24,7 @@ import { AddProductCategoryComponent } from 'app/admin/admin-components/add-prod
 import { AdminApprovalsComponent } from 'app/admin/admin-components/admin-approvals/admin-approvals.component';
 import { ApproveDialogComponent } from 'app/admin/admin-components/approve-dialog/approve-dialog.component';
 import { OrderComponent } from 'app/storefront-components/order/order.component';
+import { OrdersComponent } from 'app/storefront-components/orders/orders.component';
 
 import { AuthGuard } from 'app/services/auth.guard';
 import { SuperAdminGuard } from 'app/services/super-admin.guard';
@@ -48,7 +49,7 @@ const routes: Routes = [
           { path: 'product-approval/:key', component: AddProductComponent },
           { path: 'post-approval/:key', component: AddPostComponent },
           { path: 'product-categories', component: AdminProductCategoriesComponent },
-          { path: 'customer/:key', component: AdminCustomerComponent, canActivate: [AdminGuard] },
+          { path: 'customer/:key', component: OrdersComponent, canActivate: [AdminGuard] },
           { path: 'customers', component: AdminCustomersComponent, canActivate: [AdminGuard] },
           { path: 'edit-admin/:key', component: AddAdminComponent, canActivate: [SuperAdminGuard] },
           { path: 'edit-customer/:uid', component: AddCustomerComponent, canActivate: [AdminGuard] },
