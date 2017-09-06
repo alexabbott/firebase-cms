@@ -5,13 +5,14 @@
     <ul>
         <span *ngFor="let item of nav | async" class="nav-item">
             <li *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
-                <a routerLink="{{item.url}}">{{item.label}}</a>
+                <a *ngIf="!item.url.includes('http') && !item.url.includes('www')" routerLink="{{item.url}}" [ngClass]="{ 'color-main': router.url.includes(item.url) }">{{item.label}}</a>
+                <a *ngIf="item.url.includes('http') || item.url.includes('www')"  href="{{item.url}}" target="_blank">{{item.label}}</a>
             </li>
         </span>
         <li class="search-nav">
-            <md-icon routerLink="/search">search</md-icon>
+            <md-icon routerLink="/search" [ngClass]="{ 'color-main': router.url.includes('search') }">search</md-icon>
         </li>
-        <li class="cart-nav" (click)="mobilenav.close()">
+        <li class="cart-nav" (click)="mobilenav.close()" [ngClass]="{ 'color-main': router.url.includes('cart') }">
             <cart-icon></cart-icon>
         </li>
         <li *ngIf="(user | async)?.displayName" class="user-nav">

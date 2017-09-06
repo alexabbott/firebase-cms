@@ -8,11 +8,17 @@ import { GlobalService } from '../../services/global.service';
 })
 export class SearchResultsComponent implements OnInit {
   @ViewChild('searchit') private elementRef: ElementRef;
+  searchTerm: string;
 
   constructor(
     public globalService: GlobalService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    this.globalService.searchTerm.next('');
+    this.globalService.searchTerm.subscribe((term) => {
+      this.searchTerm = term;
+    });
+  }
 
   ngOnInit() {
 

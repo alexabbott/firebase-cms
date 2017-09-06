@@ -45,7 +45,8 @@ a {
         color: $color-grey;
         transition-property: color;
 
-        &:hover {
+        &:hover,
+        &.color-main {
             color: $color-main;
         }
     }
@@ -158,6 +159,10 @@ admin .mat-sidenav-content {
     color: $color-grey;
     font-size: .7em;
     margin-top: 10px;
+}
+
+.color-main {
+    color: $color-main;
 }
 
 /*dnd*/
