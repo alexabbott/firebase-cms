@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute }    from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -19,6 +19,7 @@ export class AppComponent {
   user: Observable<firebase.User>;
   searchTerm: string;
   showSearch: boolean;
+  @ViewChild('searchMenuTrigger') menu: any;
 
   constructor(
     public router: Router,
@@ -67,14 +68,21 @@ export class AppComponent {
     this.afAuth.auth.signOut();
   }
 
-  toggleSearch() {
-    this.showSearch = !this.showSearch;
-  }
-
   checkRoute() {
     this.globalService.searchTerm.next(this.searchTerm);
     if (location.pathname === '/') {
       this.router.navigateByUrl('search');
+    }
+  }
+
+  closeMenu() {
+    this.menu.closeMenu();
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.closeMenu();
     }
   }
 }
