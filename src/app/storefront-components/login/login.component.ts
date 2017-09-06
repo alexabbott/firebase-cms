@@ -54,7 +54,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  ngOnInit() {
+  }
+
+  loginWithGoogle() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
@@ -63,14 +66,31 @@ export class LoginComponent implements OnInit {
   }
 
   signUpWithEmail() {
+    this.validateFields();
     this.afAuth.auth.createUserWithEmailAndPassword(this.newEmail, this.newPassword);
   }
 
   loginWithEmail() {
+    this.validateFields();
     this.afAuth.auth.signInWithEmailAndPassword(this.newEmail, this.newPassword);
   }
 
-  ngOnInit() {
+  validateFields() {
+    if (!this.newEmail) {
+      let snackBarRef = this.snackBar.open('Email is missing', 'OK!', {
+        duration: 3000
+      });
+      return;
+    } else if (!this.newPassword) {
+      let snackBarRef = this.snackBar.open('Password is missing', 'OK!', {
+        duration: 3000
+      });
+      return;
+    } else if (this.newPassword.length < 6) {
+      let snackBarRef = this.snackBar.open('Password must be at least 6 characters', 'OK!', {
+        duration: 3000
+      });
+      return;
+    }
   }
-
 }

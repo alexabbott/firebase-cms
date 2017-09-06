@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 import { MaterialComponentsModule } from 'app/materialcomponents.module';
 import { SharedModule } from 'app/shared.module';
 import { AppRoutingModule } from 'app/app-routing.module';
+import 'hammerjs';
 
 // storefront components
 import { PostsComponent } from './storefront-components/posts/posts.component';
