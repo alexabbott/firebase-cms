@@ -1,0 +1,26 @@
+@import '../../../../variables.scss';
+
+.category-form {
+    box-sizing: border-box;
+    padding: 0 30px 30px 30px;
+}
+
+.highlight.small {
+    cursor: pointer;
+    margin-bottom: 30px;
+    opacity: .7;
+
+    .action {
+        color: $color-white;
+        font-weight: 800;
+        margin-left: auto;
+    }
+}
+
+button {
+    margin-top: 30px;
+}
+
+.mat-input-container {
+    display: block;
+}

@@ -1,0 +1,24 @@
+@import '../../../../variables.scss';
+
+.mat-card {
+    cursor: move !important;
+}
+
+.mat-icon {
+    color: $color-grey;
+    display: block;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.button-add-menu {
+    margin-top: 20px;
+}
+
+md-toolbar {
+    margin-bottom: 5px;
+}
+
+.actions {
+    float: right;
+}

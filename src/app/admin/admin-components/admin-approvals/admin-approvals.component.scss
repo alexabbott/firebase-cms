@@ -1,0 +1,59 @@
+@import '../../../../variables.scss';
+
+.button-container {
+    h2 {
+        display: inline-block;
+    }
+}
+
+.highlight {
+    div {
+        &:nth-of-type(1) {
+            width: 25%;
+        }
+
+        &:nth-of-type(2) {
+            width: 22%;
+        }
+    }
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+.approval {
+    cursor: pointer;
+    padding: 24px 16px;
+
+    .content {
+        display: inline-block;
+        width: 100%;
+
+        a {
+            float: left;
+            width: 25%;
+        }
+
+        .date {
+            color: $color-grey;
+            float: left;
+            font-size: .8em;
+            width: 22%;
+        }
+
+        .updated-by {
+            display: inline-block;;
+            font-size: .8em;
+            margin-right: 20px;
+            width: 25%;
+        }
+    }
+
+    .actions {
+        display: inline-block;
+        text-align: right;
+        vertical-align: top;
+        width: 24%;
+    }
+}

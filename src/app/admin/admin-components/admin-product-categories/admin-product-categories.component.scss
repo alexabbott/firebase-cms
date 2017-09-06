@@ -1,0 +1,37 @@
+@import '../../../../variables.scss';
+
+.button-container {
+    h2 {
+        display: inline-block;
+    }
+
+    button {
+        float: right;
+        margin: 18px 30px 30px 30px;
+    }
+}
+
+.category {
+    cursor: pointer;
+
+    .content {
+        display: inline-block;
+        width: calc(100% - 410px);
+
+        h3 {
+            margin: 0 0 10px 0;
+        }
+    }
+
+    .publish {
+        float: right;
+        text-align: right;
+        vertical-align: top;
+        width: 400px;
+    }
+}
+
+.edit {
+    display: inline-block;
+    text-align: center;
+}
