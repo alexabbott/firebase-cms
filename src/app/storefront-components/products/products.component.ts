@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Router } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    public router: Router,
   ) {
     this.products = db.list('/products', {
       query: {
@@ -29,6 +31,9 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url.includes('product')) {
+      this.globalService.searchTerm.next('');
+    }
   }
 
   getProductImage(product:any) {

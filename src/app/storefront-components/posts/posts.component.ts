@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { GlobalService } from '../../services/global.service';
 
@@ -13,7 +14,8 @@ export class PostsComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    public router: Router,
   ) {
     this.posts = db.list('/posts', {
       query: {
@@ -28,14 +30,17 @@ export class PostsComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    if (this.router.url.includes('post')) {
+      this.globalService.searchTerm.next('');
+    }
+  }
+
   getPostImage(post:any) {
     if (post.thumbnail) {
       return post.thumbnail;
     } else {
       return '../../assets/placeholder.jpg';
     }
-  }
-
-  ngOnInit() {
   }
 }
