@@ -1,3 +1,6 @@
+<md-input-container class="search-big">
+    <input mdInput placeholder="Search" (ngModelChange)="performSearch($event)" ngModel #searchit>
+</md-input-container>
 <md-toolbar class="highlight">Products</md-toolbar>
 <products></products>
 

@@ -9,12 +9,7 @@
             </li>
         </span>
         <li class="search-nav">
-            <md-icon [mdMenuTriggerFor]="searchMenu" #searchMenuTrigger="mdMenuTrigger">search</md-icon>
-            <md-menu #searchMenu="mdMenu">
-                <md-input-container class="search" stop-propagation floatPlaceholder="never">
-                    <input mdInput placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="checkRoute()" (keyup.enter)="closeMenu()">
-                </md-input-container>
-            </md-menu>
+            <md-icon routerLink="/search">search</md-icon>
         </li>
         <li class="cart-nav" (click)="mobilenav.close()">
             <cart-icon></cart-icon>

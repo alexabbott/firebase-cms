@@ -25,6 +25,9 @@
     "orders": {
       ".indexOn": ["uid", "rdate"]
     },
+    "pages": {
+      ".indexOn": ["rdateUpdated", "url"]
+    },
     "products": {
       ".indexOn": ["published", "category", "rdateUpdated"]
     },

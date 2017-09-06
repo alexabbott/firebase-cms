@@ -31,7 +31,7 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.includes('post')) {
+    if (this.router.url.includes('blog')) {
       this.globalService.searchTerm.next('');
     }
   }

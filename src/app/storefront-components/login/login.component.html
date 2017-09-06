@@ -1,8 +1,8 @@
 <div class="login-frame">
-    <div>
-        <button md-raised-button class="bw block google-login" (click)="loginWithGoogle()" *ngIf="!(admin | async)?.uid">
+    <div *ngIf="!(admin | async)?.uid">
+        <button md-raised-button class="bw block google-login" (click)="loginWithGoogle()">
             <img src="../../assets/google-icon.png">
-            <span *ngIf="showSignUp === false">Log In with Google</span>
+            <span *ngIf="showSignUp === false">Login with Google</span>
             <span *ngIf="showSignUp === true">Sign Up with Google</span>
         </button>
         <div class="block-center">or</div>
@@ -15,7 +15,7 @@
             <input mdInput type="password" placeholder="password" minlength="6" [(ngModel)]="newPassword">
         </md-input-container>
         <button md-raised-button class="bw" (click)="loginWithEmail()" *ngIf="showSignUp === false">
-            Log In with Email
+            Login with Email
         </button>
     </div>
     <div *ngIf="!(admin | async)?.uid">
