@@ -18,7 +18,6 @@ import { AdminCustomersComponent } from 'app/admin/admin-components/admin-custom
 import { AddOrderComponent } from 'app/admin/admin-components/add-order/add-order.component';
 import { AddCustomerComponent } from 'app/admin/admin-components/add-customer/add-customer.component';
 import { AdminOrdersComponent } from 'app/admin/admin-components/admin-orders/admin-orders.component';
-import { AdminCustomerComponent } from 'app/admin/admin-components/admin-customer/admin-customer.component';
 import { AdminProductCategoriesComponent } from 'app/admin/admin-components/admin-product-categories/admin-product-categories.component';
 import { AddProductCategoryComponent } from 'app/admin/admin-components/add-product-category/add-product-category.component';
 import { AdminApprovalsComponent } from 'app/admin/admin-components/admin-approvals/admin-approvals.component';
