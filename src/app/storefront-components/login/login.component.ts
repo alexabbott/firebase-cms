@@ -15,10 +15,14 @@ import { MdSnackBar } from '@angular/material';
 export class LoginComponent implements OnInit {
 
   admin: Observable<firebase.User>;
+  newEmail: string;
+  newPassword: string;
+  showSignUp: boolean;
 
   constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public globalService: GlobalService, public router: Router, public snackBar: MdSnackBar) {
 
     this.admin = afAuth.authState;
+    this.showSignUp = false;
     this.admin.subscribe(currentAdmin => {
 
       if (currentAdmin) {
@@ -56,6 +60,14 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  signUpWithEmail() {
+    this.afAuth.auth.createUserWithEmailAndPassword(this.newEmail, this.newPassword);
+  }
+
+  loginWithEmail() {
+    this.afAuth.auth.signInWithEmailAndPassword(this.newEmail, this.newPassword);
   }
 
   ngOnInit() {

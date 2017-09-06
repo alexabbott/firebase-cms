@@ -1,12 +1,29 @@
 .login-frame {
     align-items: center;
     display: flex;
+    flex-direction: column;
     height: 100vh;
     justify-content: center;
 }
 
+.block {
+    display: block;
+}
+
+.sign-up-trigger {
+    margin-top: 20px;
+    text-align: center;
+
+    a {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
 button {
-    max-width: 50%;
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 100%;
 }
 
 button img {

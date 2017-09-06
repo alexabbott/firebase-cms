@@ -36,9 +36,11 @@
 
     img {
         display: block;
+        height: 155px;
         margin: 0 auto;
         max-height: 155px;
         max-width: 100%;
+        object-fit: cover;
     }
 
     .product-content {

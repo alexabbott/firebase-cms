@@ -1,7 +1,38 @@
 <div class="login-frame">
-    <button md-raised-button class="bw" (click)="login()" *ngIf="!(admin | async)?.uid">
-        <img src="../../assets/google-icon.png">
-        Sign In with Google
-    </button>
+    <div>
+        <button md-raised-button class="bw block google-login" (click)="login()" *ngIf="!(admin | async)?.uid">
+            <img src="../../assets/google-icon.png">
+            <span *ngIf="showSignUp === false">Log In with Google</span>
+            <span *ngIf="showSignUp === true">Sign Up with Google</span>
+        </button>
+        <div class="block-center">or</div>
+    </div>
+    <div *ngIf="!(admin | async)?.uid">
+        <md-input-container class="block">
+            <input mdInput type="email" placeholder="email" [(ngModel)]="newEmail">
+        </md-input-container>
+        <md-input-container class="block">
+            <input mdInput type="password" placeholder="password" [(ngModel)]="newPassword">
+        </md-input-container>
+        <button md-raised-button class="bw" (click)="loginWithEmail()" *ngIf="showSignUp === false">
+            Log In with Email
+        </button>
+    </div>
+    <div *ngIf="!(admin | async)?.uid">
+        <div *ngIf="showSignUp === false" class="sign-up-trigger">
+            Don't have an account? <a (click)="showSignUp = true">Sign up</a>
+            <div class="hint block-center">
+                You must be an approved admin to access the admin panel
+            </div>
+        </div>
+        <div *ngIf="showSignUp === true">
+            <button md-raised-button class="bw" (click)="signUpWithEmail()">
+                Sign Up with Email
+            </button>
+        </div>
+    </div>
+    <div *ngIf="showSignUp === true && !(admin | async)?.uid" class="sign-up-trigger">
+        Already have an account? <a (click)="showSignUp = false">Log in</a>
+    </div>
     <button md-button *ngIf="(admin | async)?.uid">Loading...</button>
 </div>

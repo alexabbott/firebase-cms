@@ -154,6 +154,12 @@ admin .mat-sidenav-content {
     color: $color-red;
 }
 
+.hint {
+    color: $color-grey;
+    font-size: .7em;
+    margin-top: 10px;
+}
+
 /*dnd*/
 .dnd-drag-start {
     -moz-transform:scale(0.8);
