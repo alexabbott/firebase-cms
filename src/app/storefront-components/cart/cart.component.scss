@@ -12,9 +12,16 @@ h3,
     @include tablet {
         display: block;
     }
+
+    .quantity {
+        @include tablet {
+            transform: none;
+        }
+    }
 }
 
 .product {
+    min-height: 30px;
     padding: 24px 16px;
 }
 
@@ -24,7 +31,22 @@ h3,
 
     @include tablet {
         float: left;
-        width: 40%;
+        width: 35%;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 70%;
+
+        @include tablet {
+            display: inline-block;
+            height: 50px;
+            margin-top: -8px;
+            object-fit: cover;
+            vertical-align: middle;
+            width: 50px;
+        }
     }
 }
 
@@ -37,6 +59,12 @@ h3,
     @include tablet {
         float: left;
         width: 15%;
+    }
+}
+
+.price {
+    @include tablet {
+        width: 20%;
     }
 }
 
@@ -53,8 +81,8 @@ h3,
     text-align: right;
 
     @include tablet {
-        margin-top: -22px;
         text-align: left;
+        transform: translateY(-22px);
     }
 
     .quantity-label {

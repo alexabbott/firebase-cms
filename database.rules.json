@@ -29,7 +29,7 @@
       ".indexOn": ["rdateUpdated", "url"]
     },
     "products": {
-      ".indexOn": ["published", "category", "rdateUpdated"]
+      ".indexOn": ["published", "category", "rdateUpdated", "url"]
     },
     "posts": {
       ".indexOn": ["published", "url"]

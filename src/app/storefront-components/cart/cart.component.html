@@ -8,14 +8,18 @@
   </md-toolbar>
   <div class="no-items" *ngIf="cartArray.length === 0">No items in the cart. <a routerLink="/products">Keep shopping!</a></div>
   <md-card *ngFor="let item of cartArray" class="product">
-    <div class="item">{{item.title}}</div>
+    <div class="item">
+      <img [src]="item.thumbnail" *ngIf="!review && item.thumbnail">
+      <img src="../../../assets/placeholder.jpg" *ngIf="!review && !item.thumbnail">
+      {{item.title}}
+    </div>
     <div class="price">{{item.price | currency:'USD':true}}</div>
     <div class="quantity">
       <label class="quantity-label">QTY</label>
-      <md-input-container *ngIf="!review">
-        <input mdInput type="number" min="1" [(ngModel)]="item.quantity" (change)="updateCart(item)">
+      <md-input-container>
+        <input mdInput type="number" min="1" [(ngModel)]="item.quantity" (change)="updateCart(item)" [disabled]="review">
       </md-input-container>
-      <span *ngIf="review">{{item.quantity}}</span>
+      <!-- <span *ngIf="review">{{item.quantity}}</span> -->
     </div>
     <div class="total">{{item.total | currency:'USD':true}}</div>
     <div class="remove" *ngIf="!review">

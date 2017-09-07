@@ -146,7 +146,7 @@ const gmailPassword = encodeURIComponent(functions.config().gmail.password);
 const mailTransport = nodemailer.createTransport(
     `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
 
-// Sends an email confirmation when a user changes his mailing list subscription.
+// Sends an email confirmation when a user is added as an admin
 exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(event => {
   const snapshot = event.data;
   const val = snapshot.val();
@@ -161,12 +161,39 @@ exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(e
   };
 
   if (!val.active) {
-    mailOptions.subject = 'FireShop Admin Confirmation';
-    mailOptions.text = 'You have been added as an admin to FireShop. Sign in now: https://fir-cms-76f54.firebaseapp.com/login';
+    mailOptions.subject = 'Admin Confirmation';
+    mailOptions.html = '<h2>FireShop</h2><br>You have been added as an admin to FireShop. <br><br>Sign in now: https://' + process.env.GCLOUD_PROJECT + '.firebaseapp.com/admin';
     return mailTransport.sendMail(mailOptions).then(() => {
       console.log('New admin confirmation email sent to:', val.email);
     }).catch(error => {
       console.error('There was an error while sending the email:', error);  
     });
   }
+});
+
+// Sends an email confirmation when a user places an order
+exports.sendOrderConfirmation = functions.database.ref('/users/{uid}/orders/{{orderid}}').onCreate(event => {
+  const snapshot = event.data;
+  const snapval = snapshot.val();
+  console.log('val', snapval);
+  return event.data.ref.parent.parent.once("value").then(snap => {
+    const user = snap.val();
+    const email = user.email;
+
+    if (email) {
+      const mailOptions = {
+        from: '"FireShop" <noreply@firebase.com>',
+        to: email
+      };
+      mailOptions.subject = 'Order Confirmation';
+      mailOptions.html = '<h2>FireShop</h2><br>Order #' + snapval + '. This is a confirmation email for you order on FireShop. <br><br>';
+      mailOptions.html += 'View order details and status by logging in: https://' + process.env.GCLOUD_PROJECT + '.firebaseapp.com/account/orders';
+      return mailTransport.sendMail(mailOptions).then(() => {
+        console.log('New order confirmation email sent to:', email);
+      }).catch(error => {
+        console.error('There was an error while sending the email:', error);
+      });
+    }
+  });
+
 });
