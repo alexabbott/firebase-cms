@@ -23,7 +23,11 @@
       }
     },
     "orders": {
-      ".indexOn": ["uid", "rdate"]
+      ".indexOn": ["uid", "rdate"],
+      "$order_id": {
+        ".read": "auth.uid === data.child('uid').val()",
+        ".write": true
+      }
     },
     "pages": {
       ".indexOn": ["rdateUpdated", "url"]

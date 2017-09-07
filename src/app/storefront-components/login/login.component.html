@@ -21,9 +21,6 @@
     <div *ngIf="!(admin | async)?.uid">
         <div *ngIf="showSignUp === false" class="sign-up-trigger">
             Don't have an account? <a routerLink="/register">Sign up</a>
-            <div class="hint block-center">
-                You must be an approved admin to access the admin panel
-            </div>
         </div>
         <div *ngIf="showSignUp === true">
             <button md-raised-button class="bw" (click)="signUpWithEmail()">
@@ -33,6 +30,9 @@
     </div>
     <div *ngIf="showSignUp === true && !(admin | async)?.uid" class="sign-up-trigger">
         Already have an account? <a routerLink="/login">Log in</a>
+    </div>
+    <div class="hint block-center" *ngIf="!(admin | async)?.uid">
+        You must be an approved admin to access the admin panel
     </div>
     <button md-button *ngIf="(admin | async)?.uid">Loading...</button>
 </div>

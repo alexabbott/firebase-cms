@@ -166,7 +166,7 @@ exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(e
     return mailTransport.sendMail(mailOptions).then(() => {
       console.log('New admin confirmation email sent to:', val.email);
     }).catch(error => {
-      console.error('There was an error while sending the email:', error);  
+      console.error('There was an error while sending the email:', error);
     });
   }
 });
