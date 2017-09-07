@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +48,7 @@ firebase.initializeApp(environment.firebase);
     AngularFireModule.initializeApp(environment.firebase, 'firebase-cms'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     MaterialComponentsModule,
