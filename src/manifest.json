@@ -5,7 +5,7 @@
     "scope": "/",
     "display": "standalone",
     "start_url": "./?utm_source=web_app_manifest",
-    "short_name": "FS",
+    "short_name": "FireShop",
     "theme_color": "#2E2E2E",
     "description": "",
     "orientation": "any",
