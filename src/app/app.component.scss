@@ -5,8 +5,13 @@
         text-decoration: none;
     }
 
-    h2 a {
-        color: $color-main;
+    h1 {
+        font-weight: 800;
+        margin-left: 11px;
+
+        a {
+            color: $color-main;
+        }
     }
 
     md-icon {

@@ -1,6 +1,6 @@
 <md-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
     <md-icon class="material-icons menu-trigger" (click)="mobilenav.toggle()">menu</md-icon>
-    <h2><a routerLink="/" (click)="mobilenav.close()">{{ (theme | async)?.siteName }}</a></h2>
+    <h1><a routerLink="/" (click)="mobilenav.close()">{{ (theme | async)?.siteName }}</a></h1>
     <span class="fill-space"></span>
     <ul>
         <span *ngFor="let item of nav | async" class="nav-item">
