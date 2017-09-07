@@ -50,6 +50,7 @@ const routes: Routes = [
   },
   { path: 'category/:slug', component: ProductCategoryComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: LoginComponent },
   { path: 'page/:url', component: PageComponent },
   { path: 'product/:url', component: ProductComponent },
   { path: 'products', component: ProductsComponent },

@@ -31,7 +31,13 @@ export class LoginComponent implements OnInit {
   ) {
 
     this.admin = afAuth.authState;
-    this.showSignUp = false;
+
+    if (this.router.url.includes('login')) {
+      this.showSignUp = false;
+    } else if (this.router.url.includes('register')) {
+      this.showSignUp = true;
+    }
+
     this.admin.subscribe(currentAdmin => {
 
       if (currentAdmin) {

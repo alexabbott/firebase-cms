@@ -162,7 +162,7 @@ exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(e
 
   if (!val.active) {
     mailOptions.subject = 'Admin Confirmation';
-    mailOptions.html = '<h2>FireShop</h2>You have been added as an admin to FireShop. <br><br>Sign in now: https://' + process.env.GCLOUD_PROJECT + '.firebaseapp.com/admin';
+    mailOptions.html = '<h2>FireShop</h2>You have been added as an admin to FireShop. <br><br>Sign in now: https://' + process.env.GCLOUD_PROJECT + '.firebaseapp.com/register';
     return mailTransport.sendMail(mailOptions).then(() => {
       console.log('New admin confirmation email sent to:', val.email);
     }).catch(error => {

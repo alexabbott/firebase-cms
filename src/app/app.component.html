@@ -10,13 +10,13 @@
             </li>
         </span>
         <li class="search-nav">
-            <md-icon routerLink="/search" [ngClass]="{ 'color-main': router.url.includes('search') }">search</md-icon>
+            <md-icon (click)="mobilenav.close()" routerLink="/search" [ngClass]="{ 'color-main': router.url.includes('search') }">search</md-icon>
         </li>
         <li class="cart-nav" (click)="mobilenav.close()" [ngClass]="{ 'color-main': router.url.includes('cart') }">
             <cart-icon></cart-icon>
         </li>
         <li *ngIf="(user | async)?.displayName" class="user-nav">
-            <img src="{{ (user | async)?.photoURL }}" class="user-photo" [mdMenuTriggerFor]="userMenu">
+            <img src="{{ (user | async)?.photoURL }}" class="user-photo" (click)="mobilenav.close()" [mdMenuTriggerFor]="userMenu">
             <md-menu #userMenu="mdMenu">
                 <button md-menu-item routerLink="/account/orders">My Account</button>
                 <button md-menu-item (click)="logout()">Logout</button>
