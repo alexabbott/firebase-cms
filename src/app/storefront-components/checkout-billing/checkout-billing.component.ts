@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
@@ -18,7 +19,9 @@ export class CheckoutBillingComponent implements OnInit {
     public snackBar: MdSnackBar,
     public router: Router,
     public globalService: GlobalService,
-    public localCart: LocalCartService
+    public localCart: LocalCartService,
+    private title: Title,
+    private meta: Meta
   ) {
     this.states = globalService.states;
     this.order = globalService.order.getValue();
@@ -27,6 +30,15 @@ export class CheckoutBillingComponent implements OnInit {
     }
     if (this.localCart.orderHasItems() && this.localCart.orderHas('billing')) {
       this.order = this.localCart.orderGetItems();
+    }
+  }
+
+  ngOnInit() {
+    this.title.setTitle('Billing');
+    this.meta.addTag({ name: 'description', content: 'Billing info for the order' });
+
+    if (!this.order || this.order === {}) {
+      this.router.navigateByUrl('checkout/shipping');
     }
   }
 
@@ -55,11 +67,4 @@ export class CheckoutBillingComponent implements OnInit {
           });
       }
   }
-
-  ngOnInit() {
-    if (!this.order || this.order === {}) {
-      this.router.navigateByUrl('checkout/shipping');
-    }
-  }
-
 }

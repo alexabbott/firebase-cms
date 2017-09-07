@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from "app/services/localcart.service";
+import { LocalCartService } from 'app/services/localcart.service';
 
 @Component({
   selector: 'checkout-shipping',
@@ -17,7 +18,9 @@ export class CheckoutShippingComponent implements OnInit {
     public snackBar: MdSnackBar,
     public router: Router,
     public globalService: GlobalService,
-    public localCart: LocalCartService
+    public localCart: LocalCartService,
+    private title: Title,
+    private meta: Meta
   ) {
     this.states = globalService.states;
     this.order = globalService.order.getValue();
@@ -27,6 +30,11 @@ export class CheckoutShippingComponent implements OnInit {
     if (this.localCart.orderHasItems() && this.localCart.orderHas('shipping')) {
       this.order = this.localCart.orderGetItems();
     }
+  }
+
+  ngOnInit() {
+    this.title.setTitle('Shipping');
+    this.meta.addTag({ name: 'description', content: 'Enter shipping information for the order' });
   }
 
   goTo(url: string) {
@@ -46,8 +54,4 @@ export class CheckoutShippingComponent implements OnInit {
           });
       }
   }
-
-  ngOnInit() {
-  }
-
 }

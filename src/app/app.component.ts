@@ -5,7 +5,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from './services/global.service';
-import { LocalCartService } from "app/services/localcart.service";
+import { LocalCartService } from 'app/services/localcart.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
-    public localCart: LocalCartService
+    public localCart: LocalCartService,
   ) {
     this.nav = db.list('/menus/nav');
     this.theme = db.object('/theme');

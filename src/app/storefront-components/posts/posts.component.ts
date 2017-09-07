@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { GlobalService } from '../../services/global.service';
@@ -16,6 +17,8 @@ export class PostsComponent implements OnInit {
     public db: AngularFireDatabase,
     public globalService: GlobalService,
     public router: Router,
+    private title: Title,
+    private meta: Meta
   ) {
     this.posts = db.list('/posts', {
       query: {
@@ -31,6 +34,9 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle('Blog');
+    this.meta.addTag({ name: 'description', content: 'View recent blog posts' });
+
     if (this.router.url.includes('blog')) {
       this.globalService.searchTerm.next('');
     }

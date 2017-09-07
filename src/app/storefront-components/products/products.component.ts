@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
@@ -16,6 +17,8 @@ export class ProductsComponent implements OnInit {
     public db: AngularFireDatabase,
     public globalService: GlobalService,
     public router: Router,
+    private title: Title,
+    private meta: Meta
   ) {
     this.products = db.list('/products', {
       query: {
@@ -31,6 +34,9 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle('Products');
+    this.meta.addTag({ name: 'description', content: 'View all products' });
+
     if (this.router.url.includes('product')) {
       this.globalService.searchTerm.next('');
     }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from "app/services/localcart.service";
+import { LocalCartService } from 'app/services/localcart.service';
 
 @Component({
   selector: 'product',
@@ -27,7 +28,9 @@ export class ProductComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     public globalService: GlobalService,
-    public localCart: LocalCartService
+    public localCart: LocalCartService,
+    private title: Title,
+    private meta: Meta
   ) {
     this.user = afAuth.authState;
   }
@@ -43,6 +46,9 @@ export class ProductComponent implements OnInit {
         this.productContent.subscribe(p => {
           if (p[0].published) {
             this.product = p[0];
+
+            this.title.setTitle(this.product.title);
+            this.meta.addTag({ name: 'description', content: 'View product details for ' + this.product.title });
 
             this.globalService.cart.subscribe((cart) => {
               this.globalCart = cart;

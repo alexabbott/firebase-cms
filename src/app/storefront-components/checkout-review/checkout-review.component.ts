@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from "app/services/localcart.service";
+import { LocalCartService } from 'app/services/localcart.service';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'checkout-review',
@@ -21,7 +22,9 @@ export class CheckoutReviewComponent implements OnInit {
     public db: AngularFireDatabase,
     public router: Router,
     public globalService: GlobalService,
-    public localCart: LocalCartService
+    public localCart: LocalCartService,
+    private title: Title,
+    private meta: Meta
   ) {
     this.charges = {};
     this.newCharge = {};
@@ -57,6 +60,11 @@ export class CheckoutReviewComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+    this.title.setTitle('Review');
+    this.meta.addTag({ name: 'description', content: 'Review items and information for the order' });
+  }
+
   confirm() {
     this.submitNewCharge();
     let newKey = Math.abs(this.globalService.hashCode(this.order.date) + this.globalService.hashCode(this.order.shipping.email));
@@ -77,8 +85,4 @@ export class CheckoutReviewComponent implements OnInit {
       amount: Math.floor(this.order.total * 100)
     });
   }
-
-  ngOnInit() {
-  }
-
 }

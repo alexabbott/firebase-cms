@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
@@ -13,7 +14,13 @@ export class OrderComponent implements OnInit {
   admin: boolean;
   customers: FirebaseListObservable<any>;
 
-  constructor(public db: AngularFireDatabase, public route: ActivatedRoute, public router: Router) {
+  constructor(
+    public db: AngularFireDatabase,
+    public route: ActivatedRoute,
+    public router: Router,
+    private title: Title,
+    private meta: Meta
+  ) {
     this.admin = false;
     this.customers = db.list('/users');
   }
@@ -24,22 +31,25 @@ export class OrderComponent implements OnInit {
     }
 
     this.route.params.subscribe((params: Params) => {
-        this.orderContent = this.db.list('/orders', {
-          query: {
-            orderByKey: true,
-            equalTo: params.key
+      this.title.setTitle('Order #' + params.key);
+      this.meta.addTag({ name: 'description', content: 'View the details for an order' });
+
+      this.orderContent = this.db.list('/orders', {
+        query: {
+          orderByKey: true,
+          equalTo: params.key
+        }
+      });
+      this.orderContent.subscribe(o => {
+        if (o[0]) {
+          this.order = o[0];
+        } else {
+          this.order = {
+            title: 'Order Not Found',
+            body: ''
           }
-        });
-        this.orderContent.subscribe(o => {
-          if (o[0]) {
-            this.order = o[0];
-          } else {
-            this.order = {
-              title: 'Order Not Found',
-              body: ''
-            }
-          }
-        });
+        }
+      });
     });
   }
 }

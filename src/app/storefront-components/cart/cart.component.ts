@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }    from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { MdSnackBar } from '@angular/material';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from "app/services/localcart.service";
+import { LocalCartService } from 'app/services/localcart.service';
 
 @Component({
   selector: 'cart',
@@ -26,7 +27,9 @@ export class CartComponent implements OnInit {
     public router: Router,
     public snackBar: MdSnackBar,
     public globalService: GlobalService,
-    public localCart: LocalCartService
+    public localCart: LocalCartService,
+    private title: Title,
+    private meta: Meta
   ) {
     this.user = afAuth.authState;
     this.cartArray = [];
@@ -44,8 +47,16 @@ export class CartComponent implements OnInit {
         }
         globalService.order.next({items: this.cartArray, shipping: {}, billing: {}, total: this.cartTotal});
       }
-
     });
+  }
+
+  ngOnInit() {
+    this.title.setTitle('Cart');
+    this.meta.addTag({ name: 'description', content: 'View and edit the shopping cart' });
+
+    if (this.router.url.includes('review')) {
+      this.review = true;
+    }
   }
 
   updateCart(item) {
@@ -73,10 +84,4 @@ export class CartComponent implements OnInit {
       duration: 3000
     });
   }
-  ngOnInit() {
-    if (this.router.url.includes('review')) {
-      this.review = true;
-    }
-  }
-
 }

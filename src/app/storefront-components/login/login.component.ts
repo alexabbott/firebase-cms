@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router }    from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -19,7 +20,15 @@ export class LoginComponent implements OnInit {
   newPassword: string;
   showSignUp: boolean;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public globalService: GlobalService, public router: Router, public snackBar: MdSnackBar) {
+  constructor(
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public globalService: GlobalService,
+    public router: Router,
+    public snackBar: MdSnackBar,
+    private title: Title,
+    private meta: Meta
+  ) {
 
     this.admin = afAuth.authState;
     this.showSignUp = false;
@@ -55,6 +64,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle('Login');
+    this.meta.addTag({ name: 'description', content: 'Login to the admin panel' });
   }
 
   loginWithGoogle() {

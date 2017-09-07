@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { GlobalService } from '../../services/global.service';
 
 @Component({
@@ -12,7 +13,9 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(
     public globalService: GlobalService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private title: Title,
+    private meta: Meta
   ) {
     this.globalService.searchTerm.next('');
     this.globalService.searchTerm.subscribe((term) => {
@@ -21,7 +24,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.title.setTitle('Search');
+    this.meta.addTag({ name: 'description', content: 'Search products and blog posts' });
   }
 
   public ngAfterViewInit(): void {

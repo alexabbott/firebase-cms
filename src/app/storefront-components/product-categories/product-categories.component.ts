@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
@@ -9,11 +10,17 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 export class ProductCategoriesComponent implements OnInit {
   categories: FirebaseListObservable<any[]>;
 
-  constructor(public db: AngularFireDatabase) {
+  constructor(
+    public db: AngularFireDatabase,
+    private title: Title,
+    private meta: Meta
+  ) {
     this.categories = db.list('/categories');
   }
 
   ngOnInit() {
+    this.title.setTitle('Products');
+    this.meta.addTag({ name: 'description', content: 'Browse products and product categories' });
   }
 
 }

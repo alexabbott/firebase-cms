@@ -6,6 +6,7 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable }
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MdSnackBar } from '@angular/material';
 import { environment } from '../../../environments/environment';
+import { Title, Meta } from '@angular/platform-browser';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -27,7 +28,9 @@ export class CheckoutPaymentComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
     public router: Router,
-    public snackBar: MdSnackBar
+    public snackBar: MdSnackBar,
+    private title: Title,
+    private meta: Meta
   ) {
     this.user = globalService.user.getValue();
     this.order = globalService.order.getValue();
@@ -61,6 +64,12 @@ export class CheckoutPaymentComponent implements OnInit {
     };
   }
 
+  ngOnInit() {
+    this.title.setTitle('Payment');
+    this.meta.addTag({ name: 'description', content: 'Enter credit card information for payment of the order' });
+    (<any>window).Stripe.setPublishableKey(environment.stripe);
+  }
+
   submitNewCreditCard() {
     if (this.newCreditCard.number && this.newCreditCard.cvc && this.newCreditCard.exp_month && this.newCreditCard.exp_year) {
       (<any>window).Stripe.card.createToken({
@@ -92,9 +101,4 @@ export class CheckoutPaymentComponent implements OnInit {
       });
     }
   }
-
-  ngOnInit() {
-    (<any>window).Stripe.setPublishableKey(environment.stripe);
-  }
-
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
@@ -11,7 +12,12 @@ export class PostComponent implements OnInit {
   postContent: any;
   post: any;
 
-  constructor(public db: AngularFireDatabase, public route: ActivatedRoute) {}
+  constructor(
+    public db: AngularFireDatabase,
+    public route: ActivatedRoute,
+    private title: Title,
+    private meta: Meta
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -24,6 +30,8 @@ export class PostComponent implements OnInit {
         this.postContent.subscribe(p => {
           if (p[0].published) {
             this.post = p[0];
+            this.title.setTitle(this.post.title);
+            this.meta.addTag({ name: 'description', content: 'View ' + this.post.title });
           } else {
             this.post = {
               title: 'Post Not Found',

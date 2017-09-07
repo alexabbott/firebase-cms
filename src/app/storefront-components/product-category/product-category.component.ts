@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
@@ -19,7 +20,9 @@ export class ProductCategoryComponent implements OnInit {
   constructor(
     public db: AngularFireDatabase,
     public route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    private title: Title,
+    private meta: Meta
   ) {
     this.categories = db.list('/categories');
     this.products = db.list('/products', {
@@ -60,6 +63,9 @@ export class ProductCategoryComponent implements OnInit {
           this.categoryObject.slug = cat[0].slug;
           this.categoryObject.name = cat[0].name;
           this.categoryObject.products = Object.keys(cat[0].products);
+
+          this.title.setTitle(this.categoryObject.name);
+          this.meta.addTag({ name: 'description', content: 'View all products in the ' + this.categoryObject.name + ' category' });
         });
       });
     }

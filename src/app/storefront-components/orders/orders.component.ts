@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -17,7 +18,15 @@ export class OrdersComponent implements OnInit {
   userObject: any;
   orderLink: String;
 
-  constructor(db: AngularFireDatabase, public globalService: GlobalService, public router: Router, public route: ActivatedRoute, public afAuth: AngularFireAuth) {
+  constructor(
+    db: AngularFireDatabase,
+    public globalService: GlobalService,
+    public router: Router,
+    public route: ActivatedRoute,
+    public afAuth: AngularFireAuth,
+    private title: Title,
+    private meta: Meta
+  ) {
     this.user = afAuth.authState;
     if (!router.url.includes('/admin')) {
       this.user.subscribe(currentUser => {
@@ -53,6 +62,9 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle('Orders');
+    this.meta.addTag({ name: 'description', content: 'View all of your past orders' });
+
     if (this.router.url.includes('/admin/customer')) {
       this.orderLink = '/admin/order';
     } else {
