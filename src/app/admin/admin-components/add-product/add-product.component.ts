@@ -120,7 +120,13 @@ export class AddProductComponent implements OnInit {
 
   handleFiles(e) {
     this.file = e.srcElement.files[0];
-    this.uploadImage();
+    if (this.file.size > 2097152) {
+      let snackBarRef = this.snackBar.open('Images must be 2 MB or less', 'OK!', {
+        duration: 3000
+      });
+    } else {
+      this.uploadImage();
+    }
   }
 
   uploadImage() {

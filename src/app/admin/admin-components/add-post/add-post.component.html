@@ -33,7 +33,7 @@
         <span *ngIf="imageUrl">Change</span>
         Featured Image
     </button>
-    <input type="file" id="uploadImage" name="thumbnail" class="native-upload" (change)="handleFiles($event)">
+    <input type="file" id="uploadImage" name="thumbnail" class="native-upload" (change)="handleFiles($event)" accept="image/*">
     <img [src]="imageUrl" *ngIf="imageUrl" class="thumbnail">
     <div class="no-image" *ngIf="!imageUrl">No image chosen</div>
     <div (click)="deleteImage()" *ngIf="imageUrl" class="delete-image">Delete Image</div>

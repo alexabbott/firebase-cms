@@ -5,29 +5,37 @@
   <base href="/">
 
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      connect-src 'self' https://www.googleapis.com ws: wss: http://localhost:4200 https://firebasestorage.googleapis.com;
+      script-src 'unsafe-inline' 'unsafe-eval' 'self' https://cdn.ckeditor.com https://js.stripe.com/v2/ *.firebaseio.com;
+      img-src 'self' data: *.googleusercontent.com https://firebasestorage.googleapis.com https://cdn.ckeditor.com;
+      font-src 'self' https://fonts.gstatic.com;
+      style-src 'unsafe-inline' 'self' https://fonts.googleapis.com https://cdn.ckeditor.com;
+      frame-src https://js.stripe.com *.firebaseio.com;
+  ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2E2E2E">
   <meta name="keywords" content="fireshop, firebase, shop, blog, ecommerce, cms">
-  <!-- Schema.org markup for Google+ -->
+
   <meta itemprop="name" content="FireShop">
   <meta itemprop="description" content="FireShop is an ecommerce and blogging platform built with Firebase">
   <meta itemprop="image" content="/src/assets/icons/icon-144x144.png">
 
-  <!-- Twitter Card data -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="FireShop">
   <meta name="twitter:description" content="FireShop is an ecommerce and blogging platform built with Firebase">
 
-  <!-- Open Graph data -->
   <meta property="og:title" content="FireShop" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://fir-cms-76f54.firebaseapp.com" />
   <meta property="og:image" content="/src/assets/icons/icon-144x144.png" />
   <meta property="og:description" content="FireShop is an ecommerce and blogging platform built with Firebase" />
 
-  <link rel="manifest" href="manifest.json"> 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <script src="https://cdn.ckeditor.com/4.5.11/full-all/ckeditor.js"></script>
   <script src="https://js.stripe.com/v2/"></script>
 </head>
