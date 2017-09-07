@@ -129,9 +129,7 @@ You'll need to manually add your first admin account. To generate a hashcode for
 1. To be able to send emails with your Gmail account: enable access to [Less Secure Apps](https://www.google.com/settings/security/lesssecureapps) and [Display Unlock Captcha](https://accounts.google.com/DisplayUnlockCaptcha). For accounts with 2-step verification enabled [Generate an App Password](https://support.google.com/accounts/answer/185833).
 2. Set the gmail.email and gmail.password Google Cloud environment variables to match the email and password of the Gmail account used to send emails (or the app password if your account has 2-step verification enabled). For this use:
 ```
-{
 firebase functions:config:set gmail.email="<EMAIL ADDRESS>" gmail.password="<PASSWORD>"
-}
 ```
 
 ## Development server
@@ -151,6 +149,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Deploy
+
+Run `npm run deploy` to deploy your project. This command will first build the app for production and then deploy it to firebase hosting.
 
 ## Admin Roles
 
