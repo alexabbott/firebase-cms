@@ -33,8 +33,10 @@ export class OrdersComponent implements OnInit {
       if (currentUser && currentUser.uid) {
         this.userObject = currentUser;
         this.db.object('/users/' + currentUser.uid).subscribe((theuser) => {
-          this.userOrders = Object.keys(theuser.orders);
-           this.orderDates = Object.keys(theuser.orders).map(it => theuser.orders[it])
+          if (theuser && theuser.orders) {
+            this.userOrders = Object.keys(theuser.orders);
+            this.orderDates = Object.keys(theuser.orders).map(it => theuser.orders[it])
+          }
         });
       } else {
         router.navigateByUrl('products');

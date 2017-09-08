@@ -14,6 +14,7 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import 'hammerjs';
 
 // storefront components
+import { OrdersComponent } from './storefront-components/orders/orders.component';
 import { PostsComponent } from './storefront-components/posts/posts.component';
 import { PagesComponent } from './storefront-components/pages/pages.component';
 import { PageComponent } from './storefront-components/page/page.component';
@@ -64,6 +65,7 @@ firebase.initializeApp(environment.firebase);
     CheckoutReviewComponent,
     CheckoutConfirmationComponent,
     LoginComponent,
+    OrdersComponent,
     PagesComponent,
     PageComponent,
     PostComponent,

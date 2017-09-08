@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialComponentsModule } from 'app/materialcomponents.module';
 
-import { OrdersComponent } from 'app/storefront-components/orders/orders.component';
+// Components
 import { OrderComponent } from 'app/storefront-components/order/order.component';
 
 // Pipes
@@ -33,7 +33,6 @@ const pipes = [
   ],
   declarations: [
     ...pipes,
-    OrdersComponent,
     OrderComponent
   ],
   exports: [
