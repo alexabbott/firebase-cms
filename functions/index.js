@@ -172,7 +172,7 @@ exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(e
 });
 
 // Sends an email confirmation when a user places an order
-exports.sendOrderConfirmation = functions.database.ref('/users/{uid}/orders/{{orderId}}').onCreate(event => {
+exports.sendOrderConfirmation = functions.database.ref('/users/{uid}/orders/{orderId}').onCreate(event => {
   const snapshot = event.data;
   return event.data.ref.parent.parent.once("value").then(snap => {
     const user = snap.val();
