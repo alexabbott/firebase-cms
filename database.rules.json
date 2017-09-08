@@ -1,14 +1,18 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true,
     "categories": {
-      ".indexOn": "slug"
+      ".indexOn": "slug",
+      ".read": true,
+      ".write": true
     },
     "admins": {
-      ".indexOn": "email"
+      ".indexOn": "email",
+      ".read": true,
+      ".write": true
     },
     "approvals": {
+      ".read": true,
+      ".write": true,
       "categories": {
         ".indexOn": ["updatedBy", "entityKey"]
       },
@@ -23,20 +27,40 @@
       }
     },
     "orders": {
+      ".read": true,
+      ".write": true,
       ".indexOn": ["uid", "rdate"],
       "$order_id": {
-        ".read": "auth.uid === data.child('uid').val()",
+        ".read": false,
         ".write": true
       }
     },
+    "menus": {
+      ".read": true,
+      ".write": true
+    },
+    "theme": {
+      ".read": true,
+      ".write": true
+    },
     "pages": {
+      ".read": true,
+      ".write": true,
       ".indexOn": ["rdateUpdated", "url"]
     },
     "products": {
+      ".read": true,
+      ".write": true,
       ".indexOn": ["published", "category", "rdateUpdated", "url"]
     },
     "posts": {
+      ".read": true,
+      ".write": true,
       ".indexOn": ["published", "url"]
+    },
+    "users": {
+      ".read": true,
+      ".write": true
     },
     "stripe_customers": {
       "$uid": {

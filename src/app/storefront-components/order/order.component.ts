@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'order',
@@ -34,15 +34,10 @@ export class OrderComponent implements OnInit {
       this.title.setTitle('Order #' + params.key);
       this.meta.addTag({ name: 'description', content: 'View the details for an order' });
 
-      this.orderContent = this.db.list('/orders', {
-        query: {
-          orderByKey: true,
-          equalTo: params.key
-        }
-      });
-      this.orderContent.subscribe(o => {
-        if (o[0]) {
-          this.order = o[0];
+      this.orderContent = this.db.object('/orders/' + params.key);
+      this.orderContent.subscribe((o) => {
+        if (o) {
+          this.order = o;
         } else {
           this.order = {
             title: 'Order Not Found',
