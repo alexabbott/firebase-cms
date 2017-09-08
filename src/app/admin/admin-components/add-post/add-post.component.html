@@ -28,12 +28,14 @@
         <input mdInput placeholder="Title" [(ngModel)]="newTitle">
     </md-input-container>
 
-    <button md-raised-button class="mat-upload-button" onclick="document.getElementById('uploadImage').click()">
-        <span *ngIf="!imageUrl">Upload</span>
-        <span *ngIf="imageUrl">Change</span>
-        Featured Image
-    </button>
-    <input type="file" id="uploadImage" name="thumbnail" class="native-upload" (change)="handleFiles($event)" accept="image/*">
+    <div class="upload-button">
+        <button md-raised-button class="mat-upload-button">
+            <span *ngIf="!imageUrl">Upload</span>
+            <span *ngIf="imageUrl">Change</span>
+            Featured Image
+        </button>
+        <input type="file" id="uploadImage" name="thumbnail" class="native-upload" (change)="handleFiles($event)" accept="image/*">
+    </div>
     <img [src]="imageUrl" *ngIf="imageUrl" class="thumbnail">
     <div class="no-image" *ngIf="!imageUrl">No image chosen</div>
     <div (click)="deleteImage()" *ngIf="imageUrl" class="delete-image">Delete Image</div>

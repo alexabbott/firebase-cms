@@ -39,10 +39,23 @@ ckeditor {
 
 .mat-upload-button {
     margin-top: 10px;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+}
+
+.upload-button {
+    position: relative;
 }
 
 .native-upload {
-    display: none;
+    cursor: pointer;
+    height: 38px;
+    left: 0;
+    outline: 0;
+    position: absolute;
+    top: 10px;
+    width: 208px;
 }
 
 .no-image {
