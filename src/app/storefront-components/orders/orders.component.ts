@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from '../../services/global.service';
@@ -13,13 +13,13 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  orders: FirebaseListObservable<any[]>;
   user: Observable<firebase.User>;
   userObject: any;
-  orderLink: String;
+  userOrders: any;
+  orderDates: any;
 
   constructor(
-    db: AngularFireDatabase,
+    public db: AngularFireDatabase,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
@@ -27,48 +27,23 @@ export class OrdersComponent implements OnInit {
     private title: Title,
     private meta: Meta
   ) {
+    let userOrders;
     this.user = afAuth.authState;
-    if (!router.url.includes('/admin')) {
-      this.user.subscribe(currentUser => {
-        if (currentUser && currentUser.uid) {
-          this.userObject = currentUser;
-          this.orders = db.list('/orders', {
-            query: {
-              orderByChild: 'uid',
-              equalTo: currentUser.uid,
-              limitToLast: 20,
-            }
-          });
-        } else {
-          router.navigateByUrl('products');
-        }
-      });
-    } else {
-      this.route.params.subscribe((params: Params) => {
-        db.object('/users/' + params.key).subscribe(u => {
-          this.userObject = u;
+    this.user.subscribe(currentUser => {
+      if (currentUser && currentUser.uid) {
+        this.userObject = currentUser;
+        this.db.object('/users/' + currentUser.uid).subscribe((theuser) => {
+          this.userOrders = Object.keys(theuser.orders);
+           this.orderDates = Object.keys(theuser.orders).map(it => theuser.orders[it])
         });
-        if (params && params.key) {
-          this.orders = db.list('/orders', {
-            query: {
-              orderByChild: 'uid',
-              equalTo: params.key,
-              limitToLast: 20,
-            }
-          });
-        }
-      });
-    }
+      } else {
+        router.navigateByUrl('products');
+      }
+    });
   }
 
   ngOnInit() {
     this.title.setTitle('Orders');
     this.meta.addTag({ name: 'description', content: 'View all of your past orders' });
-
-    if (this.router.url.includes('/admin/customer')) {
-      this.orderLink = '/admin/order';
-    } else {
-      this.orderLink = '/account/order'
-    }
   }
 }

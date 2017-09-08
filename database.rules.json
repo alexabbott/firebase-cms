@@ -3,16 +3,16 @@
     "categories": {
       ".indexOn": "slug",
       ".read": true,
-      ".write": true
+      ".write": "root.child('admins/'+auth.uid).exists()"
     },
     "admins": {
       ".indexOn": "email",
       ".read": true,
-      ".write": true
+      ".write": "root.child('admins/'+auth.uid).exists()"
     },
     "approvals": {
-      ".read": true,
-      ".write": true,
+      ".read": "root.child('admins/'+auth.uid).exists()",
+      ".write": "root.child('admins/'+auth.uid).exists()",
       "categories": {
         ".indexOn": ["updatedBy", "entityKey"]
       },
@@ -27,54 +27,57 @@
       }
     },
     "orders": {
-      ".read": true,
-      ".write": true,
+      ".read": "root.child('admins/'+auth.uid).exists()",
+      ".write": "auth != null",
       ".indexOn": ["uid", "rdate"],
       "$order_id": {
-        ".read": false,
-        ".write": true
+        ".read": "data.child('uid').val() == auth.uid || root.child('admins/'+auth.uid).exists()"
       }
     },
     "menus": {
       ".read": true,
-      ".write": true
+      ".write": "root.child('admins/'+auth.uid).exists()"
     },
     "theme": {
       ".read": true,
-      ".write": true
+      ".write": "root.child('admins/'+auth.uid).exists()"
     },
     "pages": {
       ".read": true,
-      ".write": true,
+      ".write": "root.child('admins/'+auth.uid).exists()",
       ".indexOn": ["rdateUpdated", "url"]
     },
     "products": {
-      ".read": true,
-      ".write": true,
-      ".indexOn": ["published", "category", "rdateUpdated", "url"]
+      ".write": "root.child('admins/'+auth.uid).exists()",
+      ".indexOn": ["published", "category", "rdateUpdated", "url"],
+      "$p_id": {
+        ".read": "data.child('published') == true || root.child('admins/'+auth.uid).exists()"
+      }
     },
     "posts": {
       ".read": true,
-      ".write": true,
+      ".write": "root.child('admins/'+auth.uid).exists()",
       ".indexOn": ["published", "url"]
     },
     "users": {
-      ".read": true,
-      ".write": true
+      "$uid": {
+        ".read": "$uid == auth.uid || root.child('admins/'+auth.uid).exists()",
+        ".write": "$uid == auth.uid || root.child('admins/'+auth.uid).exists()"
+      }
     },
     "stripe_customers": {
       "$uid": {
-        ".read": "$uid === auth.uid",
+        ".read": "$uid == auth.uid",
         "sources": {
           "$chargeId" : {
-            ".write": "$uid === auth.uid",
+            ".write": "$uid == auth.uid",
             "token": { ".validate": "newData.isString()" },
             "$other": { ".validate": false }
           }
         },
         "charges": {
           "$sourceId" : {
-            ".write": "$uid === auth.uid",
+            ".write": "$uid == auth.uid",
             "source": { ".validate": "newData.isString()" },
             "amount": { ".validate": "newData.isNumber()" },
             "$other": { ".validate": false }

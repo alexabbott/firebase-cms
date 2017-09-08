@@ -46,14 +46,15 @@ export class LoginComponent implements OnInit {
             orderByChild: 'email',
             equalTo: currentAdmin.email
           }
-        });
+        }).take(1);
 
         checkAdmin.subscribe(admin => {
           if (admin.length > 0) {
-            this.db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).update({
+            this.db.object('/admins/' + currentAdmin.uid).update({
               uid: currentAdmin.uid,
               email: currentAdmin.email,
               photoURL: currentAdmin.photoURL,
+              role: admin[0].role,
               active: true
             });
 

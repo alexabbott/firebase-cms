@@ -48,7 +48,7 @@ const routes: Routes = [
           { path: 'product-approval/:key', component: AddProductComponent },
           { path: 'post-approval/:key', component: AddPostComponent },
           { path: 'product-categories', component: AdminProductCategoriesComponent },
-          { path: 'customer/:key', component: OrdersComponent, canActivate: [AdminGuard] },
+          { path: 'customer/:key', component: AdminOrdersComponent, canActivate: [AdminGuard] },
           { path: 'customers', component: AdminCustomersComponent, canActivate: [AdminGuard] },
           { path: 'edit-admin/:key', component: AddAdminComponent, canActivate: [SuperAdminGuard] },
           { path: 'edit-customer/:uid', component: AddCustomerComponent, canActivate: [AdminGuard] },

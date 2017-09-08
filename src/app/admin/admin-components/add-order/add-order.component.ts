@@ -20,7 +20,13 @@ export class AddOrderComponent implements OnInit {
   statuses: Array<any>;
   users: FirebaseListObservable<any>;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public globalService: GlobalService, public router: Router, public route: ActivatedRoute) {
+  constructor(
+    public db: AngularFireDatabase,
+    public snackBar: MdSnackBar,
+    public globalService: GlobalService,
+    public router: Router,
+    public route: ActivatedRoute
+  ) {
     this.states = globalService.states;
     this.statuses = globalService.orderStatuses;
     this.orders = db.list('/orders');

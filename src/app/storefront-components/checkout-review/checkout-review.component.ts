@@ -68,15 +68,16 @@ export class CheckoutReviewComponent implements OnInit {
   confirm() {
     this.submitNewCharge();
     let newKey = Math.abs(this.globalService.hashCode(this.order.date) + this.globalService.hashCode(this.order.shipping.email));
-    this.db.object('/orders/' + newKey).set(this.order);
-    this.globalService.cart.next(null);
-    this.globalService.order.next(null);
-    this.localCart.clearAll();
-    if (this.user) {
-      this.db.object('/users/' + this.user.uid + '/cart').remove();
-      this.db.list('/users/' + this.user.uid + '/orders').push(newKey);
-    }
-    this.router.navigateByUrl('checkout/confirmation');
+    this.db.list('/orders').push(this.order).then((item) => {
+      this.globalService.cart.next(null);
+      this.globalService.order.next(null);
+      this.localCart.clearAll();
+      if (this.user) {
+        this.db.object('/users/' + this.user.uid + '/cart').remove();
+        this.db.object('/users/' + this.user.uid + '/orders/' + item.key).set(Date.now());
+      }
+      this.router.navigateByUrl('checkout/confirmation');
+    });
   }
 
   submitNewCharge() {

@@ -19,7 +19,7 @@
             <button md-raised-button routerLink="/admin/edit-admin/{{admin.$key}}">
                 Edit
             </button>
-            <button md-raised-button (click)="deleteAdmin(admin.$key)">Delete</button>
+            <button md-raised-button (click)="deleteAdmin($event, admin.$key)">Delete</button>
         </div>
     </md-card>
 </div>

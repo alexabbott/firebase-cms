@@ -23,7 +23,8 @@ export class AdminAdminsComponent {
     });
   }
 
-  deleteAdmin(key: string) {
+  deleteAdmin(event, key: string) {
+    event.stopPropagation();
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;

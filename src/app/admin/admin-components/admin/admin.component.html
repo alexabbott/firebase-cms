@@ -2,7 +2,8 @@
     <h3>FireCMS</h3>
     <span class="fill-space"></span>
     <div class="login">
-        <img src="{{ (admin | async)?.photoURL }}" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
+        <img *ngIf="(admin | async)?.photoURL" src="{{ (admin | async)?.photoURL }}" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
+        <img *ngIf="!(admin | async)?.photoURL" src="../../../../assets/placeholder.jpg" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
         <md-menu #adminMenu="mdMenu">
             <button md-menu-item (click)="logout()">Logout</button>
         </md-menu>

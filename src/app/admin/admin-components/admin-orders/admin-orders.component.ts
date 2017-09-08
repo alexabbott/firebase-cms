@@ -3,6 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { GlobalService } from 'app/services/global.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'admin-orders',
@@ -20,19 +21,38 @@ export class AdminOrdersComponent implements OnInit {
     public db: AngularFireDatabase,
     public dialog: MdDialog,
     public snackBar: MdSnackBar,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {
-    this.orders = db.list('/orders', {
-      query: {
-        orderByChild: 'rdate',
-        limitToFirst: 99999
-      }
-    });
+
     this.users = db.list('/users');
+
+    if (router.url.includes('customer')) {
+      this.route.params.subscribe((params: Params) => {
+        this.orders = db.list('/orders', {
+          query: {
+            orderByChild: 'uid',
+            equalTo:  params.key,
+            limitToFirst: 99999
+          }
+        });
+      });
+    } else {
+      this.orders = db.list('/orders', {
+        query: {
+          orderByChild: 'rdate',
+          limitToFirst: 99999
+        }
+      });
+    }
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;
     });
+  }
+
+  ngOnInit() {
   }
 
   deleteOrder(event, key: string) {
@@ -50,8 +70,4 @@ export class AdminOrdersComponent implements OnInit {
       }
     });
   }
-
-  ngOnInit() {
-  }
-
 }

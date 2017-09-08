@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router }    from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
@@ -16,10 +16,14 @@ import { GlobalService } from 'app/services/global.service';
 export class AdminComponent implements OnInit {
 
   admin: Observable<firebase.User>;
-  admins: FirebaseListObservable<any>;
   currentAdmin: any;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public router: Router, public globalService: GlobalService) {
+  constructor(
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public router: Router,
+    public globalService: GlobalService
+  ) {
     this.admin = afAuth.authState;
     this.currentAdmin = {};
 
@@ -28,14 +32,10 @@ export class AdminComponent implements OnInit {
         this.router.navigateByUrl('login');
       } else {
         this.globalService.admin.next(currentAdmin);
-        this.db.list('/admins', {
-          query: {
-            orderByChild: 'email',
-            equalTo: currentAdmin.email
-          }
-        }).subscribe((a) => {
-          this.globalService.admin.next(a[0]);
-          this.currentAdmin.role = a[0].role;
+        this.db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).remove();
+        this.db.object('/admins/' + currentAdmin.uid).subscribe((a) => {
+          this.globalService.admin.next(a);
+          this.currentAdmin.role = a.role;
         });
       }
     });

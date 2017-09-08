@@ -1,23 +1,20 @@
 <div class="container">
-  <h3 *ngIf="!router.url.includes('/admin/customer')">My Orders</h3>
-  <h3 *ngIf="router.url.includes('/admin/customer') && userObject && userObject.email">
-    <img src="{{ userObject.photoURL }}" class="user-photo"> {{ userObject.email }}
-  </h3>
+  <h3>My Orders</h3>
   <h3 *ngIf="router.url.includes('/admin/customer') && userObject && !userObject.email">
     Guest Customer
   </h3>
-  <md-card class="order" routerLink="{{ orderLink }}/{{order.$key}}" *ngFor="let order of orders | async">
-    <div class="order-info">
-      <h3>
-        <a routerLink="{{ orderLink }}/{{order.$key}}">#{{order.$key}}</a>
-      </h3>
-      <div class="date">{{order.date | date }}</div>
-    </div>
-    <div class="actions">
-      <div>{{order.total | currency:'USD':true }}</div>
-      <button md-raised-button routerLink="{{ orderLink }}/{{ order.$key }}">View</button>
-      <button *ngIf="router.url.includes('/admin/customer')" md-raised-button routerLink="{{ orderLink }}/{{ order.$key }}">Edit</button>
-    </div>
-  </md-card>
-  <p *ngIf="!(orders | async)?.length" class="block-center">No orders</p>
+  <span *ngIf="userOrders">
+    <md-card class="order" routerLink="/account/order/{{order}}" *ngFor="let order of userOrders; let i = index">
+      <div class="order-info">
+        <h3>
+          <a routerLink="/account/order/{{order}}">#{{order}}</a>
+        </h3>
+        <div class="date">{{ orderDates[i] | date }}</div>
+      </div>
+      <div class="actions">
+        <button md-raised-button routerLink="/account/order/{{ order }}">View</button>
+      </div>
+    </md-card>
+  </span>
+  <p *ngIf="!userOrders || !userOrders.length" class="block-center">No orders</p>
 </div>
