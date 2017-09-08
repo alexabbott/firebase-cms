@@ -172,9 +172,8 @@ exports.sendEmailConfirmation = functions.database.ref('/admins/{id}').onWrite(e
 });
 
 // Sends an email confirmation when a user places an order
-exports.sendOrderConfirmation = functions.database.ref('/users/{uid}/orders/{{orderid}}').onCreate(event => {
+exports.sendOrderConfirmation = functions.database.ref('/users/{uid}/orders/{{orderId}}').onCreate(event => {
   const snapshot = event.data;
-  const orderID = snapshot.val();
   return event.data.ref.parent.parent.once("value").then(snap => {
     const user = snap.val();
     const email = user.email;
@@ -185,8 +184,8 @@ exports.sendOrderConfirmation = functions.database.ref('/users/{uid}/orders/{{or
         to: email
       };
       mailOptions.subject = 'Order Confirmation';
-      mailOptions.html = '<h2>FireShop</h2>Order #' + orderID + '. This is a confirmation email for you order on FireShop. <br><br>';
-      mailOptions.html += 'View order details and status by logging in: https://' + process.env.GCLOUD_PROJECT + '.firebaseapp.com/account/order/' + orderID;
+      mailOptions.html = '<h2>FireShop</h2>Order #' + event.params.orderId + '. This is a confirmation email for you order on FireShop. <br><br>';
+      mailOptions.html += 'View order details and status by logging in: https://' + process.env.GCLOUD_PROJECT + '.firebaseapp.com/account/order/' + event.params.orderId;
       return mailTransport.sendMail(mailOptions).then(() => {
         console.log('New order confirmation email sent to:', email);
       }).catch(error => {

@@ -48,10 +48,11 @@
       ".indexOn": ["rdateUpdated", "url"]
     },
     "products": {
+      ".read": true,
       ".write": "root.child('admins/'+auth.uid).exists()",
       ".indexOn": ["published", "category", "rdateUpdated", "url"],
       "$p_id": {
-        ".read": "data.child('published') == true || root.child('admins/'+auth.uid).exists()"
+        ".read": "data.child('published').val() == true || root.child('admins/'+auth.uid).exists()"
       }
     },
     "posts": {

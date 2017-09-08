@@ -1,6 +1,8 @@
 @import '../../../variables.scss';
 
 .order {
+    cursor: pointer;
+
     .order-info {
         display: inline-block;
         width: 100%;
