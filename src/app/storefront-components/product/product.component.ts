@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit {
             this.product = p[0];
 
             this.title.setTitle(this.product.title);
-            this.meta.addTag({ name: 'description', content: 'View product details for ' + this.product.title });
+            this.meta.updateTag({ content: 'View product details for ' + this.product.title }, "name='description'");
 
             this.globalService.cart.subscribe((cart) => {
               this.globalCart = cart;

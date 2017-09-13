@@ -35,6 +35,7 @@ export class CheckoutShippingComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('Shipping');
     this.meta.addTag({ name: 'description', content: 'Enter shipping information for the order' });
+    this.meta.updateTag({ content: 'Enter shipping information for the order' }, "name='description'");
   }
 
   goTo(url: string) {

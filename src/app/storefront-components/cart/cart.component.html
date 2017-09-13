@@ -9,8 +9,8 @@
   <div class="no-items" *ngIf="cartArray.length === 0">No items in the cart. <a routerLink="/products">Keep shopping!</a></div>
   <md-card *ngFor="let item of cartArray" class="product">
     <div class="item">
-      <img [src]="item.thumbnail" *ngIf="!review && item.thumbnail">
-      <img src="../../../assets/placeholder.jpg" *ngIf="!review && !item.thumbnail">
+      <img [src]="item.thumbnail" *ngIf="!review && item.thumbnail" alt="{{item.title}}">
+      <img src="../../../assets/placeholder.jpg" *ngIf="!review && !item.thumbnail" alt="No image available">
       {{item.title}}
     </div>
     <div class="price">{{item.price | currency:'USD':true}}</div>

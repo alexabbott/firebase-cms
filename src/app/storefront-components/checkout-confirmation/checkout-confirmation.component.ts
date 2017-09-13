@@ -24,7 +24,7 @@ export class CheckoutConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Confirmation');
-    this.meta.addTag({ name: 'description', content: 'Order confirmation information' });
+    this.meta.updateTag({ content: 'Order confirmation information' }, "name='description'");
   }
 
 }

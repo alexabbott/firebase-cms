@@ -66,7 +66,7 @@ export class CheckoutPaymentComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Payment');
-    this.meta.addTag({ name: 'description', content: 'Enter credit card information for payment of the order' });
+    this.meta.updateTag({ content: 'Enter credit card information for payment of the order' }, "name='description'");
     (<any>window).Stripe.setPublishableKey(environment.stripe);
   }
 

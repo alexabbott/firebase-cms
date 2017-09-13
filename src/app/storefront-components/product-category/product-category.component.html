@@ -2,12 +2,19 @@
   <h3><a routerLink="/category/{{ categoryObject.slug }}">{{ categoryObject.name }}</a></h3>
   <section class="grid">
     <span class="grid-tile" *ngFor="let productKey of categoryObject.products">
-      <div *ngIf="(products | async | getKey: productKey)?.published">
+      <div *ngIf="(products | async | getKey: productKey)?.published" itemscope itemtype="http://schema.org/Product">
         <md-card routerLink="/product/{{ (products | async | getKey: productKey)?.url }}" class="product">
-          <img [src]="getProductImage((products | async | getKey: productKey))">
+          <img [src]="getProductImage((products | async | getKey: productKey))" itemprop="image" alt="{{(products | async | getKey: productKey)?.title}}">
           <div class="product-content">
-            <h3><a routerLink="/product/{{ (products | async | getKey: productKey)?.url }}">{{ (products | async | getKey: productKey)?.title }}</a></h3>
-            <div class="price">{{ (products | async | getKey: productKey)?.price | currency:'USD':true }}</div>
+            <h3>
+              <a routerLink="/product/{{ (products | async | getKey: productKey)?.url }}" itemprop="name">
+                {{ (products | async | getKey: productKey)?.title }}
+              </a>
+            </h3>
+            <meta itemprop="priceCurrency" content="USD" />
+            <div class="price" itemprop="price">
+              {{ (products | async | getKey: productKey)?.price | currency:'USD':true }}
+            </div>
           </div>
         </md-card>
       </div>

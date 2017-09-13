@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Products');
-    this.meta.addTag({ name: 'description', content: 'View all products' });
+    this.meta.updateTag({ content: 'View all products' }, "name='description'");
 
     if (this.router.url.includes('product')) {
       this.globalService.searchTerm.next('');

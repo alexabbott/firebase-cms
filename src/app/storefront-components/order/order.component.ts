@@ -32,7 +32,7 @@ export class OrderComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => {
       this.title.setTitle('Order #' + params.key);
-      this.meta.addTag({ name: 'description', content: 'View the details for an order' });
+      this.meta.updateTag({ content: 'View the order dtails' }, "name='description'");
 
       this.orderContent = this.db.object('/orders/' + params.key);
       this.orderContent.subscribe((o) => {

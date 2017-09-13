@@ -35,7 +35,7 @@ export class CheckoutBillingComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Billing');
-    this.meta.addTag({ name: 'description', content: 'Billing info for the order' });
+    this.meta.updateTag({ content: 'Billing info for the order' }, "name='description'");
 
     if (!this.order || this.order === {}) {
       this.router.navigateByUrl('checkout/shipping');

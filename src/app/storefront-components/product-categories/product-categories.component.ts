@@ -20,7 +20,7 @@ export class ProductCategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Products');
-    this.meta.addTag({ name: 'description', content: 'Browse products and product categories' });
+    this.meta.updateTag({ content: 'Browse products and product categories' }, "name='description'");
   }
 
 }

@@ -1,6 +1,6 @@
 # FirebaseCMS
 
-A CMS and E-commerce platform with a Front End theme built with Angular 4 (Angular CLI), Firebase (AngularFire2), Angular Material and Stripe. Manage pages, blog posts, products, orders, customers, carts, navigation, themes and admins with this tool.
+FirebasCMS is an e-commerce and blogging platform with a storefront and CMS built with Angular 4 (Angular CLI), Firebase (AngularFire2), Angular Material and Stripe. Create, moderate and manage pages, blog posts, products, orders, customers, carts, navigation, themes, admins and more with this web application.
 
 ## Installation
 
@@ -116,9 +116,13 @@ You'll need to manually add your first admin account. To generate a hashcode for
 2) Create new entry in your firebaseDB under, `/admins/<YOUR HASHCODE>/` as follows:
 
 ```javascript
-{
-  email: '<YOUR EMAIL>',
-  role: 'super-admin'
+admins: {
+  <YOUR HASH CODE>: {
+    {
+      email: '<YOUR EMAIL>',
+      role: 'super-admin'
+    }
+  }
 }
 ```
 
@@ -126,7 +130,7 @@ You'll need to manually add your first admin account. To generate a hashcode for
 
 ## Email Confirmation setup
 
-1. To be able to send emails with your Gmail account: enable access to [Less Secure Apps](https://www.google.com/settings/security/lesssecureapps) and [Display Unlock Captcha](https://accounts.google.com/DisplayUnlockCaptcha). For accounts with 2-step verification enabled [Generate an App Password](https://support.google.com/accounts/answer/185833).
+1. To allow the app to send confirmation emails through a Gmail account: enable access to [Less Secure Apps](https://www.google.com/settings/security/lesssecureapps) and [Display Unlock Captcha](https://accounts.google.com/DisplayUnlockCaptcha). For accounts with 2-step verification enabled, [Generate an App Password](https://support.google.com/accounts/answer/185833).
 2. Set the gmail.email and gmail.password Google Cloud environment variables to match the email and password of the Gmail account used to send emails (or the app password if your account has 2-step verification enabled). For this use:
 ```
 firebase functions:config:set gmail.email="<EMAIL ADDRESS>" gmail.password="<PASSWORD>"
@@ -152,7 +156,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Deploy
 
-Run `npm run deploy` to deploy your project. This command will first build the app for production and then deploy it to firebase hosting.
+Run `npm run deploy` to deploy your project. This command will first build the app for production and then deploy it to Firebase hosting.
 
 ## Admin Roles
 

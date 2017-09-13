@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Cart');
-    this.meta.addTag({ name: 'description', content: 'View and edit the shopping cart' });
+    this.meta.updateTag({ content: 'View and edit the shopping cart' }, "name='description'");
 
     if (this.router.url.includes('review')) {
       this.review = true;

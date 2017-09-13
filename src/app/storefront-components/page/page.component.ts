@@ -31,7 +31,7 @@ export class PageComponent implements OnInit {
           if (p[0].published) {
             this.page = p[0];
             this.title.setTitle(this.page.title);
-            this.meta.addTag({ name: 'description', content: 'View ' + this.page.title });
+            this.meta.updateTag({ content: 'View ' + this.page.title }, "name='description'");
           } else {
             this.page = {
               title: 'Page Not Found',

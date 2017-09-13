@@ -31,7 +31,7 @@ export class PostComponent implements OnInit {
           if (p[0].published) {
             this.post = p[0];
             this.title.setTitle(this.post.title);
-            this.meta.addTag({ name: 'description', content: 'View ' + this.post.title });
+            this.meta.updateTag({ content: 'View ' + this.post.title }, "name='description'");
           } else {
             this.post = {
               title: 'Post Not Found',

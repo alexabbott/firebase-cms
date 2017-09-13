@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Login');
-    this.meta.addTag({ name: 'description', content: 'Login to the admin panel' });
+    this.meta.updateTag({ content: 'Login to the admin panel' }, "name='description'");
   }
 
   loginWithGoogle() {

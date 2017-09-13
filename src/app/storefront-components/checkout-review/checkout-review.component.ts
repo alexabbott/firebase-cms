@@ -62,7 +62,7 @@ export class CheckoutReviewComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Review');
-    this.meta.addTag({ name: 'description', content: 'Review items and information for the order' });
+    this.meta.updateTag({ content: 'Review items and information for the order' }, "name='description'");
   }
 
   confirm() {

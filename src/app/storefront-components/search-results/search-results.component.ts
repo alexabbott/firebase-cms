@@ -25,7 +25,7 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Search');
-    this.meta.addTag({ name: 'description', content: 'Search products and blog posts' });
+    this.meta.updateTag({ content: 'Search products and blog posts' }, "name='description'");
   }
 
   public ngAfterViewInit(): void {

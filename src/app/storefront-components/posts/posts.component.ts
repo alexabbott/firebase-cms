@@ -35,7 +35,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Blog');
-    this.meta.addTag({ name: 'description', content: 'View recent blog posts' });
+    this.meta.updateTag({ content: 'View recent blog posts' }, "name='description'");
 
     if (this.router.url.includes('blog')) {
       this.globalService.searchTerm.next('');

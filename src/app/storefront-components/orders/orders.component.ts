@@ -46,6 +46,6 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Orders');
-    this.meta.addTag({ name: 'description', content: 'View all of your past orders' });
+    this.meta.updateTag({ content: 'View all of your past orders' }, "name='description'");
   }
 }

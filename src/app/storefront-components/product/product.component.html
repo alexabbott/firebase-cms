@@ -1,11 +1,12 @@
-<div class="container" *ngIf="product">
+<div class="container" *ngIf="product" itemscope itemtype="http://schema.org/Product">
   <div class="product-left">
-    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="featured-image">
+    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="featured-image" alt="{{product.title}}">
   </div>
   <div class="product-right">
-    <h2>{{product.title}}</h2>
-    <p>{{product.price | currency:'USD':true}}</p>
-    <p [innerHTML]="product.description | safeHtml"></p>
+    <h2 itemprop="name">{{product.title}}</h2>
+    <meta itemprop="priceCurrency" content="USD" />
+    <p itemprop="price">{{product.price | currency:'USD':true}}</p>
+    <p [innerHTML]="product.description | safeHtml" itemprop="description"></p>
     <div class="quantity-label">Qty</div>
     <md-input-container class="quantity">
       <input mdInput type="number" min="1" [(ngModel)]="product.quantity">
