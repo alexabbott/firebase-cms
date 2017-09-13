@@ -12,7 +12,16 @@
     "background_color": "#2E2E2E",
     "related_applications": [],
     "prefer_related_applications": false,
-    "icons": [{
+    "icons": [
+      {
+        "src": "/assets/icons/icon-512x512.png",
+        "sizes": "16x16"
+      },
+      {
+        "src": "/assets/icons/icon-192x192.png",
+        "sizes": "16x16"
+      },
+      {
         "src": "/assets/icons/icon-144x144.png",
         "sizes": "144x144"
       },
