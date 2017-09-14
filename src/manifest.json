@@ -15,11 +15,11 @@
     "icons": [
       {
         "src": "/assets/icons/icon-512x512.png",
-        "sizes": "16x16"
+        "sizes": "512x512"
       },
       {
         "src": "/assets/icons/icon-192x192.png",
-        "sizes": "16x16"
+        "sizes": "192x192"
       },
       {
         "src": "/assets/icons/icon-144x144.png",
