@@ -2,8 +2,8 @@
     <h3>FireCMS</h3>
     <span class="fill-space"></span>
     <div class="login">
-        <img *ngIf="(admin | async)?.photoURL" src="{{ (admin | async)?.photoURL }}" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
-        <img *ngIf="!(admin | async)?.photoURL" src="../../../../assets/placeholder.jpg" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
+        <img *ngIf="(user | async)?.photoURL" src="{{ (user | async)?.photoURL }}" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
+        <img *ngIf="!(user | async)?.photoURL" src="../../../../assets/placeholder.jpg" class="admin-photo" [mdMenuTriggerFor]="adminMenu">
         <md-menu #adminMenu="mdMenu">
             <button md-menu-item (click)="logout()">Logout</button>
         </md-menu>
@@ -40,25 +40,25 @@
             <md-list-item
                 [ngClass]="{'selected': router.url.includes('/admin/customers')}"
                 routerLink="/admin/customers"
-                *ngIf="currentAdmin.role !== 'editor'">
+                *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 <md-icon>account_circle</md-icon> Customers
             </md-list-item>
             <md-list-item
                 [ngClass]="{'selected': router.url.includes('/admin/orders')}"
                 routerLink="/admin/orders"
-                *ngIf="currentAdmin.role !== 'editor'">
+                *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 <md-icon>attach_money</md-icon> Orders
             </md-list-item>
             <md-list-item
                 [ngClass]="{'selected': router.url.includes('/admin/menus')}"
                 routerLink="/admin/menus"
-                *ngIf="currentAdmin.role !== 'editor'">
+                *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 <md-icon>menu</md-icon> Menus
             </md-list-item>
             <md-list-item
                 [ngClass]="{'selected': router.url === '/admin/theme'}"
                 routerLink="/admin/theme"
-                *ngIf="currentAdmin.role !== 'editor'">
+                *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 <md-icon>restaurant_menu</md-icon> Theme
             </md-list-item>
             <md-list-item

@@ -7,8 +7,12 @@
     },
     "admins": {
       ".indexOn": "email",
-      ".read": true,
-      ".write": true
+      ".write": true,
+      ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(super-admin)/)",
+      "$uid": {
+        ".read": "$uid == auth.uid || root.child('admins/'+auth.uid).exists() || data.child('email').val() == auth.email",
+        ".write": "$uid == auth.uid || root.child('admins/'+auth.uid).exists() || data.child('email').val() == auth.email"
+      }
     },
     "approvals": {
       ".read": "root.child('admins/'+auth.uid).exists()",

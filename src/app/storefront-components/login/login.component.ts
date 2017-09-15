@@ -41,21 +41,20 @@ export class LoginComponent implements OnInit {
     this.admin.subscribe(currentAdmin => {
 
       if (currentAdmin) {
-        let checkAdmin = db.list('/admins', {
-          query: {
-            orderByChild: 'email',
-            equalTo: currentAdmin.email
-          }
-        }).take(1);
-
-        checkAdmin.subscribe(admin => {
-          if (admin.length > 0) {
+        db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).take(1).subscribe(admin => {
+          if (admin && admin.role) {
             this.db.object('/admins/' + currentAdmin.uid).update({
               uid: currentAdmin.uid,
               email: currentAdmin.email,
               photoURL: currentAdmin.photoURL,
-              role: admin[0].role,
+              role: admin.role,
               active: true
+            }).catch((err) => {
+              console.log('Permission Error', err);
+              this.router.navigateByUrl('');
+              let snackBarRef = this.snackBar.open('You are not an authorized administrator', 'OK!', {
+                duration: 3000
+              });
             });
 
             this.router.navigateByUrl('admin');

@@ -18,7 +18,7 @@ export class AdminApprovalsComponent {
   postApprovals: FirebaseListObservable<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
-  admins: FirebaseListObservable<any>;
+  users: FirebaseListObservable<any>;
   currentAdmin: any;
 
   constructor(
@@ -31,7 +31,7 @@ export class AdminApprovalsComponent {
     this.categoryApprovals = db.list('/approvals/categories');
     this.pageApprovals = db.list('/approvals/pages');
     this.postApprovals = db.list('/approvals/posts');
-    this.admins = db.list('/admins');
+    this.users = db.list('/users');
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;

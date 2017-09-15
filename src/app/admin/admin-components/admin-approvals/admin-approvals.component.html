@@ -25,19 +25,19 @@
           {{ product.dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (admins | async | getUser: product.updatedBy)?.email }}
+          {{ (users | async | getUser: product.updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
             md-raised-button
             (click)="approveItem($event, 'products', product)"
-            *ngIf="currentAdmin.role !== 'editor'">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
             md-raised-button
             (click)="deleteItem($event, 'products', product.$key)"
-            *ngIf="currentAdmin.role !== 'editor' || product.updatedBy === currentAdmin.uid">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || product.updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
@@ -64,19 +64,19 @@
           {{ category.dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (admins | async | getUser: category.updatedBy)?.email }}
+          {{ (users | async | getUser: category.updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
             md-raised-button
             (click)="approveItem($event, 'categories', category)"
-            *ngIf="currentAdmin.role !== 'editor'">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
             md-raised-button
             (click)="deleteItem($event, 'categories', category.$key)"
-            *ngIf="currentAdmin.role !== 'editor' || category.updatedBy === currentAdmin.uid">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || category.updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
@@ -103,19 +103,19 @@
           {{ page.dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (admins | async | getUser: page.updatedBy)?.email }}
+          {{ (users | async | getUser: page.updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
             md-raised-button
             (click)="approveItem($event, 'pages', page)"
-            *ngIf="currentAdmin.role !== 'editor'">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
             md-raised-button
             (click)="deleteItem($event, 'pages', page.$key)"
-            *ngIf="currentAdmin.role !== 'editor' || page.updatedBy === currentAdmin.uid">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || page.updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
@@ -142,19 +142,19 @@
           {{ post.dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (admins | async | getUser: post.updatedBy)?.email }}
+          {{ (users | async | getUser: post.updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
             md-raised-button
             (click)="approveItem($event, 'posts', post)"
-            *ngIf="currentAdmin.role !== 'editor'">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
             md-raised-button
             (click)="deleteItem($event, 'posts', post.$key)"
-            *ngIf="currentAdmin.role !== 'editor' || post.updatedBy === currentAdmin.uid">
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || post.updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>

@@ -55,7 +55,7 @@
         md-raised-button
         (click)="approveItem(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
-        *ngIf="router.url.includes('approval') && currentAdmin.role !== 'editor'">
+        *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span>Approve</span>
     </button>
 
@@ -63,7 +63,7 @@
         md-raised-button
         (click)="submitForModeration(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
-        *ngIf="router.url.includes('approval') && entityObject && (currentAdmin.role !== 'editor' || currentAdmin.uid === entityObject.updatedBy)">
+        *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
         Save Draft
     </button>
 
@@ -71,7 +71,7 @@
         md-raised-button
         (click)="deleteItem($event)"
         class="submit"
-        *ngIf="router.url.includes('approval') && entityObject && (currentAdmin.role !== 'editor' || currentAdmin.uid === entityObject.updatedBy)">
+        *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
         Delete Draft
     </button>
 
@@ -87,7 +87,7 @@
         md-raised-button
         (click)="addPost(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
-        *ngIf="!router.url.includes('approval') && currentAdmin.role !== 'editor'">
+        *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Post

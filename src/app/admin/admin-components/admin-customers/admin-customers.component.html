@@ -20,7 +20,7 @@
             <button md-raised-button routerLink="/admin/edit-customer/{{customer.uid}}">
                 Edit
             </button>
-            <button md-raised-button (click)="deleteCustomer($event, customer.$key)" *ngIf="currentAdmin.role !== 'editor'">
+            <button md-raised-button (click)="deleteCustomer($event, customer.$key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 Delete
             </button>
         </div>

@@ -19,7 +19,7 @@
                 <button md-raised-button routerLink="/admin/edit-product-category/{{ category.$key }}">
                     Edit
                 </button>
-                <button md-raised-button (click)="deleteCategory(category)" *ngIf="currentAdmin.role !== 'editor'">
+                <button md-raised-button (click)="deleteCategory(category)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                     Delete
                 </button>
             </div>

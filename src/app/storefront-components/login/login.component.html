@@ -34,5 +34,5 @@
     <div class="hint block-center" *ngIf="!(admin | async)?.uid">
         You must be an approved admin to access the admin panel
     </div>
-    <button md-button *ngIf="(admin | async)?.uid">Loading...</button>
+    <button md-button *ngIf="(admin | async)?.uid" (click)="logout()" class="logout">Logout</button>
 </div>

@@ -15,7 +15,7 @@ import { GlobalService } from 'app/services/global.service';
 
 export class AdminComponent implements OnInit {
 
-  admin: Observable<firebase.User>;
+  user: Observable<firebase.User>;
   currentAdmin: any;
 
   constructor(
@@ -25,19 +25,19 @@ export class AdminComponent implements OnInit {
     public globalService: GlobalService,
     public snackBar: MdSnackBar,
   ) {
-    this.admin = afAuth.authState;
+    this.user = afAuth.authState;
     this.currentAdmin = {};
   }
 
   ngOnInit() {
-    this.admin.subscribe(currentAdmin => {
-      if (!currentAdmin) {
+    this.user.subscribe(currentUser => {
+      if (!currentUser) {
         this.router.navigateByUrl('login');
       } else {
-        this.db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).subscribe((a) => {
+        this.db.object('/admins/' + this.globalService.hashCode(currentUser.email)).subscribe((a) => {
           if (a && a.email) {
-            this.globalService.admin.next(currentAdmin);
-            this.db.object('/admins/' + currentAdmin.uid).subscribe((a) => {
+            this.globalService.admin.next(currentUser);
+            this.db.object('/admins/' + currentUser.uid).subscribe((a) => {
               this.globalService.admin.next(a);
               this.currentAdmin.role = a.role;
             });
@@ -47,6 +47,12 @@ export class AdminComponent implements OnInit {
               duration: 3000
             });
           }
+        }, (err) => {
+          console.log('Permission Error', err);
+          this.router.navigateByUrl('');
+          let snackBarRef = this.snackBar.open('You are not an authorized administrator', 'OK!', {
+            duration: 3000
+          });
         });
       }
     });
