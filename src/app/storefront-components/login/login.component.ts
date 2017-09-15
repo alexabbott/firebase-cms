@@ -60,10 +60,7 @@ export class LoginComponent implements OnInit {
 
             this.router.navigateByUrl('admin');
           } else {
-            this.logout();
-            let snackBarRef = this.snackBar.open('You are not an authorized administrator', 'OK!', {
-              duration: 3000
-            });
+            this.router.navigateByUrl('');
           }
         });
       }

@@ -22,20 +22,31 @@ export class AdminComponent implements OnInit {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    public snackBar: MdSnackBar,
   ) {
     this.admin = afAuth.authState;
     this.currentAdmin = {};
+  }
 
+  ngOnInit() {
     this.admin.subscribe(currentAdmin => {
       if (!currentAdmin) {
         this.router.navigateByUrl('login');
       } else {
-        this.globalService.admin.next(currentAdmin);
-        this.db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).remove();
-        this.db.object('/admins/' + currentAdmin.uid).subscribe((a) => {
-          this.globalService.admin.next(a);
-          this.currentAdmin.role = a.role;
+        this.db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).subscribe((a) => {
+          if (a && a.email) {
+            this.globalService.admin.next(currentAdmin);
+            this.db.object('/admins/' + currentAdmin.uid).subscribe((a) => {
+              this.globalService.admin.next(a);
+              this.currentAdmin.role = a.role;
+            });
+          } else {
+            this.router.navigateByUrl('');
+            let snackBarRef = this.snackBar.open('You are not an authorized administrator', 'OK!', {
+              duration: 3000
+            });
+          }
         });
       }
     });
@@ -43,9 +54,6 @@ export class AdminComponent implements OnInit {
 
   logout() {
     this.afAuth.auth.signOut();
-  }
-
-  ngOnInit() {
   }
 
 }

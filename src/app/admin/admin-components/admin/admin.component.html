@@ -1,4 +1,4 @@
-<md-toolbar>
+<md-toolbar *ngIf="currentAdmin && currentAdmin.role">
     <h3>FireCMS</h3>
     <span class="fill-space"></span>
     <div class="login">
@@ -9,7 +9,7 @@
         </md-menu>
     </div>
 </md-toolbar>
-<md-sidenav-container>
+<md-sidenav-container *ngIf="currentAdmin && currentAdmin.role">
     <md-sidenav mode="side" opened="true">
         <md-list class="admin-nav">
             <md-list-item
