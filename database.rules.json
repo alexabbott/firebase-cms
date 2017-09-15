@@ -8,7 +8,7 @@
     "admins": {
       ".indexOn": "email",
       ".read": true,
-      ".write": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val() == 'super-admin'"
+      ".write": true
     },
     "approvals": {
       ".read": "root.child('admins/'+auth.uid).exists()",
