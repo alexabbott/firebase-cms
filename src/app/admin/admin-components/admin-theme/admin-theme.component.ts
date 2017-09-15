@@ -3,7 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { MdSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'app-admin-theme',
+  selector: 'admin-theme',
   templateUrl: './admin-theme.component.html',
   styleUrls: ['./admin-theme.component.scss']
 })
@@ -16,16 +16,6 @@ export class AdminThemeComponent implements OnInit {
     this.theme = db.object('/theme');
   }
 
-  saveTheme(newSiteName: string) {
-    this.theme.update({
-      siteName: newSiteName
-    });
-  
-    let snackBarRef = this.snackBar.open('Theme updated', 'OK!', {
-      duration: 3000
-    });
-  }
-
   ngOnInit() {
     this.theme.subscribe(item => {
       if (item && item.siteName) {
@@ -34,4 +24,13 @@ export class AdminThemeComponent implements OnInit {
     });
   }
 
+  saveTheme(newSiteName: string) {
+    this.theme.update({
+      siteName: newSiteName
+    });
+
+    let snackBarRef = this.snackBar.open('Theme updated', 'OK!', {
+      duration: 3000
+    });
+  }
 }

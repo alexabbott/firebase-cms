@@ -8,7 +8,7 @@
     "admins": {
       ".indexOn": "email",
       ".write": true,
-      ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(super-admin)/)",
+      ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
       "$uid": {
         ".read": "$uid == auth.uid || root.child('admins/'+auth.uid).exists() || data.child('email').val() == auth.email",
         ".write": "$uid == auth.uid || root.child('admins/'+auth.uid).exists() || data.child('email').val() == auth.email"
