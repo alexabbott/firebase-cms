@@ -2,6 +2,16 @@
 
 FirebasCMS is an e-commerce and blogging platform with a storefront and CMS built with Angular 4 (Angular CLI), Firebase (AngularFire2), Angular Material and Stripe. Create, moderate and manage pages, blog posts, products, orders, customers, carts, navigation, themes, admins and more with this web application.
 
+
+## Demo
+
+* Check out the front end application: https://fir-cms-76f54.firebaseapp.com
+* Check out the admin interface: https://fir-cms-76f54.firebaseapp.com/login
+  * Admin login details: admin@admin.com / admin123
+    * This user has an 'editor' role
+    * All of the data will be reset once a week
+
+
 ## Installation
 
 Install [Angular CLI](https://cli.angular.io/)
