@@ -119,7 +119,7 @@ export class AddPostComponent implements OnInit {
 
   uploadImage() {
     let storageRef = firebase.storage().ref();
-    let path = this.file.name;
+    let path = Date.now().toString() + '-' + this.file.name;
     let iRef = storageRef.child('posts/' + path);
     let me = this;
     iRef.put(this.file).then((snapshot) => {

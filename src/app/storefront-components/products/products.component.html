@@ -1,6 +1,6 @@
 <div class="container">
   <div class="grid">
-    <div class="grid-tile" *ngFor="let product of products | async | search: searchTerm">
+    <div class="grid-tile" *ngFor="let product of products | async | search: searchTerm | sort:['weight']">
       <md-card routerLink="/product/{{product.url}}" class="product" itemscope itemtype="http://schema.org/Product">
         <img [src]="getProductImage(product)" alt="{{product.title}}" itemprop="image">
         <div class="product-content">

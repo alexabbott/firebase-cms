@@ -16,6 +16,7 @@ export class AddProductCategoryComponent implements OnInit {
   categories: FirebaseListObservable<any>;
   category: FirebaseObjectObservable<any>;
   newName: string;
+  newWeight: number;
   newProducts: any;
   editMode: boolean;
   categoryKey: string;
@@ -70,20 +71,23 @@ export class AddProductCategoryComponent implements OnInit {
 
           this.currentCategory.subscribe(c => {
             this.newName = c.name;
+            this.newWeight = c.weight;
             if (c.products) {
               this.newProducts = c.products;
             }
           });
         } else {
           this.newName = null;
+          this.newWeight = 0;
         }
     });
   }
 
-  addCategory(newName: string) {
+  addCategory(newName: string, newWeight: number) {
     if (newName) {
       let categoryObject = {
         name: newName,
+        weight: newWeight,
         slug: this.globalService.slugify(newName),
         dateUpdated: Date.now(),
         rdateUpdated: (Date.now() * -1),
@@ -108,12 +112,13 @@ export class AddProductCategoryComponent implements OnInit {
     this.validateFields(newName);
   }
 
-  submitForModeration(newName: string) {
+  submitForModeration(newName: string, newWeight: number) {
     if (newName && this.currentAdmin.uid) {
 
       let approvalObject = {
         entityKey: this.router.url.includes('approval') ? this.entityObject.entityKey : this.categoryKey,
         name: newName,
+        weight: newWeight,
         slug: this.globalService.slugify(newName),
         dateUpdated: Date.now(),
         rdateUpdated: (Date.now() * -1),
@@ -164,7 +169,7 @@ export class AddProductCategoryComponent implements OnInit {
     this.validateFields(newName);
   }
 
-  approveItem(newName: string) {
+  approveItem(newName: string, newWeight: number) {
     if (this.entityObject.entityKey) {
       let ogEntity = this.db.object('/categories/' + this.entityObject.entityKey);
       ogEntity.update(this.entityObject);

@@ -1,19 +1,19 @@
 <div class="container" [ngClass]="{ 'category': router.url.includes('category'), 'categories': !router.url.includes('category') }">
   <h3><a routerLink="/category/{{ categoryObject.slug }}">{{ categoryObject.name }}</a></h3>
-  <section class="grid">
-    <span class="grid-tile" *ngFor="let productKey of categoryObject.products">
-      <div *ngIf="(products | async | getKey: productKey)?.published" itemscope itemtype="http://schema.org/Product">
-        <md-card routerLink="/product/{{ (products | async | getKey: productKey)?.url }}" class="product">
-          <img [src]="getProductImage((products | async | getKey: productKey))" itemprop="image" alt="{{(products | async | getKey: productKey)?.title}}">
+  <section class="grid" *ngIf="categoryProducts">
+    <span class="grid-tile" *ngFor="let product of categoryProducts | sort:['weight']">
+      <div *ngIf="product.published" itemscope itemtype="http://schema.org/Product">
+        <md-card routerLink="/product/{{ product.url }}" class="product">
+          <img [src]="getProductImage(product)" itemprop="image" alt="{{product.title}}">
           <div class="product-content">
             <h3>
-              <a routerLink="/product/{{ (products | async | getKey: productKey)?.url }}" itemprop="name">
-                {{ (products | async | getKey: productKey)?.title }}
+              <a routerLink="/product/{{ product.url }}" itemprop="name">
+                {{ product.title }}
               </a>
             </h3>
             <meta itemprop="priceCurrency" content="USD" />
             <div class="price" itemprop="price">
-              {{ (products | async | getKey: productKey)?.price | currency:'USD':true }}
+              {{ product.price | currency:'USD':true }}
             </div>
           </div>
         </md-card>

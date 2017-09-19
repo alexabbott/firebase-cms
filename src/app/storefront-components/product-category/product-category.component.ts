@@ -31,25 +31,20 @@ export class ProductCategoryComponent implements OnInit {
         equalTo: true
       }
     });
-
     this.categoryObject = {};
   }
 
-  getProductImage(product:any) {
-    if (product && product.thumbnail) {
-      return product.thumbnail;
-    } else {
-      return '../../assets/placeholder.jpg';
-    }
-  }
-
   ngOnInit() {
-
     if (this.categoryInput) {
       this.category = this.categoryInput;
       this.categoryObject.slug = this.categoryInput.slug;
       this.categoryObject.name = this.categoryInput.name;
       this.categoryObject.products = Object.keys(this.categoryInput.products);
+      this.products.subscribe((p) => {
+        this.categoryProducts = p.filter((item) => {
+          return item.category === this.categoryInput.$key;
+        });
+      });
     } else {
       this.route.params.subscribe((params: Params) => {
         this.category = this.db.list('/categories', {
@@ -63,11 +58,24 @@ export class ProductCategoryComponent implements OnInit {
           this.categoryObject.slug = cat[0].slug;
           this.categoryObject.name = cat[0].name;
           this.categoryObject.products = Object.keys(cat[0].products);
+          this.products.subscribe((p) => {
+            this.categoryProducts = p.filter((item) => {
+              return item.category === cat[0].$key;
+            });
+          });
 
           this.title.setTitle(this.categoryObject.name);
           this.meta.addTag({ name: 'description', content: 'View all products in the ' + this.categoryObject.name + ' category' });
         });
       });
+    }
+  }
+
+  getProductImage(product:any) {
+    if (product && product.thumbnail) {
+      return product.thumbnail;
+    } else {
+      return '../../assets/placeholder.jpg';
     }
   }
 }

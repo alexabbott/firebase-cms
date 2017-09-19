@@ -24,6 +24,7 @@ export class AddProductComponent implements OnInit {
   newPrice: string;
   newPublished: boolean;
   newCategory: any;
+  newWeight: number;
   currentAdmin: any;
   editMode: boolean;
   productKey: string;
@@ -101,6 +102,7 @@ export class AddProductComponent implements OnInit {
             this.newPrice = p.price;
             this.newPublished = p.published;
             this.newCategory = p.category;
+            this.newWeight = p.weight;
 
             if (p.thumbnail) {
               this.imageUrl = p.thumbnail;
@@ -113,6 +115,7 @@ export class AddProductComponent implements OnInit {
           this.newDescription = null;
           this.newPrice = null;
           this.newCategory = null;
+          this.newWeight = 0;
           this.newPublished = false;
         }
     });
@@ -131,10 +134,10 @@ export class AddProductComponent implements OnInit {
 
   uploadImage() {
     let storageRef = firebase.storage().ref();
-    let path = this.file.name;
-    let iRef = storageRef.child('products/' + path);
+    let path = Date.now().toString() + '-' + this.file.name;
+    let imageRef = storageRef.child('products/' + path);
     let me = this;
-    iRef.put(this.file).then((snapshot) => {
+    imageRef.put(this.file).then((snapshot) => {
         let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
           duration: 3000
         });
@@ -188,7 +191,7 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  addProduct(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
+  addProduct(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean) {
     if (!newPublished) {
       newPublished = false;
     }
@@ -205,6 +208,7 @@ export class AddProductComponent implements OnInit {
         price: newPrice,
         published: newPublished,
         updatedBy: this.currentAdmin.uid,
+        weight: newWeight,
         category: newCategory ? newCategory : null,
         entityKey: this.editMode && this.productKey ? this.productKey : null
       };
@@ -234,7 +238,7 @@ export class AddProductComponent implements OnInit {
     this.validateFields(newTitle, newDescription, newPrice);
   }
 
-  submitForModeration(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
+  submitForModeration(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean) {
     if (!newPublished) {
       newPublished = false;
     }
@@ -251,6 +255,7 @@ export class AddProductComponent implements OnInit {
         description: newDescription,
         price: newPrice,
         published: newPublished,
+        weight: newWeight,
         updatedBy: this.currentAdmin.uid,
         category: newCategory ? newCategory : null
       };

@@ -26,6 +26,10 @@
         <md-option *ngFor="let category of categories | async" [value]="category.$key">{{ category.name }}</md-option>
     </md-select>
 
+    <md-input-container class="weight">
+        <input mdInput placeholder="Weight" [(ngModel)]="newWeight">
+    </md-input-container>
+
     <button md-raised-button class="mat-upload-button" onclick="document.getElementById('uploadImage').click()">
         <span *ngIf="!newThumbnail">Upload</span>
         <span *ngIf="newThumbnail">Change</span>
@@ -50,7 +54,7 @@
 
     <button
         md-raised-button
-        (click)="approveItem(newTitle, newPrice, newCategory, newDescription, newPublished)"
+        (click)="approveItem(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
         class="submit"
         *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span>Approve</span>
@@ -58,7 +62,7 @@
 
     <button
         md-raised-button
-        (click)="submitForModeration(newTitle, newPrice, newCategory, newDescription, newPublished)"
+        (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
         Save Draft
@@ -74,7 +78,7 @@
 
     <button
         md-raised-button
-        (click)="submitForModeration(newTitle, newPrice, newCategory, newDescription, newPublished)"
+        (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
         class="submit"
         *ngIf="!router.url.includes('approval')">
         <span>Submit for Moderation</span>
@@ -82,7 +86,7 @@
 
     <button
         md-raised-button
-        (click)="addProduct(newTitle, newPrice, newCategory, newDescription, newPublished, false)"
+        (click)="addProduct(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, false)"
         class="submit"
         *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span *ngIf="!editMode">Add</span>

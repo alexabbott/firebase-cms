@@ -15,7 +15,12 @@ export class ProductCategoriesComponent implements OnInit {
     private title: Title,
     private meta: Meta
   ) {
-    this.categories = db.list('/categories');
+    this.categories = db.list('/categories', {
+      query: {
+        orderByChild: 'weight',
+        limitToLast: 999
+      }
+    });
   }
 
   ngOnInit() {

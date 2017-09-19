@@ -16,9 +16,13 @@
         <input mdInput placeholder="Category name" type="text" [(ngModel)]="newName">
     </md-input-container>
 
+    <md-input-container>
+        <input mdInput placeholder="Category weight" type="number" [(ngModel)]="newWeight">
+    </md-input-container>
+
     <button
         md-raised-button
-        (click)="approveItem(newName)"
+        (click)="approveItem(newName, newWeight)"
         class="submit"
         *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span>Approve</span>
@@ -26,7 +30,7 @@
 
     <button
         md-raised-button
-        (click)="submitForModeration(newName)"
+        (click)="submitForModeration(newName, newWeight)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
         Save Draft
@@ -42,7 +46,7 @@
 
     <button
         md-raised-button
-        (click)="submitForModeration(newName)"
+        (click)="submitForModeration(newName, newWeight)"
         class="submit"
         *ngIf="!router.url.includes('approval')">
         <span>Submit for Moderation</span>
@@ -50,7 +54,7 @@
 
     <button
         md-raised-button
-        (click)="addCategory(newName)"
+        (click)="addCategory(newName, newWeight)"
         class="submit"
         *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span *ngIf="!editMode">Add</span>
