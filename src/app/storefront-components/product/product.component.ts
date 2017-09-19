@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -30,7 +31,8 @@ export class ProductComponent implements OnInit {
     public globalService: GlobalService,
     public localCart: LocalCartService,
     private title: Title,
-    private meta: Meta
+    private meta: Meta,
+    private sanitizer: DomSanitizer
   ) {
     this.user = afAuth.authState;
   }
@@ -46,6 +48,7 @@ export class ProductComponent implements OnInit {
         this.productContent.subscribe(p => {
           if (p[0].published) {
             this.product = p[0];
+            this.setJsonldData();
 
             this.title.setTitle(this.product.title);
             this.meta.updateTag({ content: 'View product details for ' + this.product.title }, "name='description'");
@@ -85,6 +88,25 @@ export class ProductComponent implements OnInit {
     snackBarRef.onAction().subscribe(() => {
       this.router.navigateByUrl('cart');
     });
+  }
+
+  private jsonld: any;
+  public jsonLDString: any;
+  private setJsonldData() {
+    this.jsonld = {
+      '@context': 'http://schema.org/',
+      '@type': 'Product',
+      'name': this.product.name,
+      'image': this.product.thubmnail,
+      'description': this.product.description,
+      'offers': {
+        '@type': 'Offer',
+        'priceCurrency': 'USD',
+        'price': this.product.price
+      }
+    };
+    this.jsonLDString = '<script type="application/ld+json">' + JSON.stringify(this.jsonld) + '</script>';
+    this.jsonLDString  = this.sanitizer.bypassSecurityTrustHtml(this.jsonLDString);
   }
 
 }

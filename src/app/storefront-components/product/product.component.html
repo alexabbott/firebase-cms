@@ -1,6 +1,7 @@
 <div class="container" *ngIf="product" itemscope itemtype="http://schema.org/Product">
   <div class="product-left">
-    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="featured-image" alt="{{product.title}}">
+    <img [src]="product.thumbnail" *ngIf="product.thumbnail" class="featured-image" alt="{{product.title}}" itemprop="image">
+    <img src="../../../assets/placeholder.jpg" *ngIf="!product.thumbnail" class="featured-image" alt="{{product.title}}" itemprop="image">
   </div>
   <div class="product-right">
     <h2 itemprop="name">{{product.title}}</h2>
@@ -18,3 +19,5 @@
     </button>
   </div>
 </div>
+
+<div [innerHtml]="jsonLDString" class="structured-data"></div>
