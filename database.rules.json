@@ -1,7 +1,7 @@
 {
   "rules": {
     "categories": {
-      ".indexOn": "slug",
+      ".indexOn": ["slug", "weight"],
       ".read": true,
       ".write": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)"
     },
@@ -31,7 +31,7 @@
       }
     },
     "orders": {
-      ".read": "root.child('admins/'+auth.uid).exists()",
+      ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
       ".write": "auth != null",
       ".indexOn": ["uid", "rdate"],
       "$order_id": {
@@ -48,7 +48,7 @@
     },
     "pages": {
       ".read": true,
-      ".write": "root.child('admins/'+auth.uid).exists()",
+      ".write": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
       ".indexOn": ["rdateUpdated", "url"]
     },
     "products": {
@@ -65,7 +65,7 @@
       ".indexOn": ["published", "url"]
     },
     "users": {
-      ".read": "root.child('admins/'+auth.uid).exists()",
+      ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
       ".write": true,
       "$uid": {
         ".read": "$uid == auth.uid || root.child('admins/'+auth.uid).exists()",
