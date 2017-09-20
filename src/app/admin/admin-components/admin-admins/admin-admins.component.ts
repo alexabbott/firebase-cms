@@ -13,6 +13,7 @@ export class AdminAdminsComponent {
   admins: FirebaseListObservable<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
+  adminsObject: any;
 
   constructor(public db: AngularFireDatabase, public dialog: MdDialog, public snackBar: MdSnackBar) {
     this.admins = db.list('/admins', {
@@ -21,6 +22,17 @@ export class AdminAdminsComponent {
         limitToFirst: 9999
       }
     });
+
+    this.admins.subscribe((adminList) => {
+      this.adminsObject = adminList;
+    });
+  }
+
+  countAdmin(email:string) {
+    let matches = this.adminsObject.filter((item) => {
+      return item.email === email;
+    });
+    return matches.length;
   }
 
   deleteAdmin(event, key: string) {
