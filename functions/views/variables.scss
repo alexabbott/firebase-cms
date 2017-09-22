@@ -1,0 +1,37 @@
+// colors
+$color-main: #2E2E2E;
+$color-white: #FFF;
+$color-grey: #777;
+$color-grey-dark: #333;
+$color-grey-light: #EEE;
+$color-black: rgba(0,0,0,.87);
+$color-red: #FF0000;
+$color-green: #009900;
+
+// screen size
+$screen-sm: 750px;
+$screen-md: 960px;
+
+// transitions
+%transition {
+    transition: .3s ease-out;
+}
+
+// mixins
+@mixin mobile {
+    @media screen and (max-width: #{$screen-sm}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: #{$screen-sm}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: #{$screen-md}) {
+        @content;
+    }
+}

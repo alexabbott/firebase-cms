@@ -1,8 +1,10 @@
+@import "../variables";
+
 .products-grid {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 90px;
 
     .grid-tile {
         height: 300px;
@@ -10,6 +12,7 @@
         width: 25%;
 
         .mdc-card {
+            color: #2e2e2e;
             margin: 0 10px;
             padding: 20px;
 

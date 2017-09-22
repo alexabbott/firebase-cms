@@ -146,6 +146,19 @@ admins: {
 firebase functions:config:set gmail.email="<EMAIL ADDRESS>" gmail.password="<PASSWORD>"
 ```
 
+## Local configuration for server-side rendering
+
+Copy your config JSON ouput into a config.json file inside the functions folder, which will be used for running the Cloud Functions locally.
+
+Run `firebase functions:config:get` and copy the output
+
+```
+cd functions/
+touch config.json
+```
+
+Run `firebase functions:config:get` and paste the output into config.json
+
 ## Development server
 
 Run `ng serve` for a dev server. The app will automatically reload if you change any of the source files.
@@ -155,6 +168,8 @@ Navigate to `http://localhost:4200/` to access the front end.
 Navigate to `http://localhost:4200/login` to access the login page (login is via Google).
 
 Navigate to `http://localhost:4200/admin` to access the CMS (user must be logged in and must be part of '/admins' in the Firebase database to access the CMS).
+
+Run `firebase serve --only hosting,functions` to run the server-side rendered version of the storefront
 
 ## Code scaffolding
 

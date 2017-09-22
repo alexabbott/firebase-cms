@@ -1,7 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+@import "./variables";
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+div,
+a {
+    font-family: 'Roboto Mono', monospace;
+}
+
+a {
+  text-decoration: none;
 }
 
 .mobile-only {
@@ -10,7 +28,57 @@ html, body {
 
 .user-photo {
   border-radius: 50%;
-  height: 40px;
-  padding-right: 10px;
-  width: 40px;
+  height: 50px;
+  margin-right: 10px;
+  width: 50px;
+}
+
+.mdc-toolbar {
+  background-color: $color-white !important;
+  box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, .1);
+  color: $color-grey;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
+  a {
+      @extend %transition;
+      color: $color-grey;
+      transition-property: color;
+
+      &:hover,
+      &.color-main {
+          color: $color-main;
+      }
+  }
+
+  h2 {
+      font-weight: 800;
+      margin-left: 11px;
+  }
+
+  .mat-raised-button {
+      background: $color-white;
+
+      .mat-button-wrapper {
+          color: $color-main;
+      }
+  }
+
+  &.highlight {
+      background: $color-main;
+      box-shadow: none;
+      color: $color-white;
+      position: static;
+
+      &.small {
+          height: 30px;
+          min-height: 30px;
+
+          .mat-toolbar-row {
+              height: 30px;
+              font-size: .7em;
+          }
+      }
+  }
 }

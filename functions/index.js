@@ -18,6 +18,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const app = express();
@@ -25,7 +26,13 @@ const firebaseUser = require('./firebaseUser');
 const logging = require('@google-cloud/logging')();
 const db = admin.database();
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+let hbsHelpers = exphbs.create({
+  helpers: require("./helpers.js").helpers,
+  defaultLayout: 'main',
+  extname: '.handlebars'
+});
+
+app.engine('handlebars', hbsHelpers.engine);
 app.set('view engine', 'handlebars');
 app.use(firebaseUser.validateFirebaseIdToken);
 
@@ -34,6 +41,16 @@ app.get('/', (req, res) => {
     res.render('products/products', {
       user: req.user,
       products: snapshot.val()
+    });
+  });
+});
+
+app.get('/product/:slug', (req, res) => {
+  let productSlug = req.path.split('/product/')[1];
+  db.ref('products').orderByChild('url').equalTo(productSlug).on('value', (snapshot) => {
+    res.render('product/product', {
+      user: req.user,
+      product: snapshot.val()[Object.keys(snapshot.val())[0]]
     });
   });
 });

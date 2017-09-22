@@ -1,0 +1,44 @@
+[debug] [2017-09-22T16:23:59.970Z] ----------------------------------------------------------------------
+[debug] [2017-09-22T16:23:59.973Z] Command:       /usr/local/Cellar/node@6/6.11.1/bin/node /usr/local/bin/firebase serve -p 5025 --only hosting,functions
+[debug] [2017-09-22T16:23:59.973Z] CLI Version:   3.12.0
+[debug] [2017-09-22T16:23:59.973Z] Platform:      darwin
+[debug] [2017-09-22T16:23:59.973Z] Node Version:  v6.11.1
+[debug] [2017-09-22T16:23:59.974Z] Time:          Fri Sep 22 2017 12:23:59 GMT-0400 (EDT)
+[debug] [2017-09-22T16:23:59.974Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-22T16:23:59.987Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-22T16:23:59.987Z] > authorizing via signed-in user
+[debug] [2017-09-22T16:23:59.989Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-09-22T16:23:59.989Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/Ik2vECID_eDjxPCbTACktYBtAx95n2-z9yYYJfN22-w',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Sep 22 2017 12:23:59 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:00.109Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-22T16:24:00.124Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fir-cms-76f54  
+ Fri Sep 22 2017 12:24:00 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:00.461Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-22T16:24:00.462Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fir-cms-76f54/tokens  
+ Fri Sep 22 2017 12:24:00 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:00.865Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/alexabbott/Documents/beyond/firebase-cms'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2017-09-22T16:24:01.140Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/fir-cms-76f54  
+ Fri Sep 22 2017 12:24:01 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:01.141Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/fir-cms-76f54/apiKeys  
+ Fri Sep 22 2017 12:24:01 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:01.141Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/fir-cms-76f54  
+ Fri Sep 22 2017 12:24:01 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:01.366Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-22T16:24:01.367Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1065458841365/clients/_:getWebAppConfig  
+ Fri Sep 22 2017 12:24:01 GMT-0400 (EDT)
+[debug] [2017-09-22T16:24:01.429Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-22T16:24:01.471Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-22T16:24:01.695Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5025
+
+[info] ✔  functions: app: http://localhost:5026/fir-cms-76f54/us-central1/app
