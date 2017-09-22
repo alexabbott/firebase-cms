@@ -9,6 +9,11 @@
 # dependencies
 /node_modules
 /functions/node_modules
+/public/node_modules
+
+# config
+functions/.runtimeconfig.json
+functions/config.json
 
 # IDEs and editors
 /.idea

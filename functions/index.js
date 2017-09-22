@@ -15,17 +15,15 @@
  */
 'use strict';
 
-const functions = require('firebase-functions'),
-      admin = require('firebase-admin'),
-      logging = require('@google-cloud/logging')(),
-      express = require('express'),
-      exphbs = require('express-handlebars'),
-      app = express(),
-      firebaseUser = require('./firebaseUser'),
-      db = admin.database();
-
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-
+const express = require('express');
+const exphbs = require('express-handlebars');
+const app = express();
+const firebaseUser = require('./firebaseUser');
+const logging = require('@google-cloud/logging')();
+const db = admin.database();
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -51,7 +49,6 @@ app.get('/user', (req, res) => {
 // Requests need to be authorized by providing an `Authorization` HTTP header
 // with value `Bearer <Firebase ID Token>`.
 exports.app = functions.https.onRequest(app);
-
 
 const stripe = require('stripe')(functions.config().stripe.token),
       currency = functions.config().stripe.currency || 'USD';
