@@ -1,0 +1,22 @@
+.products-grid {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    .grid-tile {
+        height: 300px;
+        margin: 0 0 10px 0;
+        width: 25%;
+
+        .mdc-card {
+            margin: 0 10px;
+            padding: 20px;
+
+            img {
+                height: 170px;;
+                width: auto;
+            }
+        }
+    }
+}

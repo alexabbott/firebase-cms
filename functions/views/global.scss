@@ -1,0 +1,16 @@
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.user-photo {
+  border-radius: 50%;
+  height: 40px;
+  padding-right: 10px;
+  width: 40px;
+}

@@ -1,0 +1,15 @@
+{{#if products}}
+    <div class="products-grid">
+        {{#each products}}
+            <div class="grid-tile">
+                <a href="/test">
+                    <div class="mdc-card">
+                        <img src="{{this.thumbnail}}">
+                        <h4>{{this.title}}</h4>
+                        ${{this.price}}
+                    </div>
+                </a>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}

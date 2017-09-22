@@ -17,9 +17,41 @@
 
 const functions = require('firebase-functions'),
       admin = require('firebase-admin'),
-      logging = require('@google-cloud/logging')();
+      logging = require('@google-cloud/logging')(),
+      express = require('express'),
+      exphbs = require('express-handlebars'),
+      app = express(),
+      firebaseUser = require('./firebaseUser'),
+      db = admin.database();
 
 admin.initializeApp(functions.config().firebase);
+
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+app.use(firebaseUser.validateFirebaseIdToken);
+
+app.get('/', (req, res) => {
+  db.ref('products').on('value', (snapshot) => {
+    res.render('products/products', {
+      user: req.user,
+      products: snapshot.val()
+    });
+  });
+});
+
+app.get('/user', (req, res) => {
+  console.log('Signed-in user:', req.user);
+  res.render('user', {
+    user: req.user
+  });
+});
+
+// This HTTPS endpoint can only be accessed by your Firebase Users.
+// Requests need to be authorized by providing an `Authorization` HTTP header
+// with value `Bearer <Firebase ID Token>`.
+exports.app = functions.https.onRequest(app);
+
 
 const stripe = require('stripe')(functions.config().stripe.token),
       currency = functions.config().stripe.currency || 'USD';
