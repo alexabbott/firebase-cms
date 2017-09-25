@@ -101,6 +101,31 @@ app.get('/page/:slug', (req, res) => {
   });
 });
 
+app.get('/account/orders', (req, res) => {
+  getNavItems();
+  db.ref('users/' + req.user.user_id + '/orders').on('value', (snapshot) => {
+    res.render('orders/orders', {
+      user: req.user,
+      nav: menu,
+      orders: snapshot.val()
+    });
+    console.log('orders', snapshot.val())
+  });
+});
+
+app.get('/account/order/:key', (req, res) => {
+  getNavItems();
+  let orderKey = req.path.split('/account/order/')[1];
+  db.ref('orders/' + orderKey).on('value', (snapshot) => {
+    res.render('order/order', {
+      user: req.user,
+      nav: menu,
+      order: snapshot.val(),
+      orderKey: orderKey
+    });
+  });
+});
+
 app.get('/user', (req, res) => {
   console.log('Signed-in user:', req.user);
   res.render('user', {

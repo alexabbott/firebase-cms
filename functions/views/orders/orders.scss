@@ -1,0 +1,25 @@
+
+.orders {
+    margin-top: 90px;
+
+    h2 {
+        text-align: center;
+    }
+
+    .order {
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 5px;
+        padding: 30px;
+
+        h4 {
+            color: #2e2e2e;
+            margin: 0 0 5px 0;
+        }
+
+        p {
+            color: #2e2e2e;
+            margin-bottom: 0;
+        }
+    }
+}

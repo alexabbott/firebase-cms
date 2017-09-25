@@ -1,0 +1,29 @@
+{{#if order}}
+    <div class="order">
+        <div class="order">
+            <h4>Order #{{orderKey}}</h4>
+            <div class="mdc-card shipping">
+                <h5>Shipping Info</h5>
+                {{order.shipping.name}}<br>
+                {{order.shipping.email}}<br>
+                {{order.shipping.address}}<br>
+                {{order.shipping.city}}, {{order.shipping.state}} {{order.shipping.zip}}<br>
+            </div>
+            <div class="mdc-card billing">
+                <h5>Billing Info</h5>
+                {{order.billing.name}}<br>
+                {{order.billing.email}}<br>
+                {{order.billing.address}}<br>
+                {{order.billing.city}}, {{order.billing.state}} {{order.billing.zip}}<br>
+            </div>
+            <div class="order-items">
+                {{#each order.items}}
+                    <div class="mdc-card order-item">
+                        <h5>{{this.title}}</h5>
+                        <p>${{this.total}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+{{/if}}
