@@ -1,0 +1,12 @@
+{{#if posts}}
+    <div class="posts">
+        {{#each posts}}
+            <a href="/blog/{{this.url}}">
+                <div class="mdc-card post">
+                    <img src="{{this.thumbnail}}">
+                    <h4>{{this.title}}</h4>
+                </div>
+            </a>
+        {{/each}}
+    </div>
+{{/if}}

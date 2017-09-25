@@ -36,21 +36,67 @@ app.engine('handlebars', hbsHelpers.engine);
 app.set('view engine', 'handlebars');
 app.use(firebaseUser.validateFirebaseIdToken);
 
+let menu = [];
+let getNavItems = () => {
+  db.ref('menus/nav').on('value', (snapshot) => {
+    menu = snapshot.val();
+  });
+};
+
 app.get('/', (req, res) => {
+  getNavItems();
   db.ref('products').on('value', (snapshot) => {
     res.render('products/products', {
       user: req.user,
+      nav: menu,
       products: snapshot.val()
     });
   });
 });
 
 app.get('/product/:slug', (req, res) => {
+  getNavItems();
   let productSlug = req.path.split('/product/')[1];
   db.ref('products').orderByChild('url').equalTo(productSlug).on('value', (snapshot) => {
     res.render('product/product', {
       user: req.user,
+      nav: menu,
       product: snapshot.val()[Object.keys(snapshot.val())[0]]
+    });
+  });
+});
+
+app.get('/blog', (req, res) => {
+  getNavItems();
+  db.ref('posts').on('value', (snapshot) => {
+    res.render('posts/posts', {
+      user: req.user,
+      nav: menu,
+      posts: snapshot.val()
+    });
+  });
+});
+
+app.get('/blog/:slug', (req, res) => {
+  getNavItems();
+  let postSlug = req.path.split('/blog/')[1];
+  db.ref('posts').orderByChild('url').equalTo(postSlug).on('value', (snapshot) => {
+    res.render('post/post', {
+      user: req.user,
+      nav: menu,
+      post: snapshot.val()[Object.keys(snapshot.val())[0]]
+    });
+  });
+});
+
+app.get('/page/:slug', (req, res) => {
+  getNavItems();
+  let pageSlug = req.path.split('/page/')[1];
+  db.ref('pages').orderByChild('url').equalTo(pageSlug).on('value', (snapshot) => {
+    res.render('page/page', {
+      user: req.user,
+      nav: menu,
+      page: snapshot.val()[Object.keys(snapshot.val())[0]]
     });
   });
 });

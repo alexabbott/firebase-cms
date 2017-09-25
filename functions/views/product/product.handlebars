@@ -1,8 +1,12 @@
 {{#if product}}
-    <div>
-        <img src="{{product.thumbnail}}">
-        <h4>{{product.title}}</h4>
-        ${{product.price}}
-        {{{product.description}}}
+    <div class="product-container">
+        <div class="product-image">
+            <img src="{{product.thumbnail}}">
+        </div>
+        <div class="product-info">
+            <h2>{{product.title}}</h2>
+            ${{product.price}}
+            {{{product.description}}}
+        </div>
     </div>
 {{/if}}

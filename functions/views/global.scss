@@ -26,11 +26,25 @@ a {
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .user-photo {
   border-radius: 50%;
+  cursor: pointer;
   height: 50px;
   margin-right: 10px;
   width: 50px;
+}
+
+.user-menu {
+  right: 20px;
+  top: 80px;
+}
+
+.login {
+  margin-right: 10px;
 }
 
 .mdc-toolbar {
@@ -52,9 +66,17 @@ a {
       }
   }
 
-  h2 {
+  h1 {
+    margin: 0 0 0 11px;
+
+    a {
+      color: $color-main;
       font-weight: 800;
-      margin-left: 11px;
+    }
+  }
+
+  .nav-item {
+    margin: 15px 25px 0 0;
   }
 
   .mat-raised-button {

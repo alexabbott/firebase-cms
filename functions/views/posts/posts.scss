@@ -1,0 +1,26 @@
+
+.posts {
+    margin-top: 90px;
+
+    .post {
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 5px;
+        padding: 30px;
+
+        img {
+            display: inline-block;
+            height: 150px;
+            object-fit: contain;
+            vertical-align: top;
+            width: 150px;
+        }
+
+        h4 {
+            color: #2e2e2e;
+            display: inline-block;
+            margin-left: 20px;
+            vertical-align: top;
+        }
+    }
+}

@@ -13,11 +13,19 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('public'))
 });
 
+gulp.task('scripts', () => {
+    return gulp.src(['functions/views/**/*.js'])
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('public'))
+});
+
 gulp.task('watch', () => {
     gulp.watch(['functions/views/**/*.scss', 'functions/views/global.scss'], ['styles']);
+    gulp.watch(['functions/views/**/*.js'], ['scripts']);
 });
 
 gulp.task('default', () => {
     gulp.start('styles');
+    gulp.start('scripts');
     gulp.start('watch');
 });

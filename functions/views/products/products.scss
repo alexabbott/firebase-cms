@@ -17,8 +17,9 @@
             padding: 20px;
 
             img {
-                height: 170px;;
-                width: auto;
+                height: 170px;
+                object-fit: contain;
+                width: 100%;
             }
         }
     }

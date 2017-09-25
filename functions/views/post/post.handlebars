@@ -1,0 +1,11 @@
+{{#if post}}
+    <div class="post-container">
+        <div class="post-image">
+            <img src="{{post.thumbnail}}">
+        </div>
+        <div class="post-info">
+            <h2>{{post.title}}</h2>
+            {{{post.body}}}
+        </div>
+    </div>
+{{/if}}

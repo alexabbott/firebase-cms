@@ -1,0 +1,16 @@
+.product-container {
+    display: block;
+    margin: 90px 30px 30px 30px;
+
+    .product-info,
+    .product-image {
+        display: inline-block;
+        vertical-align: top;
+        width: 48%;
+    }
+
+    .product-info {
+        box-sizing: border-box;
+        padding: 30px;
+    }
+}

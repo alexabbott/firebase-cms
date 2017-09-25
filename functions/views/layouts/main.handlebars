@@ -56,17 +56,35 @@
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
       <a href="#" class="material-icons mdc-toolbar__icon--menu mobile-only">menu</a>
-      <span class="mdc-toolbar__title"><a href="/">FireShop</a></span>
+      <h1 class="mdc-toolbar__title"><a href="/">FireShop</a></h1>
     </section>
     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-      <img src="{{user.picture}}" class="user-photo">
-    </section>
-  </div>
+      {{#if nav}}
+        {{#each nav}}
+          <a href="{{this.url}}" class="nav-item">
+            {{this.label}}
+          </a>
+        {{/each}}
+      {{/if}}
+      <img src="{{user.picture}}" class="user-photo {{#if user}}{{^}}hidden{{/if}}">
+      <div class="mdc-simple-menu" tabindex="-1">
+        <ul class="mdc-simple-menu__items mdc-list user-menu" role="menu" aria-hidden="true">
+          <li class="mdc-list-item" role="menuitem" tabindex="0">
+            My Account
+          </li>
+          <li class="mdc-list-item logout" role="menuitem" tabindex="0">
+            Log out
+          </li>
+        </ul>
+      </div>
+      <button class="mdc-button mdc-button--raised login {{#if user}}hidden{{^}}{{/if}}">Login</button>
+    </div>
+  </section>
 </header>
 {{{body}}}
 
 <script src="/node_modules/material-components-web/dist/material-components-web.js"></script>
 <script>mdc.autoInit()</script>
-
+<script src="/main.js"></script>
 </body>
 </html>
