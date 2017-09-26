@@ -8,9 +8,10 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-import { MaterialComponentsModule } from 'app/materialcomponents.module';
-import { SharedModule } from 'app/shared.module';
-import { AppRoutingModule } from 'app/app-routing.module';
+import { MaterialComponentsModule } from './materialcomponents.module';
+import { SharedModule } from './shared.module';
+import { Routes, RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import 'hammerjs';
 
 // storefront components
@@ -32,6 +33,7 @@ import { ProductCategoryComponent } from './storefront-components/product-catego
 import { ProductCategoriesComponent } from './storefront-components/product-categories/product-categories.component';
 import { SearchResultsComponent } from './storefront-components/search-results/search-results.component';
 import { LoginComponent } from './storefront-components/login/login.component';
+import { OrderComponent } from './storefront-components/order/order.component';
 
 // services
 import { GlobalService } from './services/global.service';
@@ -45,7 +47,7 @@ firebase.initializeApp(environment.firebase);
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'my-app'}),
     AngularFireModule.initializeApp(environment.firebase, 'firebase-cms'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

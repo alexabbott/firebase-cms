@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from "app/services/localcart.service";
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'checkout-billing',

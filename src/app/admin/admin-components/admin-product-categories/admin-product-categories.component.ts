@@ -3,7 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Router }    from '@angular/router';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'app-admin-product-categories',

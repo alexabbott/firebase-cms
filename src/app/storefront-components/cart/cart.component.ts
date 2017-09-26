@@ -5,8 +5,8 @@ import { MdSnackBar } from '@angular/material';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'cart',

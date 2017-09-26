@@ -5,7 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'admin',

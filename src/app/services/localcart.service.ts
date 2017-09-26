@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WindowRefService } from "app/services/window-ref.service";
+import { WindowRefService } from './window-ref.service';
 
 @Injectable()
 export class LocalCartService {

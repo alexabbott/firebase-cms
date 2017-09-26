@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 @Component({

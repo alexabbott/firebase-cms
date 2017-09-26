@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "fir-cms-76f54"
+    "default": "fir-cms-76f54",
+    "cms": "fir-cms-76f54"
   }
 }

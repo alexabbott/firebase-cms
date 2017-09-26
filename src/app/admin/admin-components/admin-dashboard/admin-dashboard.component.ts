@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { GlobalService } from 'app/services/global.service';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'admin-dashboard',

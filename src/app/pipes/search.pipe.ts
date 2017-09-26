@@ -7,7 +7,7 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 @Injectable()
 export class SearchPipe implements PipeTransform {
 
-  transform(items :any ,term :any): any {
+  transform(items :any, term :any): any {
     if (term === undefined || term === '') return items;
 
     if (items) {

@@ -6,8 +6,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'product',

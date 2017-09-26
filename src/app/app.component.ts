@@ -5,7 +5,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from './services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { LocalCartService } from './services/localcart.service';
 
 @Component({
   selector: 'app-root',

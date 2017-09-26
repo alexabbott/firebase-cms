@@ -1,0 +1,37 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "FireShop",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "./?utm_source=web_app_manifest",
+    "short_name": "FireShop",
+    "theme_color": "#2E2E2E",
+    "description": "",
+    "orientation": "any",
+    "background_color": "#2E2E2E",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+      {
+        "src": "/assets/icons/icon-512x512.png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/assets/icons/icon-192x192.png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/assets/icons/icon-144x144.png",
+        "sizes": "144x144"
+      },
+      {
+        "src": "/assets/icons/icon-32x32.png",
+        "sizes": "32x32"
+      },
+      {
+        "src": "/assets/icons/icon-16x16.png",
+        "sizes": "16x16"
+      }
+    ]
+}
