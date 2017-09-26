@@ -10,6 +10,10 @@
 /node_modules
 /functions/node_modules
 
+#secrets
+/functions/config.json
+/functions/.runtimeconfig.json
+
 # IDEs and editors
 /.idea
 .project
