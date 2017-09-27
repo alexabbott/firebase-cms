@@ -1,13 +1,62 @@
 <section class="cart-container">
     <h3 class="center">Cart</h3>
+    <div class="mdc-card cart-header">
+        <div class="item">
+            Item
+        </div>
+        <div class="price">
+            Price
+        </div>
+        <div class="quantity">
+            Qty
+        </div>
+        <div class="total">
+            Total
+        </div>
+        <div class="remove">
+        </div>
+    </div>
     <div class="cart-items">
         {{#if cart}}
             {{#each cart}}
                 <div class="mdc-card cart-item">
-                    <h5>{{this.title}}</h5>
-                    <p>${{this.price}}</p>
+                    <div class="item">
+                        <img src="{{this.thumbnail}}">
+                        <h5>{{this.title}}</h5>
+                    </div>
+                    <div class="price">
+                        ${{this.price}}
+                    </div>
+                    <div class="quantity">
+                        <div class="mdc-textfield mdc-textfield--upgraded">
+                            <input type="number" class="mdc-textfield__input" value="{{this.quantity}}">
+                        </div>
+                    </div>
+                    <div class="total">
+                        ${{this.total}}
+                    </div>
+                    <div class="remove">
+                        <button class="mdc-button remove-item" data-item="{{this.entityKey}}">Remove</button>
+                    </div>
                 </div>
             {{/each}}
         {{/if}}
     </div>
+    <div class="mdc-card subtotal">
+        <div class="subtotal-label">Subtotal</div>
+        <div class="subtotal-amount">
+            {{#if subtotal}}
+                ${{subtotal}}
+            {{/if}}
+        </div>
+        <a href="/checkout/shipping" class="checkout">
+            <button class="mdc-button mdc-button--raised">Checkout</button>
+        </a>
+    </div>
 </section>
+
+{{#if cart}}
+    <script>
+        cart = {{#json cart}}{{/json}};
+    </script>
+{{/if}}

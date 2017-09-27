@@ -7,6 +7,12 @@
             <h2>{{product.title}}</h2>
             ${{product.price}}
             {{{product.description}}}
+            <div class="mdc-textfield mdc-textfield--upgraded">
+                <div class="quantity-label">
+                    Qty
+                </div>
+                <input type="number" class="mdc-textfield__input product-quantity" value="1">
+            </div>
             <button class="mdc-button mdc-button--raised add-to-cart">Add to Cart</button>
         </div>
     </div>

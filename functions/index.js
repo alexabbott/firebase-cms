@@ -128,10 +128,18 @@ app.get('/account/order/:key', (req, res) => {
 app.get('/cart', (req, res) => {
   getNavItems();
   db.ref('users/' + req.user.user_id + '/cart').on('value', (snapshot) => {
+    let cartTotal = 0;
+    let cartArray = Object.keys(snapshot.val()).map(function(key) {
+      return snapshot.val()[key];
+    });
+    for (let i = 0; i < cartArray.length; i++) {
+      cartTotal += cartArray[i].total;
+    }
     res.render('cart/cart', {
       user: req.user,
       nav: menu,
-      cart: snapshot.val()
+      cart: snapshot.val(),
+      subtotal: parseFloat(cartTotal.toFixed(2))
     });
   });
 });

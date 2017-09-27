@@ -12,5 +12,15 @@
     .product-info {
         box-sizing: border-box;
         padding: 30px;
+
+        .quantity-label {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .mdc-textfield__input {
+            transform: translateY(8px);
+            width: 45px;
+        }
     }
 }

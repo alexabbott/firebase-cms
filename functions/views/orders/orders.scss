@@ -1,6 +1,8 @@
 
 .orders {
+    box-sizing: border-box;
     margin-top: 90px;
+    padding: 0 30px 20px 30px;
 
     h2 {
         text-align: center;
@@ -9,7 +11,7 @@
     .order {
         box-sizing: border-box;
         display: block;
-        margin-bottom: 5px;
+        margin: 0 auto 5px auto;
         padding: 30px;
 
         h4 {
