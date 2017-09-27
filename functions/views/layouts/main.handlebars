@@ -9,47 +9,13 @@
   <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
   <script defer src="/__/firebase/3.9.0/firebase-app.js"></script>
   <script defer src="/__/firebase/3.9.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-database.js"></script>
   <script defer src="/__/firebase/init.js"></script>
-
-  <script>
-    function checkCookie() {
-      // Checks if it's likely that there is a signed-in Firebase user and the session cookie expired.
-      // In that case we'll hide the body of the page until it will be reloaded after the cookie has been set.
-      var hasSessionCookie = document.cookie.indexOf('__session=') !== -1;
-      var isProbablySignedInFirebase = typeof Object.keys(localStorage).find(function (key) {
-            return key.startsWith('firebase:authUser')
-          }) !== 'undefined';
-      if (!hasSessionCookie && isProbablySignedInFirebase) {
-        var style = document.createElement('style');
-        style.id = '__bodyHider';
-        style.appendChild(document.createTextNode('body{display:none}'));
-        document.head.appendChild(style);
-      }
-    }
-    checkCookie();
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Make sure the Firebase ID Token is always passed as a cookie.
-      firebase.auth().addAuthTokenListener(function (idToken) {
-        var hadSessionCookie = document.cookie.indexOf('__session=') !== -1;
-        document.cookie = '__session=' + idToken + ';max-age=' + (idToken ? 3600 : 0);
-        // If there is a change in the auth state compared to what's in the session cookie we'll reload after setting the cookie.
-        if ((!hadSessionCookie && idToken) || (hadSessionCookie && !idToken)) {
-          window.location.reload(true);
-        } else {
-          // In the rare case where there was a user but it could not be signed in (for instance the account has been deleted).
-          // We un-hide the page body.
-          var style = document.getElementById('__bodyHider');
-          if (style) {
-            document.head.removeChild(style);
-          }
-        }
-      });
-    });
-  </script>
+  <script src="user.js"></script>
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="stylesheet" href="/node_modules/material-components-web/dist/material-components-web.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/main.css">
 </head>
 <body>
@@ -67,6 +33,9 @@
           </a>
         {{/each}}
       {{/if}}
+      <a href="/cart" class="cart-icon">
+        <i class="material-icons">shopping_cart</i>
+      </a>
       <img src="{{user.picture}}" class="user-photo {{#if user}}{{^}}hidden{{/if}}">
       <div class="mdc-simple-menu" tabindex="-1">
         <ul class="mdc-simple-menu__items mdc-list user-menu" role="menu" aria-hidden="true">
@@ -88,6 +57,11 @@
 
 <script src="/node_modules/material-components-web/dist/material-components-web.js"></script>
 <script>mdc.autoInit()</script>
-<script src="/main.js"></script>
+<script defer src="/main.js"></script>
+{{#if user}}
+  <script>
+    user = {{#json user}}{{/json}}
+  </script>
+{{/if}}
 </body>
 </html>

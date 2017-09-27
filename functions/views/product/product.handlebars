@@ -7,6 +7,11 @@
             <h2>{{product.title}}</h2>
             ${{product.price}}
             {{{product.description}}}
+            <button class="mdc-button mdc-button--raised add-to-cart">Add to Cart</button>
         </div>
     </div>
+
+    <script>
+        product = {{#json product}}{{/json}}
+    </script>
 {{/if}}

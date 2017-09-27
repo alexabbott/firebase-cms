@@ -30,6 +30,10 @@ a {
   display: none;
 }
 
+.center {
+  text-align: center;
+}
+
 .user-photo {
   border-radius: 50%;
   cursor: pointer;
@@ -80,6 +84,10 @@ a {
       .mat-button-wrapper {
           color: $color-main;
       }
+  }
+
+  .cart-icon {
+    margin: 15px 25px 0 0;
   }
 
   &.highlight {

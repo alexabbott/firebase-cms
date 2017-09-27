@@ -109,7 +109,6 @@ app.get('/account/orders', (req, res) => {
       nav: menu,
       orders: snapshot.val()
     });
-    console.log('orders', snapshot.val())
   });
 });
 
@@ -122,6 +121,17 @@ app.get('/account/order/:key', (req, res) => {
       nav: menu,
       order: snapshot.val(),
       orderKey: orderKey
+    });
+  });
+});
+
+app.get('/cart', (req, res) => {
+  getNavItems();
+  db.ref('users/' + req.user.user_id + '/cart').on('value', (snapshot) => {
+    res.render('cart/cart', {
+      user: req.user,
+      nav: menu,
+      cart: snapshot.val()
     });
   });
 });

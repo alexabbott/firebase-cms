@@ -1,13 +1,13 @@
-let register = function(Handlebars) {
+let register = (Handlebars) => {
     let helpers = {
-        inc: function(value, options) {
-            return parseInt(value) + 1;
-        },
-        slugify: function(value, options) {
+        slugify: (value, options) => {
             value = value.trim();
             let slug = value.replace(/[^\w\s]+/gi, '').replace(/ +/gi, '-');
             return slug.toLowerCase();
-        }
+        },
+        json: (value) => {
+            return JSON.stringify(value);
+        },
     };
 
     if (Handlebars && typeof Handlebars.registerHelper === "function") {

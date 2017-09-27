@@ -1,0 +1,9 @@
+{
+  "name": "firebase-cms",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "material-components-web": "^0.21.1"
+  }
+}

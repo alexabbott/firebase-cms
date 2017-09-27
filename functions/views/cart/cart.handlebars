@@ -1,0 +1,13 @@
+<section class="cart-container">
+    <h3 class="center">Cart</h3>
+    <div class="cart-items">
+        {{#if cart}}
+            {{#each cart}}
+                <div class="mdc-card cart-item">
+                    <h5>{{this.title}}</h5>
+                    <p>${{this.price}}</p>
+                </div>
+            {{/each}}
+        {{/if}}
+    </div>
+</section>

@@ -20,8 +20,7 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch(['functions/views/**/*.scss', 'functions/views/global.scss'], ['styles']);
-    gulp.watch(['functions/views/**/*.js'], ['scripts']);
+    gulp.watch(['functions/views/**/*.scss', 'functions/views/global.scss', 'functions/views/**/*.js'], ['styles', 'scripts']);
 });
 
 gulp.task('default', () => {
