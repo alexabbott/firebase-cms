@@ -37,15 +37,26 @@ app.set('view engine', 'handlebars');
 app.use(firebaseUser.validateFirebaseIdToken);
 
 let menu = [];
+let cart = [];
+
+let getCartItems = (req) => {
+  db.ref('users/' + req.user.user_id + '/cart').once('value', (snapshot) => {
+    let cartArray = Object.keys(snapshot.val()).map(function(key) {
+      return snapshot.val()[key];
+    });
+    cart = cartArray;
+  });
+};
+
 let getNavItems = () => {
-  db.ref('menus/nav').on('value', (snapshot) => {
+  db.ref('menus/nav').once('value', (snapshot) => {
     menu = snapshot.val();
   });
 };
 
 app.get('/', (req, res) => {
   getNavItems();
-  db.ref('products').on('value', (snapshot) => {
+  db.ref('products').once('value', (snapshot) => {
     res.render('products/products', {
       user: req.user,
       nav: menu,
@@ -56,19 +67,21 @@ app.get('/', (req, res) => {
 
 app.get('/product/:slug', (req, res) => {
   getNavItems();
+  getCartItems(req);
   let productSlug = req.path.split('/product/')[1];
-  db.ref('products').orderByChild('url').equalTo(productSlug).on('value', (snapshot) => {
+  db.ref('products').orderByChild('url').equalTo(productSlug).once('value', (snapshot) => {
     res.render('product/product', {
       user: req.user,
       nav: menu,
-      product: snapshot.val()[Object.keys(snapshot.val())[0]]
+      product: snapshot.val()[Object.keys(snapshot.val())[0]],
+      cart: cart
     });
   });
 });
 
 app.get('/blog', (req, res) => {
   getNavItems();
-  db.ref('posts').on('value', (snapshot) => {
+  db.ref('posts').once('value', (snapshot) => {
     res.render('posts/posts', {
       user: req.user,
       nav: menu,
@@ -80,7 +93,7 @@ app.get('/blog', (req, res) => {
 app.get('/blog/:slug', (req, res) => {
   getNavItems();
   let postSlug = req.path.split('/blog/')[1];
-  db.ref('posts').orderByChild('url').equalTo(postSlug).on('value', (snapshot) => {
+  db.ref('posts').orderByChild('url').equalTo(postSlug).once('value', (snapshot) => {
     res.render('post/post', {
       user: req.user,
       nav: menu,
@@ -92,7 +105,7 @@ app.get('/blog/:slug', (req, res) => {
 app.get('/page/:slug', (req, res) => {
   getNavItems();
   let pageSlug = req.path.split('/page/')[1];
-  db.ref('pages').orderByChild('url').equalTo(pageSlug).on('value', (snapshot) => {
+  db.ref('pages').orderByChild('url').equalTo(pageSlug).once('value', (snapshot) => {
     res.render('page/page', {
       user: req.user,
       nav: menu,
@@ -103,7 +116,7 @@ app.get('/page/:slug', (req, res) => {
 
 app.get('/account/orders', (req, res) => {
   getNavItems();
-  db.ref('users/' + req.user.user_id + '/orders').on('value', (snapshot) => {
+  db.ref('users/' + req.user.user_id + '/orders').once('value', (snapshot) => {
     res.render('orders/orders', {
       user: req.user,
       nav: menu,
@@ -115,7 +128,7 @@ app.get('/account/orders', (req, res) => {
 app.get('/account/order/:key', (req, res) => {
   getNavItems();
   let orderKey = req.path.split('/account/order/')[1];
-  db.ref('orders/' + orderKey).on('value', (snapshot) => {
+  db.ref('orders/' + orderKey).once('value', (snapshot) => {
     res.render('order/order', {
       user: req.user,
       nav: menu,
@@ -127,20 +140,30 @@ app.get('/account/order/:key', (req, res) => {
 
 app.get('/cart', (req, res) => {
   getNavItems();
-  db.ref('users/' + req.user.user_id + '/cart').on('value', (snapshot) => {
-    let cartTotal = 0;
-    let cartArray = Object.keys(snapshot.val()).map(function(key) {
-      return snapshot.val()[key];
+  if (req) {
+    db.ref(`users/${req.user.user_id}/cart`).once('value', (snapshot) => {
+      res.render('cart/cart', {
+        user: req.user,
+        nav: menu,
+        cart: snapshot.val() || null
+      });
     });
-    for (let i = 0; i < cartArray.length; i++) {
-      cartTotal += cartArray[i].total;
-    }
-    res.render('cart/cart', {
-      user: req.user,
-      nav: menu,
-      cart: snapshot.val(),
-      subtotal: parseFloat(cartTotal.toFixed(2))
-    });
+  }
+});
+
+app.get('/checkout/shipping', (req, res) => {
+  getNavItems();
+  res.render('checkout-shipping/checkout-shipping', {
+    user: req.user,
+    nav: menu
+  });
+});
+
+app.get('/checkout/billing', (req, res) => {
+  getNavItems();
+  res.render('checkout-billing/checkout-billing', {
+    user: req.user,
+    nav: menu
   });
 });
 
