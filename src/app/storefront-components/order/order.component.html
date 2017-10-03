@@ -1,7 +1,7 @@
-<div class="container" [ngClass]="{ 'full-width': admin}">
+<div class="container order-container" [ngClass]="{ 'full-width': admin}">
   <div class="order-left">
     <h3 *ngIf="order">Order #{{ order.$key }}</h3>
-    <div *ngIf="order">{{ order.date | date }}</div>
+    <div *ngIf="order" class="order-date">{{ order.date | date }}</div>
   </div>
   <div class="order-right" *ngIf="order && router.url.includes('/admin')">
     <a routerLink="/admin/customer/{{order.uid}}">

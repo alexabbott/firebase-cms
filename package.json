@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "hashcode": "node scripts/hashcode.js",
     "deploy": "ng build --prod; firebase deploy",
-    "deploy-static": "ng build --prod; node scripts/static-generator.js; mv static/ dist/; firebase deploy"
+    "build-static": "node scripts/static-generator.js",
+    "deploy-static": "ng build --prod; node scripts/static-generator.js; mv static/* dist/; firebase deploy"
   },
   "private": true,
   "dependencies": {

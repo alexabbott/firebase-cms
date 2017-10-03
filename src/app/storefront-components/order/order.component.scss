@@ -1,7 +1,12 @@
 @import '../../../variables.scss';
 
-.orders-header {
-    margin: 30px 0 10px 0;
+.order-container {
+    margin: 0;
+    text-align: left;
+}
+
+.order-date {
+    text-align: left;
 }
 
 .order-left {
@@ -95,6 +100,7 @@
 
 .order-info {
     margin-top: 30px;
+    text-align: left;
 
     @include tablet {
         display: flex;

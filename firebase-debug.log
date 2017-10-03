@@ -1,0 +1,104 @@
+[debug] [2017-10-02T15:31:49.374Z] ----------------------------------------------------------------------
+[debug] [2017-10-02T15:31:49.378Z] Command:       /usr/local/Cellar/node@6/6.11.1/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-10-02T15:31:49.379Z] CLI Version:   3.12.0
+[debug] [2017-10-02T15:31:49.379Z] Platform:      darwin
+[debug] [2017-10-02T15:31:49.379Z] Node Version:  v6.11.1
+[debug] [2017-10-02T15:31:49.380Z] Time:          Mon Oct 02 2017 11:31:49 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:49.381Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-02T15:31:49.419Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-02T15:31:49.429Z] > authorizing via signed-in user
+[debug] [2017-10-02T15:31:49.433Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-10-02T15:31:49.434Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/Ik2vECID_eDjxPCbTACktYBtAx95n2-z9yYYJfN22-w',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Mon Oct 02 2017 11:31:49 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:49.599Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-02T15:31:49.618Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fir-cms-76f54  
+ Mon Oct 02 2017 11:31:49 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:50.065Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-02T15:31:50.066Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fir-cms-76f54/tokens  
+ Mon Oct 02 2017 11:31:50 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:50.401Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fir-cms-76f54'...
+[info] 
+[info] i  deploying database, functions, hosting
+[info] ✔  database: rules ready to deploy.
+[debug] [2017-10-02T15:31:50.852Z] > [functions] package.json contents: {
+  "name": "stripe-functions",
+  "description": "Stripe Firebase Functions",
+  "dependencies": {
+    "@google-cloud/logging": "^0.7.1",
+    "firebase-admin": "^4.0.5",
+    "firebase-functions": "^0.5.1",
+    "stripe": "^4.15.0",
+    "nodemailer": "^4.0.1"
+  }
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] [2017-10-02T15:31:50.853Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/fir-cms-76f54?view=CONSUMER_VIEW  
+ Mon Oct 02 2017 11:31:50 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:50.854Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/fir-cms-76f54?view=CONSUMER_VIEW  
+ Mon Oct 02 2017 11:31:50 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:51.441Z] <<< HTTP RESPONSE 200
+[info] ✔  runtimeconfig: all necessary APIs are enabled
+[debug] [2017-10-02T15:31:51.454Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2017-10-02T15:31:51.456Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/fir-cms-76f54  
+ Mon Oct 02 2017 11:31:51 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:51.457Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/fir-cms-76f54/apiKeys  
+ Mon Oct 02 2017 11:31:51 GMT-0400 (EDT)
+[debug] [2017-10-02T15:31:51.692Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-02T15:31:51.814Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-02T16:15:45.304Z] ----------------------------------------------------------------------
+[debug] [2017-10-02T16:15:45.311Z] Command:       /usr/local/Cellar/node@6/6.11.1/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-10-02T16:15:45.312Z] CLI Version:   3.12.0
+[debug] [2017-10-02T16:15:45.312Z] Platform:      darwin
+[debug] [2017-10-02T16:15:45.312Z] Node Version:  v6.11.1
+[debug] [2017-10-02T16:15:45.313Z] Time:          Mon Oct 02 2017 12:15:45 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:45.313Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-02T16:15:45.359Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-02T16:15:45.360Z] > authorizing via signed-in user
+[debug] [2017-10-02T16:15:45.366Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fir-cms-76f54  
+ Mon Oct 02 2017 12:15:45 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:45.837Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-02T16:15:45.839Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fir-cms-76f54/tokens  
+ Mon Oct 02 2017 12:15:45 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:46.285Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fir-cms-76f54'...
+[info] 
+[info] i  deploying database, functions, hosting
+[info] ✔  database: rules ready to deploy.
+[debug] [2017-10-02T16:15:46.726Z] > [functions] package.json contents: {
+  "name": "stripe-functions",
+  "description": "Stripe Firebase Functions",
+  "dependencies": {
+    "@google-cloud/logging": "^0.7.1",
+    "firebase-admin": "^4.0.5",
+    "firebase-functions": "^0.5.1",
+    "stripe": "^4.15.0",
+    "nodemailer": "^4.0.1"
+  }
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] [2017-10-02T16:15:46.730Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/fir-cms-76f54?view=CONSUMER_VIEW  
+ Mon Oct 02 2017 12:15:46 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:46.731Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/fir-cms-76f54?view=CONSUMER_VIEW  
+ Mon Oct 02 2017 12:15:46 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:47.382Z] <<< HTTP RESPONSE 200
+[info] ✔  runtimeconfig: all necessary APIs are enabled
+[debug] [2017-10-02T16:15:47.396Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2017-10-02T16:15:47.398Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/fir-cms-76f54  
+ Mon Oct 02 2017 12:15:47 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:47.399Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/fir-cms-76f54/apiKeys  
+ Mon Oct 02 2017 12:15:47 GMT-0400 (EDT)
+[debug] [2017-10-02T16:15:47.719Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-02T16:15:47.738Z] <<< HTTP RESPONSE 200
