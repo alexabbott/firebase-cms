@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -15,8 +15,8 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 })
 export class AddProductComponent implements OnInit {
 
-  products: FirebaseListObservable<any>;
-  categories: FirebaseListObservable<any>;
+  products: AngularFireList<any>;
+  categories: Observable<any>;
   ogCategory: string;
   newTitle: string;
   newThumbnail: string;
@@ -31,8 +31,8 @@ export class AddProductComponent implements OnInit {
   storageRef: any;
   file: any;
   imageUrl: any;
-  currentProduct: FirebaseObjectObservable<any>;
-  currentModeratedProducts: FirebaseListObservable<any>;
+  currentProduct: AngularFireObject<any>;
+  currentModeratedProducts: AngularFireList<any>;
   entityObject: any;
   dialogRef: MdDialogRef<any>;
   selectedOption: string;
@@ -50,10 +50,15 @@ export class AddProductComponent implements OnInit {
   ) {
     this.newPublished = false;
     this.products = db.list('/products');
-    this.categories = db.list('/categories');
+    this.categories = db.list('/categories').snapshotChanges();
 
     this.globalService.admin.subscribe(admin => {
       this.currentAdmin = admin;
+
+      let adminApprovalProducts = this.db.list('/approvals/products/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid));
+      adminApprovalProducts.valueChanges().subscribe(response => {
+        console.log(!response);
+      });
     });
 
     this.storageRef = af.storage().ref();
@@ -67,36 +72,32 @@ export class AddProductComponent implements OnInit {
 
           if (this.router.url.includes('approval')) {
             this.currentProduct = this.db.object('/approvals/products/' + params.key);
-            this.db.object('/approvals/products/' + params.key, { preserveSnapshot: true }).take(1).subscribe((p) => {
-              if (p.val().category) {
-                this.ogCategory = p.val().category;
+            this.db.object('/approvals/products/' + params.key).valueChanges().take(1).subscribe((p:any) => {
+              if (p.category) {
+                this.ogCategory = p.category;
               }
             });
-            this.db.object('/approvals/products/' + this.productKey).subscribe((approvalProduct) => {
+            this.db.object('/approvals/products/' + this.productKey).valueChanges().subscribe((approvalProduct:any) => {
               this.entityObject = approvalProduct;
             });
           } else {
             this.currentProduct = this.db.object('/products/' + params.key);
-            this.db.object('/products/' + params.key, { preserveSnapshot: true }).take(1).subscribe((p) => {
-              if (p.val().category) {
-                this.ogCategory = p.val().category;
+            this.db.object('/products/' + params.key).valueChanges().take(1).subscribe((p:any) => {
+              if (p.category) {
+                this.ogCategory = p.category;
               }
             });
 
             // check to see if any approvals are awaiting on this product
-            this.db.list('/approvals/products', {
-              query: {
-                orderByChild: 'entityKey',
-                equalTo: params.key
-              }
-            }).subscribe((approval) => {
-              if (approval.length > 0 && approval[0]) {
-                this.awaitingApproval = approval[0].$key;
-              }
+            this.db.list('/approvals/products', ref => ref.orderByChild('entityKey').equalTo(params.key)).valueChanges()
+              .subscribe((approval:any) => {
+                if (approval.length > 0 && approval[0]) {
+                  this.awaitingApproval = approval[0].$key;
+                }
             });
           }
 
-          this.currentProduct.subscribe(p => {
+          this.currentProduct.valueChanges().subscribe((p:any) => {
             this.newTitle = p.title;
             this.newDescription = p.description;
             this.newPrice = p.price;
@@ -264,19 +265,14 @@ export class AddProductComponent implements OnInit {
 
         this.currentModeratedProducts = this.db.list('/approvals/products/');
 
-        let adminApprovalProducts = this.db.list('/approvals/products/', {
-          query: {
-            orderByChild: 'updatedBy',
-            equalTo: this.currentAdmin.uid
-          }
-        });
-
-        adminApprovalProducts.take(1).subscribe((approvals) => {
+        let adminApprovalProducts = this.db.list('/approvals/products/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid));
+        console.log(adminApprovalProducts.valueChanges());
+        adminApprovalProducts.snapshotChanges().take(1).subscribe((approvals:any) => {
 
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
-              return match.$key === this.productKey;
+              return match.key === this.productKey;
             });
           } else {
             matchingApprovals = approvals.filter((match) => {
@@ -307,7 +303,7 @@ export class AddProductComponent implements OnInit {
   approveItem(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
     if (this.entityObject.entityKey) {
       let ogEntity = this.db.object('/products/' + this.entityObject.entityKey);
-      ogEntity.take(1).subscribe((item) => {
+      ogEntity.valueChanges().take(1).subscribe((item:any) => {
         this.updateCategory(item.category, this.entityObject.category, this.entityObject.entityKey);
         ogEntity.set(this.entityObject);
       });

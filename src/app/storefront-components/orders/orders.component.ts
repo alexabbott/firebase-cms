@@ -32,7 +32,7 @@ export class OrdersComponent implements OnInit {
     this.user.subscribe(currentUser => {
       if (currentUser && currentUser.uid) {
         this.userObject = currentUser;
-        this.db.object('/users/' + currentUser.uid).subscribe((theuser) => {
+        this.db.object('/users/' + currentUser.uid).valueChanges().subscribe((theuser:any) => {
           if (theuser && theuser.orders) {
             this.userOrders = Object.keys(theuser.orders);
             this.orderDates = Object.keys(theuser.orders).map(it => theuser.orders[it])

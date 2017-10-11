@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { Router }    from '@angular/router';
 import { GlobalService } from 'app/services/global.service';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'admin-pages',
@@ -12,8 +13,8 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 })
 export class AdminPagesComponent implements OnInit {
 
-  pages: FirebaseListObservable<any>;
-  page: FirebaseObjectObservable<any>;
+  pages: Observable<any>;
+  page: AngularFireObject<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
   currentAdmin: any;
@@ -25,12 +26,7 @@ export class AdminPagesComponent implements OnInit {
     public snackBar: MdSnackBar,
     public globalService: GlobalService
   ) {
-    this.pages = db.list('/pages', {
-      query: {
-        orderByChild: 'rdateUpdated',
-        limitToFirst: 9999
-      }
-    });
+    this.pages = db.list('/pages', ref => ref.orderByChild('rdateUpdated').limitToFirst(9999)).snapshotChanges();
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;

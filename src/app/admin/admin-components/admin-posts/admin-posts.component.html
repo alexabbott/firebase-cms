@@ -6,18 +6,18 @@
     <p *ngIf="(posts | async)?.length === 0" class="center">
         No posts yet
     </p>
-    <md-card class="post" *ngFor="let post of posts | async | sort:['-date']" routerLink="/admin/edit-post/{{ post.$key}}">
-        <div class="content">
-            <h3><a routerLink="/blog/{{post.url}}" target="_blank" stop-propagation>{{post.title}}</a></h3>
-            <div class="date">{{post.date | date }}</div>
+    <md-card class="post" *ngFor="let post of posts | async | sort:['-date']">
+        <div class="content" routerLink="/admin/edit-post/{{ post.key}}">
+            <h3><a routerLink="/blog/{{post.payload.val().url}}" target="_blank" stop-propagation>{{post.payload.val().title}}</a></h3>
+            <div class="date">{{post.payload.val().date | date }}</div>
         </div>
         <div class="publish">
-            <md-slide-toggle ngDefaultControl (change)="onChange($event, post.$key)" [(ngModel)]="post.published" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
-                <span *ngIf="!post.published">Publish</span>
-                <span *ngIf="post.published">Un-Publish</span>
+            <md-slide-toggle ngDefaultControl stop-propagation (change)="onChange($event, post.key)" [(ngModel)]="post.payload.val().published" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+                <span *ngIf="!post.payload.val().published">Publish</span>
+                <span *ngIf="post.payload.val().published">Un-Publish</span>
             </md-slide-toggle>
             <div class="edit">
-                <button md-raised-button routerLink="/admin/edit-post/{{ post.$key}}">
+                <button md-raised-button routerLink="/admin/edit-post/{{ post.key}}">
                     Edit
                 </button>
                 <button md-raised-button (click)="deletePost(post)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">

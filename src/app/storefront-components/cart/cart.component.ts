@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router }    from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { MdSnackBar } from '@angular/material';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { GlobalService } from 'app/services/global.service';
@@ -60,13 +60,13 @@ export class CartComponent implements OnInit {
   }
 
   updateCart(item) {
-    this.globalCart[item.key] = item;
-    this.globalCart[item.key]['total'] = (item.quantity * item.price);
+    this.globalCart[item.entityKey] = item;
+    this.globalCart[item.entityKey]['total'] = (item.quantity * item.price);
     this.globalService.cart.next(this.globalCart);
   }
 
   removeItem(item) {
-    delete this.globalCart[item.key];
+    delete this.globalCart[item.entityKey];
     this.globalService.cart.next(this.globalCart);
 
     this.user.subscribe((currentShopper) => {

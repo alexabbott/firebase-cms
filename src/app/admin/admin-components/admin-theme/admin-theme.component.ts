@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 
 @Component({
@@ -9,7 +9,7 @@ import { MdSnackBar } from '@angular/material';
 })
 export class AdminThemeComponent implements OnInit {
 
-  theme: FirebaseObjectObservable<any>;
+  theme: AngularFireObject<any>;
   siteName: string;
 
   constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar) {
@@ -17,7 +17,7 @@ export class AdminThemeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.theme.subscribe(item => {
+    this.theme.valueChanges().subscribe((item:any) => {
       if (item && item.siteName) {
         this.siteName = item.siteName;
       }

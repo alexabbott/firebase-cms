@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { GlobalService } from '../../services/global.service';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
@@ -31,7 +31,7 @@ export class CartIconComponent implements OnInit {
         if (currentUser && currentUser.uid && cart && Object.keys(cart).length > 0) {
           db.object('/users/' + currentUser.uid).update({
             cart: cart
-          })
+          });
         }
       });
     });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'page',
@@ -21,13 +21,8 @@ export class PageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-        this.pageContent = this.db.list('/pages', {
-          query: {
-            orderByChild: 'url',
-            equalTo: params.url
-          }
-        });
-        this.pageContent.subscribe(p => {
+        this.pageContent = this.db.list('/pages', ref => ref.orderByChild('url').equalTo(params.url));
+        this.pageContent.valueChanges().subscribe(p => {
           if (p[0].published) {
             this.page = p[0];
             this.title.setTitle(this.page.title);

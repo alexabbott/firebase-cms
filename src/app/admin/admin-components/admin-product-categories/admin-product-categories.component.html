@@ -6,17 +6,17 @@
     <p *ngIf="(categories | async)?.length === 0" class="center">
         No categories yet
     </p>
-    <md-card class="category" *ngFor="let category of categories | async" routerLink="/admin/edit-product-category/{{ category.$key }}">
+    <md-card class="category" *ngFor="let category of categories | async" routerLink="/admin/edit-product-category/{{ category.key }}">
         <div class="content">
             <h3>
-                <a routerLink="/category/{{ category.slug }}" target="_blank" stop-propagation>
-                    {{category.name}}
+                <a routerLink="/category/{{ category.payload.val().slug }}" target="_blank" stop-propagation>
+                    {{category.payload.val().name}}
                 </a>
             </h3>
         </div>
         <div class="publish">
             <div class="edit">
-                <button md-raised-button routerLink="/admin/edit-product-category/{{ category.$key }}">
+                <button md-raised-button routerLink="/admin/edit-product-category/{{ category.key }}">
                     Edit
                 </button>
                 <button md-raised-button (click)="deleteCategory(category)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">

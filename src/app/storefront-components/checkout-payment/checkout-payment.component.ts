@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { GlobalService } from '../../services/global.service';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MdSnackBar } from '@angular/material';
 import { environment } from '../../../environments/environment';
@@ -16,7 +16,7 @@ import * as firebase from 'firebase/app';
 })
 export class CheckoutPaymentComponent implements OnInit {
 
-  sources: FirebaseListObservable<any[]>;
+  sources: AngularFireList<any>;
   stripeCustomerInitialized: Boolean;
   newCreditCard: any;
   user: any;

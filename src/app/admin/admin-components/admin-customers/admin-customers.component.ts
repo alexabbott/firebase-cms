@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { GlobalService } from 'app/services/global.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'admin-customers',
@@ -11,7 +12,7 @@ import { GlobalService } from 'app/services/global.service';
 })
 export class AdminCustomersComponent {
 
-  customers: FirebaseListObservable<any>;
+  customers: Observable<any[]>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
   currentAdmin: any;
@@ -22,7 +23,7 @@ export class AdminCustomersComponent {
     public snackBar: MdSnackBar,
     public globalService: GlobalService
   ) {
-    this.customers = db.list('/users');
+    this.customers = db.list('/users').snapshotChanges();
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;

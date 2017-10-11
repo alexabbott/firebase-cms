@@ -23,7 +23,7 @@
 
     <md-select placeholder="Product Category" [(ngModel)]="newCategory">
         <md-option value="">No category</md-option>
-        <md-option *ngFor="let category of categories | async" [value]="category.$key">{{ category.name }}</md-option>
+        <md-option *ngFor="let category of categories | async" [value]="category.key">{{ category.payload.val().name }}</md-option>
     </md-select>
 
     <md-input-container class="weight">

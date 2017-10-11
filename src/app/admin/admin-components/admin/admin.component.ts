@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router }    from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
@@ -34,10 +34,10 @@ export class AdminComponent implements OnInit {
       if (!currentUser) {
         this.router.navigateByUrl('login');
       } else {
-        this.db.object('/admins/' + this.globalService.hashCode(currentUser.email)).subscribe((a) => {
+        this.db.object('/admins/' + this.globalService.hashCode(currentUser.email)).valueChanges().subscribe((a:any) => {
           if (a && a.email) {
             this.globalService.admin.next(currentUser);
-            this.db.object('/admins/' + currentUser.uid).subscribe((a) => {
+            this.db.object('/admins/' + currentUser.uid).valueChanges().subscribe((a:any) => {
               this.globalService.admin.next(a);
               this.currentAdmin.role = a.role;
             });

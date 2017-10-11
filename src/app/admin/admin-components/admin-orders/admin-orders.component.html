@@ -3,26 +3,26 @@
         <h2>Orders</h2>
         <button md-raised-button routerLink="/admin/add-order">Add an Order</button>
     </div>
-    <p *ngIf="(orders | async)?.length === 0" class="center">
+    <p *ngIf="!(orders | async) || (orders | async)?.length === 0" class="center">
         No orders yet
     </p>
-    <md-card class="order" routerLink="/admin/order/{{order.$key}}" *ngFor="let order of orders | async">
+    <md-card class="order" routerLink="/admin/order/{{order.key}}" *ngFor="let order of orders | async">
         <div class="content">
-            <h3><a routerLink="/admin/order/{{order.$key}}">Order #{{order.$key}}</a></h3>
-            <div class="date">{{order.date | date }}</div>
+            <h3><a routerLink="/admin/order/{{order.key}}">Order #{{order.key}}</a></h3>
+            <div class="date">{{order.payload.val().date | date }}</div>
         </div>
         <div class="action">
             <div class="view">
                 <div>
-                    <a routerLink="/admin/customer/{{ order.uid }}" *ngIf="order.uid && (users | async | getUser: order.uid)?.email">
-                        {{ (users | async | getUser: order.uid)?.email }}
+                    <a routerLink="/admin/customer/{{ order.payload.val().uid }}" *ngIf="order.payload.val().uid && (users | async | getUser: order.payload.val().uid)?.email">
+                        {{ (users | async | getUser: order.payload.val().uid)?.email }}
                     </a>
-                    <span *ngIf="!(users | async | getUser: order.uid)?.email">Guest Customer</span>
+                    <span *ngIf="!(users | async | getUser: order.payload.val().uid)?.email">Guest Customer</span>
                 </div>
-                <button md-raised-button routerLink="/admin/edit-order/{{order.$key}}">
+                <button md-raised-button routerLink="/admin/edit-order/{{order.key}}">
                     Edit
                 </button>
-                <button md-raised-button (click)="deleteOrder($event, order.$key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+                <button md-raised-button (click)="deleteOrder($event, order.key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                     Delete
                 </button>
             </div>

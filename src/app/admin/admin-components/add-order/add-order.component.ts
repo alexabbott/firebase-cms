@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -12,13 +12,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class AddOrderComponent implements OnInit {
 
-  orders: FirebaseListObservable<any>;
+  orders: AngularFireList<any>;
   order: any;
   editMode: boolean;
   orderKey: string;
   states: any;
   statuses: Array<any>;
-  users: FirebaseListObservable<any>;
+  users: AngularFireList<any>;
 
   constructor(
     public db: AngularFireDatabase,
@@ -53,7 +53,7 @@ export class AddOrderComponent implements OnInit {
         if (params && params.key) {
           this.editMode = true;
           this.orderKey = params.key;
-          this.db.object('/orders/' + params.key).subscribe(o => {
+          this.db.object('/orders/' + params.key).valueChanges().subscribe((o:any) => {
             this.order = o;
           });
         } else {

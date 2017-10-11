@@ -17,15 +17,15 @@
       Updated by
     </div>
   </md-toolbar>
-  <section *ngFor="let product of productApprovals | async" class="approval-category">
-    <md-card class="approval" routerLink="/admin/product-approval/{{ product.$key }}">
+  <section class="approval-category">
+    <md-card *ngFor="let product of productApprovals | async" class="approval" routerLink="/admin/product-approval/{{ product.key }}">
       <div class="content">
-        <a routerLink="/admin/product-approval/{{ product.$key }}">{{ product.title }}</a>
+        <a routerLink="/admin/product-approval/{{ product.key }}">{{ product.payload.val().title }}</a>
         <div class="date">
-          {{ product.dateUpdated | date }}
+          {{ product.payload.val().dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (users | async | getUser: product.updatedBy)?.email }}
+          {{ (users | async | getUser: product.payload.val().updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
@@ -36,8 +36,8 @@
           </button>
           <button
             md-raised-button
-            (click)="deleteItem($event, 'products', product.$key)"
-            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || product.updatedBy === currentAdmin.uid">
+            (click)="deleteItem($event, 'products', product.key)"
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || product.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
@@ -56,15 +56,15 @@
       Updated by
     </div>
   </md-toolbar>
-  <section *ngFor="let category of categoryApprovals | async" class="approval-category">
-    <md-card class="approval" routerLink="/admin/category-approval/{{ category.$key }}">
+  <section class="approval-category">
+    <md-card *ngFor="let category of categoryApprovals | async" class="approval" routerLink="/admin/category-approval/{{ category.key }}">
       <div class="content">
-        <a routerLink="/admin/category-approval/{{ category.$key }}">{{ category.name }}</a>
+        <a routerLink="/admin/category-approval/{{ category.key }}">{{ category.payload.val().name }}</a>
         <div class="date">
-          {{ category.dateUpdated | date }}
+          {{ category.payload.val().dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (users | async | getUser: category.updatedBy)?.email }}
+          {{ (users | async | getUser: category.payload.val().updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
@@ -75,8 +75,8 @@
           </button>
           <button
             md-raised-button
-            (click)="deleteItem($event, 'categories', category.$key)"
-            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || category.updatedBy === currentAdmin.uid">
+            (click)="deleteItem($event, 'categories', category.key)"
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || category.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
@@ -95,15 +95,15 @@
       Updated by
     </div>
   </md-toolbar>
-  <section *ngFor="let page of pageApprovals | async" class="approval-category">
-    <md-card class="approval" routerLink="/admin/page-approval/{{ page.$key }}">
+  <section class="approval-category">
+    <md-card *ngFor="let page of pageApprovals | async" class="approval" routerLink="/admin/page-approval/{{ page.key }}">
       <div class="content">
-        <a routerLink="/admin/page-approval/{{ page.$key }}">{{ page.title }}</a>
+        <a routerLink="/admin/page-approval/{{ page.key }}">{{ page.payload.val().title }}</a>
         <div class="date">
-          {{ page.dateUpdated | date }}
+          {{ page.payload.val().dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (users | async | getUser: page.updatedBy)?.email }}
+          {{ (users | async | getUser: page.payload.val().updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
@@ -114,8 +114,8 @@
           </button>
           <button
             md-raised-button
-            (click)="deleteItem($event, 'pages', page.$key)"
-            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || page.updatedBy === currentAdmin.uid">
+            (click)="deleteItem($event, 'pages', page.key)"
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || page.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
@@ -134,15 +134,15 @@
       Updated by
     </div>
   </md-toolbar>
-  <section *ngFor="let post of postApprovals | async" class="approval-category">
-    <md-card class="approval" routerLink="/admin/post-approval/{{ post.$key }}">
+  <section class="approval-category">
+    <md-card *ngFor="let post of postApprovals | async" class="approval" routerLink="/admin/post-approval/{{ post.key }}">
       <div class="content">
-        <a routerLink="/admin/post-approval/{{ post.$key }}">{{ post.title }}</a>
+        <a routerLink="/admin/post-approval/{{ post.key }}">{{ post.payload.val().title }}</a>
         <div class="date">
-          {{ post.dateUpdated | date }}
+          {{ post.payload.val().dateUpdated | date }}
         </div>
         <div class="updated-by">
-          {{ (users | async | getUser: post.updatedBy)?.email }}
+          {{ (users | async | getUser: post.payload.val().updatedBy)?.email }}
         </div>
         <div class="actions">
           <button
@@ -153,8 +153,8 @@
           </button>
           <button
             md-raised-button
-            (click)="deleteItem($event, 'posts', post.$key)"
-            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || post.updatedBy === currentAdmin.uid">
+            (click)="deleteItem($event, 'posts', post.key)"
+            *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || post.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>

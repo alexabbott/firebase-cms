@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { GlobalService } from 'app/services/global.service';
 import { LocalCartService } from 'app/services/localcart.service';
 import { Title, Meta } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ export class CheckoutReviewComponent implements OnInit {
   order: any;
   user: any;
   now: number;
-  sources: FirebaseListObservable<any[]>;
+  sources: AngularFireList<any[]>;
   charges: any;
   newCharge: any;
 
@@ -39,7 +39,7 @@ export class CheckoutReviewComponent implements OnInit {
     }
 
     if (this.sources) {
-      this.sources.subscribe((s) => {
+      this.sources.valueChanges().subscribe((s) => {
         this.newCharge.source = s[(s.length - 1)];
       });
     } else {

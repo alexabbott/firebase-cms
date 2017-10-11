@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalService } from '../../services/global.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'posts',
@@ -10,7 +11,7 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  posts: FirebaseListObservable<any[]>;
+  posts: Observable<any[]>;
   searchTerm: string;
 
   constructor(
@@ -20,13 +21,7 @@ export class PostsComponent implements OnInit {
     private title: Title,
     private meta: Meta
   ) {
-    this.posts = db.list('/posts', {
-      query: {
-        orderByChild: 'published',
-        equalTo: true,
-        limitToLast: 20,
-      }
-    });
+    this.posts = db.list('/posts', ref => ref.orderByChild('published').equalTo(true).limitToLast(20)).valueChanges();
 
     this.globalService.searchTerm.subscribe((term) => {
       this.searchTerm = term;

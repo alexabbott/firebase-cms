@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
@@ -39,13 +39,8 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-        this.productContent = this.db.list('/products', {
-          query: {
-            orderByChild: 'url',
-            equalTo: params.url
-          }
-        });
-        this.productContent.subscribe(p => {
+        this.productContent = this.db.list('/products', ref => ref.orderByChild('url').equalTo(params.url));
+        this.productContent.valueChanges().subscribe(p => {
           if (p[0].published) {
             this.product = p[0];
             this.setJsonldData();
@@ -59,8 +54,8 @@ export class ProductComponent implements OnInit {
                 this.globalCart = {};
               }
               this.localCart.cartUpdateItems(this.globalCart);
-              if (this.globalCart && this.globalCart[this.product.$key]) {
-                this.product.quantity = this.globalCart[this.product.$key]['quantity'];
+              if (this.globalCart && this.globalCart[this.product.entityKey]) {
+                this.product.quantity = this.globalCart[this.product.entityKey]['quantity'];
               } else {
                 this.product.quantity = 1;
                 this.product.total = this.product.price;
@@ -77,9 +72,9 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(item) {
-    this.globalCart[item.$key] = item;
-    this.globalCart[item.$key]['key'] = item.$key;
-    this.globalCart[item.$key]['total'] = (item.quantity * item.price);
+    this.globalCart[item.entityKey] = item;
+    this.globalCart[item.entityKey]['key'] = item.entityKey;
+    this.globalCart[item.entityKey]['total'] = (item.quantity * item.price);
     this.globalService.cart.next(this.globalCart);
 
     let snackBarRef = this.snackBar.open('Product added to cart', 'View Cart', {

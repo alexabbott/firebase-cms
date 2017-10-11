@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ApproveDialogComponent } from '../approve-dialog/approve-dialog.component';
@@ -12,13 +13,13 @@ import { GlobalService } from 'app/services/global.service';
 })
 export class AdminApprovalsComponent {
 
-  productApprovals: FirebaseListObservable<any>;
-  categoryApprovals: FirebaseListObservable<any>;
-  pageApprovals: FirebaseListObservable<any>;
-  postApprovals: FirebaseListObservable<any>;
+  productApprovals: Observable<any>;
+  categoryApprovals: Observable<any>;
+  pageApprovals: Observable<any>;
+  postApprovals: Observable<any>;
   selectedOption: any;
   dialogRef: MdDialogRef<any>;
-  users: FirebaseListObservable<any>;
+  users: Observable<any>;
   currentAdmin: any;
 
   constructor(
@@ -27,11 +28,11 @@ export class AdminApprovalsComponent {
     public snackBar: MdSnackBar,
     public globalService: GlobalService
   ) {
-    this.productApprovals = db.list('/approvals/products');
-    this.categoryApprovals = db.list('/approvals/categories');
-    this.pageApprovals = db.list('/approvals/pages');
-    this.postApprovals = db.list('/approvals/posts');
-    this.users = db.list('/users');
+    this.productApprovals = db.list('/approvals/products').snapshotChanges();
+    this.categoryApprovals = db.list('/approvals/categories').snapshotChanges();
+    this.pageApprovals = db.list('/approvals/pages').snapshotChanges();
+    this.postApprovals = db.list('/approvals/posts').snapshotChanges();
+    this.users = db.list('/users').valueChanges();
 
     this.globalService.admin.subscribe((a) => {
       this.currentAdmin = a;
@@ -46,7 +47,7 @@ export class AdminApprovalsComponent {
       if (this.selectedOption === 'approve') {
         if (entityObject.entityKey) {
           let ogEntity = this.db.object('/' + entity + '/' + entityObject.entityKey);
-          ogEntity.take(1).subscribe((item) => {
+          ogEntity.valueChanges().take(1).subscribe((item:any) => {
             if (entity === 'products' && item.category && entityObject.category) {
               this.db.object('/categories/' + item.category + '/products/' + entityObject.entityKey).remove();
               this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now());

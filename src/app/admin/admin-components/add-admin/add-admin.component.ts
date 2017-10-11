@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'add-admin',
@@ -13,7 +14,7 @@ export class AddAdminComponent implements OnInit {
 
   newEmail: string;
   newRole: string;
-  currentAdmin: FirebaseObjectObservable<any>;
+  currentAdmin: Observable<any>;
   editMode: boolean;
   adminKey: string;
 
@@ -32,9 +33,9 @@ export class AddAdminComponent implements OnInit {
         if (params && params.key) {
           this.editMode = true;
           this.adminKey = params.key;
-          this.currentAdmin = this.db.object('/admins/' + params.key);
+          this.currentAdmin = this.db.object('/admins/' + params.key).valueChanges();
 
-          this.currentAdmin.subscribe(a => {
+          this.currentAdmin.subscribe((a:any) => {
             this.newEmail = a.email;
             this.newRole = a.role;
           });

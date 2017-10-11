@@ -1,6 +1,6 @@
 <div class="container order-container" [ngClass]="{ 'full-width': admin}">
   <div class="order-left">
-    <h3 *ngIf="order">Order #{{ order.$key }}</h3>
+    <h3 *ngIf="order">Order #{{ order.key }}</h3>
     <div *ngIf="order" class="order-date">{{ order.date | date }}</div>
   </div>
   <div class="order-right" *ngIf="order && router.url.includes('/admin')">
@@ -44,7 +44,7 @@
         <div class="total">{{item.total | currency:'USD':true }}</div>
     </md-card>
   <span>
-  <button md-raised-button routerLink="/admin/edit-order/{{order.$key}}" *ngIf="router.url.includes('/admin')">Edit Order</button>
+  <button md-raised-button routerLink="/admin/edit-order/{{order.key}}" *ngIf="router.url.includes('/admin')">Edit Order</button>
   <md-card class="order-summary" *ngIf="order">
     <h4 class="subtotal-label">Subtotal</h4>
     <h4 class="subtotal">{{order.total | currency:'USD':true}}</h4>

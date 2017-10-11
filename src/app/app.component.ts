@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute }    from '@angular/router';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from './services/global.service';
@@ -14,8 +14,8 @@ import { LocalCartService } from 'app/services/localcart.service';
 })
 export class AppComponent {
   title = 'app';
-  nav: FirebaseListObservable<any>;
-  theme: FirebaseObjectObservable<any>;
+  nav: Observable<any>;
+  theme: Observable<any>;
   user: Observable<firebase.User>;
 
   constructor(
@@ -26,8 +26,8 @@ export class AppComponent {
     public globalService: GlobalService,
     public localCart: LocalCartService,
   ) {
-    this.nav = db.list('/menus/nav');
-    this.theme = db.object('/theme');
+    this.nav = db.list('/menus/nav').valueChanges();
+    this.theme = db.object('/theme').valueChanges();
 
     this.user = afAuth.authState;
     this.user.subscribe(currentUser => {
@@ -41,7 +41,7 @@ export class AppComponent {
           status: 'active'
         });
 
-        this.db.object('/users/' + currentUser.uid).subscribe((user) => {
+        this.db.object('/users/' + currentUser.uid).valueChanges().subscribe((user:any) => {
           if (user.cart) {
             globalService.cart.next(user.cart);
           }

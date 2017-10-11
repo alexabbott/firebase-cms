@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -11,13 +11,18 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class AddCustomerComponent implements OnInit {
 
-  customers: FirebaseListObservable<any>;
-  customer: FirebaseObjectObservable<any>;
+  customers: AngularFireList<any>;
+  customer: AngularFireObject<any>;
   newEmail: string;
   editMode: boolean;
   customerKey: string;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar, public router: Router, public route: ActivatedRoute) {
+  constructor(
+    public db: AngularFireDatabase,
+    public snackBar: MdSnackBar,
+    public router: Router,
+    public route: ActivatedRoute
+  ) {
     this.customers = db.list('/users');
   }
 
@@ -50,7 +55,7 @@ export class AddCustomerComponent implements OnInit {
         if (params && params.uid) {
           this.editMode = true;
           this.customerKey = params.uid;
-          this.db.object('/users/' + params.uid).subscribe(u => {
+          this.db.object('/users/' + params.uid).valueChanges().subscribe((u: any) => {
             this.newEmail = u.email;
           });
         } else {

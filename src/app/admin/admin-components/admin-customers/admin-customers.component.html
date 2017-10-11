@@ -6,21 +6,21 @@
     <p *ngIf="(customers | async)?.length === 0" class="center">
         No customers yet
     </p>
-    <md-card routerLink="/admin/customer/{{ customer.$key }}" class="customer" *ngFor="let customer of customers | async">
+    <md-card routerLink="/admin/customer/{{ customer.key }}" class="customer" *ngFor="let customer of customers | async">
         <div class="content">
-            <a routerLink="/admin/customer/{{ customer.$key }}">
-                <img src="{{ customer.photoURL }}" class="customer-photo" *ngIf="customer.photoURL">
-                <img src="../../assets/placeholder.jpg" class="customer-photo" *ngIf="!customer.photoURL">
-                <span *ngIf="customer.email">{{customer.email}}</span>
-                <span *ngIf="!customer.email">Guest Customer</span>
+            <a routerLink="/admin/customer/{{ customer.key }}">
+                <img src="{{ customer.payload.val().photoURL }}" class="customer-photo" *ngIf="customer.payload.val().photoURL">
+                <img src="../../assets/placeholder.jpg" class="customer-photo" *ngIf="!customer.payload.val().photoURL">
+                <span *ngIf="customer.payload.val().email">{{customer.payload.val().email}}</span>
+                <span *ngIf="!customer.payload.val().email">Guest Customer</span>
             </a>
         </div>
         <div class="active">
-            <span class="block">{{customer.orders | objectCount}} order<span *ngIf="(customer.orders | objectCount) !== 1">s</span></span>
-            <button md-raised-button routerLink="/admin/edit-customer/{{customer.uid}}">
+            <span class="block">{{customer.payload.val().orders | objectCount}} order<span *ngIf="(customer.payload.val().orders | objectCount) !== 1">s</span></span>
+            <button md-raised-button routerLink="/admin/edit-customer/{{customer.payload.val().uid}}">
                 Edit
             </button>
-            <button md-raised-button (click)="deleteCustomer($event, customer.$key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+            <button md-raised-button (click)="deleteCustomer($event, customer.key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 Delete
             </button>
         </div>

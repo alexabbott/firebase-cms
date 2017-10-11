@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'product-category',
@@ -9,9 +10,9 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
   styleUrls: ['./product-category.component.scss']
 })
 export class ProductCategoryComponent implements OnInit {
-  products: FirebaseListObservable<any[]>;
-  categories: FirebaseListObservable<any[]>;
-  category: FirebaseListObservable<any[]>;
+  products: Observable<any[]>;
+  categories: Observable<any[]>;
+  category: Observable<any[]>;
   categoryObject: any;
   categoryName: string;
   categoryProducts: any;
@@ -24,13 +25,8 @@ export class ProductCategoryComponent implements OnInit {
     private title: Title,
     private meta: Meta
   ) {
-    this.categories = db.list('/categories');
-    this.products = db.list('/products', {
-      query: {
-        orderByChild: 'published',
-        equalTo: true
-      }
-    });
+    this.categories = db.list('/categories').valueChanges();
+    this.products = db.list('/products', ref => ref.orderByChild('published').equalTo(true)).valueChanges();
     this.categoryObject = {};
   }
 
@@ -40,27 +36,22 @@ export class ProductCategoryComponent implements OnInit {
       this.categoryObject.slug = this.categoryInput.slug;
       this.categoryObject.name = this.categoryInput.name;
       this.categoryObject.products = Object.keys(this.categoryInput.products);
-      this.products.subscribe((p) => {
+      this.products.subscribe((p:any) => {
         this.categoryProducts = p.filter((item) => {
-          return item.category === this.categoryInput.$key;
+          return item.category === this.categoryInput.entityKey;
         });
       });
     } else {
       this.route.params.subscribe((params: Params) => {
-        this.category = this.db.list('/categories', {
-          query: {
-            orderByChild: 'slug',
-            equalTo: params.slug
-          }
-        });
+        this.category = this.db.list('/categories', ref => ref.orderByChild('slug').equalTo(params.slug)).valueChanges();
 
-        this.category.subscribe((cat) => {
+        this.category.subscribe((cat:any) => {
           this.categoryObject.slug = cat[0].slug;
           this.categoryObject.name = cat[0].name;
           this.categoryObject.products = Object.keys(cat[0].products);
-          this.products.subscribe((p) => {
-            this.categoryProducts = p.filter((item) => {
-              return item.category === cat[0].$key;
+          this.products.subscribe((p:any) => {
+            this.categoryProducts = p.filter((item:any) => {
+              return item.category === cat[0].entityKey;
             });
           });
 
