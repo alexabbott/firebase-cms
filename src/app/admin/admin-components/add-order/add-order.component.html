@@ -2,7 +2,7 @@
     <h2>
         <span *ngIf="!editMode">Add an</span>
         <span *ngIf="editMode">Edit</span>
-        Order <span *ngIf="editMode">#{{order.$key}}</span>
+        Order <span *ngIf="editMode">#{{orderKey}}</span>
     </h2>
 
     <div class="order-user" *ngIf="editMode">

@@ -92,7 +92,7 @@ export class AddProductComponent implements OnInit {
             this.db.list('/approvals/products', ref => ref.orderByChild('entityKey').equalTo(params.key)).valueChanges()
               .subscribe((approval:any) => {
                 if (approval.length > 0 && approval[0]) {
-                  this.awaitingApproval = approval[0].$key;
+                  this.awaitingApproval = approval[0].key;
                 }
             });
           }
@@ -184,11 +184,11 @@ export class AddProductComponent implements OnInit {
   updateCategory(ogCat: string, newCat: string, key: string) {
     if (ogCat && newCat) {
       this.db.object('/categories/' + ogCat + '/products/' + key).remove();
-      this.db.object('/categories/' + newCat + '/products/' + key).set(Date.now());
+      this.db.object('/categories/' + newCat + '/products/' + key).set(Date.now().toString());
     } else if (ogCat && !newCat) {
       this.db.object('/categories/' + ogCat + '/products/' + key).remove();
     } else if (!ogCat && newCat) {
-      this.db.object('/categories/' + newCat + '/products/' + key).set(Date.now());
+      this.db.object('/categories/' + newCat + '/products/' + key).set(Date.now().toString());
     }
   }
 
@@ -201,8 +201,8 @@ export class AddProductComponent implements OnInit {
 
       let productObject = {
         url: this.globalService.slugify(newTitle),
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         title: newTitle,
         thumbnail: this.newThumbnail ? this.newThumbnail : null,
         description: newDescription,
@@ -226,7 +226,7 @@ export class AddProductComponent implements OnInit {
         this.products.push(productObject).then((item) => {
           if (this.newCategory) {
             this.db.object('/products/' + item.key + '/entityKey').set(item.key);
-            this.db.object('/categories/' + this.newCategory + '/products/' + item.key).set(Date.now());
+            this.db.object('/categories/' + this.newCategory + '/products/' + item.key).set(Date.now().toString());
           }
         });
       }
@@ -249,8 +249,8 @@ export class AddProductComponent implements OnInit {
       let approvalObject = {
         entityKey: this.router.url.includes('approval') ? this.entityObject.entityKey : this.productKey,
         url: this.globalService.slugify(newTitle),
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         title: newTitle,
         thumbnail: this.newThumbnail ? this.newThumbnail : null,
         description: newDescription,
@@ -265,14 +265,13 @@ export class AddProductComponent implements OnInit {
 
         this.currentModeratedProducts = this.db.list('/approvals/products/');
 
-        let adminApprovalProducts = this.db.list('/approvals/products/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid));
-        console.log(adminApprovalProducts.valueChanges());
-        adminApprovalProducts.snapshotChanges().take(1).subscribe((approvals:any) => {
+        let adminApprovalProducts = this.db.list('/approvals/products/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
+        adminApprovalProducts.take(1).subscribe((approvals:any) => {
 
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
-              return match.key === this.productKey;
+              return match.entityKey === this.entityObject.entityKey;
             });
           } else {
             matchingApprovals = approvals.filter((match) => {
@@ -280,7 +279,7 @@ export class AddProductComponent implements OnInit {
             });
           }
 
-          if (matchingApprovals.length === 0) {
+          if (matchingApprovals.length === 0 || !this.router.url.includes('approval')) {
             this.currentModeratedProducts.push(approvalObject);
           } else {
             this.db.object('/approvals/products/' + this.productKey).update(approvalObject);
@@ -315,7 +314,7 @@ export class AddProductComponent implements OnInit {
       });
     }
 
-    this.db.object('/approvals/products/' + this.entityObject.$key).remove();
+    this.db.object('/approvals/products/' + this.productKey).remove();
     let snackBarRef = this.snackBar.open('Product approved', 'OK!', {
       duration: 3000
     });

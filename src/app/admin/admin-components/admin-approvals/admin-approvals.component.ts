@@ -39,7 +39,7 @@ export class AdminApprovalsComponent {
     });
   }
 
-  approveItem(event, entity: string, entityObject: any) {
+  approveItem(event, entity: string, entityObject: any, ogKey: string) {
     event.stopPropagation();
     let dialogRef = this.dialog.open(ApproveDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -50,23 +50,23 @@ export class AdminApprovalsComponent {
           ogEntity.valueChanges().take(1).subscribe((item:any) => {
             if (entity === 'products' && item.category && entityObject.category) {
               this.db.object('/categories/' + item.category + '/products/' + entityObject.entityKey).remove();
-              this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now());
+              this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now().toString());
             } else if (entity === 'products' && item.category && !entityObject.category) {
               this.db.object('/categories/' + item.category + '/products/' + entityObject.entityKey).remove();
             } else if (entity === 'products' && !item.category && entityObject.category) {
-              this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now());
+              this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now().toString());
             }
             ogEntity.set(entityObject);
           });
         } else {
           this.db.list('/' + entity).push(entityObject).then((item) => {
             if (entity === 'products' && entityObject.category) {
-              this.db.object('/categories/' + entityObject.category + '/products/' + item.key).set(Date.now());
+              this.db.object('/categories/' + entityObject.category + '/products/' + item.key).set(Date.now().toString());
             }
           });
         }
 
-        this.db.object('/approvals/' + entity + '/' + entityObject.$key).remove();
+        this.db.object('/approvals/' + entity + '/' + ogKey).remove();
         let snackBarRef = this.snackBar.open('Item approved', 'OK!', {
           duration: 3000
         });

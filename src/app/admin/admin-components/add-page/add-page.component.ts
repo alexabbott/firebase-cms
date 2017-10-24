@@ -66,10 +66,12 @@ export class AddPageComponent implements OnInit {
           }
 
           this.currentPage.subscribe(p => {
-            this.newURL = p.url;
-            this.newTitle = p.title;
-            this.newBody = p.body;
-            this.newPublished = p.published;
+            if (p) {
+              this.newURL = p.url;
+              this.newTitle = p.title;
+              this.newBody = p.body;
+              this.newPublished = p.published;
+            }
           });
         } else {
           this.newURL = null;
@@ -90,8 +92,8 @@ export class AddPageComponent implements OnInit {
 
       let pageObject = {
         url: newURL,
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         title: newTitle,
         body: newBody,
         published: newPublished,
@@ -125,8 +127,8 @@ export class AddPageComponent implements OnInit {
       let approvalObject = {
         entityKey: this.router.url.includes('approval') ? this.entityObject.entityKey : this.pageKey,
         url: newURL,
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         title: newTitle,
         body: newBody,
         published: newPublished,
@@ -134,25 +136,22 @@ export class AddPageComponent implements OnInit {
       };
 
       if (this.editMode && this.pageKey) {
-
         this.currentModeratedPages = this.db.list('/approvals/pages/');
 
-        let adminApprovalPages = this.db.list('/approvals/pages/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid));
+        let adminApprovalPages = this.db.list('/approvals/pages/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalPages.valueChanges().take(1).subscribe((approvals:any) => {
-
+        adminApprovalPages.take(1).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
-              return match.$key === this.pageKey;
+              return match.entityKey === this.entityObject.entityKey;
             });
           } else {
             matchingApprovals = approvals.filter((match) => {
               return match.entityKey === this.pageKey;
             });
           }
-
-          if (matchingApprovals.length === 0) {
+          if (matchingApprovals.length === 0 || !this.router.url.includes('approval')) {
             this.currentModeratedPages.push(approvalObject);
           } else {
             this.db.object('/approvals/pages/' + this.pageKey).update(approvalObject);
@@ -180,7 +179,7 @@ export class AddPageComponent implements OnInit {
       this.db.list('/pages').push(this.entityObject);
     }
 
-    this.db.object('/approvals/pages/' + this.entityObject.$key).remove();
+    this.db.object('/approvals/pages/' + this.pageKey).remove();
     let snackBarRef = this.snackBar.open('Page approved', 'OK!', {
       duration: 3000
     });

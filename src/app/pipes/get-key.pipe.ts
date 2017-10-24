@@ -6,7 +6,7 @@ export class GetKeyPipe implements PipeTransform {
     if (val === null || !val || !val[0]) return val;
     if (val) {
       return val.filter((v) => {
-        return v.$key === args;
+        return v.key === args;
       })[0];
     }
   }

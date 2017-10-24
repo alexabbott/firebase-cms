@@ -30,7 +30,7 @@
         <div class="actions">
           <button
             md-raised-button
-            (click)="approveItem($event, 'products', product)"
+            (click)="approveItem($event, 'products', product.payload.val(), product.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
@@ -69,7 +69,7 @@
         <div class="actions">
           <button
             md-raised-button
-            (click)="approveItem($event, 'categories', category)"
+            (click)="approveItem($event, 'categories', category.payload.val(), category.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
@@ -108,7 +108,7 @@
         <div class="actions">
           <button
             md-raised-button
-            (click)="approveItem($event, 'pages', page)"
+            (click)="approveItem($event, 'pages', page.payload.val(), page.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
@@ -147,7 +147,7 @@
         <div class="actions">
           <button
             md-raised-button
-            (click)="approveItem($event, 'posts', post)"
+            (click)="approveItem($event, 'posts', post.payload.val(), post.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>

@@ -74,7 +74,7 @@ export class CheckoutReviewComponent implements OnInit {
       this.localCart.clearAll();
       if (this.user) {
         this.db.object('/users/' + this.user.uid + '/cart').remove();
-        this.db.object('/users/' + this.user.uid + '/orders/' + item.key).set(Date.now());
+        this.db.object('/users/' + this.user.uid + '/orders/' + item.key).set(Date.now().toString());
       }
       this.router.navigateByUrl('checkout/confirmation');
     });

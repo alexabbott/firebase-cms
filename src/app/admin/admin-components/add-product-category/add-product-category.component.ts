@@ -85,8 +85,8 @@ export class AddProductCategoryComponent implements OnInit {
         name: newName,
         weight: newWeight,
         slug: this.globalService.slugify(newName),
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         updatedBy: this.currentAdmin.uid,
         entityKey: this.editMode && this.categoryKey ? this.categoryKey : null,
         products: this.newProducts ? this.newProducts : null
@@ -116,8 +116,8 @@ export class AddProductCategoryComponent implements OnInit {
         name: newName,
         weight: newWeight,
         slug: this.globalService.slugify(newName),
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         updatedBy: this.currentAdmin.uid,
         products: this.newProducts ? this.newProducts : null
       };
@@ -125,14 +125,13 @@ export class AddProductCategoryComponent implements OnInit {
       if (this.editMode && this.categoryKey) {
         this.currentModeratedCategories = this.db.list('/approvals/categories/');
 
-        let adminApprovalCategories = this.db.list('/approvals/categories/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid));
+        let adminApprovalCategories = this.db.list('/approvals/categories/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalCategories.snapshotChanges().take(1).subscribe((approvals:any) => {
-
+        adminApprovalCategories.take(1).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
-              return match.key === this.categoryKey;
+              return match.entityKey === this.entityObject.entityKey;
             });
           } else {
             matchingApprovals = approvals.filter((match) => {
@@ -140,7 +139,7 @@ export class AddProductCategoryComponent implements OnInit {
             });
           }
 
-          if (matchingApprovals.length === 0) {
+          if (matchingApprovals.length === 0 || !this.router.url.includes('approval')) {
             this.currentModeratedCategories.push(approvalObject);
           } else {
             this.db.object('/approvals/categories/' + this.categoryKey).update(approvalObject);
@@ -168,7 +167,7 @@ export class AddProductCategoryComponent implements OnInit {
       this.db.list('/categories').push(this.entityObject);
     }
 
-    this.db.object('/approvals/categories/' + this.entityObject.$key).remove();
+    this.db.object('/approvals/categories/' + this.categoryKey).remove();
     let snackBarRef = this.snackBar.open('Category approved', 'OK!', {
       duration: 3000
     });

@@ -156,8 +156,8 @@ export class AddPostComponent implements OnInit {
 
       let postObject = {
         url: newURL,
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         date: dateTime,
         title: newTitle,
         thumbnail: this.newThumbnail ? this.newThumbnail : null,
@@ -200,8 +200,8 @@ export class AddPostComponent implements OnInit {
       let approvalObject = {
         entityKey: this.router.url.includes('approval') ? this.entityObject.entityKey : this.postKey,
         url: newURL,
-        dateUpdated: Date.now(),
-        rdateUpdated: (Date.now() * -1),
+        dateUpdated: Date.now().toString(),
+        rdateUpdated: (Date.now() * -1).toString(),
         date: dateTime,
         title: newTitle,
         thumbnail: this.newThumbnail ? this.newThumbnail : null,
@@ -214,15 +214,13 @@ export class AddPostComponent implements OnInit {
 
         this.currentModeratedPosts = this.db.list('/approvals/posts/');
 
-        let adminApprovalPosts = this.db.list('/approvals/posts/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).snapshotChanges();
+        let adminApprovalPosts = this.db.list('/approvals/posts/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
         adminApprovalPosts.take(1).subscribe((approvals:any) => {
-          console.log('approvals', approvals);
-
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
-              return match.key === this.postKey;
+              return match.entityKey === this.entityObject.entityKey;
             });
           } else {
             matchingApprovals = approvals.filter((match) => {
@@ -230,7 +228,7 @@ export class AddPostComponent implements OnInit {
             });
           }
 
-          if (matchingApprovals.length === 0) {
+          if (matchingApprovals.length === 0 || !this.router.url.includes('approval')) {
             this.currentModeratedPosts.push(approvalObject);
           } else {
             this.db.object('/approvals/posts/' + this.postKey).update(approvalObject);
@@ -258,7 +256,7 @@ export class AddPostComponent implements OnInit {
       this.db.list('/posts').push(this.entityObject);
     }
 
-    this.db.object('/approvals/posts/' + this.entityObject.$key).remove();
+    this.db.object('/approvals/posts/' + this.postKey).remove();
     let snackBarRef = this.snackBar.open('Post approved', 'OK!', {
       duration: 3000
     });
