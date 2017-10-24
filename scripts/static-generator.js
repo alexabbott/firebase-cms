@@ -5,11 +5,11 @@ const Nightmare = require('nightmare'),
       selector = 'html';
 
 let links = [
-  'http://localhost:4200/',
-  'http://localhost:4200/blog',
-  'http://localhost:4200/products',
-  'http://localhost:4200/search',
-  'http://localhost:4200/cart'];
+  'https://fir-cms-76f54.firebaseapp.com/',
+  'https://fir-cms-76f54.firebaseapp.com/blog',
+  'https://fir-cms-76f54.firebaseapp.com/products',
+  'https://fir-cms-76f54.firebaseapp.com/search',
+  'https://fir-cms-76f54.firebaseapp.com/cart'];
 
 let getLinks = (i) => {
   let nightmareLink = Nightmare({
@@ -29,8 +29,8 @@ let getLinks = (i) => {
       let $ = cheerio.load(content);
       let thelinks = $('a');
       $(thelinks).each((i, link) => {
-        if (links.indexOf('http://localhost:4200' + $(link).attr('href')) === -1) {
-          links.push('http://localhost:4200' + $(link).attr('href'));
+        if (links.indexOf('https://fir-cms-76f54.firebaseapp.com' + $(link).attr('href')) === -1) {
+          links.push('https://fir-cms-76f54.firebaseapp.com' + $(link).attr('href'));
         }
       });
 
@@ -67,7 +67,7 @@ let scrape = () => {
           });
           stream = fs.createWriteStream("./static/index.html");
         } else {
-          let path = './static' + links[x].replace('http://localhost:4200', '');
+          let path = './static' + links[x].replace('https://fir-cms-76f54.firebaseapp.com', '');
           path = path.split('/');
           path = path.slice(0, -1);
           path = path.join('/');
@@ -76,7 +76,7 @@ let scrape = () => {
             if (err) console.error('dir not created ' + path)
             else console.log('dir created ' + path)
           });
-          stream = fs.createWriteStream("./static" + links[x].replace('http://localhost:4200', '') + ".html");
+          stream = fs.createWriteStream("./static" + links[x].replace('https://fir-cms-76f54.firebaseapp.com', '') + ".html");
         }
         stream.once('open', (fd) => {
             stream.write(content);
