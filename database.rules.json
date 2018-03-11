@@ -7,7 +7,6 @@
     },
     "admins": {
       ".indexOn": "email",
-      ".write": true,
       ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
       "$uid": {
         ".read": "$uid == auth.uid || root.child('admins/'+auth.uid).exists() || data.child('email').val() == auth.email",
@@ -54,10 +53,7 @@
     "products": {
       ".read": true,
       ".write": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
-      ".indexOn": ["published", "category", "rdateUpdated", "url"],
-      "$p_id": {
-        ".read": "data.child('published').val() == true || root.child('admins/'+auth.uid).exists()"
-      }
+      ".indexOn": ["published", "category", "rdateUpdated", "url"]
     },
     "posts": {
       ".read": true,
@@ -66,7 +62,6 @@
     },
     "users": {
       ".read": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
-      ".write": true,
       "$uid": {
         ".read": "$uid == auth.uid || root.child('admins/'+auth.uid).exists()",
         ".write": "$uid == auth.uid || root.child('admins/'+auth.uid).exists()"
