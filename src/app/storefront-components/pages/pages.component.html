@@ -1,4 +1,4 @@
-<md-card class="page" *ngFor="let page of pages | async | sort:['title']">
+<mat-card class="page" *ngFor="let page of pages | async | sort:['title']">
   <h3>{{page.title}}</h3>
   <p>{{page.body | truncate: 20 }}</p>
-</md-card>
+</mat-card>

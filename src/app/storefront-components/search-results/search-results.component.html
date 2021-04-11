@@ -1,10 +1,10 @@
-<md-input-container class="search-big">
-    <input mdInput placeholder="Search" (ngModelChange)="performSearch($event)" ngModel #searchit>
-</md-input-container>
+<mat-form-field class="search-big">
+    <input matInput placeholder="Search" (ngModelChange)="performSearch($event)" ngModel #searchit>
+</mat-form-field>
 <div *ngIf="searchTerm">
-    <md-toolbar class="highlight">Products</md-toolbar>
+    <mat-toolbar class="highlight">Products</mat-toolbar>
     <products></products>
 
-    <md-toolbar class="highlight">Blog Posts</md-toolbar>
+    <mat-toolbar class="highlight">Blog Posts</mat-toolbar>
     <posts></posts>
 </div>

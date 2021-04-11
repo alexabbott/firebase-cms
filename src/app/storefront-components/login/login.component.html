@@ -1,6 +1,6 @@
 <div class="login-frame">
     <div *ngIf="!(admin | async)?.uid">
-        <button md-raised-button class="bw block google-login" (click)="loginWithGoogle()">
+        <button mat-raised-button class="bw block google-login" (click)="loginWithGoogle()">
             <img src="../../assets/google-icon.png">
             <span *ngIf="showSignUp === false">Login with Google</span>
             <span *ngIf="showSignUp === true">Sign Up with Google</span>
@@ -8,13 +8,13 @@
         <div class="block-center">or</div>
     </div>
     <div *ngIf="!(admin | async)?.uid">
-        <md-input-container class="block">
-            <input mdInput type="email" placeholder="email" [(ngModel)]="newEmail">
-        </md-input-container>
-        <md-input-container class="block">
-            <input mdInput type="password" placeholder="password" minlength="6" [(ngModel)]="newPassword">
-        </md-input-container>
-        <button md-raised-button class="bw" (click)="loginWithEmail()" *ngIf="showSignUp === false">
+        <mat-form-field class="block">
+            <input matInput type="email" placeholder="email" [(ngModel)]="newEmail">
+        </mat-form-field>
+        <mat-form-field class="block">
+            <input matInput type="password" placeholder="password" minlength="6" [(ngModel)]="newPassword">
+        </mat-form-field>
+        <button mat-raised-button class="bw" (click)="loginWithEmail()" *ngIf="showSignUp === false">
             Login with Email
         </button>
     </div>
@@ -23,7 +23,7 @@
             Don't have an account? <a routerLink="/register">Sign up</a>
         </div>
         <div *ngIf="showSignUp === true">
-            <button md-raised-button class="bw" (click)="signUpWithEmail()">
+            <button mat-raised-button class="bw" (click)="signUpWithEmail()">
                 Sign Up with Email
             </button>
         </div>
@@ -34,5 +34,5 @@
     <div class="hint block-center" *ngIf="!(admin | async)?.uid">
         You must be an approved admin to access the admin panel
     </div>
-    <button md-button *ngIf="(admin | async)?.uid" (click)="logout()" class="logout">Logout</button>
+    <button mat-button *ngIf="(admin | async)?.uid" (click)="logout()" class="logout">Logout</button>
 </div>

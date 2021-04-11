@@ -1,5 +1,5 @@
 <div class="container">
-  <md-card
+  <mat-card
     *ngFor="let post of posts | async  | search: searchTerm | sort:['-date']"
     routerLink="/blog/{{post.url}}"
     class="post"
@@ -11,9 +11,9 @@
       <div class="date" itemprop="datePublished">{{post.date | date }}</div>
       <p>
         <span [innerHTML]="post.body | truncate: 200 " itemprop="articleBody"></span>
-        <button md-button routerLink="/blog/{{post.url}}">Read More</button>
+        <button mat-button routerLink="/blog/{{post.url}}">Read More</button>
       </p>
     </div>
-  </md-card>
+  </mat-card>
   <p class="block-center" *ngIf="searchTerm && !(posts | async | search: searchTerm)?.length">No posts</p>
 </div>

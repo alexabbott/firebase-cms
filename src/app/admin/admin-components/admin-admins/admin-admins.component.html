@@ -1,10 +1,10 @@
 <div class="container">
     <div class="button-container">
         <h2>Admins</h2>
-        <button md-raised-button routerLink="/admin/add-admin">Add an Admin</button>
+        <button mat-raised-button routerLink="/admin/add-admin">Add an Admin</button>
     </div>
     <span *ngFor="let admin of admins | async">
-        <md-card class="admin" *ngIf="admin.payload.val().active || (!admin.payload.val().active && countAdmin(admin.payload.val().email) === 1)" routerLink="/admin/edit-admin/{{admin.key}}">
+        <mat-card class="admin" *ngIf="admin.payload.val().active || (!admin.payload.val().active && countAdmin(admin.payload.val().email) === 1)" routerLink="/admin/edit-admin/{{admin.key}}">
             <div class="content">
                 <img src="{{ admin.payload.val().photoURL }}" class="admin-photo" *ngIf="admin.payload.val().photoURL">
                 <img src="..//../../assets/placeholder.jpg" class="admin-photo" *ngIf="!admin.payload.val().photoURL">
@@ -17,11 +17,11 @@
                         (<span *ngIf="admin.payload.val().uid" class="active-user">active</span><span *ngIf="!admin.payload.val().uid" class="inactive-user">inactive</span>)
                     </span>
                 </div>
-                <button md-raised-button routerLink="/admin/edit-admin/{{admin.key}}">
+                <button mat-raised-button routerLink="/admin/edit-admin/{{admin.key}}">
                     Edit
                 </button>
-                <button md-raised-button (click)="deleteAdmin($event, admin.key)">Delete</button>
+                <button mat-raised-button (click)="deleteAdmin($event, admin.key)">Delete</button>
             </div>
-        </md-card>
+        </mat-card>
     </span>
 </div>

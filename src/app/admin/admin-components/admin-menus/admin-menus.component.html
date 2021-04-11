@@ -1,24 +1,24 @@
 <div class="container">
   <h2>Menus</h2>
 
-  <md-toolbar class="highlight">Primary Nav</md-toolbar>
+  <mat-toolbar class="highlight">Primary Nav</mat-toolbar>
   <p *ngIf="menuList.length === 0" class="center">
       No menu items yet
   </p>
   <div dnd-sortable-container [sortableData]="menuList">
-    <md-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
-      <md-input-container>
-        <input mdInput placeholder="Item Label" [(ngModel)]="item.label" required>
-      </md-input-container>
-      <md-input-container>
-        <input mdInput placeholder="Item URL" [(ngModel)]="item.url" required>
-      </md-input-container>
+    <mat-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
+      <mat-form-field>
+        <input matInput placeholder="Item Label" [(ngModel)]="item.label" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Item URL" [(ngModel)]="item.url" required>
+      </mat-form-field>
       <div class="actions">
-        <button md-raised-button (click)="deleteMenuItem(i)">Delete Menu Item</button>
+        <button mat-raised-button (click)="deleteMenuItem(i)">Delete Menu Item</button>
       </div>
-      <md-icon>drag_handle</md-icon>
-    </md-card>
+      <mat-icon>drag_handle</mat-icon>
+    </mat-card>
   </div>
-  <button md-raised-button (click)="addMenuItem()" class="button-add-menu">Add Menu Item</button>
-  <button md-raised-button (click)="saveMenu()" class="button-add-menu">Save Menu</button>
+  <button mat-raised-button (click)="addMenuItem()" class="button-add-menu">Add Menu Item</button>
+  <button mat-raised-button (click)="saveMenu()" class="button-add-menu">Save Menu</button>
 </div>

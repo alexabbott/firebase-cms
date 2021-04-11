@@ -1,71 +1,71 @@
 <div class="container">
     <h2>Admin Dashboard</h2>
 
-    <md-grid-list cols="{{columns}}" rowHeight="230px" (window:resize)="onResize($event)">
-        <md-grid-tile colspan="1" rowspan="1">
-          <md-card routerLink="/admin/posts">
-            <md-icon>class</md-icon>
+    <mat-grid-list cols="{{columns}}" rowHeight="230px" (window:resize)="onResize($event)">
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-card routerLink="/admin/posts">
+            <mat-icon>class</mat-icon>
             <h4 *ngIf="posts | async">{{ (posts | async)?.length }} Post<span *ngIf="(posts | async)?.length !== 1">s</span></h4>
-            <button md-raised-button routerLink="/admin/add-post">Add a Post</button>
-          </md-card>
-        </md-grid-tile>
+            <button mat-raised-button routerLink="/admin/add-post">Add a Post</button>
+          </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1">
-            <md-card routerLink="/admin/pages">
-                <md-icon>description</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-card routerLink="/admin/pages">
+                <mat-icon>description</mat-icon>
                 <h4 *ngIf="pages | async">{{ (pages | async)?.length }} Page<span *ngIf="(pages | async)?.length !== 1">s</span></h4>
-                <button md-raised-button routerLink="/admin/add-page">Add a Page</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-page">Add a Page</button>
+            </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1">
-            <md-card routerLink="/admin/products">
-                <md-icon>shopping_basket</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-card routerLink="/admin/products">
+                <mat-icon>shopping_basket</mat-icon>
                 <h4 *ngIf="products | async">{{ (products | async)?.length }} Product<span *ngIf="(products | async)?.length !== 1">s</span></h4>
-                <button md-raised-button routerLink="/admin/add-product">Add a Product</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-product">Add a Product</button>
+            </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1">
-            <md-card routerLink="/admin/product-categories">
-                <md-icon>group_work</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-card routerLink="/admin/product-categories">
+                <mat-icon>group_work</mat-icon>
                 <h4 *ngIf="categories | async">{{ (categories | async)?.length }} Product Categorie<span *ngIf="(categories | async)?.length !== 1">s</span></h4>
-                <button md-raised-button routerLink="/admin/add-product-category">Add a Category</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-product-category">Add a Category</button>
+            </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1">
-            <md-card routerLink="/admin/approvals">
-                <md-icon>check_circle</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1">
+            <mat-card routerLink="/admin/approvals">
+                <mat-icon>check_circle</mat-icon>
                 <h4 *ngIf="approvals | async">{{ approvalsTotal }} item<span *ngIf="approvalsTotal !== 1">s</span> need<span *ngIf="approvalsTotal === 1">s</span> moderation</h4>
                 <h4 *ngIf="!(approvals | async)">0 items need moderation</h4>
-                <button md-raised-button routerLink="/admin/add-customer">View Approvals</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-customer">View Approvals</button>
+            </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
-            <md-card routerLink="/admin/customers">
-                <md-icon>account_circle</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+            <mat-card routerLink="/admin/customers">
+                <mat-icon>account_circle</mat-icon>
                 <h4 *ngIf="customers | async">{{ (customers | async)?.length }} Customer<span *ngIf="(customers | async)?.length !== 1">s</span></h4>
-                <button md-raised-button routerLink="/admin/add-customer">Add a Customer</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-customer">Add a Customer</button>
+            </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
-            <md-card routerLink="/admin/orders">
-                <md-icon>attach_money</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+            <mat-card routerLink="/admin/orders">
+                <mat-icon>attach_money</mat-icon>
                 <h4 *ngIf="orders | async">{{ (orders | async)?.length }} Order<span *ngIf="(orders | async)?.length !== 1">s</span></h4>
-                <button md-raised-button routerLink="/admin/add-order">Add an Order</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-order">Add an Order</button>
+            </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin && currentAdmin.role === 'super-admin'">
-            <md-card routerLink="/admin/admins">
-                <md-icon>assignment_ind</md-icon>
+        <mat-grid-tile colspan="1" rowspan="1" *ngIf="currentAdmin && currentAdmin.role === 'super-admin'">
+            <mat-card routerLink="/admin/admins">
+                <mat-icon>assignment_ind</mat-icon>
                 <h4 *ngIf="admins | async">{{ (admins | async)?.length }} Admin<span *ngIf="(admins | async)?.length !== 1">s</span></h4>
-                <button md-raised-button routerLink="/admin/add-admin">Add an Admin</button>
-            </md-card>
-        </md-grid-tile>
+                <button mat-raised-button routerLink="/admin/add-admin">Add an Admin</button>
+            </mat-card>
+        </mat-grid-tile>
 
-      </md-grid-list>
+      </mat-grid-list>
 </div>

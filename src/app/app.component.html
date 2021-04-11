@@ -1,5 +1,5 @@
-<md-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
-    <md-icon class="material-icons menu-trigger" (click)="mobilenav.toggle()">menu</md-icon>
+<mat-toolbar *ngIf="!router.url.includes('/admin')" class="main-header">
+    <mat-icon class="material-icons menu-trigger" (click)="mobilenav.toggle()">menu</mat-icon>
     <h1><a routerLink="/" (click)="mobilenav.close()">{{ (theme | async)?.siteName }}</a></h1>
     <span class="fill-space"></span>
     <ul>
@@ -10,30 +10,30 @@
             </li>
         </span>
         <li class="search-nav">
-            <md-icon (click)="mobilenav.close()" routerLink="/search" [ngClass]="{ 'color-main': router.url.includes('search') }">search</md-icon>
+            <mat-icon (click)="mobilenav.close()" routerLink="/search" [ngClass]="{ 'color-main': router.url.includes('search') }">search</mat-icon>
         </li>
         <li class="cart-nav" (click)="mobilenav.close()" [ngClass]="{ 'color-main': router.url.includes('cart') }">
             <cart-icon></cart-icon>
         </li>
         <li *ngIf="(user | async)?.displayName" class="user-nav">
             <img src="{{ (user | async)?.photoURL }}" class="user-photo" (click)="mobilenav.close()" [mdMenuTriggerFor]="userMenu">
-            <md-menu #userMenu="mdMenu">
-                <button md-menu-item routerLink="/account/orders">My Account</button>
-                <button md-menu-item (click)="logout()">Logout</button>
-            </md-menu>
+            <mat-menu #userMenu="mdMenu">
+                <button mat-menu-item routerLink="/account/orders">My Account</button>
+                <button mat-menu-item (click)="logout()">Logout</button>
+            </mat-menu>
         </li>
         <li>
-            <button md-raised-button (click)="login()" *ngIf="!(user | async)?.displayName">Login</button>
+            <button mat-raised-button (click)="login()" *ngIf="!(user | async)?.displayName">Login</button>
         </li>
     </ul>
-</md-toolbar>
-<md-sidenav-container>
-    <md-sidenav #mobilenav  mode="over" class="mobile-nav">
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #mobilenav  mode="over" class="mobile-nav">
         <div *ngFor="let item of nav | async" class="mobile-nav-item">
             <a routerLink="{{item.url}}" (click)="mobilenav.close()" *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
                 {{item.label}}
             </a>
         </div>
-    </md-sidenav>
+    </mat-sidenav>
     <router-outlet></router-outlet>
-</md-sidenav-container>
+</mat-sidenav-container>
