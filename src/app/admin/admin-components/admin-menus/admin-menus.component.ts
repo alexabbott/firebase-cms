@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { Observable } from 'rxjs/Observable';
 
@@ -19,7 +19,7 @@ export class AdminMenusComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public dialog: MdDialog
   ) {
     this.menuList = [];

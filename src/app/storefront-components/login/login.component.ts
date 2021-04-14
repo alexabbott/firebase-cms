@@ -6,7 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from '../../services/global.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'login',
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
     public router: Router,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private title: Title,
     private meta: Meta
   ) {

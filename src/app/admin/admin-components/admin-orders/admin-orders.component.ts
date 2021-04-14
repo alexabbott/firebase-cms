@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { GlobalService } from 'app/services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class AdminOrdersComponent implements OnInit {
   constructor(
     public db: AngularFireDatabase,
     public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute

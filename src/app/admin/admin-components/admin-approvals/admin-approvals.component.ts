@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ApproveDialogComponent } from '../approve-dialog/approve-dialog.component';
 import { GlobalService } from 'app/services/global.service';
@@ -25,7 +25,7 @@ export class AdminApprovalsComponent {
   constructor(
     public db: AngularFireDatabase,
     public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService
   ) {
     this.productApprovals = db.list('/approvals/products').snapshotChanges();

@@ -4,7 +4,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import { GlobalService } from 'app/services/global.service';
 import { Router }    from '@angular/router';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { Observable } from 'rxjs/Observable';
 
@@ -28,7 +28,7 @@ export class AdminPostsComponent implements OnInit {
     public globalService: GlobalService,
     public router: Router,
     public dialog: MdDialog,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
     this.posts = db.list('/posts').snapshotChanges();
 

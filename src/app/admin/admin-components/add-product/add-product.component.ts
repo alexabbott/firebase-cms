@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -41,7 +41,7 @@ export class AddProductComponent implements OnInit {
   constructor(
     public af: FirebaseApp,
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,

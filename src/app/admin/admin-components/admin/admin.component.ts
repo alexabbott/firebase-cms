@@ -4,7 +4,7 @@ import { Router }    from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { GlobalService } from 'app/services/global.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public router: Router,
     public globalService: GlobalService,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
   ) {
     this.user = afAuth.authState;
     this.currentAdmin = {};

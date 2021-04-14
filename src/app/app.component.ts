@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Router, ActivatedRoute }    from '@angular/router';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from './services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { LocalCartService } from './services/localcart.service';
 
 @Component({
   selector: 'app-root',

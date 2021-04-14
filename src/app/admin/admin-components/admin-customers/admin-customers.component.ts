@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { GlobalService } from 'app/services/global.service';
 import { Observable } from 'rxjs/Observable';
@@ -20,7 +20,7 @@ export class AdminCustomersComponent {
   constructor(
     public db: AngularFireDatabase,
     public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService
   ) {
     this.customers = db.list('/users').snapshotChanges();

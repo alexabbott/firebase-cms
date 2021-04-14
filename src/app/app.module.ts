@@ -3,14 +3,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../environments/environment';
+
+//import { environment } from './../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-import { MaterialComponentsModule } from 'app/materialcomponents.module';
-import { SharedModule } from 'app/shared.module';
-import { AppRoutingModule } from 'app/app-routing.module';
+import { MaterialComponentsModule } from './materialcomponents.module';
+import { SharedModule } from './shared.module';
+import { AppRoutingModule } from './app-routing.module';
 import 'hammerjs';
 
 // storefront components
