@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }    from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { MatSnackBar } from '@angular/material';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { GlobalService } from '../../services/global.service';
 import { LocalCartService } from '../../services/localcart.service';

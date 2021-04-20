@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { GlobalService } from 'app/services/global.service';
-import { Observable } from 'rxjs/Observable';
+import { GlobalService } from '../../../services/global.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-customers',

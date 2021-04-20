@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ApproveDialogComponent } from '../approve-dialog/approve-dialog.component';
-import { GlobalService } from 'app/services/global.service';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'admin-approvals',
@@ -18,13 +19,13 @@ export class AdminApprovalsComponent {
   pageApprovals: Observable<any>;
   postApprovals: Observable<any>;
   selectedOption: any;
-  dialogRef: MdDialogRef<any>;
+    dialogRef: MatDialogRef<any>;
   users: Observable<any>;
   currentAdmin: any;
 
   constructor(
     public db: AngularFireDatabase,
-    public dialog: MdDialog,
+      public dialog: MatDialog,
     public snackBar: MatSnackBar,
     public globalService: GlobalService
   ) {

@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import * as firebase from 'firebase/app';
-import { FirebaseApp } from 'angularfire2';
+import { FirebaseApp } from '@angular/fire';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
@@ -31,19 +30,18 @@ export class AddPostComponent implements OnInit {
   currentPost: AngularFireObject<any>;
   currentModeratedPosts: AngularFireList<any>;
   entityObject: any;
-  dialogRef: MdDialogRef<any>;
+    dialogRef: MatDialogRef<any>;
   selectedOption: string;
   awaitingApproval: string;
 
   constructor(
-    public af: FirebaseApp,
+      public af: FirebaseApp,
     public db: AngularFireDatabase,
     public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
-    private fb: FirebaseApp,
-    public dialog: MdDialog
+      public dialog: MatDialog
   ) {
 
     this.newPublished = false;
@@ -53,7 +51,7 @@ export class AddPostComponent implements OnInit {
       this.currentAdmin = admin;
     });
 
-    this.storageRef = af.storage().ref();
+      this.storageRef = af.storage().ref();
   }
 
   ngOnInit() {
@@ -114,7 +112,7 @@ export class AddPostComponent implements OnInit {
   }
 
   uploadImage() {
-    let storageRef = firebase.storage().ref();
+    let storageRef = this.af.storage().ref();
     let path = Date.now().toString() + '-' + this.file.name;
     let iRef = storageRef.child('posts/' + path);
     let me = this;
@@ -134,7 +132,7 @@ export class AddPostComponent implements OnInit {
   }
 
   deleteImageRef() {
-    let storage = firebase.storage();
+    let storage = this.af.storage();
     let imageRef = storage.refFromURL(this.imageUrl);
 
     let me = this;

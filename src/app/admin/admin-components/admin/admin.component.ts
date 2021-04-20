@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Router }    from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
-import { MatSnackBar } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'admin',
@@ -15,7 +15,7 @@ import { GlobalService } from 'app/services/global.service';
 
 export class AdminComponent implements OnInit {
 
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   currentAdmin: any;
 
   constructor(
@@ -58,8 +58,8 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  logout() {
-    this.afAuth.auth.signOut();
+    logout() {
+        this.afAuth.signOut();
   }
 
 }

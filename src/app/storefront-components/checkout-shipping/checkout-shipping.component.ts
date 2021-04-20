@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { GlobalService } from '../../../services/global.service';
 import { LocalCartService } from 'app/services/localcart.service';
 
 @Component({

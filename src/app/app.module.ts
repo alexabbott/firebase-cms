@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 //import { environment } from './../environments/environment';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { MaterialComponentsModule } from './materialcomponents.module';

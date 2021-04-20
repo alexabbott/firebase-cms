@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { Router }    from '@angular/router';
-import { GlobalService } from 'app/services/global.service';
-import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { GlobalService } from '../../../services/global.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-pages',
@@ -16,13 +17,13 @@ export class AdminPagesComponent implements OnInit {
   pages: Observable<any>;
   page: AngularFireObject<any>;
   selectedOption: any;
-  dialogRef: MdDialogRef<any>;
+    dialogRef: MatDialogRef<any>;
   currentAdmin: any;
 
   constructor(
     public db: AngularFireDatabase,
     public router: Router,
-    public dialog: MdDialog,
+      public dialog: MatDialog,
     public snackBar: MatSnackBar,
     public globalService: GlobalService
   ) {

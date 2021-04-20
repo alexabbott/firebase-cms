@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
-import { GlobalService } from 'app/services/global.service';
+import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-orders',
@@ -20,7 +21,7 @@ export class AdminOrdersComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public dialog: MdDialog,
+      public dialog: MatDialog,
     public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public router: Router,
