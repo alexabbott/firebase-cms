@@ -20,7 +20,7 @@ export class CheckoutPaymentComponent implements OnInit {
   stripeCustomerInitialized: Boolean;
   newCreditCard: any;
   user: any;
-  anonymous: Observable<firebase.User>;
+  anonymous: Observable<firebase.default.User>;
   order: any;
 
   constructor(

@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'app';
   nav: Observable<any>;
   theme: Observable<any>;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
 
   constructor(
     public router: Router,

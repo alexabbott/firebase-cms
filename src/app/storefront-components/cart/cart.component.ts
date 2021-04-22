@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
 import { GlobalService } from '../../services/global.service';
 import { LocalCartService } from '../../services/localcart.service';
 
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   globalCart: any;
   cartArray: any;
   cartTotal: Number;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   currentShopper: any;
   review: boolean;
 

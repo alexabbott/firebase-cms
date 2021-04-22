@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { GlobalService } from '../../services/global.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'cart-icon',
@@ -11,7 +12,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class CartIconComponent implements OnInit {
   globalCart: any;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   cartItems = 0;
 
   constructor(public globalService: GlobalService, public afAuth: AngularFireAuth, public db: AngularFireDatabase) {

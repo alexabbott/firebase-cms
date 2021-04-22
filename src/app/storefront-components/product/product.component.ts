@@ -6,8 +6,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { GlobalService } from '../../../services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import * as firebase from 'firebase/app';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'product',
@@ -19,7 +20,7 @@ export class ProductComponent implements OnInit {
   productContent: any;
   product: any;
   globalCart: any;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   currentShopper: any;
 
   constructor(
