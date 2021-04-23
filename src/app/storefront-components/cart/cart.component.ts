@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   globalCart: any;
   cartArray: any;
   cartTotal: Number;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   currentShopper: any;
   review: boolean;
 

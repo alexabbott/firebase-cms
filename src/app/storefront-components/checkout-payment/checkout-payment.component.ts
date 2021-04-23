@@ -20,7 +20,7 @@ export class CheckoutPaymentComponent implements OnInit {
   stripeCustomerInitialized: Boolean;
   newCreditCard: any;
   user: any;
-  anonymous: Observable<firebase.User>;
+  anonymous: Observable<firebase.default.User>;
   order: any;
 
   constructor(
@@ -42,7 +42,7 @@ export class CheckoutPaymentComponent implements OnInit {
     if (this.user) {
       this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
     } else {
-      this.afAuth.auth.signInAnonymously().catch(function(error) {
+      this.afAuth.signInAnonymously().catch(function(error) {
         console.log('auth error', error.message);
       }).then(() => {
         this.anonymous = afAuth.authState;
@@ -97,7 +97,7 @@ export class CheckoutPaymentComponent implements OnInit {
     } else {
       let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
         duration: 3000,
-        extraClasses: ['warn-snackbar']
+        panelClass: ['warn-snackbar']
       });
     }
   }

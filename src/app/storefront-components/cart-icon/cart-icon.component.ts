@@ -11,7 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class CartIconComponent implements OnInit {
   globalCart: any;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   cartItems = 0;
 
   constructor(public globalService: GlobalService, public afAuth: AngularFireAuth, public db: AngularFireDatabase) {

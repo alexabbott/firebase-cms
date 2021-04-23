@@ -13,7 +13,7 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   userObject: any;
   userOrders: any;
   orderDates: any;

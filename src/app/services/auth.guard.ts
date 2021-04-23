@@ -6,7 +6,7 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  auth: Observable<firebase.User>;
+  auth: Observable<firebase.default.User>;
 
   constructor(
     public router: Router,

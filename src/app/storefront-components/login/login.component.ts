@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
 
-  admin: Observable<firebase.User>;
+  admin: Observable<firebase.default.User>;
   newEmail: string;
   newPassword: string;
   showSignUp: boolean;
@@ -71,16 +71,16 @@ export class LoginComponent implements OnInit {
     this.meta.updateTag({ content: 'Login to the admin panel' }, "name='description'");
   }
 
-  loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    loginWithGoogle() {
+    this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
   }
 
   signUpWithEmail() {
-    this.afAuth.auth.createUserWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
+    this.afAuth.createUserWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
       let snackBarRef = this.snackBar.open(error.message, 'OK!', {
         duration: 3000
       });

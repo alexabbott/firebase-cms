@@ -136,7 +136,7 @@ export class AddProductComponent implements OnInit {
   }
 
   uploadImage() {
-    let storageRef = firebase.storage().ref();
+    let storageRef = firebase.default.storage().ref();
     let path = Date.now().toString() + '-' + this.file.name;
     let imageRef = storageRef.child('products/' + path);
     let me = this;
@@ -156,7 +156,7 @@ export class AddProductComponent implements OnInit {
   }
 
   deleteImageRef() {
-    let storage = firebase.storage();
+    let storage = firebase.default.storage();
     let imageRef = storage.refFromURL(this.imageUrl);
 
     let me = this;

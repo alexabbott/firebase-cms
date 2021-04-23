@@ -63,7 +63,7 @@ export class CheckoutBillingComponent implements OnInit {
       } else {
           let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
             duration: 3000,
-            extraClasses: ['warn-snackbar']
+            panelClass: ['warn-snackbar']
           });
       }
   }
