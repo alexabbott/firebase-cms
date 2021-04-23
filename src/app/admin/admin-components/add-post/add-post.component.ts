@@ -6,6 +6,7 @@ import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FirebaseApp } from '@angular/fire';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'add-post',
@@ -214,7 +215,7 @@ export class AddPostComponent implements OnInit {
 
         let adminApprovalPosts = this.db.list('/approvals/posts/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalPosts.take(1).subscribe((approvals:any) => {
+        adminApprovalPosts.pipe(take(1)).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {

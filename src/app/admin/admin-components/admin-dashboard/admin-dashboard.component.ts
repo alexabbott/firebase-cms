@@ -17,7 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   customers: Observable<any[]>;
   categories: Observable<any[]>;
   orders: Observable<any[]>;
-  approvals: Observable<any[]>;
+  approvals: Observable<any>;
   approvalsTotal: number;
   currentAdmin: any;
   columns: number;

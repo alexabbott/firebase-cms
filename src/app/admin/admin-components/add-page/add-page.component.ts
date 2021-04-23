@@ -5,6 +5,7 @@ import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
 import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'add-page',
@@ -140,7 +141,7 @@ export class AddPageComponent implements OnInit {
 
         let adminApprovalPages = this.db.list('/approvals/pages/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalPages.take(1).subscribe((approvals:any) => {
+        adminApprovalPages.pipe(take(1)).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {

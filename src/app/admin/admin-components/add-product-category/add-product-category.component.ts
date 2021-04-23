@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'add-product-category',
@@ -127,7 +128,7 @@ export class AddProductCategoryComponent implements OnInit {
 
         let adminApprovalCategories = this.db.list('/approvals/categories/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalCategories.take(1).subscribe((approvals:any) => {
+        adminApprovalCategories.pipe(take(1)).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
