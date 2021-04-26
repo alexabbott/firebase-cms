@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
-import { MatSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -34,7 +35,7 @@ export class AddPageComponent implements OnInit {
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) {
     this.newPublished = false;
     this.pages = db.list('/pages').valueChanges();

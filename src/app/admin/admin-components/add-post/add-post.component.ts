@@ -17,7 +17,7 @@ export class AddPostComponent implements OnInit {
 
   posts: AngularFireList<any>;
   newURL: string;
-  newDate: string;
+  newDate: any;
   newTitle: string;
   newThumbnail: string;
   newBody: string;
@@ -80,7 +80,7 @@ export class AddPostComponent implements OnInit {
 
         this.currentPost.valueChanges().subscribe((p:any) => {
           this.newURL = p.url;
-          this.newDate = p.date;
+          this.newDate = new Date(p.date);
           this.newTitle = p.title;
           this.newBody = p.body;
           this.newPublished = p.published;
