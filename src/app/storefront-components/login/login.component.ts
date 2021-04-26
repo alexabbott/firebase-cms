@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithEmail() {
-    this.afAuth.auth.signInWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
+    this.afAuth.signInWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
       let snackBarRef = this.snackBar.open(error.message, 'OK!', {
         duration: 3000
       });

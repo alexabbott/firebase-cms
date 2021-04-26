@@ -8,7 +8,7 @@ import { MaterialComponentsModule } from './materialcomponents.module';
 import { SharedModule } from './shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FirebaseModule } from './firebase.module';
-import 'hammerjs';
+//import 'hammerjs';
 
 // storefront components
 import { OrdersComponent } from './storefront-components/orders/orders.component';

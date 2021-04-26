@@ -6,9 +6,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import * as firebase from 'firebase';
-//import { environment } from './../environments/environment';
+import { environment } from './../environments/environment';
 
-firebase.initializeApp(environment.firebase);
+firebase.default.initializeApp(environment.firebase);
 
 @NgModule({
     imports: [

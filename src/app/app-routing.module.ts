@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'blog/:url', component: PostComponent },
   { path: 'cart', component: CartComponent },
   { path: 'search', component: SearchResultsComponent },
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)}
 ];
 
 @NgModule({
