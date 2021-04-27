@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'checkout-shipping',
@@ -15,7 +15,7 @@ export class CheckoutShippingComponent implements OnInit {
   states: any;
 
   constructor(
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public router: Router,
     public globalService: GlobalService,
     public localCart: LocalCartService,
@@ -51,7 +51,7 @@ export class CheckoutShippingComponent implements OnInit {
       } else {
           let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
             duration: 3000,
-            extraClasses: ['warn-snackbar']
+            panelClass: ['warn-snackbar']
           });
       }
   }

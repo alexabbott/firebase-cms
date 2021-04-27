@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { GlobalService } from 'app/services/global.service';
-import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { GlobalService } from '../../../services/global.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-dashboard',
@@ -17,7 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   customers: Observable<any[]>;
   categories: Observable<any[]>;
   orders: Observable<any[]>;
-  approvals: Observable<any[]>;
+  approvals: Observable<any>;
   approvalsTotal: number;
   currentAdmin: any;
   columns: number;

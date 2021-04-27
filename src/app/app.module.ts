@@ -3,15 +3,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import * as firebase from 'firebase';
-import { MaterialComponentsModule } from 'app/materialcomponents.module';
-import { SharedModule } from 'app/shared.module';
-import { AppRoutingModule } from 'app/app-routing.module';
-import 'hammerjs';
+
+import { MaterialComponentsModule } from './materialcomponents.module';
+import { SharedModule } from './shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { FirebaseModule } from './firebase.module';
+//import 'hammerjs';
 
 // storefront components
 import { OrdersComponent } from './storefront-components/orders/orders.component';
@@ -41,19 +38,16 @@ import { LocalCartService } from "./services/localcart.service";
 // directives
 import { StopPropagationDirective } from './directives/stop-propagation.directive';
 
-firebase.initializeApp(environment.firebase);
 
 @NgModule({
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase, 'firebase-cms'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     MaterialComponentsModule,
     SharedModule,
+    FirebaseModule
   ],
   declarations: [
     AppComponent,

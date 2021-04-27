@@ -1,26 +1,26 @@
-<md-card class="container">
+<mat-card class="container">
   <h3>Billing info</h3>
-  <md-checkbox [(ngModel)]="sameAsShipping" (change)="copyShipping()">same as shipping</md-checkbox>
-  <md-input-container>
-    <input mdInput placeholder="Name (first & last)" [(ngModel)]="order.billing.name">
-  </md-input-container>
-  <md-input-container>
-    <input mdInput placeholder="Company (optional)" [(ngModel)]="order.billing.company">
-  </md-input-container>
-  <md-input-container>
-    <input mdInput placeholder="Email" [(ngModel)]="order.billing.email">
-  </md-input-container>
-  <md-input-container>
-    <input mdInput placeholder="Address" [(ngModel)]="order.billing.address">
-  </md-input-container>
-  <md-input-container>
-    <input mdInput placeholder="City" [(ngModel)]="order.billing.city">
-  </md-input-container>
-  <md-select placeholder="State" [(ngModel)]="order.billing.state">
-    <md-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</md-option>
-  </md-select>
-  <md-input-container>
-    <input mdInput placeholder="Zip Code" [(ngModel)]="order.billing.zip">
-  </md-input-container>
-  <button md-raised-button (click)="goTo('checkout/payment')">Continue</button>
-</md-card>
+  <mat-checkbox [(ngModel)]="sameAsShipping" (change)="copyShipping()">same as shipping</mat-checkbox>
+  <mat-form-field>
+    <input matInput placeholder="Name (first & last)" [(ngModel)]="order.billing.name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Company (optional)" [(ngModel)]="order.billing.company">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="order.billing.email">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Address" [(ngModel)]="order.billing.address">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="City" [(ngModel)]="order.billing.city">
+  </mat-form-field>
+  <mat-select placeholder="State" [(ngModel)]="order.billing.state">
+    <mat-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</mat-option>
+  </mat-select>
+  <mat-form-field>
+    <input matInput placeholder="Zip Code" [(ngModel)]="order.billing.zip">
+  </mat-form-field>
+  <button mat-raised-button (click)="goTo('checkout/payment')">Continue</button>
+</mat-card>

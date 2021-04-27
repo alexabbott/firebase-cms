@@ -1,12 +1,12 @@
 <div class="container">
     <div class="button-container">
         <h2>Customers</h2>
-        <button md-raised-button routerLink="/admin/add-customer">Add a Customer</button>
+        <button mat-raised-button routerLink="/admin/add-customer">Add a Customer</button>
     </div>
     <p *ngIf="(customers | async)?.length === 0" class="center">
         No customers yet
     </p>
-    <md-card routerLink="/admin/customer/{{ customer.key }}" class="customer" *ngFor="let customer of customers | async">
+    <mat-card routerLink="/admin/customer/{{ customer.key }}" class="customer" *ngFor="let customer of customers | async">
         <div class="content">
             <a routerLink="/admin/customer/{{ customer.key }}">
                 <img src="{{ customer.payload.val().photoURL }}" class="customer-photo" *ngIf="customer.payload.val().photoURL">
@@ -17,12 +17,12 @@
         </div>
         <div class="active">
             <span class="block">{{customer.payload.val().orders | objectCount}} order<span *ngIf="(customer.payload.val().orders | objectCount) !== 1">s</span></span>
-            <button md-raised-button routerLink="/admin/edit-customer/{{customer.payload.val().uid}}">
+            <button mat-raised-button routerLink="/admin/edit-customer/{{customer.payload.val().uid}}">
                 Edit
             </button>
-            <button md-raised-button (click)="deleteCustomer($event, customer.key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+            <button mat-raised-button (click)="deleteCustomer($event, customer.key)" *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
                 Delete
             </button>
         </div>
-    </md-card>
+    </mat-card>
 </div>

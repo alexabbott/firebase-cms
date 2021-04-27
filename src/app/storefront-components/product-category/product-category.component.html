@@ -3,7 +3,7 @@
   <section class="grid" *ngIf="categoryProducts">
     <span class="grid-tile" *ngFor="let product of categoryProducts | sort:['weight']">
       <div *ngIf="product.published" itemscope itemtype="http://schema.org/Product">
-        <md-card routerLink="/product/{{ product.url }}" class="product">
+        <mat-card routerLink="/product/{{ product.url }}" class="product">
           <img [src]="getProductImage(product)" itemprop="image" alt="{{product.title}}">
           <div class="product-content">
             <h3>
@@ -16,16 +16,16 @@
               {{ product.price | currency:'USD':true }}
             </div>
           </div>
-        </md-card>
+        </mat-card>
       </div>
     </span>
     <div class="grid-tile button-container">
       <span class="see-more">
-        <button md-raised-button routerLink="/category/{{ categoryObject.slug }}">See more {{ categoryObject.name }}</button>
+        <button mat-raised-button routerLink="/category/{{ categoryObject.slug }}">See more {{ categoryObject.name }}</button>
       </span>
     </div>
   </section>
 </div>
 <div *ngIf="(products | async) && router.url.includes('category')" class="bottom-cta">
-  <button md-button routerLink="/">View All Categories</button>
+  <button mat-button routerLink="/">View All Categories</button>
 </div>

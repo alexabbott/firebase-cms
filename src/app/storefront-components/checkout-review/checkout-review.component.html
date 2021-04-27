@@ -1,4 +1,4 @@
-<md-card class="container">
+<mat-card class="container">
   <h3>Review Order</h3>
 
   <h4>Shipping Info</h4>
@@ -21,7 +21,7 @@
       {{ newCharge.source.monbrand }} &hellip;{{ newCharge.source.last4 }}
       (exp. {{ newCharge.source.exp_th }}/{{ newCharge.source.exp_year }})
     </span>
-    <md-progress-spinner mode="indeterminate" *ngIf="!newCharge.source || !newCharge.source.last4"></md-progress-spinner>
+    <mat-progress-spinner mode="indeterminate" *ngIf="!newCharge.source || !newCharge.source.last4"></mat-progress-spinner>
     <span class="verify-card" *ngIf="!newCharge.source || !newCharge.source.last4">Verifying payment method</span>
   </div>
 
@@ -31,7 +31,7 @@
 
   <h4>Subtotal: {{ order.total | currency:'USD':true }}</h4>
 
-  <button md-raised-button [disabled]="!newCharge.source || !newCharge.source.last4" class="confirm" (click)="confirm()">Confirm Order</button>
+  <button mat-raised-button [disabled]="!newCharge.source || !newCharge.source.last4" class="confirm" (click)="confirm()">Confirm Order</button>
 
   <div class="error" *ngIf="newCharge.error">{{ newCharge.error }}</div>
-</md-card>
+</mat-card>

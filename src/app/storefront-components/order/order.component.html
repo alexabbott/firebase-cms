@@ -11,41 +11,41 @@
     </a>
   </div>
   <div class="order-info">
-    <md-card *ngIf="order">
+    <mat-card *ngIf="order">
       <h3>Shipping info</h3>
       {{ order.shipping.name }}<br>
       <span *ngIf="order.shipping.company">{{ order.shipping.company }}<br></span>
       {{ order.shipping.email }}<br>
       {{ order.shipping.address }}<br>
       {{ order.shipping.city }}, {{ order.shipping.state }} {{ order.shipping.zip }}
-    </md-card>
-    <md-card *ngIf="order">
+    </mat-card>
+    <mat-card *ngIf="order">
       <h3>Billing info</h3>
       {{ order.billing.name }}<br>
       <span *ngIf="order.billing.company">{{ order.billing.company }}<br></span>
       {{ order.billing.email }}<br>
       {{ order.billing.address }}<br>
       {{ order.billing.city }}, {{ order.billing.state }} {{ order.billing.zip }}
-    </md-card>
+    </mat-card>
   </div>
-  <md-toolbar class="orders-header highlight">
+  <mat-toolbar class="orders-header highlight">
     <div class="item">Item</div>
     <div class="price">Price</div>
     <div class="quantity">Qty</div>
     <div class="total">Total</div>
-  </md-toolbar>
+  </mat-toolbar>
   <span *ngIf="order">
-    <md-card *ngFor="let item of order.items" class="product">
+    <mat-card *ngFor="let item of order.items" class="product">
         <div class="item">{{item.title}}</div>
         <div class="price">{{item.price | currency:'USD':true }}</div>
         <div class="quantity">
           <span>{{item.quantity}}</span>
         </div>
         <div class="total">{{item.total | currency:'USD':true }}</div>
-    </md-card>
+    </mat-card>
   <span>
-  <button md-raised-button routerLink="/admin/edit-order/{{order.key}}" *ngIf="router.url.includes('/admin')">Edit Order</button>
-  <md-card class="order-summary" *ngIf="order">
+  <button mat-raised-button routerLink="/admin/edit-order/{{order.key}}" *ngIf="router.url.includes('/admin')">Edit Order</button>
+  <mat-card class="order-summary" *ngIf="order">
     <h4 class="subtotal-label">Subtotal</h4>
     <h4 class="subtotal">{{order.total | currency:'USD':true}}</h4>
-  </md-card>
+  </mat-card>

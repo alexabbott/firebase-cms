@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar } from '@angular/material';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'admin-theme',
@@ -12,7 +12,7 @@ export class AdminThemeComponent implements OnInit {
   theme: AngularFireObject<any>;
   siteName: string;
 
-  constructor(public db: AngularFireDatabase, public snackBar: MdSnackBar) {
+  constructor(public db: AngularFireDatabase, public snackBar: MatSnackBar) {
     this.theme = db.object('/theme');
   }
 

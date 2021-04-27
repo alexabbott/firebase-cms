@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class GlobalService {

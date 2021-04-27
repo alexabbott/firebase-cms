@@ -1,13 +1,13 @@
 <div class="container" [ngClass]="{'no-padding': review}">
   <h3 *ngIf="!review">Cart</h3>
-  <md-toolbar class="cart-header highlight">
+  <mat-toolbar class="cart-header highlight">
     <div class="item">Item</div>
     <div class="price">Price</div>
     <div class="quantity">Qty</div>
     <div class="total">Total</div>
-  </md-toolbar>
+  </mat-toolbar>
   <div class="no-items" *ngIf="cartArray.length === 0">No items in the cart. <a routerLink="/products">Keep shopping!</a></div>
-  <md-card *ngFor="let item of cartArray" class="product">
+  <mat-card *ngFor="let item of cartArray" class="product">
     <div class="item">
       <img [src]="item.thumbnail" *ngIf="!review && item.thumbnail" alt="{{item.title}}">
       <img src="../../../assets/placeholder.jpg" *ngIf="!review && !item.thumbnail" alt="No image available">
@@ -16,19 +16,19 @@
     <div class="price">{{item.price | currency:'USD':true}}</div>
     <div class="quantity">
       <label class="quantity-label">QTY</label>
-      <md-input-container>
-        <input mdInput type="number" min="1" [(ngModel)]="item.quantity" (change)="updateCart(item)" [disabled]="review">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput type="number" min="1" [(ngModel)]="item.quantity" (change)="updateCart(item)" [disabled]="review">
+      </mat-form-field>
       <!-- <span *ngIf="review">{{item.quantity}}</span> -->
     </div>
     <div class="total">{{item.total | currency:'USD':true}}</div>
     <div class="remove" *ngIf="!review">
-      <button md-button (click)="removeItem(item)">Remove</button>
+      <button mat-button (click)="removeItem(item)">Remove</button>
     </div>
-  </md-card>
-  <md-card class="checkout-cta" *ngIf="cartArray.length > 0 && !review">
+  </mat-card>
+  <mat-card class="checkout-cta" *ngIf="cartArray.length > 0 && !review">
     <h4 class="subtotal-label">Subtotal</h4>
     <h4 class="subtotal">{{cartTotal | currency:'USD':true}}</h4>
-    <button md-raised-button routerLink="/checkout/shipping">Checkout</button>
-  </md-card>
+    <button mat-raised-button routerLink="/checkout/shipping">Checkout</button>
+  </mat-card>
 </div>

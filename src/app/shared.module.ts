@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { MaterialComponentsModule } from 'app/materialcomponents.module';
+import { MaterialComponentsModule } from './materialcomponents.module'
 
 // Components
-import { OrderComponent } from 'app/storefront-components/order/order.component';
+import { OrderComponent } from './storefront-components/order/order.component';
 
 // Pipes
-import { SortPipe } from 'app/pipes/sort.pipe';
-import { SafeHtmlPipe } from 'app/pipes/safe-html.pipe';
-import { TruncatePipe } from 'app/pipes/truncate.pipe';
-import { GetUserPipe } from 'app/pipes/getUser.pipe';
-import { ObjectCountPipe } from 'app/pipes/object-count.pipe';
-import { GetKeyPipe } from 'app/pipes/get-key.pipe';
-import { SearchPipe } from 'app/pipes/search.pipe';
+import { SortPipe } from './pipes/sort.pipe';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { GetUserPipe } from './pipes/getUser.pipe';
+import { ObjectCountPipe } from './pipes/object-count.pipe';
+import { GetKeyPipe } from './pipes/get-key.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 
 const pipes = [
   GetUserPipe,

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'add-product-category',
@@ -29,11 +30,11 @@ export class AddProductCategoryComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public router: Router,
     public route: ActivatedRoute,
     public globalService: GlobalService,
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) {
     this.categories = db.list('/categories');
 
@@ -127,7 +128,7 @@ export class AddProductCategoryComponent implements OnInit {
 
         let adminApprovalCategories = this.db.list('/approvals/categories/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalCategories.take(1).subscribe((approvals:any) => {
+        adminApprovalCategories.pipe(take(1)).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {

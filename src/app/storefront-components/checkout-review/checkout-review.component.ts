@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Title, Meta } from '@angular/platform-browser';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'checkout-review',

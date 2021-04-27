@@ -5,31 +5,39 @@
         Post
     </h2>
 
-    <md-toolbar class="highlight small" *ngIf="awaitingApproval" routerLink="/admin/approvals">
+    <mat-toolbar class="highlight small" *ngIf="awaitingApproval" routerLink="/admin/approvals">
         This post has a change awaiting moderation
         <div class="action">
             View Approvals
         </div>
-    </md-toolbar>
+    </mat-toolbar>
 
-    <md-input-container class="block">
-        <input mdInput placeholder="Post URL (no slashes, spaces or special characters)" type="text" [(ngModel)]="newURL">
-    </md-input-container>
+    <mat-form-field class="block">
+        <input matInput placeholder="Post URL (no slashes, spaces or special characters)" type="text" [(ngModel)]="newURL">
+    </mat-form-field>
 
     <div>
-        <md-input-container>
-        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="newDate" (focus)="picker.open()">
-        <button mdSuffix [mdDatepickerToggle]="picker"></button>
-        </md-input-container>
-        <md-datepicker #picker></md-datepicker>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="newDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+      </mat-form-field>
+
     </div>
 
-    <md-input-container class="block">
-        <input mdInput placeholder="Title" [(ngModel)]="newTitle">
-    </md-input-container>
+    <mat-form-field class="block">
+        <input matInput placeholder="Title" [(ngModel)]="newTitle">
+    </mat-form-field>
 
     <div class="upload-button">
-        <button md-raised-button class="mat-upload-button">
+        <button mat-raised-button class="mat-upload-button">
             <span *ngIf="!imageUrl">Upload</span>
             <span *ngIf="imageUrl">Change</span>
             Featured Image
@@ -46,13 +54,13 @@
         [readonly]="false">
     </ckeditor>
 
-    <md-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
+    <mat-slide-toggle ngDefaultControl [(ngModel)]="newPublished">
         <span *ngIf="!newPublished">Publish</span>
         <span *ngIf="newPublished">Un-Publish</span>
-    </md-slide-toggle>
+    </mat-slide-toggle>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="approveItem(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
         *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
@@ -60,7 +68,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="submitForModeration(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
@@ -68,7 +76,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="deleteItem($event)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
@@ -76,7 +84,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="submitForModeration(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
         *ngIf="!router.url.includes('approval')">
@@ -84,7 +92,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="addPost(newURL, newDate, newTitle, newBody, newPublished)"
         class="submit"
         *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
