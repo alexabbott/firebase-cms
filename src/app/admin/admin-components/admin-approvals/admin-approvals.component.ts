@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ApproveDialogComponent } from '../approve-dialog/approve-dialog.component';
-import { GlobalService } from 'app/services/global.service';
+import { GlobalService } from '../../../services/global.service';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'admin-approvals',
@@ -18,14 +20,14 @@ export class AdminApprovalsComponent {
   pageApprovals: Observable<any>;
   postApprovals: Observable<any>;
   selectedOption: any;
-  dialogRef: MdDialogRef<any>;
+    dialogRef: MatDialogRef<any>;
   users: Observable<any>;
   currentAdmin: any;
 
   constructor(
     public db: AngularFireDatabase,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+      public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService
   ) {
     this.productApprovals = db.list('/approvals/products').snapshotChanges();
@@ -47,7 +49,7 @@ export class AdminApprovalsComponent {
       if (this.selectedOption === 'approve') {
         if (entityObject.entityKey) {
           let ogEntity = this.db.object('/' + entity + '/' + entityObject.entityKey);
-          ogEntity.valueChanges().take(1).subscribe((item:any) => {
+          ogEntity.valueChanges().pipe(take(1)).subscribe((item:any) => {
             if (entity === 'products' && item.category && entityObject.category) {
               this.db.object('/categories/' + item.category + '/products/' + entityObject.entityKey).remove();
               this.db.object('/categories/' + entityObject.category + '/products/' + entityObject.entityKey).set(Date.now().toString());

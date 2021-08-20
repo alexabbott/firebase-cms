@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PostsComponent } from 'app/storefront-components/posts/posts.component';
-import { PagesComponent } from 'app/storefront-components/pages/pages.component';
-import { PageComponent } from 'app/storefront-components/page/page.component';
-import { PostComponent } from 'app/storefront-components/post/post.component';
-import { ProductsComponent } from 'app/storefront-components/products/products.component';
-import { ProductComponent } from 'app/storefront-components/product/product.component';
-import { CartComponent } from 'app/storefront-components/cart/cart.component';
-import { CartIconComponent } from 'app/storefront-components/cart-icon/cart-icon.component';
-import { CheckoutShippingComponent } from 'app/storefront-components/checkout-shipping/checkout-shipping.component';
-import { CheckoutBillingComponent } from 'app/storefront-components/checkout-billing/checkout-billing.component';
-import { CheckoutPaymentComponent } from 'app/storefront-components/checkout-payment/checkout-payment.component';
-import { CheckoutReviewComponent } from 'app/storefront-components/checkout-review/checkout-review.component';
-import { CheckoutConfirmationComponent } from 'app/storefront-components/checkout-confirmation/checkout-confirmation.component';
-import { OrdersComponent } from 'app/storefront-components/orders/orders.component';
-import { OrderComponent } from 'app/storefront-components/order/order.component';
-import { ProductCategoryComponent } from 'app/storefront-components/product-category/product-category.component';
-import { ProductCategoriesComponent } from 'app/storefront-components/product-categories/product-categories.component';
-import { SearchResultsComponent } from 'app/storefront-components/search-results/search-results.component';
-import { LoginComponent } from 'app/storefront-components/login/login.component';
+import { PostsComponent } from './storefront-components/posts/posts.component';
+import { PagesComponent } from './storefront-components/pages/pages.component';
+import { PageComponent } from './storefront-components/page/page.component';
+import { PostComponent } from './storefront-components/post/post.component';
+import { ProductsComponent } from './storefront-components/products/products.component';
+import { ProductComponent } from './storefront-components/product/product.component';
+import { CartComponent } from './storefront-components/cart/cart.component';
+import { CartIconComponent } from './storefront-components/cart-icon/cart-icon.component';
+import { CheckoutShippingComponent } from './storefront-components/checkout-shipping/checkout-shipping.component';
+import { CheckoutBillingComponent } from './storefront-components/checkout-billing/checkout-billing.component';
+import { CheckoutPaymentComponent } from './storefront-components/checkout-payment/checkout-payment.component';
+import { CheckoutReviewComponent } from './storefront-components/checkout-review/checkout-review.component';
+import { CheckoutConfirmationComponent } from './storefront-components/checkout-confirmation/checkout-confirmation.component';
+import { OrdersComponent } from './storefront-components/orders/orders.component';
+import { OrderComponent } from './storefront-components/order/order.component';
+import { ProductCategoryComponent } from './storefront-components/product-category/product-category.component';
+import { ProductCategoriesComponent } from './storefront-components/product-categories/product-categories.component';
+import { SearchResultsComponent } from './storefront-components/search-results/search-results.component';
+import { LoginComponent } from './storefront-components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: ProductCategoriesComponent },
@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'blog/:url', component: PostComponent },
   { path: 'cart', component: CartComponent },
   { path: 'search', component: SearchResultsComponent },
-  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)}
 ];
 
 @NgModule({

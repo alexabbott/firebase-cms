@@ -1,9 +1,9 @@
 <div class="container">
   <h2>Theme</h2>
 
-  <md-input-container>
-    <input mdInput placeholder="Site Name" [(ngModel)]="siteName" required>
-  </md-input-container>
+  <mat-form-field>
+    <input matInput placeholder="Site Name" [(ngModel)]="siteName" required>
+  </mat-form-field>
 
-  <button md-raised-button (click)="saveTheme(siteName)">Save Theme</button>
+  <button mat-raised-button (click)="saveTheme(siteName)">Save Theme</button>
 </div>

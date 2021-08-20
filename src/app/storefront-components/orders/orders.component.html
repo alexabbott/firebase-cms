@@ -4,7 +4,7 @@
     Guest Customer
   </h3>
   <span *ngIf="userOrders">
-    <md-card class="order" routerLink="/account/order/{{order}}" *ngFor="let order of userOrders; let i = index">
+    <mat-card class="order" routerLink="/account/order/{{order}}" *ngFor="let order of userOrders; let i = index">
       <div class="order-info">
         <h3>
           <a routerLink="/account/order/{{order}}">#{{order}}</a>
@@ -12,9 +12,9 @@
         <div class="date">{{ orderDates[i] | date }}</div>
       </div>
       <div class="actions">
-        <button md-raised-button routerLink="/account/order/{{ order }}">View</button>
+        <button mat-raised-button routerLink="/account/order/{{ order }}">View</button>
       </div>
-    </md-card>
+    </mat-card>
   </span>
   <p *ngIf="!userOrders || !userOrders.length" class="block-center">No orders</p>
 </div>

@@ -6,7 +6,7 @@
     class="center">
     Nothing to approve at this time
   </p>
-  <md-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">
+  <mat-toolbar class="highlight" *ngIf="(productApprovals | async)?.length > 0">
     <div>
       Product
     </div>
@@ -16,9 +16,9 @@
     <div>
       Updated by
     </div>
-  </md-toolbar>
+  </mat-toolbar>
   <section class="approval-category">
-    <md-card *ngFor="let product of productApprovals | async" class="approval" routerLink="/admin/product-approval/{{ product.key }}">
+    <mat-card *ngFor="let product of productApprovals | async" class="approval" routerLink="/admin/product-approval/{{ product.key }}">
       <div class="content">
         <a routerLink="/admin/product-approval/{{ product.key }}">{{ product.payload.val().title }}</a>
         <div class="date">
@@ -29,23 +29,23 @@
         </div>
         <div class="actions">
           <button
-            md-raised-button
+            mat-raised-button
             (click)="approveItem($event, 'products', product.payload.val(), product.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
-            md-raised-button
+            mat-raised-button
             (click)="deleteItem($event, 'products', product.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || product.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
       </div>
-    </md-card>
+    </mat-card>
   </section>
 
-  <md-toolbar class="highlight" *ngIf="(categoryApprovals | async)?.length > 0">
+  <mat-toolbar class="highlight" *ngIf="(categoryApprovals | async)?.length > 0">
     <div>
       Category
     </div>
@@ -55,9 +55,9 @@
     <div>
       Updated by
     </div>
-  </md-toolbar>
+  </mat-toolbar>
   <section class="approval-category">
-    <md-card *ngFor="let category of categoryApprovals | async" class="approval" routerLink="/admin/category-approval/{{ category.key }}">
+    <mat-card *ngFor="let category of categoryApprovals | async" class="approval" routerLink="/admin/category-approval/{{ category.key }}">
       <div class="content">
         <a routerLink="/admin/category-approval/{{ category.key }}">{{ category.payload.val().name }}</a>
         <div class="date">
@@ -68,23 +68,23 @@
         </div>
         <div class="actions">
           <button
-            md-raised-button
+            mat-raised-button
             (click)="approveItem($event, 'categories', category.payload.val(), category.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
-            md-raised-button
+            mat-raised-button
             (click)="deleteItem($event, 'categories', category.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || category.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
       </div>
-    </md-card>
+    </mat-card>
   </section>
 
-  <md-toolbar class="highlight" *ngIf="(pageApprovals | async)?.length > 0">
+  <mat-toolbar class="highlight" *ngIf="(pageApprovals | async)?.length > 0">
     <div>
       Page
     </div>
@@ -94,9 +94,9 @@
     <div>
       Updated by
     </div>
-  </md-toolbar>
+  </mat-toolbar>
   <section class="approval-category">
-    <md-card *ngFor="let page of pageApprovals | async" class="approval" routerLink="/admin/page-approval/{{ page.key }}">
+    <mat-card *ngFor="let page of pageApprovals | async" class="approval" routerLink="/admin/page-approval/{{ page.key }}">
       <div class="content">
         <a routerLink="/admin/page-approval/{{ page.key }}">{{ page.payload.val().title }}</a>
         <div class="date">
@@ -107,23 +107,23 @@
         </div>
         <div class="actions">
           <button
-            md-raised-button
+            mat-raised-button
             (click)="approveItem($event, 'pages', page.payload.val(), page.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
-            md-raised-button
+            mat-raised-button
             (click)="deleteItem($event, 'pages', page.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || page.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
       </div>
-    </md-card>
+    </mat-card>
   </section>
 
-  <md-toolbar class="highlight" *ngIf="(postApprovals | async)?.length > 0">
+  <mat-toolbar class="highlight" *ngIf="(postApprovals | async)?.length > 0">
     <div>
       Post
     </div>
@@ -133,9 +133,9 @@
     <div>
       Updated by
     </div>
-  </md-toolbar>
+  </mat-toolbar>
   <section class="approval-category">
-    <md-card *ngFor="let post of postApprovals | async" class="approval" routerLink="/admin/post-approval/{{ post.key }}">
+    <mat-card *ngFor="let post of postApprovals | async" class="approval" routerLink="/admin/post-approval/{{ post.key }}">
       <div class="content">
         <a routerLink="/admin/post-approval/{{ post.key }}">{{ post.payload.val().title }}</a>
         <div class="date">
@@ -146,19 +146,19 @@
         </div>
         <div class="actions">
           <button
-            md-raised-button
+            mat-raised-button
             (click)="approveItem($event, 'posts', post.payload.val(), post.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
             Approve
           </button>
           <button
-            md-raised-button
+            mat-raised-button
             (click)="deleteItem($event, 'posts', post.key)"
             *ngIf="(currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || post.payload.val().updatedBy === currentAdmin.uid">
             Delete
           </button>
         </div>
       </div>
-    </md-card>
+    </mat-card>
   </section>
 </div>

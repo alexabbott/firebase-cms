@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { MdSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { GlobalService } from 'app/services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+import { GlobalService } from '../../services/global.service';
+import { LocalCartService } from '../../services/localcart.service';
 
 @Component({
   selector: 'product',
@@ -19,13 +20,13 @@ export class ProductComponent implements OnInit {
   productContent: any;
   product: any;
   globalCart: any;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
   currentShopper: any;
 
   constructor(
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public route: ActivatedRoute,
     public router: Router,
     public globalService: GlobalService,

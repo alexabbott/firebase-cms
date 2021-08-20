@@ -17,7 +17,7 @@
     }
 }
 
-md-sidenav {
+mat-sidenav {
     box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
     width: 300px;
 }
@@ -27,7 +27,7 @@ md-sidenav {
 }
 
 .admin-nav {
-    md-list-item {
+    mat-list-item {
         cursor: pointer;
         transition: background .2s ease-out;
 

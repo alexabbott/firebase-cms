@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { GlobalService } from '../../services/global.service';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { MdSnackBar } from '@angular/material';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../../environments/environment';
 import { Title, Meta } from '@angular/platform-browser';
 import * as firebase from 'firebase/app';
@@ -20,7 +20,7 @@ export class CheckoutPaymentComponent implements OnInit {
   stripeCustomerInitialized: Boolean;
   newCreditCard: any;
   user: any;
-  anonymous: Observable<firebase.User>;
+  anonymous: Observable<firebase.default.User>;
   order: any;
 
   constructor(
@@ -28,7 +28,7 @@ export class CheckoutPaymentComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
     public router: Router,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private title: Title,
     private meta: Meta
   ) {
@@ -42,7 +42,7 @@ export class CheckoutPaymentComponent implements OnInit {
     if (this.user) {
       this.sources = db.list('/stripe_customers/' + this.user.uid + '/sources');
     } else {
-      this.afAuth.auth.signInAnonymously().catch(function(error) {
+      this.afAuth.signInAnonymously().catch(function(error) {
         console.log('auth error', error.message);
       }).then(() => {
         this.anonymous = afAuth.authState;
@@ -97,7 +97,7 @@ export class CheckoutPaymentComponent implements OnInit {
     } else {
       let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
         duration: 3000,
-        extraClasses: ['warn-snackbar']
+        panelClass: ['warn-snackbar']
       });
     }
   }

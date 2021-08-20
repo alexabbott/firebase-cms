@@ -1,25 +1,25 @@
-<md-card class="container">
+<mat-card class="container">
   <h3>Payment Info</h3>
     <div>
-      <md-input-container>
-        <input mdInput placeholder="Credit Card Number" [(ngModel)]="newCreditCard.number">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput placeholder="Credit Card Number" [(ngModel)]="newCreditCard.number">
+      </mat-form-field>
     </div>
     <div>
-      <md-input-container>
-        <input mdInput placeholder="CCV" [(ngModel)]="newCreditCard.cvc">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput placeholder="CCV" [(ngModel)]="newCreditCard.cvc">
+      </mat-form-field>
     </div>
     <div>
-      <md-input-container>
-        <input mdInput placeholder="Month" [(ngModel)]="newCreditCard.exp_month" size="4">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput placeholder="Month" [(ngModel)]="newCreditCard.exp_month" size="4">
+      </mat-form-field>
       /
-      <md-input-container>
-        <input mdInput placeholder="Year" [(ngModel)]="newCreditCard.exp_year" size="6">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput placeholder="Year" [(ngModel)]="newCreditCard.exp_year" size="6">
+      </mat-form-field>
     </div>
 
-  <button md-raised-button (click)="submitNewCreditCard()">Continue</button>
+  <button mat-raised-button (click)="submitNewCreditCard()">Continue</button>
   <div class="error" *ngIf="newCreditCard.error">{{ newCreditCard.error }}</div>
-</md-card>
+</mat-card>

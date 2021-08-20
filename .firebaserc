@@ -3,5 +3,14 @@
     "default": "fir-cms-76f54",
     "cm": "fir-cms-76f54",
     "cms": "fir-cms-76f54"
+  },
+  "targets": {
+    "ng6-fire-shop": {
+      "hosting": {
+        "firebase-cms": [
+          "ng6-fire-shop"
+        ]
+      }
+    }
   }
 }

@@ -1,12 +1,14 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
-import { GlobalService } from 'app/services/global.service';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as firebase from 'firebase/app';
-import { FirebaseApp } from 'angularfire2';
+import { FirebaseApp } from '@angular/fire';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'add-product',
@@ -34,19 +36,19 @@ export class AddProductComponent implements OnInit {
   currentProduct: AngularFireObject<any>;
   currentModeratedProducts: AngularFireList<any>;
   entityObject: any;
-  dialogRef: MdDialogRef<any>;
+    dialogRef: MatDialogRef<any>;
   selectedOption: string;
   awaitingApproval: string;
 
   constructor(
     public af: FirebaseApp,
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
     private fb: FirebaseApp,
-    public dialog: MdDialog
+      public dialog: MatDialog
   ) {
     this.newPublished = false;
     this.products = db.list('/products');
@@ -72,7 +74,7 @@ export class AddProductComponent implements OnInit {
 
           if (this.router.url.includes('approval')) {
             this.currentProduct = this.db.object('/approvals/products/' + params.key);
-            this.db.object('/approvals/products/' + params.key).valueChanges().take(1).subscribe((p:any) => {
+            this.db.object('/approvals/products/' + params.key).valueChanges().pipe(take(1)).subscribe((p:any) => {
               if (p.category) {
                 this.ogCategory = p.category;
               }
@@ -82,7 +84,7 @@ export class AddProductComponent implements OnInit {
             });
           } else {
             this.currentProduct = this.db.object('/products/' + params.key);
-            this.db.object('/products/' + params.key).valueChanges().take(1).subscribe((p:any) => {
+            this.db.object('/products/' + params.key).valueChanges().pipe(take(1)).subscribe((p:any) => {
               if (p.category) {
                 this.ogCategory = p.category;
               }
@@ -134,7 +136,7 @@ export class AddProductComponent implements OnInit {
   }
 
   uploadImage() {
-    let storageRef = firebase.storage().ref();
+    let storageRef = firebase.default.storage().ref();
     let path = Date.now().toString() + '-' + this.file.name;
     let imageRef = storageRef.child('products/' + path);
     let me = this;
@@ -154,7 +156,7 @@ export class AddProductComponent implements OnInit {
   }
 
   deleteImageRef() {
-    let storage = firebase.storage();
+    let storage = firebase.default.storage();
     let imageRef = storage.refFromURL(this.imageUrl);
 
     let me = this;
@@ -266,7 +268,7 @@ export class AddProductComponent implements OnInit {
         this.currentModeratedProducts = this.db.list('/approvals/products/');
 
         let adminApprovalProducts = this.db.list('/approvals/products/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
-        adminApprovalProducts.take(1).subscribe((approvals:any) => {
+        adminApprovalProducts.pipe(take(1)).subscribe((approvals:any) => {
 
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
@@ -302,7 +304,7 @@ export class AddProductComponent implements OnInit {
   approveItem(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
     if (this.entityObject.entityKey) {
       let ogEntity = this.db.object('/products/' + this.entityObject.entityKey);
-      ogEntity.valueChanges().take(1).subscribe((item:any) => {
+      ogEntity.valueChanges().pipe(take(1)).subscribe((item:any) => {
         this.updateCategory(item.category, this.entityObject.category, this.entityObject.entityKey);
         ogEntity.set(this.entityObject);
       });

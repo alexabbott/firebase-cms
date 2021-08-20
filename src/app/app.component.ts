@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Router, ActivatedRoute }    from '@angular/router';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from './services/global.service';
-import { LocalCartService } from 'app/services/localcart.service';
+import { LocalCartService } from './services/localcart.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'app';
   nav: Observable<any>;
   theme: Observable<any>;
-  user: Observable<firebase.User>;
+  user: Observable<firebase.default.User>;
 
   constructor(
     public router: Router,
@@ -55,13 +55,13 @@ export class AppComponent {
   }
 
   login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
   }
 
   logout() {
     this.globalService.cart.next(null);
     this.globalService.order.next(null);
     this.localCart.clearAll();
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
   }
 }

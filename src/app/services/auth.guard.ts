@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  auth: Observable<firebase.User>;
+  auth: Observable<firebase.default.User>;
 
   constructor(
     public router: Router,

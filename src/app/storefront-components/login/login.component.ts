@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router }    from '@angular/router';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from '../../services/global.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'login',
@@ -15,7 +16,7 @@ import { MdSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  admin: Observable<firebase.User>;
+  admin: Observable<firebase.default.User>;
   newEmail: string;
   newPassword: string;
   showSignUp: boolean;
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
     public router: Router,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private title: Title,
     private meta: Meta
   ) {
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.admin.subscribe(currentAdmin => {
 
       if (currentAdmin) {
-        db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).valueChanges().take(1).subscribe((admin:any) => {
+        db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).valueChanges().pipe(take(1)).subscribe((admin:any) => {
           if (admin && admin.role) {
             this.db.object('/admins/' + currentAdmin.uid).update({
               uid: currentAdmin.uid,
@@ -71,16 +72,16 @@ export class LoginComponent implements OnInit {
     this.meta.updateTag({ content: 'Login to the admin panel' }, "name='description'");
   }
 
-  loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    loginWithGoogle() {
+    this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider());
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
   }
 
   signUpWithEmail() {
-    this.afAuth.auth.createUserWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
+    this.afAuth.createUserWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
       let snackBarRef = this.snackBar.open(error.message, 'OK!', {
         duration: 3000
       });
@@ -88,7 +89,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithEmail() {
-    this.afAuth.auth.signInWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
+    this.afAuth.signInWithEmailAndPassword(this.newEmail, this.newPassword).catch((error) => {
       let snackBarRef = this.snackBar.open(error.message, 'OK!', {
         duration: 3000
       });
