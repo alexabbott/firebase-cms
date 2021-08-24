@@ -1,0 +1,8 @@
+<div class="container" *ngIf="post" itemscope itemtype="http://schema.org/Article">
+  <div class="center post-header">
+    <img [src]="post.thumbnail" *ngIf="post.thumbnail" class="thumbnail" alt="{{post.title}}" itemprop="image">
+    <h2 itemprop="headline">{{post.title}}</h2>
+    <p>Published <span itemprope="datePublished">{{post.date | date}}</span></p>
+  </div>
+  <p [innerHTML]="post.body | safeHtml" itemprop="articleBody"></p>
+</div>

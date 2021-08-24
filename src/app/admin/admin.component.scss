@@ -1,0 +1,82 @@
+@import '../../variables.scss';
+
+:host {
+  display: flex;
+  height: 100%;
+
+  .admin-nav {
+    mat-list-item {
+      cursor: pointer;
+      transition: background .2s ease-out;
+
+      &:hover,
+      &.selected {
+        background: $color-grey-light;
+        outline: 0;
+      }
+
+      .mat-icon {
+        color: $color-main;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .toolbar-element {
+    padding: 0 14px;
+  }
+
+  .dashboard-content {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .mat-sidenav {
+    width: 240px;
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
+  }
+
+  .mat-sidenav .mat-toolbar {
+    width: 240px;
+  }
+
+  .side-content {
+    overflow-y: hidden;
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+  }
+
+  .fill-space {
+    flex: 1 1 auto;
+  }
+
+  .app-title {
+    cursor: pointer;
+    font-family: spartan;
+  }
+
+  .noshadow {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .admin-photo {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    transition: transform .3s ease-out;
+    vertical-align: middle;
+    width: 30px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

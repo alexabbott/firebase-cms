@@ -1,0 +1,131 @@
+<mat-sidenav-container fullscreen>
+
+  <mat-sidenav #start [opened]="mobileQuery.matches ? false : true" [mode]="mobileQuery.matches ? 'over' : 'side'">
+
+    <mat-list class="admin-nav">
+
+      <mat-list-item [ngClass]="{'selected': router.url === '/admin'}">
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <a matLine routerLink="/admin">
+          <span>Dashboard</span>
+        </a>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/posts')}">
+        <a matLine routerLink="/admin/posts">
+          <span>Posts</span>
+        </a>
+        <mat-icon mat-list-icon>class</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/pages')}">
+        <a matLine routerLink="/admin/pages">
+          <span>Pages</span>
+        </a>
+        <mat-icon mat-list-icon>description</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/products')}">
+        <a matLine routerLink="/admin/products">
+          Products
+        </a>
+        <mat-icon mat-list-icon>shopping_basket</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/product-categories')}">
+        <a matLine routerLink="/admin/product-categories">
+          Categories
+        </a>
+        <mat-icon mat-list-icon>group_work</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/customers')}" *ngIf="(currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin')">
+        <a matLine routerLink="/admin/customers">
+          <span>Customers</span>
+        </a>
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/orders')}" *ngIf="(currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin')">
+        <a matLine routerLink="/admin/orders">
+          Orders
+        </a>
+        <mat-icon mat-list-icon>attach_money</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/menus')}" *ngIf="(currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin')">
+        <a matLine routerLink="/admin/menus">
+          Menus
+        </a>
+        <mat-icon mat-list-icon>menu</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url === '/admin/theme'}" *ngIf="(currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin')">
+        <a matLine routerLink="/admin/theme">
+          Theme
+        </a>
+        <mat-icon mat-list-icon>restaurant_menu</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url === '/admin/approvals'}">
+        <a matLine routerLink="/admin/approvals">
+          Approvals
+        </a>
+        <mat-icon mat-list-icon>check_circle</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selected': router.url.includes('/admin/admins')}" *ngIf="currentAdmin?.role === 'super-admin'">
+        <a matLine routerLink="/admin/admins">
+          Admins
+        </a>
+        <mat-icon mat-list-icon>assignment_ind</mat-icon> 
+      </mat-list-item>
+
+    </mat-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content class="side-content" >
+
+    <mat-toolbar >
+
+      <mat-toolbar-row>
+
+        <button mat-icon-button (click)="start.open('mouse')" *ngIf="mobileQuery.matches ? true : false">
+          <mat-icon aria-label="menu icon-button with a heart icon">menu</mat-icon>
+        </button>
+
+        <span class="app-title">FireCMS</span>
+        <span class="fill-space"></span>
+
+        <button mat-icon-button mat-raised-button [matMenuTriggerFor]="usermenu">
+          <ng-container *ngIf="user$ | async as user">
+            <ng-container *ngIf="user.photoURL">
+              <img class="admin-photo" src="{{user.photoURL}}" />
+            </ng-container>
+            <ng-container *ngIf="!user.photoURL">
+              <mat-icon aria-label="profile">person</mat-icon>
+            </ng-container>
+          </ng-container>
+        </button>
+
+        <mat-menu #usermenu="matMenu" color="primary">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+
+
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+
+    <div class="dashboard-content">
+      <router-outlet></router-outlet>
+    </div>
+
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

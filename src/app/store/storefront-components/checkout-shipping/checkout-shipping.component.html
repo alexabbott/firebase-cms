@@ -1,0 +1,25 @@
+<mat-card class="container">
+  <h3>Shipping Info</h3>
+  <mat-form-field>
+    <input matInput placeholder="Name (first & last)" [(ngModel)]="order.shipping.name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Company (optional)" [(ngModel)]="order.shipping.company">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="order.shipping.email">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Address" [(ngModel)]="order.shipping.address">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="City" [(ngModel)]="order.shipping.city">
+  </mat-form-field>
+  <mat-select placeholder="State" [(ngModel)]="order.shipping.state">
+    <mat-option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</mat-option>
+  </mat-select>
+  <mat-form-field>
+    <input matInput placeholder="Zip Code" [(ngModel)]="order.shipping.zip">
+  </mat-form-field>
+  <button mat-raised-button (click)="goTo('store/checkout/billing')">Continue</button>
+</mat-card>

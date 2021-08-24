@@ -1,0 +1,123 @@
+@import '../../../../variables.scss';
+
+
+.order-container {
+    margin: 0;
+    text-align: left;
+}
+
+.order-date {
+    text-align: left;
+}
+
+.order-left {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+
+    @include tablet {
+        width: 49%;
+    }
+}
+
+.order-right {
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    width: 100%;
+
+    @include tablet {
+        width: 49%;
+    }
+}
+
+.user-photo {
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 40px;
+}
+
+.product {
+    height: 27px;
+    padding: 24px 16px;
+}
+
+.item {
+    display: inline-block;
+    width: 30%;
+
+    @include tablet {
+        float: left;
+        width: 50%;
+    }
+}
+
+.price,
+.quantity,
+.total {
+    display: inline-block;
+    width: 20%;
+
+    @include tablet {
+        float: left;
+        width: 15%;
+    }
+}
+
+.quantity {
+    span {
+        @include tablet {
+            margin-left: 13px;
+        }
+    }
+}
+
+.order-summary {
+    box-sizing: border-box;
+    margin: 20px 0;
+    width: 100%;
+
+    @include tablet {
+        float: right;
+        width: 330px;
+    }
+}
+
+.subtotal-label,
+.subtotal {
+    display: inline-block;
+    width: 48%;
+}
+
+.subtotal {
+    text-align: right;
+}
+
+.mat-raised-button {
+    margin-top: 20px;
+}
+
+.order-info {
+    margin-top: 30px;
+    text-align: left;
+
+    @include tablet {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .mat-card {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .mat-card:last-of-type {
+
+        @include tablet {
+            margin-left: 30px;
+        }
+    }
+}

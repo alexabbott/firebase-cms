@@ -1,0 +1,72 @@
+<mat-toolbar class="main-header">
+  <mat-icon class="material-icons menu-trigger" (click)="mobilenav.toggle()">menu</mat-icon>
+  <h1><a routerLink="/" (click)="mobilenav.close()">{{ (theme | async)?.siteName }}</a></h1>
+  <span class="fill-space"></span>
+  <ul>
+    <span *ngFor="let item of nav | async" class="nav-item">
+    <li *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
+      <a *ngIf="!item.url.includes('.')" routerLink="{{item.url}}" [ngClass]="{ 'color-main': router.url.includes(item.url) }">{{item.label}}</a>
+      <a *ngIf="item.url.includes('.')" href="{{item.url}}" target="_blank">{{item.label}}</a>
+    </li>
+    </span>
+    <li class="search-nav">
+      <mat-icon (click)="mobilenav.close()" routerLink="/search" [ngClass]="{ 'color-main': router.url.includes('search') }">search</mat-icon>
+    </li>
+    <li class="cart-nav" (click)="mobilenav.close()" [ngClass]="{ 'color-main': router.url.includes('cart') }">
+      <cart-icon></cart-icon>
+    </li>
+    <li *ngIf="(user | async)?.displayName" class="user-nav">
+      <img src="{{ (user | async)?.photoURL }}" class="user-photo" (click)="mobilenav.close()" [mdMenuTriggerFor]="userMenu">
+      <mat-menu #userMenu="mdMenu">
+        <button mat-menu-item routerLink="/account/orders">My Account</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </li>
+    <li>
+      <button mat-raised-button (click)="login()" *ngIf="!(user | async)?.displayName">Login</button>
+    </li>
+  </ul>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #mobilenav mode="over" class="mobile-nav">
+
+    <mat-list class="nav">
+      <ng-container *ngFor="let item of nav | async">
+        <ng-container *ngIf="item.label && item.label !== '' && item.url && item.url !== ''">
+          <mat-list-item>
+            <a matLine routerLink="{{item.url}}">
+              <span> {{item.label}}</span>
+            </a>
+          </mat-list-item>
+        </ng-container>
+      </ng-container>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        <a matLine routerLink="/search">
+          <span>Search</span>
+        </a>
+        <mat-icon mat-list-icon>search</mat-icon>
+      </mat-list-item>
+
+      <ng-container *ngIf="cartTotal$ | async as cartTotal">
+        <ng-container *ngIf="cartTotal">
+          <mat-list-item>
+            <a matLine routerLink="store/cart">
+              <span>Cart</span>
+            </a>
+            <span class="cart-counter">{{cartTotal}}</span>
+            <mat-icon mat-list-icon>shopping_cart</mat-icon>
+          </mat-list-item>
+        </ng-container>
+
+      </ng-container>
+
+    </mat-list>
+
+
+
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+</mat-sidenav-container>

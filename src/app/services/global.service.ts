@@ -6,6 +6,7 @@ export class GlobalService {
   public user = new BehaviorSubject(null);
   public admin = new BehaviorSubject(null);
   public cart = new BehaviorSubject({});
+  public cartTotalItems = new BehaviorSubject(null);
   public order = new BehaviorSubject({});
   public searchTerm = new BehaviorSubject('');
 

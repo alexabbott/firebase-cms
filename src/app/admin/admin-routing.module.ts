@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent } from './admin-components/admin/admin.component';
+import { AdminComponent } from './admin.component';
 import { AddPostComponent } from './admin-components/add-post/add-post.component';
 import { AdminPostsComponent } from './admin-components/admin-posts/admin-posts.component';
 import { AdminAdminsComponent } from './admin-components/admin-admins/admin-admins.component';
@@ -22,7 +22,7 @@ import { AdminProductCategoriesComponent } from './admin-components/admin-produc
 import { AddProductCategoryComponent } from './admin-components/add-product-category/add-product-category.component';
 import { AdminApprovalsComponent } from './admin-components/admin-approvals/admin-approvals.component';
 import { ApproveDialogComponent } from './admin-components/approve-dialog/approve-dialog.component';
-import { OrderComponent } from '../storefront-components/order/order.component';
+import { OrderComponent } from './admin-components/order/order.component';
 
 import { AuthGuard } from '../services/auth.guard';
 import { SuperAdminGuard } from '../services/super-admin.guard';

@@ -1,0 +1,49 @@
+@import '../../../../variables.scss';
+
+.grid {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+
+    .grid-tile {
+        height: 300px;
+        width: 100%;
+
+        @include tablet {
+            width: 50%;
+        }
+
+        @include desktop {
+            width: 25%;
+        }
+    }
+}
+
+.product {
+    cursor: pointer;
+    height: 235px;
+    margin: 0 auto;
+    width: auto;
+
+    @include tablet {
+        width: 80%;
+    }
+
+    .price {
+        color: $color-grey;
+        font-size: 0.8em;
+    }
+
+    img {
+        display: block;
+        height: 155px;
+        margin: 0 auto;
+        max-height: 155px;
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    .product-content {
+        display: block;
+    }
+}
