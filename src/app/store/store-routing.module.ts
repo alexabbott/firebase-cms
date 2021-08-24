@@ -4,14 +4,9 @@ import { StoreComponent } from './store.component';
 
 import { ProductCategoriesComponent } from './storefront-components/product-categories/product-categories.component';
 import { OrdersComponent } from './storefront-components/orders/orders.component';
-import { PostsComponent } from './storefront-components/posts/posts.component';
-import { PagesComponent } from './storefront-components/pages/pages.component';
-import { PageComponent } from './storefront-components/page/page.component';
-import { PostComponent } from './storefront-components/post/post.component';
 import { ProductsComponent } from './storefront-components/products/products.component';
 import { ProductComponent } from './storefront-components/product/product.component';
 import { CartComponent } from './storefront-components/cart/cart.component';
-import { CartIconComponent } from './storefront-components/cart-icon/cart-icon.component';
 import { CheckoutShippingComponent } from './storefront-components/checkout-shipping/checkout-shipping.component';
 import { CheckoutBillingComponent } from './storefront-components/checkout-billing/checkout-billing.component';
 import { CheckoutPaymentComponent } from './storefront-components/checkout-payment/checkout-payment.component';
@@ -54,13 +49,8 @@ const routes: Routes = [
         ]
       },
       <Route>{ path: 'category/:slug', component: ProductCategoryComponent },
-      //{ path: 'login', component: LoginComponent },
-      //{ path: 'register', component: LoginComponent },
-/*      <Route>{ path: 'page/:url', component: PageComponent },*/
       <Route>{ path: 'product/:url', component: ProductComponent },
       <Route>{ path: 'products', component: ProductsComponent },
-   /*   <Route>{ path: 'blog', component: PostsComponent },*/
-/*      <Route>{ path: 'blog/:url', component: PostComponent },*/
       <Route>{ path: 'cart', component: CartComponent },
       <Route>{ path: 'search', component: SearchResultsComponent },
     ]

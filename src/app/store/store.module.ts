@@ -8,10 +8,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import { StoreComponent } from './store.component';
 import { OrderComponent } from './storefront-components/order/order.component';
 import { OrdersComponent } from './storefront-components/orders/orders.component';
-import { PostsComponent } from './storefront-components/posts/posts.component';
-import { PagesComponent } from './storefront-components/pages/pages.component';
-import { PageComponent } from './storefront-components/page/page.component';
-/*import { PostComponent } from './storefront-components/post/post.component';*/
 import { ProductsComponent } from './storefront-components/products/products.component';
 import { ProductComponent } from './storefront-components/product/product.component';
 import { CartComponent } from './storefront-components/cart/cart.component';
@@ -39,10 +35,6 @@ import { StoreRoutingModule } from './store-routing.module';
     StoreComponent,
     OrderComponent,
     OrdersComponent,
-    PostsComponent,
-    PagesComponent,
-   /* PageComponent,*/
- /*   PostComponent,*/
     ProductsComponent,
     ProductComponent,
     CartComponent,

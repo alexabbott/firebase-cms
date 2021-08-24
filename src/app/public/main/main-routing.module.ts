@@ -10,11 +10,12 @@ const routes: Routes = [
   <Route>{
     path: '', component: MainComponent,
     children: [
-      <Route>{ path: '', component: PageComponent },
-      <Route>{ path: ':url', component: PageComponent },
       <Route>{ path: 'blog/:url', component: PostComponent },
       <Route>{ path: 'blog', component: PostsComponent },
       <Route>{ path: 'page-not-found', component: PageNotFoundComponent },
+      <Route>{ path: '', component: PageComponent },
+      <Route>{ path: ':url', component: PageComponent },
+
     ]
   }
 ]
