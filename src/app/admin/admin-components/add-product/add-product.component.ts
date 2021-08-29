@@ -5,10 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GlobalService } from '../../../services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import * as firebase from 'firebase/app';
 import { FirebaseApp } from '@angular/fire';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { take } from 'rxjs/operators'
+import { filter, take } from 'rxjs/operators'
+import { AngularFireStorage } from '@angular/fire/storage';
+
+const FIREBASE_PRODUCT_STORAGE_PATH = "firebase-cms-products";
 
 @Component({
   selector: 'add-product',
@@ -48,18 +50,22 @@ export class AddProductComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     private fb: FirebaseApp,
-      public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage: AngularFireStorage
   ) {
     this.newPublished = false;
     this.products = db.list('/products');
     this.categories = db.list('/categories').snapshotChanges();
 
-    this.globalService.admin.subscribe(admin => {
+    this.globalService.admin.
+      pipe(
+        filter(x => !!x),
+      ).subscribe(admin => {
       this.currentAdmin = admin;
 
       let adminApprovalProducts = this.db.list('/approvals/products/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid));
       adminApprovalProducts.valueChanges().subscribe(response => {
-        console.log(!response);
+        /*console.log(!response);*/
       });
     });
 
@@ -136,7 +142,8 @@ export class AddProductComponent implements OnInit {
   }
 
   uploadImage() {
-    let storageRef = firebase.default.storage().ref();
+
+    let storageRef = this.storage.ref(FIREBASE_PRODUCT_STORAGE_PATH);
     let path = Date.now().toString() + '-' + this.file.name;
     let imageRef = storageRef.child('products/' + path);
     let me = this;
@@ -144,7 +151,8 @@ export class AddProductComponent implements OnInit {
         let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
           duration: 3000
         });
-        this.storageRef.child('products/' + path).getDownloadURL().then(function(url) {
+
+      snapshot.ref.getDownloadURL().then(function (url) {
           me.imageUrl = url;
           me.newThumbnail = url;
         });
@@ -156,15 +164,12 @@ export class AddProductComponent implements OnInit {
   }
 
   deleteImageRef() {
-    let storage = firebase.default.storage();
-    let imageRef = storage.refFromURL(this.imageUrl);
+    
+    let imageRef = this.storage.refFromURL(this.imageUrl);
 
-    let me = this;
-    imageRef.delete().then(function() {
-      me.imageUrl = null;
-    }).catch(function(error) {
-      console.log('error', error);
-    });
+    imageRef.delete().subscribe(() => {
+      this.imageUrl = null;
+    })
   }
 
   validateFields(title, description, price) {

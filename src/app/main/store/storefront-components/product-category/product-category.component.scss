@@ -1,0 +1,105 @@
+@import 'variables';
+
+h3 {
+    margin-left: .7%;
+    text-align: center;
+
+    @include tablet {
+        text-align: left;
+    }
+}
+
+.grid {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+
+    .grid-tile {
+        height: 300px;
+        width: 100%;
+
+        @include tablet {
+            width: 50%;
+        }
+
+        @include desktop {
+            width: 25%;
+        }
+    }
+}
+
+.product,
+.see-more {
+    cursor: pointer;
+    height: 235px;
+    margin: 0 auto;
+    width: auto;
+
+    @include tablet {
+        width: 80%;
+    }
+
+    .price {
+        color: $color-grey;
+        font-size: 0.8em;
+    }
+
+    img {
+        display: block;
+        height: 155px;
+        margin: 0 auto;
+        max-height: 155px;
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    .product-content {
+        display: block;
+    }
+}
+
+.grid .button-container {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 70px;
+    margin: 0 auto;
+    padding-top: 30px;
+    text-align: center;
+
+    @include tablet {
+        height: 300px;
+        padding-top: 130px;
+    }
+}
+
+.categories {
+    padding: 30px 30px 0 30px;
+}
+
+.categories .grid span {
+    display: none;
+}
+
+.categories .grid span:nth-of-type(1),
+.categories .grid span:nth-of-type(2),
+.categories .grid span:nth-of-type(3) {
+    display: block;
+}
+
+.categories .grid span:nth-of-type(1) + .button-container,
+.categories .grid span:nth-of-type(2) + .button-container {
+    display: none;
+}
+
+.category .button-container {
+    display: none;
+}
+
+.see-more:not([class*=mat-elevation-z]) {
+    cursor: default;
+}
+
+.bottom-cta {
+    margin-bottom: 30px;
+    text-align: center;
+}

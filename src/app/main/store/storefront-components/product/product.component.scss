@@ -1,0 +1,43 @@
+@import 'variables';
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+        flex-direction: row;
+    }
+}
+
+.featured-image {
+    max-width: 100%;
+}
+
+.product-left,
+.product-right {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+
+    @include tablet {
+        padding: 20px;
+    }
+}
+
+.product-left {
+    text-align: right;
+}
+
+.quantity-label,
+.quantity {
+    display: inline-block;
+}
+
+.quantity-label {
+    color: $color-grey;
+    transform: translateY(-2px);
+}
+
+.quantity {
+    width: 35px;
+}

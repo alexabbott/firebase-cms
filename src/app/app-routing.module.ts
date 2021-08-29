@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, Route, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './public/components/login/login.component';
 
 const routes: Routes = [
   <Route>{
     path: '', component: AppComponent,
     children: [
-      { path: 'store', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },
-      { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-      { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) }
-
+      <Route>{ path: 'login', component: LoginComponent },
+      <Route>{ path: 'register', component: LoginComponent },
+      <Route>{ path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+      <Route>{ path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule)}
     ]
   }
 ];
