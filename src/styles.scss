@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/material/theming';
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
-@import "./variables";
+@import "variables";
 
 // Define a custom typography config that overrides the font-family as well as the
 // `headlines` and `body-1` levels.
@@ -15,6 +15,7 @@ $custom-typography: mat-typography-config(
 html,
 body {
     margin: 0;
+    height:100%;
 }
 
 h1,
@@ -36,7 +37,6 @@ a {
     background: $color-white;
     box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, .1);
     color: $color-grey;
-    position: fixed;
     top: 0;
     z-index: 1;
 
@@ -113,7 +113,7 @@ a {
 
 .mat-sidenav-content {
     box-sizing: border-box;
-    padding-top: 64px;
+    padding-top: 10px;
 }
 
 admin .mat-sidenav-content {
@@ -166,7 +166,7 @@ admin .mat-sidenav-content {
 }
 
 /*dnd*/
-.dnd-drag-start {
+/*.dnd-drag-start {
     -moz-transform:scale(0.8);
     -webkit-transform:scale(0.8);
     transform:scale(0.8);
@@ -189,4 +189,4 @@ admin .mat-sidenav-content {
   transform:scale(0.9);
   opacity:0.7;
   border: 1px dashed #000;
-}
+}*/

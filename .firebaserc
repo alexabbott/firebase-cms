@@ -1,14 +1,14 @@
 {
   "projects": {
-    "default": "fir-cms-76f54",
-    "cm": "fir-cms-76f54",
-    "cms": "fir-cms-76f54"
+    "default": "fir-cms-vnext",
+    "cm": "fir-cms-vnext",
+    "cms": "fir-cms-vnext"
   },
   "targets": {
     "ng6-fire-shop": {
       "hosting": {
         "firebase-cms": [
-          "ng6-fire-shop"
+          "firebase-cms-vnext"
         ]
       }
     }

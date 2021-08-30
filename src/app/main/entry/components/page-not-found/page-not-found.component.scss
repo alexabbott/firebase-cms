@@ -1,0 +1,36 @@
+:host {
+
+  .message-center {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    justify-content: center;
+    margin-top: -10vh;
+    padding:10px;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .msg-icon {
+    font-size: 3em;
+  }
+
+  .msg-title {
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align:center;
+  }
+
+  .msg-subtitle {
+    font-size: 0.8em;
+    color: #777;
+    width: 30vh;
+    text-align: center;
+  }
+}

@@ -5,8 +5,9 @@
   <p *ngIf="menuList.length === 0" class="center">
       No menu items yet
   </p>
-  <!--<div dnd-sortable-container [sortableData]="menuList">
-    <mat-card *ngFor="let item of menuList; let i = index" dnd-sortable [sortableIndex]="i">
+
+  <div>
+    <mat-card *ngFor="let item of menuList; let i = index" [sortableIndex]="i">
       <mat-form-field>
         <input matInput placeholder="Item Label" [(ngModel)]="item.label" required>
       </mat-form-field>
@@ -18,7 +19,8 @@
       </div>
       <mat-icon>drag_handle</mat-icon>
     </mat-card>
-  </div>-->
+  </div>
+
   <button mat-raised-button (click)="addMenuItem()" class="button-add-menu">Add Menu Item</button>
   <button mat-raised-button (click)="saveMenu()" class="button-add-menu">Save Menu</button>
 </div>

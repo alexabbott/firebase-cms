@@ -1,0 +1,150 @@
+@import 'variables';
+
+h3,
+.no-items {
+    text-align: center;
+}
+
+.cart-header {
+    display: none;
+    margin-bottom: 10px;
+
+    @include tablet {
+        display: block;
+    }
+
+    .quantity {
+        @include tablet {
+            transform: none;
+        }
+    }
+}
+
+.product {
+    min-height: 30px;
+    padding: 24px 16px;
+}
+
+.item {
+    display: block;
+    width: 100%;
+
+    @include tablet {
+        float: left;
+        width: 35%;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 70%;
+
+        @include tablet {
+            display: inline-block;
+            height: 50px;
+            margin-top: -8px;
+            object-fit: cover;
+            vertical-align: middle;
+            width: 50px;
+        }
+    }
+}
+
+.price,
+.quantity,
+.total {
+    display: inline-block;
+    width: 45%;
+
+    @include tablet {
+        float: left;
+        width: 15%;
+    }
+}
+
+.price {
+    @include tablet {
+        width: 20%;
+    }
+}
+
+.total {
+    display: none;
+
+    @include tablet {
+        display: inline-block;
+    }
+}
+
+.quantity {
+    position: relative;
+    text-align: right;
+
+    @include tablet {
+        text-align: left;
+        transform: translateY(-22px);
+    }
+
+    .quantity-label {
+        color: $color-grey;
+        display: inline-block;
+        font-size: .8em;
+        position: absolute;
+        right: 40px;
+        top: 0px;
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    .mat-input-container {
+        width: 35px;
+    }
+}
+
+.remove {
+    display: block;
+    text-align: center;
+    width: 100%;
+
+    @include tablet {
+        display: inline-block;
+        text-align: left;
+        width: 5%;
+    }
+}
+
+.checkout-cta {
+    box-sizing: border-box;
+    float: right;
+    margin: 20px 0 30px 0;
+    width: 100%;
+
+    @include tablet {
+        width: 330px;
+    }
+
+    button {
+        display: block;
+        float: right;
+    }
+}
+
+.subtotal-label,
+.subtotal {
+    display: inline-block;
+    width: 48%;
+}
+
+.subtotal {
+    text-align: right;
+}
+
+.hide {
+    display: none;
+}
+
+.no-padding {
+    padding: 20px 0 0 0;
+}

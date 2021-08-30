@@ -56,7 +56,7 @@
         mat-raised-button
         (click)="approveItem(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
         class="submit"
-        *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+        *ngIf="router.url.includes('approval') && (currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin')">
         <span>Approve</span>
     </button>
 
@@ -64,7 +64,7 @@
         mat-raised-button
         (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
         class="submit"
-        *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
+        *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin') || currentAdmin?.uid === entityObject.updatedBy)">
         Save Draft
     </button>
 
@@ -72,7 +72,7 @@
         mat-raised-button
         (click)="deleteItem($event)"
         class="submit"
-        *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
+        *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin') || currentAdmin?.uid === entityObject.updatedBy)">
         Delete Draft
     </button>
 
@@ -88,7 +88,7 @@
         mat-raised-button
         (click)="addProduct(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, false)"
         class="submit"
-        *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
+        *ngIf="!router.url.includes('approval') && (currentAdmin?.role === 'super-admin' || currentAdmin?.role === 'admin')">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Product

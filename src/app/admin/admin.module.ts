@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import 'firebase/storage';
-import * as firebase from 'firebase';
 
 import { MaterialComponentsModule } from '../materialcomponents.module';
 import { SharedModule } from '../shared.module';
 
 import { CKEditorModule } from 'ng2-ckeditor';
-//import { DndModule } from 'ng2-dnd';
 
-import { AdminComponent } from './admin-components/admin/admin.component';
+import { AdminComponent } from './admin.component';
 import { AddPostComponent } from './admin-components/add-post/add-post.component';
 import { AdminPostsComponent } from './admin-components/admin-posts/admin-posts.component';
 import { AdminAdminsComponent } from './admin-components/admin-admins/admin-admins.component';
@@ -31,11 +28,11 @@ import { AdminProductCategoriesComponent } from './admin-components/admin-produc
 import { AddProductCategoryComponent } from './admin-components/add-product-category/add-product-category.component';
 import { AdminApprovalsComponent } from './admin-components/admin-approvals/admin-approvals.component';
 import { ApproveDialogComponent } from './admin-components/approve-dialog/approve-dialog.component';
+import { OrderComponent } from './admin-components/order/order.component';
 
 import { AuthGuard } from '../services/auth.guard';
 import { SuperAdminGuard } from '../services/super-admin.guard';
 import { AdminGuard } from '../services/admin.guard';
-
 import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
@@ -45,10 +42,10 @@ import { AdminRoutingModule } from './admin-routing.module';
     FormsModule,
     MaterialComponentsModule,
     SharedModule,
-    CKEditorModule,
-    //DndModule.forRoot(),
+    CKEditorModule
   ],
   declarations: [
+    AdminComponent,
     AddAdminComponent,
     AddCustomerComponent,
     AddPostComponent,
@@ -56,7 +53,6 @@ import { AdminRoutingModule } from './admin-routing.module';
     AddOrderComponent,
     AddProductComponent,
     AddProductCategoryComponent,
-    AdminComponent,
     AdminDashboardComponent,
     AdminAdminsComponent,
     AdminApprovalsComponent,
@@ -70,6 +66,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     AdminThemeComponent,
     DeleteDialogComponent,
     ApproveDialogComponent,
+    OrderComponent
   ],
   providers: [AuthGuard, SuperAdminGuard, AdminGuard],
   entryComponents: [DeleteDialogComponent, ApproveDialogComponent],

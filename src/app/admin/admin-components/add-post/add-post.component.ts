@@ -7,6 +7,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FirebaseApp } from '@angular/fire';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { take } from 'rxjs/operators'
+import { AngularFireStorage } from '@angular/fire/storage';
+
+const FIREBASE_POSTS_STORAGE_PATH = "firebase-cms-products";
 
 @Component({
   selector: 'add-post',
@@ -42,7 +45,9 @@ export class AddPostComponent implements OnInit {
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
-      public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage: AngularFireStorage
+     
   ) {
 
     this.newPublished = false;
@@ -113,7 +118,7 @@ export class AddPostComponent implements OnInit {
   }
 
   uploadImage() {
-    let storageRef = this.af.storage().ref();
+    let storageRef = this.storage.ref(FIREBASE_POSTS_STORAGE_PATH); //this.af.storage().ref();
     let path = Date.now().toString() + '-' + this.file.name;
     let iRef = storageRef.child('posts/' + path);
     let me = this;
@@ -121,10 +126,12 @@ export class AddPostComponent implements OnInit {
         let snackBarRef = this.snackBar.open('Image uploaded', 'OK!', {
           duration: 3000
         });
-        this.storageRef.child('posts/' + path).getDownloadURL().then(function(url) {
-          me.imageUrl = url;
-          me.newThumbnail = url;
-        });
+
+      snapshot.ref.getDownloadURL().then(function (url) {
+        me.imageUrl = url;
+        me.newThumbnail = url;
+      });
+    
     });
   }
 
@@ -133,15 +140,11 @@ export class AddPostComponent implements OnInit {
   }
 
   deleteImageRef() {
-    let storage = this.af.storage();
-    let imageRef = storage.refFromURL(this.imageUrl);
-
-    let me = this;
-    imageRef.delete().then(function() {
-      me.imageUrl = null;
-    }).catch(function(error) {
-      console.log('error', error);
-    });
+    let imageRef = this.storage.refFromURL(this.imageUrl);
+    imageRef.delete().subscribe(() => {
+      this.imageUrl = null;
+    })
+    
   }
 
   addPost(newURL: string, newDate: string, newTitle: string, newBody: string, newPublished: boolean) {

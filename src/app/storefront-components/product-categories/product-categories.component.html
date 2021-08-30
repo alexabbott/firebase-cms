@@ -1,6 +1,0 @@
-<section *ngFor="let category of categories | async">
-  <product-category [categoryInput]="category" *ngIf="category.products" class="categories"></product-category>
-</section>
-<div *ngIf="categories | async">
-  <button mat-button routerLink="/products">View All Products</button>
-</div>

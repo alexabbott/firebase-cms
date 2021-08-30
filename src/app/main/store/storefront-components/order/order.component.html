@@ -1,0 +1,51 @@
+<div class="container order-container" [ngClass]="{ 'full-width': admin}">
+  <div class="order-left">
+    <h3 *ngIf="order">Order #{{ order.key }}</h3>
+    <div *ngIf="order" class="order-date">{{ order.date | date }}</div>
+  </div>
+  <div class="order-right" *ngIf="order && router.url.includes('/admin')">
+    <a routerLink="/admin/customer/{{order.uid}}">
+      <img src="{{ (customers | async | getUser: order.uid)?.photoURL }}" class="user-photo" *ngIf="(customers | async | getUser: order.uid)?.photoURL">
+      <span *ngIf="(customers | async | getUser: order.uid)?.email">{{ (customers | async | getUser: order.uid)?.email }}</span>
+      <span *ngIf="!(customers | async | getUser: order.uid)?.email">Guest Customer</span>
+    </a>
+  </div>
+  <div class="order-info">
+    <mat-card *ngIf="order">
+      <h3>Shipping info</h3>
+      {{ order.shipping.name }}<br>
+      <span *ngIf="order.shipping.company">{{ order.shipping.company }}<br></span>
+      {{ order.shipping.email }}<br>
+      {{ order.shipping.address }}<br>
+      {{ order.shipping.city }}, {{ order.shipping.state }} {{ order.shipping.zip }}
+    </mat-card>
+    <mat-card *ngIf="order">
+      <h3>Billing info</h3>
+      {{ order.billing.name }}<br>
+      <span *ngIf="order.billing.company">{{ order.billing.company }}<br></span>
+      {{ order.billing.email }}<br>
+      {{ order.billing.address }}<br>
+      {{ order.billing.city }}, {{ order.billing.state }} {{ order.billing.zip }}
+    </mat-card>
+  </div>
+  <mat-toolbar class="orders-header highlight">
+    <div class="item">Item</div>
+    <div class="price">Price</div>
+    <div class="quantity">Qty</div>
+    <div class="total">Total</div>
+  </mat-toolbar>
+  <span *ngIf="order">
+    <mat-card *ngFor="let item of order.items" class="product">
+        <div class="item">{{item.title}}</div>
+        <div class="price">{{item.price | currency:'USD':true }}</div>
+        <div class="quantity">
+          <span>{{item.quantity}}</span>
+        </div>
+        <div class="total">{{item.total | currency:'USD':true }}</div>
+    </mat-card>
+  <span>
+  <button mat-raised-button routerLink="/admin/edit-order/{{order.key}}" *ngIf="router.url.includes('/admin')">Edit Order</button>
+  <mat-card class="order-summary" *ngIf="order">
+    <h4 class="subtotal-label">Subtotal</h4>
+    <h4 class="subtotal">{{order.total | currency:'USD':true}}</h4>
+  </mat-card>

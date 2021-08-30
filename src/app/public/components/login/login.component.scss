@@ -1,0 +1,38 @@
+.login-frame {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  margin-top: -10vh;
+}
+
+.block {
+  display: block;
+}
+
+.sign-up-trigger {
+  margin-top: 20px;
+  text-align: center;
+
+  a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+button {
+  margin-bottom: 20px;
+  max-width: 100%;
+  width: 100%;
+
+  &.logout {
+    max-width: 200px;
+  }
+}
+
+button img {
+  margin-right: 10px;
+  vertical-align: middle;
+  width: 20px;
+}
